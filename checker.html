@@ -68,27 +68,63 @@
 
     <script>
         function runAudit() {
-            const url = document.getElementById('urlInput').value;
+            // Ambil nilai input
+            let urlInput = document.getElementById('urlInput').value.trim();
             const btn = document.getElementById('btnCheck');
             const resultDiv = document.getElementById('result');
             
-            if(!url) { alert("Masukkan URL yang valid!"); return; }
-            
-            btn.innerText = "Sedang Memindai... (Tunggu 10 Detik)";
-            btn.disabled = true;
+            // VALIDASI 1: Cek apakah kosong
+            if(!urlInput) { 
+                alert("Mohon masukkan URL website!"); 
+                return; 
+            }
 
-            fetch(`https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=${encodeURIComponent(url)}&category=ACCESSIBILITY&strategy=mobile`)
-            .then(res => res.json())
+            // VALIDASI 2: Auto-Fix Protocol (Menambahkan https:// jika lupa)
+            if (!urlInput.startsWith('http://') && !urlInput.startsWith('https://')) {
+                urlInput = 'https://' + urlInput;
+            }
+            
+            // Ubah tombol jadi loading
+            btn.innerText = "Sedang Memindai... (Tunggu 10-20 Detik)";
+            btn.disabled = true;
+            
+            // Sembunyikan hasil lama jika ada
+            resultDiv.style.display = 'none';
+
+            // Panggil Google API
+            fetch(`https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=${encodeURIComponent(urlInput)}&category=ACCESSIBILITY&strategy=mobile`)
+            .then(response => {
+                // Cek jika Google menolak (misal error 400/500)
+                if (!response.ok) {
+                    throw new Error("Google menolak URL ini. Pastikan website bisa diakses publik.");
+                }
+                return response.json();
+            })
             .then(data => {
+                // Cek apakah data lighthouse tersedia
+                if (!data.lighthouseResult || !data.lighthouseResult.categories.accessibility) {
+                    throw new Error("Data tidak lengkap dari Google.");
+                }
+
                 const score = data.lighthouseResult.categories.accessibility.score * 100;
-                document.getElementById('resUrl').innerText = url;
+                
+                // Tampilkan Hasil
+                document.getElementById('resUrl').innerText = urlInput;
                 document.getElementById('resScore').innerText = Math.round(score);
+                
+                // Ubah warna skor (Merah/Kuning/Hijau)
+                const scoreElem = document.getElementById('resScore');
+                if (score >= 90) scoreElem.style.color = "green";
+                else if (score >= 50) scoreElem.style.color = "#d4a017"; // Kuning emas
+                else scoreElem.style.color = "red";
+
                 resultDiv.style.display = 'block';
                 btn.innerText = "Cek URL Lain";
                 btn.disabled = false;
             })
             .catch(err => {
-                alert("Gagal memindai. Pastikan URL benar.");
+                console.error(err);
+                alert("Gagal memindai: " + err.message + "\n\nTips: Pastikan penulisan URL benar (contoh: detik.com) dan website tersebut tidak memblokir bot Google.");
                 btn.innerText = "Coba Lagi";
                 btn.disabled = false;
             });
