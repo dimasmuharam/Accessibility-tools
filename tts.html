@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Simulator Text-to-Speech (Cek Suara) - Accessible Web Tools</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container navbar">
+            <a href="index.html" class="brand">
+                <img src="logo.png" alt="Logo Dimaster Institute">
+                <h1>Accessible Web Tools</h1>
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <h1>Simulator Text-to-Speech</h1>
+        <p>Tes bagaimana tulisan Anda terdengar saat dibacakan oleh mesin komputer (Simulasi Screen Reader sederhana).</p>
+
+        <div class="tool-box">
+            <label for="textInput"><strong>Masukkan Teks untuk Dibaca:</strong></label>
+            <textarea id="textInput" rows="5" placeholder="Halo, nama saya Dimas. Saya sedang mencoba fitur aksesibilitas suara.">Selamat datang di Accessible Web Tools Indonesia.</textarea>
+            
+            <div style="display: flex; gap: 15px; margin-top: 15px; flex-wrap: wrap;">
+                <div style="flex: 1; min-width: 200px;">
+                    <label for="voiceSelect">Pilih Suara (Voice):</label>
+                    <select id="voiceSelect"></select>
+                </div>
+                <div style="flex: 1; min-width: 200px;">
+                    <label for="rateRange">Kecepatan Bicara:</label>
+                    <input type="range" id="rateRange" min="0.5" max="2" value="1" step="0.1">
+                </div>
+            </div>
+
+            <div style="margin-top: 20px;">
+                <button id="speakBtn" class="button">🔊 Putar Suara</button>
+                <button id="stopBtn" class="button" style="background: #d9534f;">⏹ Berhenti</button>
+            </div>
+            
+            <p style="margin-top: 10px; font-size: 0.9rem; color: #666;">*Catatan: Kualitas dan pilihan bahasa tergantung pada browser dan sistem operasi perangkat Anda.</p>
+        </div>
+
+        <div class="ads-slot">
+            <p>Iklan Google AdSense</p>
+        </div>
+
+        <article class="content-article">
+            <h2>Mengapa Anda Perlu Peduli pada "Suara" Website?</h2>
+            <p>Di era digital yang inklusif, teks tidak hanya dibaca dengan mata, tetapi juga "didengar" dengan telinga. Jutaan penyandang tunanetra dan orang dengan gangguan penglihatan (low vision) mengandalkan teknologi <strong>Screen Reader</strong> (Pembaca Layar) seperti NVDA, JAWS, atau VoiceOver untuk berselancar di internet.</p>
+
+            <h3>Apa itu Text-to-Speech (TTS)?</h3>
+            <p>Text-to-Speech adalah teknologi bantu yang mengubah teks digital menjadi suara sintesis. Bagi developer dan content writer, memahami cara kerja TTS sangat penting untuk memastikan informasi tersampaikan dengan benar tanpa bias visual.</p>
+
+            <h3>3 Tips Menulis untuk Telinga (Writing for the Ear)</h3>
+            <p>Gunakan simulator di atas untuk mengecek naskah website Anda. Apakah enak didengar? Berikut tipsnya:</p>
+            <ul>
+                <li><strong>Hindari Singkatan Ambigu:</strong> Mesin mungkin membaca "Jl." sebagai "J-L" bukan "Jalan", atau "Dr." sebagai "Doktor" padahal maksudnya "Drive". Tuliskan kata secara lengkap.</li>
+                <li><strong>Gunakan Tanda Baca yang Tepat:</strong> Koma (,) dan Titik (.) memberikan jeda napas bagi mesin. Teks tanpa tanda baca akan dibaca ngebut seperti kereta ekspres, membuat pendengar pusing.</li>
+                <li><strong>Deskripsi Gambar (Alt Text):</strong> Pastikan setiap gambar memiliki teks alternatif. Jika tidak, screen reader hanya akan membacakan nama file yang aneh seperti "IMG_2025.jpg".</li>
+            </ul>
+
+            <div style="background: #eef; padding: 15px; border-left: 5px solid var(--primary-color); margin-top: 20px;">
+                <h4>Butuh Audit Suara Profesional?</h4>
+                <p>Simulator ini hanya alat dasar. Pengalaman pengguna asli (User Experience) hanya bisa diuji oleh manusia.</p>
+                <p><strong>Dimaster Institute</strong> merekomendasikan layanan <strong>Kartunet Konsultan</strong> untuk pengujian aksesibilitas mendalam bersama tester tunanetra bersertifikat.</p>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Dimaster Institute.</p>
+        </div>
+    </footer>
+
+    <script>
+        const synth = window.speechSynthesis;
+        const textInput = document.getElementById('textInput');
+        const voiceSelect = document.getElementById('voiceSelect');
+        const rateRange = document.getElementById('rateRange');
+        const speakBtn = document.getElementById('speakBtn');
+        const stopBtn = document.getElementById('stopBtn');
+        
+        let voices = [];
+
+        function populateVoices() {
+            voices = synth.getVoices();
+            voiceSelect.innerHTML = '';
+            
+            // Prioritaskan Bahasa Indonesia
+            voices.sort((a, b) => {
+                const langA = a.lang.toUpperCase();
+                const langB = b.lang.toUpperCase();
+                if (langA.includes('ID') || langA.includes('IND')) return -1;
+                if (langB.includes('ID') || langB.includes('IND')) return 1;
+                return 0;
+            });
+
+            voices.forEach((voice) => {
+                const option = document.createElement('option');
+                option.textContent = `${voice.name} (${voice.lang})`;
+                option.setAttribute('data-lang', voice.lang);
+                option.setAttribute('data-name', voice.name);
+                voiceSelect.appendChild(option);
+            });
+        }
+
+        populateVoices();
+        if (speechSynthesis.onvoiceschanged !== undefined) {
+            speechSynthesis.onvoiceschanged = populateVoices;
+        }
+
+        speakBtn.addEventListener('click', () => {
+            if (synth.speaking) {
+                console.error('speechSynthesis.speaking');
+                return;
+            }
+            if (textInput.value !== '') {
+                const utterThis = new SpeechSynthesisUtterance(textInput.value);
+                const selectedOption = voiceSelect.selectedOptions[0].getAttribute('data-name');
+                for (let i = 0; i < voices.length; i++) {
+                    if (voices[i].name === selectedOption) {
+                        utterThis.voice = voices[i];
+                    }
+                }
+                utterThis.rate = rateRange.value;
+                synth.speak(utterThis);
+            }
+        });
+
+        stopBtn.addEventListener('click', () => {
+            if (synth.speaking) {
+                synth.cancel();
+            }
+        });
+    </script>
+</body>
+</html>
