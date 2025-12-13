@@ -68,54 +68,55 @@
 
     <script>
         function runAudit() {
-            // Ambil nilai input
+            // 1. MASUKKAN API KEY ANDA DI BAWAH INI (Di dalam tanda kutip)
+            const apiKey = 'AIzaSyBIya_RRn2SoSU8j0yOPHjgCQ6yO7f-Mdg'; 
+
             let urlInput = document.getElementById('urlInput').value.trim();
             const btn = document.getElementById('btnCheck');
             const resultDiv = document.getElementById('result');
             
-            // VALIDASI 1: Cek apakah kosong
+            // Validasi Input Kosong
             if(!urlInput) { 
                 alert("Mohon masukkan URL website!"); 
                 return; 
             }
 
-            // VALIDASI 2: Auto-Fix Protocol (Menambahkan https:// jika lupa)
+            // Auto-Fix URL (Tambah https:// jika lupa)
             if (!urlInput.startsWith('http://') && !urlInput.startsWith('https://')) {
                 urlInput = 'https://' + urlInput;
             }
             
-            // Ubah tombol jadi loading
             btn.innerText = "Sedang Memindai... (Tunggu 10-20 Detik)";
             btn.disabled = true;
-            
-            // Sembunyikan hasil lama jika ada
             resultDiv.style.display = 'none';
 
-            // Panggil Google API
-            fetch(`https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=${encodeURIComponent(urlInput)}&category=ACCESSIBILITY&strategy=mobile`)
+            // Panggil Google API dengan API KEY
+            fetch(`https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=${encodeURIComponent(urlInput)}&key=${apiKey}&category=ACCESSIBILITY&strategy=mobile`)
             .then(response => {
-                // Cek jika Google menolak (misal error 400/500)
                 if (!response.ok) {
-                    throw new Error("Google menolak URL ini. Pastikan website bisa diakses publik.");
+                    return response.json().then(errData => {
+                        // Cek pesan error spesifik dari Google
+                        if(errData.error && errData.error.message) {
+                            throw new Error(errData.error.message);
+                        }
+                        throw new Error("Google menolak akses. Cek API Key Anda.");
+                    });
                 }
                 return response.json();
             })
             .then(data => {
-                // Cek apakah data lighthouse tersedia
                 if (!data.lighthouseResult || !data.lighthouseResult.categories.accessibility) {
-                    throw new Error("Data tidak lengkap dari Google.");
+                    throw new Error("Data tidak lengkap. Coba URL lain.");
                 }
 
                 const score = data.lighthouseResult.categories.accessibility.score * 100;
                 
-                // Tampilkan Hasil
                 document.getElementById('resUrl').innerText = urlInput;
                 document.getElementById('resScore').innerText = Math.round(score);
                 
-                // Ubah warna skor (Merah/Kuning/Hijau)
                 const scoreElem = document.getElementById('resScore');
                 if (score >= 90) scoreElem.style.color = "green";
-                else if (score >= 50) scoreElem.style.color = "#d4a017"; // Kuning emas
+                else if (score >= 50) scoreElem.style.color = "#d4a017"; 
                 else scoreElem.style.color = "red";
 
                 resultDiv.style.display = 'block';
@@ -124,11 +125,12 @@
             })
             .catch(err => {
                 console.error(err);
-                alert("Gagal memindai: " + err.message + "\n\nTips: Pastikan penulisan URL benar (contoh: detik.com) dan website tersebut tidak memblokir bot Google.");
+                alert("Gagal memindai: " + err.message);
                 btn.innerText = "Coba Lagi";
                 btn.disabled = false;
             });
         }
     </script>
+   
 </body>
 </html>
