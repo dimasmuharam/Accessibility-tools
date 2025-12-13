@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Cek Kontras Warna WCAG - Accessible Web Tools</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container navbar">
+            <a href="index.html" class="brand">
+                <img src="logo.png" alt="Logo Dimaster Institute">
+                <h1>Accessible Web Tools</h1>
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="contrast.html" aria-current="page">Contrast Checker</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <h1>Color Contrast Checker</h1>
+        <p>Cek apakah kombinasi warna teks dan latar belakang Anda sudah memenuhi standar WCAG AA atau AAA.</p>
+
+        <div class="tool-box">
+            <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+                <div style="flex: 1;">
+                    <label for="bgColor">Warna Background</label>
+                    <input type="color" id="bgColor" value="#ffffff">
+                </div>
+                <div style="flex: 1;">
+                    <label for="textColor">Warna Teks</label>
+                    <input type="color" id="textColor" value="#003366">
+                </div>
+            </div>
+
+            <div id="previewBox" style="margin-top: 20px; padding: 20px; border: 1px solid #ccc; text-align: center;">
+                <h2 id="previewText">Contoh Teks Terbaca</h2>
+                <p>Ini adalah simulasi tampilan teks pada latar belakang yang dipilih.</p>
+            </div>
+
+            <div style="margin-top: 20px;">
+                <h3>Rasio Kontras: <span id="ratioResult" style="font-size: 2rem;">-</span></h3>
+                <p>Status: <span id="statusResult" style="font-weight: bold;">-</span></p>
+            </div>
+        </div>
+
+        <div class="ads-slot"><p>Iklan Google AdSense</p></div>
+
+        <article class="content-article">
+            <h3>Standar Kelulusan WCAG</h3>
+            <ul>
+                <li><strong>Level AA (Standar):</strong> Rasio minimal 4.5:1 untuk teks normal.</li>
+                <li><strong>Level AAA (Tinggi):</strong> Rasio minimal 7:1 untuk teks normal.</li>
+            </ul>
+            <p>Kontras yang buruk menyulitkan pengguna tunanetra (low vision) dan pengguna yang berada di bawah sinar matahari terik.</p>
+        </article>
+    </main>
+
+    <footer><div class="container"><p>&copy; 2025 Dimaster Institute.</p></div></footer>
+
+    <script>
+        const bgInput = document.getElementById('bgColor');
+        const textInput = document.getElementById('textColor');
+        
+        function hexToRgb(hex) {
+            var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+            return result ? {
+                r: parseInt(result[1], 16),
+                g: parseInt(result[2], 16),
+                b: parseInt(result[3], 16)
+            } : null;
+        }
+
+        function luminance(r, g, b) {
+            var a = [r, g, b].map(function (v) {
+                v /= 255;
+                return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.05) / 1.055, 2.4);
+            });
+            return a[0] * 0.2126 + a[1] * 0.7152 + a[2] * 0.0722;
+        }
+
+        function checkContrast() {
+            const bg = hexToRgb(bgInput.value);
+            const text = hexToRgb(textInput.value);
+            const box = document.getElementById('previewBox');
+            
+            box.style.backgroundColor = bgInput.value;
+            box.style.color = textInput.value;
+
+            const lum1 = luminance(bg.r, bg.g, bg.b);
+            const lum2 = luminance(text.r, text.g, text.b);
+            const brightest = Math.max(lum1, lum2);
+            const darkest = Math.min(lum1, lum2);
+            const ratio = (brightest + 0.05) / (darkest + 0.05);
+
+            document.getElementById('ratioResult').innerText = ratio.toFixed(2) + ":1";
+            
+            let status = "";
+            if(ratio >= 7) status = "LULUS Sempurna (AAA)";
+            else if(ratio >= 4.5) status = "LULUS Standar (AA)";
+            else status = "GAGAL (Kontras Buruk)";
+            
+            document.getElementById('statusResult').innerText = status;
+            document.getElementById('statusResult').style.color = ratio >= 4.5 ? "green" : "red";
+        }
+
+        bgInput.addEventListener('input', checkContrast);
+        textInput.addEventListener('input', checkContrast);
+        checkContrast(); // Run on load
+    </script>
+</body>
+</html>
