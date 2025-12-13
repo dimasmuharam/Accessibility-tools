@@ -33,33 +33,42 @@
             <button onclick="runAudit()" id="btnCheck" class="button">Mulai Audit</button>
 
 <div id="result" style="display:none; margin-top: 30px; padding: 0; background: white; border: 1px solid #ddd; border-radius: 8px; overflow: hidden;">
+                
                 <div style="padding: 20px; text-align: center; border-bottom: 1px solid #eee;">
                     <p style="margin: 0; color: #666;">Target URL: <span id="resUrl" style="font-weight: bold;">-</span></p>
-                    <div style="font-size: 3.5rem; font-weight: 800; color: var(--primary-color); margin: 10px 0;">
-                        Skor: <span id="resScore">0</span> <span style="font-size: 1.5rem; color: #999;">/ 100</span>
+                    
+                    <div style="font-size: 4rem; font-weight: 800; color: var(--text-color); margin: 10px 0; line-height: 1;">
+                        Skor: <span id="resScore">0</span><span style="font-size: 1.5rem; color: #999; font-weight: normal;">/100</span>
                     </div>
-                    <p style="font-size: 0.9rem; color: #555;">*Skor berdasarkan Google Lighthouse Mobile Strategy</p>
+
+                    <div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 15px; margin-top: 15px; font-size: 0.9rem; background: #fafafa; padding: 10px; border-radius: 50px; display: inline-flex;">
+                        <span style="color: red; font-weight: bold;">🔴 0-49 (Kritis)</span>
+                        <span style="color: #d4a017; font-weight: bold;">🟡 50-89 (Perlu Perbaikan)</span>
+                        <span style="color: green; font-weight: bold;">🟢 90-100 (Baik)</span>
+                    </div>
+                    
+                    <p style="font-size: 0.8rem; color: #999; margin-top: 10px; margin-bottom: 0;">*Skor berdasarkan Google Lighthouse Mobile Strategy</p>
                 </div>
 
                 <div style="background: #f8f9fa; padding: 25px;">
-                    <h3 style="color: var(--primary-color); margin-top: 0;">Mengapa Skor Tinggi Belum Tentu Aksesibel?</h3>
-                    <p>Mesin (seperti alat ini) hanya mampu mendeteksi sekitar 30% kesalahan teknis. Sisa 70%-nya adalah soal "Kenyamanan Pengguna" yang hanya bisa dirasakan oleh manusia.</p>
+                    <h3 style="color: var(--primary-color); margin-top: 0; font-size: 1.2rem;">Mengapa Skor Tinggi Belum Tentu Aksesibel?</h3>
+                    <p style="font-size: 0.95rem;">Mesin (seperti alat ini) hanya mampu mendeteksi sekitar 30% kesalahan teknis. Sisa 70%-nya adalah soal "Kenyamanan Pengguna" yang hanya bisa dirasakan oleh manusia.</p>
                     
                     <div style="background: #fff; border: 2px solid var(--accent-color); border-radius: 8px; padding: 20px; margin: 20px 0;">
-                        <h4 style="margin-top: 0;">Solusi: Audit Manual bersama Kartunet</h4>
-                        <p>Jangan serahkan aksesibilitas pada agensi IT biasa yang hanya menebak-nebak. Serahkan pada ahlinya.</p>
-                        <ul style="line-height: 1.6; padding-left: 20px;">
-                            <li><strong>Native Screen Reader Users:</strong> Tim kami adalah tunanetra <em>tech-savvy</em> yang hidup di dunia digital. Kami tahu persis bedanya fitur yang "jalan" vs "nyaman".</li>
-                            <li><strong>Community Based:</strong> Kartunet lahir dari komunitas disabilitas. Kami mengaudit dengan hati dan standar advokasi, bukan sekadar mengejar ceklis proyek.</li>
-                            <li><strong>Real User Experience:</strong> Kami menguji skenario nyata (transaksi, pendaftaran, navigasi), memastikan user flow benar-benar inklusif.</li>
+                        <h4 style="margin-top: 0; color: #333;">Solusi: Audit Manual bersama Kartunet</h4>
+                        <p style="font-size: 0.95rem;">Serahkan pada ahlinya, bukan sekadar asumsi.</p>
+                        <ul style="line-height: 1.5; padding-left: 20px; font-size: 0.95rem; text-align: left;">
+                            <li><strong>Native Screen Reader Users:</strong> Tim kami adalah tunanetra <em>tech-savvy</em>. Kami tahu bedanya fitur yang "jalan" vs "nyaman".</li>
+                            <li><strong>Community Based:</strong> Kartunet lahir dari komunitas disabilitas. Kami mengaudit dengan hati.</li>
+                            <li><strong>Real User Experience:</strong> Pengujian skenario nyata (transaksi, pendaftaran, dll).</li>
                         </ul>
                         <br>
                         <a href="https://kartunet.com/kontak" class="button" style="width: 100%; text-align: center; box-sizing: border-box;">Hubungi Kartunet untuk Audit Profesional &rarr;</a>
                     </div>
                 </div>
-</div>
-            
-        <div class="ads-slot">
+            </div>            
+        
+            <div class="ads-slot">
             <p>Iklan Google AdSense</p>
         </div>
 
