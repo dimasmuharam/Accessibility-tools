@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cek Skor Aksesibilitas Website - Accessible Web Tools</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <div class="container navbar">
+            <a href="index.html" class="brand">
+                <img src="logo.png" alt="Logo Dimaster Institute">
+                <h1>Accessible Web Tools</h1>
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="checker.html" aria-current="page">Audit Tool</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <h1>Website Accessibility Audit Scanner</h1>
+        <p>Masukkan URL website untuk melihat skor performa aksesibilitas berdasarkan Google Lighthouse (Mobile Strategy).</p>
+
+        <div class="tool-box">
+            <label for="urlInput"><strong>URL Website (https://...)</strong></label>
+            <input type="url" id="urlInput" placeholder="Contoh: https://kemkes.go.id" required>
+            <button onclick="runAudit()" id="btnCheck" class="button">Mulai Audit</button>
+
+            <div id="result" style="display:none; margin-top: 20px; padding: 20px; background: white; border: 1px solid #ccc;">
+                <h3>Hasil Pemindaian</h3>
+                <p>Target URL: <span id="resUrl"></span></p>
+                <div style="font-size: 3rem; font-weight: bold; color: var(--primary-color);">
+                    Skor: <span id="resScore">0</span> / 100
+                </div>
+                <hr>
+                <div style="background: #eef; padding: 15px; border-left: 5px solid var(--primary-color);">
+                    <h4>Ingin Nilai 100 Sempurna?</h4>
+                    <p>Mesin hanya mendeteksi 30% error teknis. Kenyamanan pengguna tunanetra asli tidak bisa diukur oleh mesin.</p>
+                    <p>Hubungi <strong>Kartunet Konsultan</strong> untuk Audit Manual & User Testing profesional.</p>
+                    <a href="https://kartunet.com/contact" class="button">Hubungi Ahli Audit &rarr;</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="ads-slot">
+            <p>Iklan Google AdSense</p>
+        </div>
+
+        <article class="content-article">
+            <h2>Cara Membaca Skor Aksesibilitas</h2>
+            <p>Skor 0-49 (Merah): Kritis. Banyak elemen yang tidak bisa diakses screen reader.</p>
+            <p>Skor 50-89 (Kuning): Perlu Perbaikan. Navigasi mungkin membingungkan.</p>
+            <p>Skor 90-100 (Hijau): Baik secara teknis. Namun tetap butuh pengujian manual.</p>
+        </article>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Dimaster Institute.</p>
+        </div>
+    </footer>
+
+    <script>
+        function runAudit() {
+            const url = document.getElementById('urlInput').value;
+            const btn = document.getElementById('btnCheck');
+            const resultDiv = document.getElementById('result');
+            
+            if(!url) { alert("Masukkan URL yang valid!"); return; }
+            
+            btn.innerText = "Sedang Memindai... (Tunggu 10 Detik)";
+            btn.disabled = true;
+
+            fetch(`https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=${encodeURIComponent(url)}&category=ACCESSIBILITY&strategy=mobile`)
+            .then(res => res.json())
+            .then(data => {
+                const score = data.lighthouseResult.categories.accessibility.score * 100;
+                document.getElementById('resUrl').innerText = url;
+                document.getElementById('resScore').innerText = Math.round(score);
+                resultDiv.style.display = 'block';
+                btn.innerText = "Cek URL Lain";
+                btn.disabled = false;
+            })
+            .catch(err => {
+                alert("Gagal memindai. Pastikan URL benar.");
+                btn.innerText = "Coba Lagi";
+                btn.disabled = false;
+            });
+        }
+    </script>
+</body>
+</html>
