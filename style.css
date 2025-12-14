@@ -1,25 +1,55 @@
-/* style.css - Desain Utama */
+/* =========================================
+   1. CSS VARIABLES (Tema Light & Dark)
+   ========================================= */
 :root {
-    --primary-color: #003366; /* Navy Blue dari Logo */
-    --accent-color: #008CBA;  /* Biru Muda Logo */
-    --bg-color: #ffffff;
-    --text-color: #333333;
-    --light-gray: #f4f4f4;
+    /* --- LIGHT MODE (DEFAULT) --- */
+    --primary-color: #003366;    /* Navy Blue */
+    --accent-color: #008CBA;     /* Biru Muda */
+    --bg-color: #ffffff;         /* Background Putih */
+    --text-color: #333333;       /* Teks Hitam */
+    --card-bg: #f4f4f4;          /* Abu-abu muda (pengganti light-gray lama) */
+    --border-color: #ddd;        
+    --header-text: #ffffff;
+    --input-bg: #ffffff;
+    --button-text: #ffffff;
+    --shadow: 0 2px 5px rgba(0,0,0,0.1);
+    --hero-bg: #f4f4f4;          /* Background Hero */
 }
 
+[data-theme="dark"] {
+    /* --- DARK MODE --- */
+    --primary-color: #0d1b2a;    /* Biru Sangat Gelap */
+    --accent-color: #4cc9f0;     /* Biru Neon (agar kontras) */
+    --bg-color: #121212;         /* Hitam Abu (Soft Black) */
+    --text-color: #e0e0e0;       /* Putih Gading */
+    --card-bg: #1e1e1e;          /* Abu Gelap untuk Card */
+    --border-color: #333;
+    --header-text: #e0e0e0;
+    --input-bg: #2c2c2c;
+    --button-text: #121212;      /* Teks tombol jadi gelap agar terbaca */
+    --shadow: 0 4px 6px rgba(0,0,0,0.5);
+    --hero-bg: #1a1a1a;          /* Background Hero Gelap */
+}
+
+/* =========================================
+   2. RESET & BASE STYLES
+   ========================================= */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
     margin: 0;
     padding: 0;
-    color: var(--text-color);
     background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: background-color 0.3s, color 0.3s; /* Efek transisi halus */
 }
 
-/* Header & Navigasi */
+/* =========================================
+   3. HEADER & NAVIGASI
+   ========================================= */
 header {
     background: var(--primary-color);
-    color: white;
+    color: var(--header-text);
     padding: 1rem 0;
     border-bottom: 5px solid var(--accent-color);
 }
@@ -38,19 +68,20 @@ header {
     flex-wrap: wrap;
 }
 
+/* Brand Style (Dipertahankan dari kode lama) */
 .brand {
     display: flex;
     align-items: center;
     gap: 15px;
     text-decoration: none;
-    color: white;
+    color: var(--header-text);
 }
 
 .brand img {
     height: 50px;
     width: auto;
-    background: white; /* PENTING: Memberi latar putih agar logo PNG terlihat jelas */
-    padding: 4px;      /* Memberi jarak sedikit agar logo tidak mepet */
+    background: white; /* PENTING: Logo tetap butuh background putih */
+    padding: 4px;
     border-radius: 4px;
 }
 
@@ -59,6 +90,7 @@ header {
     margin: 0;
 }
 
+/* Menu Navigasi */
 nav ul {
     list-style: none;
     padding: 0;
@@ -67,23 +99,28 @@ nav ul {
 }
 
 nav a {
-    color: white;
+    color: var(--header-text);
     text-decoration: none;
     font-weight: bold;
     font-size: 1rem;
 }
 
-nav a:hover, nav a:focus {
+nav a:hover, nav a:focus, nav a[aria-current="page"] {
     text-decoration: underline;
-    color: #ffd700; /* Kuning emas untuk fokus */
+    text-decoration-thickness: 2px;
+    color: #ffd700; /* Kuning emas (Dipertahankan) */
 }
 
-/* Area Konten */
+/* =========================================
+   4. AREA KONTEN (HERO & GRID)
+   ========================================= */
+/* Hero Section (Dikembalikan) */
 .hero {
     text-align: center;
     padding: 3rem 1rem;
-    background: var(--light-gray);
+    background: var(--hero-bg);
     margin-bottom: 2rem;
+    border-radius: 8px; /* Tambahan sedikit agar rapi */
 }
 
 .tool-grid {
@@ -93,24 +130,58 @@ nav a:hover, nav a:focus {
     margin-bottom: 2rem;
 }
 
+/* Card Style (Digabung: Style lama + Variable baru) */
 .card {
-    background: white;
+    background: var(--card-bg); /* Menggunakan variable agar bisa dark mode */
     padding: 1.5rem;
-    border: 1px solid #ddd;
+    border: 1px solid var(--border-color);
     border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    transition: transform 0.2s;
+    box-shadow: var(--shadow);
+    transition: transform 0.2s, border-color 0.2s; /* Animasi dipertahankan */
 }
 
 .card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-5px); /* Efek melayang dipertahankan */
     border-color: var(--accent-color);
 }
 
+.card h3 {
+    margin-top: 0;
+    color: var(--accent-color); /* Agar judul tool lebih menonjol */
+}
+
+/* =========================================
+   5. UI ELEMENTS (Input, Button, ToolBox)
+   ========================================= */
+/* Tool Box (Kotak Input Utama) */
+.tool-box {
+    background: var(--card-bg);
+    padding: 2rem;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    border-left: 5px solid var(--accent-color); /* Style lama dipertahankan */
+    margin: 2rem 0;
+    box-shadow: var(--shadow);
+}
+
+/* Input Fields */
+input, textarea, select {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    font-size: 1rem;
+    background-color: var(--input-bg);
+    color: var(--text-color);
+    box-sizing: border-box; /* Agar padding tidak merusak lebar */
+}
+
+/* Buttons */
 .button {
     display: inline-block;
-    background: var(--primary-color);
-    color: white;
+    background: var(--accent-color); /* Menggunakan accent agar kontras di dark mode */
+    color: var(--button-text);
     padding: 10px 20px;
     text-decoration: none;
     border-radius: 5px;
@@ -118,64 +189,80 @@ nav a:hover, nav a:focus {
     font-weight: bold;
     border: none;
     cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
 }
 
 .button:hover {
-    background: var(--accent-color);
+    filter: brightness(1.1);
+    transform: translateY(-2px);
 }
 
-/* Area Tools Spesifik */
-.tool-box {
-    background: var(--light-gray);
-    padding: 2rem;
-    border-radius: 8px;
-    border-left: 5px solid var(--accent-color);
+/* Ads Slot */
+.ads-slot {
+    background: var(--card-bg);
+    border: 1px dashed var(--border-color);
+    padding: 1rem;
+    text-align: center;
     margin: 2rem 0;
+    min-height: 100px;
+    color: #888;
 }
 
-input, textarea, select {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 1rem;
+.content-article {
+    margin-top: 3rem;
+    border-top: 1px solid var(--border-color);
+    padding-top: 2rem;
 }
 
-/* Footer */
+/* =========================================
+   6. FOOTER & ACCESSIBILITY
+   ========================================= */
 footer {
-    background: #222;
-    color: white;
+    background: var(--primary-color);
+    color: var(--header-text);
     text-align: center;
     padding: 2rem 0;
     margin-top: 3rem;
 }
 
-/* Kotak Iklan AdSense */
-.ads-slot {
-    background: #fff;
-    border: 1px dashed #ccc;
-    padding: 1rem;
-    text-align: center;
-    margin: 2rem 0;
-    min-height: 100px;
+footer a {
+    color: var(--accent-color);
+    text-decoration: none;
 }
 
-.content-article {
-    margin-top: 3rem;
-    border-top: 1px solid #eee;
-    padding-top: 2rem;
-}
+/* Skip Link */
 .skip-link {
     position: absolute;
     top: -40px;
     left: 0;
-    background: #000;
-    color: white;
+    background: var(--accent-color);
+    color: var(--button-text);
     padding: 8px;
-    z-index: 100;
+    z-index: 1000;
+    text-decoration: none;
     transition: top 0.3s;
 }
 .skip-link:focus {
     top: 0;
+}
+
+/* =========================================
+   7. THEME SWITCHER BUTTON
+   ========================================= */
+#theme-toggle {
+    background: transparent;
+    border: 2px solid var(--header-text);
+    color: var(--header-text);
+    padding: 5px 10px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 15px;
+}
+#theme-toggle:hover {
+    background: rgba(255,255,255,0.1);
+    color: #ffd700;
 }
