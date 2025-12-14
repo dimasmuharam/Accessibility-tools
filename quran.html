@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulasi Quran Braille & Arab Converter - Accessible Web Indonesia</title>
+    <meta name="description" content="Bagaimana tunanetra membaca Al-Quran? Coba simulasi konversi huruf Hijaiyah ke Braille Arab standar Indonesia. Unik: Dibaca dari kiri ke kanan!">
+    
+    <link rel="icon" type="image/x-icon" href="dimaster.ico">
+    <link rel="stylesheet" href="style.css">
+    
+    </head>
+<body>
+
+    <header>
+        <div class="container navbar">
+            <div class="brand" style="display: flex; align-items: center; gap: 15px;">
+                <a href="index.html" title="Kembali ke Beranda">
+                    <img src="logo.png" alt="Logo Dimaster Institute">
+                </a>
+                <div>
+                    <a href="index.html" style="text-decoration: none; color: white;">
+                        <h1 style="margin: 0; font-size: 1.2rem;">Accessible Web Indonesia</h1>
+                    </a>
+                    <small style="color: #ccc;">by <a href="https://www.dimaster.co.id" target="_blank" style="color: #e6e6e6; text-decoration: underline;">Dimaster Institute</a></small>
+                </div>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <h1>Simulasi Quran Braille (Hijaiyah)</h1>
+        <p>Menjawab rasa penasaran: "Bagaimana bentuk huruf Arab jika diraba?" Alat ini mengonversi teks Arab standar menjadi pola Braille.</p>
+
+        <div class="tool-box">
+            <label for="arabicInput"><strong>Masukkan Teks Arab (Hijaiyah):</strong></label>
+            <textarea id="arabicInput" rows="4" style="direction: rtl; font-family: 'Traditional Arabic', sans-serif; font-size: 1.5rem;" placeholder="بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم</textarea>
+            
+            <div style="margin-top: 20px;">
+                <button id="convertBtn" class="button">⠃ Convert ke Braille</button>
+                <button id="clearBtn" class="button" style="background: #d9534f;">Hapus</button>
+            </div>
+
+            <div id="resultArea" style="margin-top: 25px; display: none;">
+                <label><strong>Hasil Braille (Dibaca Kiri ke Kanan):</strong></label>
+                <div id="brailleOutput" style="background: #fff; padding: 20px; border: 2px solid var(--primary-color); border-radius: 8px; font-size: 2rem; letter-spacing: 3px; overflow-wrap: break-word;"></div>
+                <p style="font-size: 0.8rem; color: #666; margin-top: 10px;">*Tampilan visual titik Braille ini menggunakan font Unicode standar.</p>
+            </div>
+        </div>
+
+        <div class="ads-slot">
+            <p>Iklan Google AdSense</p>
+        </div>
+
+        <article class="content-article" style="margin-top: 3rem; border-top: 1px solid #eee; padding-top: 2rem;">
+            <h2>Fakta Unik: Arab Braille Dibaca dari Kiri ke Kanan!</h2>
+            <p>Banyak orang awas terkejut ketika mengetahui fakta ini. Kita tahu bahwa tulisan Arab visual ditulis dan dibaca dari <strong>Kanan ke Kiri (Right-to-Left)</strong>. Namun, ketika dikonversi menjadi Braille, arah bacanya berubah menjadi <strong>Kiri ke Kanan (Left-to-Right)</strong>.</p>
+
+            <h3>Mengapa Bisa Begitu?</h3>
+            <p>Sistem Braille diciptakan oleh Louis Braille berbasis huruf Latin yang linear (kiri-kanan). Ketika sistem ini diadopsi ke dalam bahasa Arab (Hijaiyah), para ahli memutuskan untuk mempertahankan logika urutan titik Braille agar universal.</p>
+            <p>Jika Braille Arab dibalik menjadi kanan-ke-kiri, maka penomoran titik (1-2-3, 4-5-6) akan terbalik dan membingungkan tunanetra yang juga mempelajari huruf Latin/Inggris. Oleh karena itu, Al-Quran Braille secara fisik dibaca dengan gerakan jari dari kiri ke kanan, meskipun itu adalah bahasa Arab.</p>
+
+            <h3>Sistem Harakat (Tanda Baca)</h3>
+            <p>Dalam tulisan Arab biasa, harakat (Fathah, Kasrah, Dammah) letaknya menumpuk di atas atau di bawah huruf. Namun dalam Braille, <strong>tidak ada konsep menumpuk</strong>.</p>
+            <p>Harakat dalam Braille dianggap sebagai karakter tersendiri yang ditulis <strong>setelah</strong> hurufnya. Jadi secara logika:</p>
+            <ul>
+                <li><strong>Visual:</strong> Ba + Fathah (b) = ( بَ ) -> Satu posisi vertikal.</li>
+                <li><strong>Braille:</strong> Huruf Ba (⠃) diikuti Tanda Fathah (⠂) -> Menjadi dua sel berdampingan (⠃⠂).</li>
+            </ul>
+
+            <h3>Standar di Indonesia</h3>
+            <p>Indonesia mengacu pada standar <em>Unified Arabic Braille</em> yang juga digunakan secara internasional. Mushaf Al-Quran Braille di Indonesia (seperti terbitan Yaketunis atau Balai Literasi Braille Kemensos) menggunakan standar ini agar tunanetra Indonesia bisa membaca mushaf dari negara lain juga.</p>
+
+            <div style="background: #f0f8ff; border-left: 5px solid var(--accent-color); padding: 20px; margin-top: 25px;">
+                <h3 style="margin-top: 0; color: var(--primary-color);">Belajar Islam & Al-Quran Bagi Tunanetra</h3>
+                <p>Membaca Al-Quran Braille membutuhkan ketelatenan ekstra karena ukurannya yang besar dan kodenya yang kompleks. Namun, semangat teman-teman tunanetra untuk mengaji tidak pernah surut.</p>
+                <p><strong>Kartunet</strong> sering mengadakan program literasi dan kajian inklusif. Jika Anda ingin mendukung program pemberdayaan tunanetra atau membutuhkan konsultasi aksesibilitas sarana ibadah, kami siap berkolaborasi.</p>
+                <br>
+                <a href="https://kartunet.com/kontak" class="button">Hubungi Kartunet &rarr;</a>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Dimaster Institute. Partner Resmi: <a href="https://kartunet.com" style="color:#008CBA;">Kartunet.com</a></p>
+            <p style="font-size: 0.8rem; margin-top: 10px;"><a href="privacy.html" style="color: #666; text-decoration: none;">Privacy Policy</a></p>
+        </div>
+    </footer>
+
+    <script>
+        // MAPPING HIJAIYAH KE BRAILLE (UNICODE)
+        // Standar Unified Arabic Braille
+        const arabicMap = {
+            'ا': '⠁', 'أ': '⠁', 'إ': '⠮', 'آ': '⠜', // Alif variants
+            'ب': '⠃', 'ت': '⠞', 'ث': '⠹',
+            'ج': '⠚', 'ح': '⠱', 'خ': '⠭',
+            'd': '⠙', 'ذ': '⠳', // Dal handled manually below due to mapping complexity
+            'ر': '⠗', 'ز': '⠵',
+            'س': '⠎', 'ش': '⠩',
+            'ص': '⠯', 'ض': '⠫',
+            'ط': '⠾', 'ظ': '⠼',
+            'ع': '⠷', 'غ': '⠣',
+            'ف': '⠋', 'q': '⠟', // Qaf handled below
+            'ك': '⠅', 'ل': '⠇', 'm': '⠍', // Mim handled below
+            'ن': '⠝', 'ه': '⠓', 'w': '⠺', // Waw handled below
+            'ي': '⠽', 'ى': '⠕',
+            'ء': '⠄', 'ة': '⠡',
+            'د': '⠙', 'ق': '⠟', 'م': '⠍', 'و': '⠺', // Fix constants
+            
+            // Harakat (Vowels)
+            'َ': '⠂', // Fathah (Dot 2)
+            'ِ': '⠔', // Kasrah (Dot 3-5) - *Check standard variation, sometimes 1-5*
+            'ُ': '⠥', // Dammah (Dot 1-3-6)
+            'ً': '⠆', // Fathatain
+            'ٍ': '⠢', // Kasratain
+            'ٌ': '⠖', // Dammatain
+            'ْ': '⠒', // Sukun
+            'ّ': '⠠', // Shadda (Dot 6)
+            ' ': ' ',  // Spasi
+            '،': '⠐', // Koma Arab
+            '؟': '⠦'  // Tanda tanya Arab
+        };
+
+        function convertArabic() {
+            const input = document.getElementById('arabicInput').value;
+            let output = '';
+            
+            // Loop setiap karakter
+            for (let i = 0; i < input.length; i++) {
+                const char = input[i];
+                if (arabicMap[char]) {
+                    output += arabicMap[char];
+                } else {
+                    // Jika tidak ketemu (misal angka atau simbol lain), biarkan atau kasih tanda tanya
+                    // Untuk demo ini kita biarkan kosong atau spasi agar rapi
+                    output += ''; 
+                }
+            }
+            
+            const resultArea = document.getElementById('resultArea');
+            const brailleOutput = document.getElementById('brailleOutput');
+            
+            if(output.trim() === '') {
+                alert("Silakan masukkan huruf Arab Hijaiyah.");
+                return;
+            }
+
+            brailleOutput.innerText = output;
+            resultArea.style.display = 'block';
+            
+            // Auto scroll ke hasil
+            resultArea.scrollIntoView({behavior: "smooth"});
+        }
+
+        document.getElementById('convertBtn').addEventListener('click', convertArabic);
+        document.getElementById('clearBtn').addEventListener('click', () => {
+            document.getElementById('arabicInput').value = '';
+            document.getElementById('resultArea').style.display = 'none';
+        });
+    </script>
+</body>
+</html>
