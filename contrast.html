@@ -2,25 +2,58 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <title>Cek Kontras Warna WCAG - Accessible Web Tools</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cek Kontras Warna - Accessible Web Indonesia</title>
+    <meta name="description" content="Cek rasio kontras warna teks dan background website Anda agar sesuai standar WCAG AA/AAA untuk penyandang low vision.">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5878514175202601"
+     crossorigin="anonymous"></script>
+
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FGJKD3430G"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-FGJKD3430G');
+</script>
+    
+    <link rel="icon" type="image/x-icon" href="dimaster.ico">
+
     <link rel="stylesheet" href="style.css">
-</head>
+
+    </head>
 <body>
+
+    <a href="#main-content" class="skip-link">Lewati ke Konten Utama</a>
+
     <header>
         <div class="container navbar">
-            <a href="index.html" class="brand">
-                <img src="logo.png" alt="Logo Dimaster Institute">
-                <h1>Accessible Web Tools</h1>
-            </a>
-<nav>
-    <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="about.html">About</a></li>   <li><a href="contact.html">Contact</a></li> </ul>
-</nav>
+            <div class="brand" style="display: flex; align-items: center; gap: 15px;">
+                <a href="index.html" title="Kembali ke Beranda">
+                    <img src="logo.png" alt="Logo Dimaster Institute">
+                </a>
+                
+                <div>
+                    <a href="index.html" style="text-decoration: none; color: white;">
+                        <h1 style="margin: 0; font-size: 1.2rem;">Accessible Web Indonesia</h1>
+                    </a>
+                    
+                    <small style="color: #ccc;">by <a href="https://www.dimaster.co.id" target="_blank" style="color: #e6e6e6; text-decoration: underline;">Dimaster Institute</a></small>
                 </div>
+            </div>
+
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
     </header>
 
-    <main class="container">
+    <main id="main-content" class="container">
         <h1>Color Contrast Checker</h1>
         <p>Cek apakah kombinasi warna teks dan latar belakang Anda sudah memenuhi standar WCAG AA atau AAA.</p>
 
@@ -47,7 +80,9 @@
             </div>
         </div>
 
-        <div class="ads-slot"><p>Iklan Google AdSense</p></div>
+        <div class="ads-slot">
+            <p>Iklan Google AdSense</p>
+        </div>
 
         <article class="content-article" style="margin-top: 3rem; border-top: 1px solid #eee; padding-top: 2rem;">
             <h2>Kontras Warna: Antara Estetika, Standar Baku, dan Kebutuhan Mata</h2>
@@ -82,7 +117,15 @@
         </article>
     </main>
 
-    <footer><div class="container"><p>&copy; 2025 Dimaster Institute.</p></div></footer>
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Dimaster Institute. All Rights Reserved.</p>
+            <p>Partner Resmi: <a href="https://kartunet.com" style="color:#008CBA;">Kartunet.com</a></p>
+            <p style="font-size: 0.8rem; margin-top: 10px;">
+                <a href="privacy.html" style="color: #666; text-decoration: none;">Privacy Policy</a>
+            </p>
+        </div>
+    </footer>
 
     <script>
         const bgInput = document.getElementById('bgColor');
@@ -126,8 +169,9 @@
             else if(ratio >= 4.5) status = "LULUS Standar (AA)";
             else status = "GAGAL (Kontras Buruk)";
             
-            document.getElementById('statusResult').innerText = status;
-            document.getElementById('statusResult').style.color = ratio >= 4.5 ? "green" : "red";
+            const statusElem = document.getElementById('statusResult');
+            statusElem.innerText = status;
+            statusElem.style.color = ratio >= 4.5 ? "green" : "red";
         }
 
         bgInput.addEventListener('input', checkContrast);
