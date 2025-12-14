@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulator Baca Disleksia - Accessible Web Indonesia</title>
+    <meta name="description" content="Rasakan sulitnya membaca bagi penyandang disleksia. Simulator ini mengacak huruf untuk memberikan pengalaman empati bagi orang awam.">
+    
+    <link rel="stylesheet" href="style.css">
+    
+    </head>
+<body>
+
+    <header>
+        <div class="container navbar">
+            <div class="brand" style="display: flex; align-items: center; gap: 15px;">
+                <a href="index.html" title="Kembali ke Beranda">
+                    <img src="logo.png" alt="Logo Dimaster Institute">
+                </a>
+                <div>
+                    <a href="index.html" style="text-decoration: none; color: white;">
+                        <h1 style="margin: 0; font-size: 1.2rem;">Accessible Web Indonesia</h1>
+                    </a>
+                    <small style="color: #ccc;">by <a href="https://www.dimaster.co.id" target="_blank" style="color: #e6e6e6; text-decoration: underline;">Dimaster Institute</a></small>
+                </div>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <h1>Simulator Membaca Disleksia</h1>
+        <p>Apakah huruf-huruf di layar terasa menari? Alat ini menyimulasikan pengalaman visual yang sering dialami oleh penyandang disleksia saat mencoba membaca.</p>
+
+        <div class="tool-box">
+            <label for="dyslexiaInput"><strong>Masukkan Teks (Atau gunakan teks contoh):</strong></label>
+            <textarea id="dyslexiaInput" rows="6" placeholder="Ketik sesuatu di sini...">Disleksia bukanlah tanda kebodohan. Banyak orang jenius seperti Albert Einstein dan Steve Jobs adalah penyandang disleksia. Bagi kami, huruf-huruf ini seringkali terlihat melompat, berputar, atau bertukar tempat, membuat aktivitas membaca menjadi sangat melelahkan.</textarea>
+            
+            <div style="margin-top: 20px;">
+                <button id="startBtn" class="button">😵 Mulai Simulasi</button>
+                <button id="resetBtn" class="button" style="background: #d9534f;">⏹ Stop / Reset</button>
+            </div>
+
+            <div id="displayArea" style="margin-top: 25px; padding: 20px; background: #fff; border: 1px solid #ccc; border-radius: 8px; font-size: 1.2rem; line-height: 1.6; min-height: 150px; display:none;">
+                </div>
+        </div>
+
+        <div class="ads-slot">
+            <p>Iklan Google AdSense</p>
+        </div>
+
+        <article class="content-article" style="margin-top: 3rem; border-top: 1px solid #eee; padding-top: 2rem;">
+            <h2>Memahami Disleksia: Lebih dari Sekadar "Susah Baca"</h2>
+            <p>Seringkali dicap "malas" atau "lambat" di sekolah, penyandang disleksia sebenarnya memiliki struktur otak yang unik. Disleksia adalah gangguan dalam memproses bahasa (neurobiologis) yang berdampak pada kesulitan mengenali kata, mengeja, dan menguraikan simbol (decoding).</p>
+
+            <h3>Bagaimana Rasanya Menjadi Disleksia?</h3>
+            <p>Simulator di atas hanyalah gambaran kasar. Pengalaman setiap penyandang berbeda-beda, namun gejala umum visual yang sering dilaporkan meliputi:</p>
+            <ul>
+                <li><strong>Efek Sungai (River Effect):</strong> Spasi antar kata terlihat menyambung membentuk garis putih vertikal yang memecah konsentrasi.</li>
+                <li><strong>Huruf Menari (Dancing Letters):</strong> Huruf terlihat bergetar, berputar, atau melayang keluar dari barisnya.</li>
+                <li><strong>Pembalikan (Reversal):</strong> Huruf seperti 'b' dan 'd', atau 'p' dan 'q' sering tertukar.</li>
+            </ul>
+
+            <h3>Disleksia & Aksesibilitas Web (WCAG)</h3>
+            <p>Sebagai pengembang web atau penulis konten, Anda bisa membantu mereka dengan menerapkan prinsip <strong>Cognitive Accessibility</strong>:</p>
+            <ol>
+                <li><strong>Gunakan Font Sans-Serif:</strong> Font seperti Arial, Verdana, atau Comic Sans lebih mudah dibaca daripada Times New Roman karena bentuk hurufnya lebih tegas dan tidak memiliki "kait" yang membingungkan.</li>
+                <li><strong>Hindari Rata Kanan-Kiri (Justify):</strong> Teks rata kanan-kiri menciptakan spasi yang tidak merata, memicu "efek sungai" yang membingungkan mata. Gunakan rata kiri (Align Left).</li>
+                <li><strong>Paragraf Pendek:</strong> Pecah teks panjang menjadi paragraf-paragraf kecil. Dinding teks (Wall of Text) adalah musuh utama disleksia.</li>
+            </ol>
+
+            <div style="background: #f0f8ff; border-left: 5px solid var(--accent-color); padding: 20px; margin-top: 25px;">
+                <h3 style="margin-top: 0; color: var(--primary-color);">Ingin Website Anda Ramah Kognitif?</h3>
+                <p>Aksesibilitas bukan hanya untuk tunanetra. Memastikan website mudah dipahami (Understandable) adalah salah satu dari 4 prinsip utama WCAG.</p>
+                <p><strong>Kartunet Konsultan</strong> dapat membantu Anda melakukan audit konten (Content Audit) dan User Testing untuk memastikan informasi di website Anda tersampaikan dengan efektif kepada semua orang, termasuk mereka dengan kesulitan belajar.</p>
+                <br>
+                <a href="https://kartunet.com/kontak" class="button">Hubungi Kami untuk Konsultasi &rarr;</a>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Dimaster Institute. Partner Resmi: <a href="https://kartunet.com" style="color:#008CBA;">Kartunet.com</a></p>
+        </div>
+    </footer>
+
+    <script>
+        const textInput = document.getElementById('dyslexiaInput');
+        const startBtn = document.getElementById('startBtn');
+        const resetBtn = document.getElementById('resetBtn');
+        const displayArea = document.getElementById('displayArea');
+        let intervalId = null;
+
+        // Fungsi mengacak huruf dalam kata (kecuali huruf pertama & terakhir)
+        function scrambleWord(word) {
+            if (word.length < 4) return word;
+            const first = word[0];
+            const last = word[word.length - 1];
+            const middle = word.slice(1, word.length - 1).split('');
+            
+            // Algoritma pengacakan sederhana (Fisher-Yates)
+            for (let i = middle.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [middle[i], middle[j]] = [middle[j], middle[i]];
+            }
+            
+            return first + middle.join('') + last;
+        }
+
+        function scrambleText(text) {
+            return text.split(' ').map(word => {
+                // Hanya acak jika bukan tanda baca
+                if (/^[a-zA-Z]+$/.test(word)) {
+                    // Probabilitas 50% kata akan teracak setiap detiknya agar efek "gerak"
+                    return Math.random() > 0.3 ? scrambleWord(word) : word; 
+                }
+                return word;
+            }).join(' ');
+        }
+
+        function startSimulation() {
+            const originalText = textInput.value;
+            if(!originalText) return;
+
+            displayArea.style.display = 'block';
+            displayArea.innerText = originalText;
+            
+            // Scroll ke area hasil
+            displayArea.scrollIntoView({behavior: "smooth"});
+
+            if (intervalId) clearInterval(intervalId);
+
+            // Update teks setiap 500ms (setengah detik) untuk efek "menari"
+            intervalId = setInterval(() => {
+                displayArea.innerText = scrambleText(originalText);
+            }, 500);
+        }
+
+        startBtn.addEventListener('click', startSimulation);
+
+        resetBtn.addEventListener('click', () => {
+            if (intervalId) clearInterval(intervalId);
+            displayArea.style.display = 'none';
+        });
+    </script>
+</body>
+</html>
