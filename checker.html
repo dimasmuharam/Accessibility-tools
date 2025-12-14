@@ -3,26 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cek Skor Aksesibilitas Website - Accessible Web Tools</title>
+    <title>Cek Skor Aksesibilitas Website - Accessible Web Indonesia</title>
+    <meta name="description" content="Audit aksesibilitas website Anda secara gratis menggunakan standar Google Lighthouse dan WCAG.">
+        <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FGJKD3430G"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-FGJKD3430G');
+</script>
+
+    <link rel="icon" type="image/x-icon" href="dimaster.ico">
+
     <link rel="stylesheet" href="style.css">
-</head>
+
+    </head>
 <body>
+
+    <a href="#main-content" class="skip-link">Lewati ke Konten Utama</a>
 
     <header>
         <div class="container navbar">
-            <a href="index.html" class="brand">
-                <img src="logo.png" alt="Logo Dimaster Institute">
-                <h1>Accessible Web Tools</h1>
-            </a>
+            <div class="brand" style="display: flex; align-items: center; gap: 15px;">
+                <a href="index.html" title="Kembali ke Beranda">
+                    <img src="logo.png" alt="Logo Dimaster Institute">
+                </a>
+                
+                <div>
+                    <a href="index.html" style="text-decoration: none; color: white;">
+                        <h1 style="margin: 0; font-size: 1.2rem;">Accessible Web Indonesia</h1>
+                    </a>
+                    
+                    <small style="color: #ccc;">by <a href="https://www.dimaster.co.id" target="_blank" style="color: #e6e6e6; text-decoration: underline;">Dimaster Institute</a></small>
+                </div>
+            </div>
+
             <nav>
-    <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="about.html">About</a></li>   <li><a href="contact.html">Contact</a></li> </ul>
-</nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
         </div>
     </header>
 
-    <main class="container">
+    <main id="main-content" class="container">
         <h1>Website Accessibility Audit Scanner</h1>
         <p>Masukkan URL website untuk melihat skor performa aksesibilitas berdasarkan Google Lighthouse (Mobile Strategy).</p>
 
@@ -31,7 +59,7 @@
             <input type="url" id="urlInput" placeholder="Contoh: https://kemkes.go.id" required>
             <button onclick="runAudit()" id="btnCheck" class="button">Mulai Audit</button>
 
-<div id="result" style="display:none; margin-top: 30px; padding: 0; background: white; border: 1px solid #ddd; border-radius: 8px; overflow: hidden;">
+            <div id="result" style="display:none; margin-top: 30px; padding: 0; background: white; border: 1px solid #ddd; border-radius: 8px; overflow: hidden;">
                 
                 <div style="padding: 20px; text-align: center; border-bottom: 1px solid #eee;">
                     <p style="margin: 0; color: #666;">Target URL: <span id="resUrl" style="font-weight: bold;">-</span></p>
@@ -68,59 +96,63 @@
             </div>            
         
             <div class="ads-slot">
-            <p>Iklan Google AdSense</p>
-        </div>
+                <p>Iklan Google AdSense</p>
+            </div>
 
             <article class="content-article" style="margin-top: 3rem; border-top: 1px solid #eee; padding-top: 2rem;">
-            <h2>Panduan Lengkap Audit Aksesibilitas & Standar WCAG</h2>
-            <p>Memiliki website yang aksesibel bukan lagi sekadar pilihan, melainkan keharusan hukum dan moral. Di Indonesia, hak aksesibilitas digital telah dijamin dalam UU No. 8 Tahun 2016. Tool <em>Accessibility Checker</em> ini adalah langkah awal Anda untuk mematuhi standar tersebut.</p>
+                <h2>Panduan Lengkap Audit Aksesibilitas & Standar WCAG</h2>
+                <p>Memiliki website yang aksesibel bukan lagi sekadar pilihan, melainkan keharusan hukum dan moral. Di Indonesia, hak aksesibilitas digital telah dijamin dalam UU No. 8 Tahun 2016. Tool <em>Accessibility Checker</em> ini adalah langkah awal Anda untuk mematuhi standar tersebut.</p>
 
-            <h3>1. Apa yang Diperiksa oleh Alat Ini?</h3>
-            <p>Alat ini menggunakan mesin Google Lighthouse untuk memindai kode HTML website Anda. Beberapa poin krusial yang diperiksa meliputi:</p>
-            <ul>
-                <li><strong>Alt Text pada Gambar:</strong> Apakah setiap gambar memiliki deskripsi teks bagi pengguna pembaca layar (screen reader)?</li>
-                <li><strong>Struktur Heading:</strong> Apakah penggunaan H1, H2, H3 berurutan secara logis untuk navigasi keyboard?</li>
-                <li><strong>Label Formulir:</strong> Apakah setiap kotak input memiliki label yang jelas?</li>
-                <li><strong>Warna dan Kontras:</strong> Apakah teks cukup kontras dengan latar belakangnya agar terbaca oleh penyandang <em>low vision</em>?</li>
-            </ul>
-
-            <h3>2. Mengenal Standar WCAG (Prinsip POUR)</h3>
-            <p>Standar internasional yang digunakan adalah <strong>WCAG (Web Content Accessibility Guidelines)</strong>. Agar website dianggap aksesibel, ia harus memenuhi 4 prinsip utama (POUR):</p>
-            <ol>
-                <li><strong>Perceivable (Dapat Diterima):</strong> Informasi harus bisa ditangkap oleh indera (misal: teks alternatif untuk gambar).</li>
-                <li><strong>Operable (Dapat Dioperasikan):</strong> Website harus bisa dijalankan sepenuhnya dengan Keyboard (tanpa Mouse).</li>
-                <li><strong>Understandable (Dapat Dipahami):</strong> Navigasi dan bahasa tidak membingungkan.</li>
-                <li><strong>Robust (Kokoh):</strong> Kode program valid dan bisa dibaca oleh berbagai teknologi bantu (Assistive Technology).</li>
-            </ol>
-
-            <h3>3. Mengapa Skor 100 Saja Tidak Cukup?</h3>
-            <p>Penting diingat: <strong>Mesin hanya mampu mendeteksi 30% kesalahan teknis.</strong> Sisa 70%-nya adalah tentang "Kenyamanan Pengguna" yang hanya bisa dirasakan manusia.</p>
-            <p>Contoh: Mesin tahu gambar ada Alt Text-nya. Tapi mesin tidak tahu apakah isinya benar ("Foto Kucing") atau salah ("img_123.jpg"). Di sinilah peran audit manual dibutuhkan.</p>
-
-            <div style="background: #f0f8ff; border-left: 5px solid var(--accent-color); padding: 20px; margin-top: 25px;">
-                <h3 style="margin-top: 0; color: var(--primary-color);">Mengapa Harus Audit Manual Bersama Kartunet?</h3>
-                <p>Berbeda dengan <em>agency</em> IT biasa yang hanya memperbaiki kode, <strong>Kartunet Konsultan</strong> menawarkan audit berbasis pengalaman nyata:</p>
+                <h3>1. Apa yang Diperiksa oleh Alat Ini?</h3>
+                <p>Alat ini menggunakan mesin Google Lighthouse untuk memindai kode HTML website Anda. Beberapa poin krusial yang diperiksa meliputi:</p>
                 <ul>
-                    <li><strong>Native Screen Reader Users:</strong> Tim kami adalah tunanetra yang "hidup" di internet. Kami tahu bedanya fitur yang sekadar "jalan" dengan yang "nyaman".</li>
-                    <li><strong>Tech-Savvy Community:</strong> Kami bukan objek pasif, melainkan praktisi digital yang paham teknis dan standar advokasi.</li>
-                    <li><strong>Solusi Menyeluruh:</strong> Dari audit sistem, perbaikan kode, hingga pelatihan kesadaran disabilitas untuk tim Anda.</li>
+                    <li><strong>Alt Text pada Gambar:</strong> Apakah setiap gambar memiliki deskripsi teks bagi pengguna pembaca layar (screen reader)?</li>
+                    <li><strong>Struktur Heading:</strong> Apakah penggunaan H1, H2, H3 berurutan secara logis untuk navigasi keyboard?</li>
+                    <li><strong>Label Formulir:</strong> Apakah setiap kotak input memiliki label yang jelas?</li>
+                    <li><strong>Warna dan Kontras:</strong> Apakah teks cukup kontras dengan latar belakangnya agar terbaca oleh penyandang <em>low vision</em>?</li>
                 </ul>
-                <br>
-                <a href="https://kartunet.com/kontak" class="button">Hubungi Tim Ahli Kartunet &rarr;</a>
-            </div>
-        </article>
-        
+
+                <h3>2. Mengenal Standar WCAG (Prinsip POUR)</h3>
+                <p>Standar internasional yang digunakan adalah <strong>WCAG (Web Content Accessibility Guidelines)</strong>. Agar website dianggap aksesibel, ia harus memenuhi 4 prinsip utama (POUR):</p>
+                <ol>
+                    <li><strong>Perceivable (Dapat Diterima):</strong> Informasi harus bisa ditangkap oleh indera (misal: teks alternatif untuk gambar).</li>
+                    <li><strong>Operable (Dapat Dioperasikan):</strong> Website harus bisa dijalankan sepenuhnya dengan Keyboard (tanpa Mouse).</li>
+                    <li><strong>Understandable (Dapat Dipahami):</strong> Navigasi dan bahasa tidak membingungkan.</li>
+                    <li><strong>Robust (Kokoh):</strong> Kode program valid dan bisa dibaca oleh berbagai teknologi bantu (Assistive Technology).</li>
+                </ol>
+
+                <h3>3. Mengapa Skor 100 Saja Tidak Cukup?</h3>
+                <p>Penting diingat: <strong>Mesin hanya mampu mendeteksi 30% kesalahan teknis.</strong> Sisa 70%-nya adalah tentang "Kenyamanan Pengguna" yang hanya bisa dirasakan manusia.</p>
+                <p>Contoh: Mesin tahu gambar ada Alt Text-nya. Tapi mesin tidak tahu apakah isinya benar ("Foto Kucing") atau salah ("img_123.jpg"). Di sinilah peran audit manual dibutuhkan.</p>
+
+                <div style="background: #f0f8ff; border-left: 5px solid var(--accent-color); padding: 20px; margin-top: 25px;">
+                    <h3 style="margin-top: 0; color: var(--primary-color);">Mengapa Harus Audit Manual Bersama Kartunet?</h3>
+                    <p>Berbeda dengan <em>agency</em> IT biasa yang hanya memperbaiki kode, <strong>Kartunet Konsultan</strong> menawarkan audit berbasis pengalaman nyata:</p>
+                    <ul>
+                        <li><strong>Native Screen Reader Users:</strong> Tim kami adalah tunanetra yang "hidup" di internet. Kami tahu bedanya fitur yang sekadar "jalan" dengan yang "nyaman".</li>
+                        <li><strong>Tech-Savvy Community:</strong> Kami bukan objek pasif, melainkan praktisi digital yang paham teknis dan standar advokasi.</li>
+                        <li><strong>Solusi Menyeluruh:</strong> Dari audit sistem, perbaikan kode, hingga pelatihan kesadaran disabilitas untuk tim Anda.</li>
+                    </ul>
+                    <br>
+                    <a href="https://kartunet.com/kontak" class="button">Hubungi Tim Ahli Kartunet &rarr;</a>
+                </div>
+            </article>
+        </div>
     </main>
 
     <footer>
         <div class="container">
-            <p>&copy; 2025 Dimaster Institute.</p>
+            <p>&copy; 2025 Dimaster Institute. All Rights Reserved.</p>
+            <p>Partner Resmi: <a href="https://kartunet.com" style="color:#008CBA;">Kartunet.com</a></p>
+            <p style="font-size: 0.8rem; margin-top: 10px;">
+                <a href="privacy.html" style="color: #666; text-decoration: none;">Privacy Policy</a>
+            </p>
         </div>
     </footer>
 
     <script>
         function runAudit() {
-            // 1. MASUKKAN API KEY ANDA DI BAWAH INI (Di dalam tanda kutip)
+            // 1. MASUKKAN API KEY ANDA (TIDAK DIUBAH, SESUAI PERMINTAAN)
             const apiKey = 'AIzaSyBIya_RRn2SoSU8j0yOPHjgCQ6yO7f-Mdg'; 
 
             let urlInput = document.getElementById('urlInput').value.trim();
@@ -183,6 +215,6 @@
             });
         }
     </script>
-   
+    
 </body>
 </html>
