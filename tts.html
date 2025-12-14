@@ -29,13 +29,14 @@
 
     <header>
         <div class="container navbar">
+            
             <div class="brand" style="display: flex; align-items: center; gap: 15px;">
                 <a href="index.html" title="Kembali ke Beranda">
                     <img src="logo.png" alt="Logo Dimaster Institute">
                 </a>
                 
                 <div>
-                    <a href="index.html" style="text-decoration: none; color: white;">
+                    <a href="index.html" style="text-decoration: none; color: var(--header-text);">
                         <h1 style="margin: 0; font-size: 1.2rem;">Accessible Web Indonesia</h1>
                     </a>
                     
@@ -43,16 +44,20 @@
                 </div>
             </div>
 
-            <nav>
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                </ul>
-            </nav>
+            <div style="display: flex; align-items: center; gap: 15px;">
+                
+                <nav aria-label="Menu Utama">
+                    <ul>
+                        <li><a href="index.html">Home</a></li> <li><a href="about.html">About</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+                
+                <button id="theme-toggle" aria-label="Ganti Mode Gelap atau Terang" title="Ganti Tema">🌙</button>
+            </div>
+
         </div>
     </header>
-
     <main id="main-content" class="container">
         <h1>Simulator Text-to-Speech</h1>
         <p>Tes bagaimana tulisan Anda terdengar saat dibacakan oleh mesin komputer (Simulasi Screen Reader sederhana).</p>
@@ -180,5 +185,6 @@
             }
         });
     </script>
+<script src="script.js"></script>
 </body>
 </html>
