@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+   <url>
+      <loc>https://www.accessible.web.id/</loc>
+      <lastmod>2025-06-29</lastmod>
+      <priority>1.00</priority>
+   </url>
+   <url>
+      <loc>https://www.accessible.web.id/index.html</loc>
+      <lastmod>2025-06-29</lastmod>
+      <priority>0.80</priority>
+   </url>
+
+   <url>
+      <loc>https://www.accessible.web.id/checker.html</loc>
+      <lastmod>2025-06-29</lastmod>
+      <priority>0.80</priority>
+   </url>
+   <url>
+      <loc>https://www.accessible.web.id/contrast.html</loc>
+      <lastmod>2025-06-29</lastmod>
+      <priority>0.80</priority>
+   </url>
+   <url>
+      <loc>https://www.accessible.web.id/braille.html</loc>
+      <lastmod>2025-06-29</lastmod>
+      <priority>0.80</priority>
+   </url>
+   <url>
+      <loc>https://www.accessible.web.id/tts.html</loc>
+      <lastmod>2025-06-29</lastmod>
+      <priority>0.80</priority>
+   </url>
+
+   <url>
+      <loc>https://www.accessible.web.id/about.html</loc>
+      <lastmod>2025-06-29</lastmod>
+      <priority>0.60</priority>
+   </url>
+   <url>
+      <loc>https://www.accessible.web.id/contact.html</loc>
+      <lastmod>2025-06-29</lastmod>
+      <priority>0.60</priority>
+   </url>
+</urlset>
