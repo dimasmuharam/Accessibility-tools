@@ -1,29 +1,32 @@
-// 1. Cek apakah user pernah memilih tema sebelumnya (disimpan di memori browser)
-const currentTheme = localStorage.getItem('theme');
 const toggleBtn = document.getElementById('theme-toggle');
+const currentTheme = localStorage.getItem('theme');
 
-// 2. Jika di memori tersimpan 'dark', langsung terapkan tema gelap & ikon matahari
+// 1. Cek status awal saat loading
 if (currentTheme === 'dark') {
     document.documentElement.setAttribute('data-theme', 'dark');
-    if (toggleBtn) toggleBtn.innerHTML = '☀️'; 
+    if (toggleBtn) {
+        toggleBtn.innerHTML = '☀️';
+        toggleBtn.setAttribute('aria-label', 'Ganti ke Mode Terang'); // Update label suara
+    }
 }
 
-// 3. Fungsi ketika tombol diklik
+// 2. Fungsi Klik
 if (toggleBtn) {
     toggleBtn.addEventListener('click', () => {
-        // Ambil tema yang sedang aktif
         let theme = document.documentElement.getAttribute('data-theme');
         
         if (theme === 'dark') {
-            // Kalau sekarang Gelap, ubah jadi TERANG (Light)
+            // Pindah ke LIGHT
             document.documentElement.setAttribute('data-theme', 'light');
-            localStorage.setItem('theme', 'light'); // Simpan pilihan user
-            toggleBtn.innerHTML = '🌙'; // Ubah ikon jadi Bulan
+            localStorage.setItem('theme', 'light');
+            toggleBtn.innerHTML = '🌙';
+            toggleBtn.setAttribute('aria-label', 'Ganti ke Mode Gelap'); // Update label suara
         } else {
-            // Kalau sekarang Terang, ubah jadi GELAP (Dark)
+            // Pindah ke DARK
             document.documentElement.setAttribute('data-theme', 'dark');
-            localStorage.setItem('theme', 'dark'); // Simpan pilihan user
-            toggleBtn.innerHTML = '☀️'; // Ubah ikon jadi Matahari
+            localStorage.setItem('theme', 'dark');
+            toggleBtn.innerHTML = '☀️';
+            toggleBtn.setAttribute('aria-label', 'Ganti ke Mode Terang'); // Update label suara
         }
     });
 }
