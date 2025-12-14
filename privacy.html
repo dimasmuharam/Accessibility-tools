@@ -8,18 +8,35 @@
 <body>
     <header>
         <div class="container navbar">
-            <div class="brand">
-                <a href="index.html"><h1>Accessible Web Indonesia</h1></a>
+            
+            <div class="brand" style="display: flex; align-items: center; gap: 15px;">
+                <a href="index.html" title="Kembali ke Beranda">
+                    <img src="logo.png" alt="Logo Dimaster Institute">
+                </a>
+                
+                <div>
+                    <a href="index.html" style="text-decoration: none; color: var(--header-text);">
+                        <h1 style="margin: 0; font-size: 1.2rem;">Accessible Web Indonesia</h1>
+                    </a>
+                    
+                    <small style="color: #ccc;">by <a href="https://www.dimaster.co.id" target="_blank" style="color: #e6e6e6; text-decoration: underline;">Dimaster Institute</a></small>
+                </div>
             </div>
-            <nav>
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                </ul>
-            </nav>
+
+            <div style="display: flex; align-items: center; gap: 15px;">
+                
+                <nav aria-label="Menu Utama">
+                    <ul>
+                        <li><a href="index.html">Home</a></li> <li><a href="about.html">About</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+                
+                <button id="theme-toggle" aria-label="Ganti Mode Gelap atau Terang" title="Ganti Tema">🌙</button>
+            </div>
+
         </div>
     </header>
-
     <main class="container">
         <article class="content-article">
             <h1>Kebijakan Privasi (Privacy Policy)</h1>
@@ -42,5 +59,6 @@
     <footer>
         <div class="container"><p>&copy; 2025 Dimaster Institute.</p></div>
     </footer>
+<script src="script.js"></script>
 </body>
 </html>
