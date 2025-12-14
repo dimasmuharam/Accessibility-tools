@@ -3,21 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Accessible Web Tools - Powered by Dimaster Institute</title>
-    <meta name="description" content="Kumpulan alat bantu gratis untuk cek aksesibilitas website, kontras warna, dan konverter Braille.">
+    <title>Accessible Web Indonesia - Powered by Dimaster Institute</title>
+    <meta name="description" content="Pusat alat bantu aksesibilitas digital. Cek WCAG, simulasi disleksia, konverter Braille, dan simulasi Quran Braille untuk edukasi masyarakat.">
+    
+    <link rel="icon" type="image/x-icon" href="dimaster.ico">
+
     <link rel="stylesheet" href="style.css">
-</head>
+
+    </head>
 <body>
+
+    <a href="#main-content" class="skip-link">Lewati ke Konten Utama</a>
 
     <header>
         <div class="container navbar">
-            <a href="index.html" class="brand">
-                <img src="logo.png" alt="Logo Dimaster Institute">
+            <div class="brand" style="display: flex; align-items: center; gap: 15px;">
+                <a href="index.html" title="Kembali ke Beranda">
+                    <img src="logo.png" alt="Logo Dimaster Institute">
+                </a>
+                
                 <div>
-                    <h1>Accessible Web Tools</h1>
-                    <small>by Dimaster Institute</small>
+                    <a href="index.html" style="text-decoration: none; color: white;">
+                        <h1 style="margin: 0; font-size: 1.2rem;">Accessible Web Indonesia</h1>
+                    </a>
+                    
+                    <small style="color: #ccc;">by <a href="https://www.dimaster.co.id" target="_blank" style="color: #e6e6e6; text-decoration: underline;">Dimaster Institute</a></small>
                 </div>
-            </a>
+            </div>
+
             <nav aria-label="Menu Utama">
                 <ul>
                     <li><a href="index.html" aria-current="page">Home</a></li>
@@ -28,20 +41,20 @@
         </div>
     </header>
 
-    <main class="container">
+    <main id="main-content" class="container">
         <section class="hero">
             <h2>Buat Internet Ramah untuk Semua</h2>
-            <p>Kumpulan alat bantu gratis untuk developer, desainer, dan pendidik dalam menciptakan ekosistem digital yang inklusif.</p>
+            <p>Platform edukasi dan alat bantu aksesibilitas pertama di Indonesia. Ciptakan dunia digital yang inklusif, satu baris kode pada satu waktu.</p>
         </section>
 
         <div class="ads-slot">
-            <p>Iklan Google AdSense akan muncul di sini</p>
+            <p>Iklan Google AdSense</p>
         </div>
 
         <section class="tool-grid">
             <article class="card">
                 <h3>🔍 Accessibility Checker</h3>
-                <p>Audit otomatis website Anda menggunakan standar Google Lighthouse & WCAG.</p>
+                <p>Audit otomatis website Anda menggunakan standar Google Lighthouse & WCAG (Mobile Strategy).</p>
                 <a href="checker.html" class="button">Cek Website Sekarang</a>
             </article>
 
@@ -53,7 +66,7 @@
 
             <article class="card">
                 <h3>⠃⠗⠇ Braille Converter</h3>
-                <p>Simulasi konversi teks biasa menjadi format tulisan Braille (ASCII).</p>
+                <p>Simulasi konversi teks latin menjadi format tulisan Braille (ASCII) untuk edukasi literasi.</p>
                 <a href="braille.html" class="button">Coba Konverter</a>
             </article>
 
@@ -62,12 +75,59 @@
                 <p>Dengar bagaimana teks website Anda dibacakan oleh suara robot (Cek kenyamanan mendengar).</p>
                 <a href="tts.html" class="button">Tes Suara</a>
             </article>
+
+            <article class="card">
+                <h3>😵 Dyslexia Simulator</h3>
+                <p>Rasakan pengalaman membaca penyandang disleksia. Huruf akan menari dan melompat.</p>
+                <a href="dyslexia.html" class="button">Coba Simulasi</a>
+            </article>
+
+            <article class="card">
+                <h3>🕌 Quran Braille Simulator</h3>
+                <p>Simulasi konversi huruf Arab Hijaiyah ke Braille standar Indonesia (Baca Kiri-ke-Kanan).</p>
+                <a href="quran.html" class="button">Cek Huruf Arab</a>
+            </article>
         </section>
 
-        <section class="content-article">
-            <h3>Mengapa Aksesibilitas Web Penting?</h3>
-            <p>Aksesibilitas web memastikan bahwa orang dengan disabilitas dapat melihat, memahami, menavigasi, dan berinteraksi dengan Web. Ini bukan hanya tren, tetapi hak asasi manusia di era digital.</p>
-            <p>Tool ini dikembangkan sebagai inisiatif dari <strong>Dimaster Institute</strong> dan <strong>Kartunet</strong> untuk mendorong standar WCAG (Web Content Accessibility Guidelines) di Indonesia.</p>
+        <div class="ads-slot">
+            <p>Iklan Google AdSense</p>
+        </div>
+
+        <section class="content-article" style="margin-top: 3rem; border-top: 1px solid #eee; padding-top: 2rem;">
+            <h2>Pusat Edukasi & Alat Bantu Aksesibilitas Digital</h2>
+            <p>Selamat datang di <strong>Accessible Web Indonesia</strong>, inisiatif digital untuk menjembatani kesenjangan informasi antara dunia awas dan dunia disabilitas. Kami percaya bahwa aksesibilitas web bukan sekadar soal kode pemrograman, tetapi soal kemanusiaan.</p>
+
+            <h3>Website Ini Sebagai Alat Pelatihan Sensitivitas (Sensitivity Training)</h3>
+            <p>Seringkali masyarakat umum (non-disabilitas) merasa canggung atau penasaran tentang bagaimana cara penyandang disabilitas berinteraksi dengan dunia. Website ini hadir sebagai <strong>alat peraga praktis</strong> untuk menjawab rasa penasaran tersebut.</p>
+            <p>Para penyandang disabilitas, guru SLB, atau aktivis inklusi dapat menggunakan tools di sini untuk melakukan sosialisasi <em>(Disability Awareness)</em>:</p>
+            <ul>
+                <li><strong>Untuk Menjelaskan Disleksia:</strong> Gunakan <em>Dyslexia Simulator</em> untuk menunjukkan kepada orang tua atau guru betapa melelahkannya membaca teks yang "menari-nari", sehingga tumbuh rasa empati.</li>
+                <li><strong>Untuk Mengenalkan Braille:</strong> Gunakan <em>Braille Converter</em> (Latin & Arab) untuk mendemokan logika titik timbul. Jelaskan bahwa Al-Quran Braille pun dibaca dari kiri ke kanan, sebuah fakta unik yang jarang diketahui publik.</li>
+                <li><strong>Untuk Simulasi Screen Reader:</strong> Gunakan fitur <em>Text-to-Speech</em> untuk memperdengarkan bagaimana orang buta "membaca" website dengan telinga, bukan mata.</li>
+            </ul>
+
+            <h3>Mengapa Aksesibilitas Web Itu Penting?</h3>
+            <p>Bagi pemilik bisnis dan instansi pemerintah, aksesibilitas memberikan dampak nyata:</p>
+            <ol>
+                <li><strong>Kepatuhan Hukum:</strong> Memenuhi amanat <strong>UU No. 8 Tahun 2016</strong> tentang penyediaan akses informasi publik.</li>
+                <li><strong>SEO & Ranking Google:</strong> Google menyukai website yang strukturnya rapi, memiliki Alt Text, dan cepat diakses—ciri khas website aksesibel.</li>
+                <li><strong>Pasar yang Lebih Luas:</strong> Sekitar 15% populasi dunia memiliki disabilitas. Membuat web aksesibel berarti membuka pintu bagi jutaan pelanggan baru.</li>
+            </ol>
+
+            <h3>Inisiatif Dimaster Institute & Kartunet</h3>
+            <p>Platform ini dikembangkan secara independen oleh <strong><a href="https://www.dimasmuharam.com" target="_blank" style="color: var(--primary-color); text-decoration: underline;">Dimas P. Muharam</a></strong>, seorang aktivis tunanetra dan pendiri <strong>Dimaster Institute</strong>. Bersama komunitas <strong>Kartunet</strong> (Karya Tunanetra), kami berupaya menciptakan ekosistem digital Indonesia yang ramah bagi semua ragam disabilitas.</p>
+
+            <div style="background: #f0f8ff; border-left: 5px solid var(--accent-color); padding: 25px; margin-top: 30px; border-radius: 8px;">
+                <h3 style="margin-top: 0; color: var(--primary-color);">Langkah Selanjutnya: Audit & Pelatihan</h3>
+                <p>Tools di atas adalah langkah awal untuk diagnosa dan edukasi. Namun, implementasi nyata membutuhkan keahlian mendalam.</p>
+                <p><strong>Kartunet Konsultan</strong> menyediakan layanan profesional:</p>
+                <ul style="margin-bottom: 20px;">
+                    <li><strong>Audit Aksesibilitas:</strong> Pengecekan manual oleh tim penguji tunanetra bersertifikat.</li>
+                    <li><strong>Pelatihan Sensitivitas:</strong> Training untuk HRD/Karyawan tentang etika berinteraksi dengan disabilitas.</li>
+                    <li><strong>Usability Testing:</strong> Pengujian kenyamanan aplikasi oleh pengguna asli.</li>
+                </ul>
+                <a href="https://kartunet.com/kontak" class="button">Hubungi Kami untuk Konsultasi &rarr;</a>
+            </div>
         </section>
     </main>
 
@@ -75,6 +135,9 @@
         <div class="container">
             <p>&copy; 2025 Dimaster Institute. All Rights Reserved.</p>
             <p>Partner Resmi: <a href="https://kartunet.com" style="color:#008CBA;">Kartunet.com</a></p>
+            <p style="font-size: 0.8rem; margin-top: 10px;">
+                <a href="privacy.html" style="color: #666; text-decoration: none;">Privacy Policy</a>
+            </p>
         </div>
     </footer>
 
