@@ -319,3 +319,37 @@ h1, h2, h3, h4, h5, h6 {
     color: #ffd700; /* Kuning Emas (Opsional: Jika ingin beda dengan Cyan) */
     /* Atau hapus baris ini jika ingin tetap pakai Cyan (--accent-color) */
 }
+/* =========================================
+   9. EMERGENCY FIX: PAKSA TEKS TERBACA
+   ========================================= */
+
+/* Kode ini memaksa elemen yang punya warna 'hardcode' 
+   untuk tunduk pada warna tema saat Dark Mode aktif */
+
+[data-theme="dark"] p, 
+[data-theme="dark"] li, 
+[data-theme="dark"] span, 
+[data-theme="dark"] div {
+    /* Paksa jadi putih gading, abaikan style bawaan */
+    color: var(--text-color) !important; 
+}
+
+[data-theme="dark"] h1, 
+[data-theme="dark"] h2, 
+[data-theme="dark"] h3, 
+[data-theme="dark"] h4, 
+[data-theme="dark"] h5, 
+[data-theme="dark"] h6 {
+    /* Paksa judul jadi putih terang */
+    color: var(--primary-color) !important;
+}
+
+[data-theme="dark"] small {
+    /* Paksa teks kecil (seperti copyright) jadi terang */
+    color: #ccc !important;
+}
+
+/* KECUALI TOMBOL: Biarkan tombol tetap punya warnanya sendiri */
+[data-theme="dark"] .button {
+    color: var(--button-text) !important;
+}
