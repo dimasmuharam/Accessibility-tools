@@ -7,7 +7,7 @@
     --accent-color: #008CBA;     /* Biru Muda */
     --bg-color: #ffffff;         /* Background Putih */
     --text-color: #333333;       /* Teks Hitam */
-    --card-bg: #f4f4f4;          /* Abu-abu muda (pengganti light-gray lama) */
+    --card-bg: #f4f4f4;          /* Abu-abu muda */
     --border-color: #ddd;        
     --header-text: #ffffff;
     --input-bg: #ffffff;
@@ -17,18 +17,18 @@
 }
 
 [data-theme="dark"] {
-    /* --- DARK MODE --- */
-    --primary-color: #0d1b2a;    /* Biru Sangat Gelap */
-    --accent-color: #4cc9f0;     /* Biru Neon (agar kontras) */
-    --bg-color: #121212;         /* Hitam Abu (Soft Black) */
-    --text-color: #e0e0e0;       /* Putih Gading */
+    /* --- DARK MODE (HIGH CONTRAST REVISION) --- */
+    --primary-color: #000000;    /* Hitam Pekat (Header/Footer) */
+    --accent-color: #4cc9f0;     /* Biru Neon */
+    --bg-color: #121212;         /* Hitam Abu (Body) agar tidak pedih di mata */
+    --text-color: #ffffff;       /* Putih Murni (High Contrast) */
     --card-bg: #1e1e1e;          /* Abu Gelap untuk Card */
-    --border-color: #333;
-    --header-text: #e0e0e0;
+    --border-color: #555;        /* Border lebih terang agar kotak terlihat jelas */
+    --header-text: #ffffff;      /* Teks Header Putih Murni */
     --input-bg: #2c2c2c;
-    --button-text: #121212;      /* Teks tombol jadi gelap agar terbaca */
-    --shadow: 0 4px 6px rgba(0,0,0,0.5);
-    --hero-bg: #1a1a1a;          /* Background Hero Gelap */
+    --button-text: #000000;      /* Teks tombol jadi hitam di atas biru neon */
+    --shadow: 0 4px 6px rgba(255,255,255,0.1); /* Bayangan putih tipis */
+    --hero-bg: #000000;          /* Hero Hitam Pekat */
 }
 
 /* =========================================
@@ -68,7 +68,7 @@ header {
     flex-wrap: wrap;
 }
 
-/* Brand Style (Dipertahankan dari kode lama) */
+/* Brand Style (Dipertahankan) */
 .brand {
     display: flex;
     align-items: center;
@@ -108,19 +108,19 @@ nav a {
 nav a:hover, nav a:focus, nav a[aria-current="page"] {
     text-decoration: underline;
     text-decoration-thickness: 2px;
-    color: #ffd700; /* Kuning emas (Dipertahankan) */
+    color: #ffd700; /* Kuning emas */
 }
 
 /* =========================================
    4. AREA KONTEN (HERO & GRID)
    ========================================= */
-/* Hero Section (Dikembalikan) */
+/* Hero Section */
 .hero {
     text-align: center;
     padding: 3rem 1rem;
     background: var(--hero-bg);
     margin-bottom: 2rem;
-    border-radius: 8px; /* Tambahan sedikit agar rapi */
+    border-radius: 8px;
 }
 
 .tool-grid {
@@ -130,36 +130,36 @@ nav a:hover, nav a:focus, nav a[aria-current="page"] {
     margin-bottom: 2rem;
 }
 
-/* Card Style (Digabung: Style lama + Variable baru) */
+/* Card Style */
 .card {
-    background: var(--card-bg); /* Menggunakan variable agar bisa dark mode */
+    background: var(--card-bg);
     padding: 1.5rem;
     border: 1px solid var(--border-color);
     border-radius: 8px;
     box-shadow: var(--shadow);
-    transition: transform 0.2s, border-color 0.2s; /* Animasi dipertahankan */
+    transition: transform 0.2s, border-color 0.2s;
 }
 
 .card:hover {
-    transform: translateY(-5px); /* Efek melayang dipertahankan */
+    transform: translateY(-5px);
     border-color: var(--accent-color);
 }
 
 .card h3 {
     margin-top: 0;
-    color: var(--accent-color); /* Agar judul tool lebih menonjol */
+    color: var(--accent-color);
 }
 
 /* =========================================
    5. UI ELEMENTS (Input, Button, ToolBox)
    ========================================= */
-/* Tool Box (Kotak Input Utama) */
+/* Tool Box */
 .tool-box {
     background: var(--card-bg);
     padding: 2rem;
     border-radius: 8px;
     border: 1px solid var(--border-color);
-    border-left: 5px solid var(--accent-color); /* Style lama dipertahankan */
+    border-left: 5px solid var(--accent-color);
     margin: 2rem 0;
     box-shadow: var(--shadow);
 }
@@ -174,13 +174,13 @@ input, textarea, select {
     font-size: 1rem;
     background-color: var(--input-bg);
     color: var(--text-color);
-    box-sizing: border-box; /* Agar padding tidak merusak lebar */
+    box-sizing: border-box;
 }
 
 /* Buttons */
 .button {
     display: inline-block;
-    background: var(--accent-color); /* Menggunakan accent agar kontras di dark mode */
+    background: var(--accent-color);
     color: var(--button-text);
     padding: 10px 20px;
     text-decoration: none;
@@ -228,6 +228,12 @@ footer {
 footer a {
     color: var(--accent-color);
     text-decoration: none;
+}
+
+/* KHUSUS: Link Footer di Dark Mode jadi Kuning (High Contrast) */
+[data-theme="dark"] footer a {
+    color: #ffd700; 
+    text-decoration: underline;
 }
 
 /* Skip Link */
