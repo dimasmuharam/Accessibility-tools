@@ -381,3 +381,41 @@ h1, h2, h3, h4, h5, h6 {
     color: var(--text-color) !important;
     background-color: var(--input-bg) !important;
 }
+/* =========================================
+   10. STYLE KHUSUS SIGN LANGUAGE SIMULATOR
+   ========================================= */
+.sign-output {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+    min-height: 100px;
+    align-items: center;
+    padding: 20px;
+    background: var(--card-bg);
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+}
+
+.sign-card {
+    text-align: center;
+    width: 80px; /* Lebar per kartu */
+}
+
+.sign-card img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    background: #ffffff; /* Latar gambar tetap putih agar kontras */
+    padding: 5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.sign-card span {
+    display: block;
+    font-weight: bold;
+    margin-top: 5px;
+    font-size: 1.2rem;
+    color: var(--text-color);
+}
