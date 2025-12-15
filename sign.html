@@ -188,53 +188,98 @@
 
     <script src="script.js"></script>
     <script>
-        function convertToSign() {
-            const input = document.getElementById('TextInput').value.toLowerCase(); // Ubah ke huruf kecil
-            const output = document.getElementById('signOutput');
-            
-            // Bersihkan output lama
-            output.innerHTML = '';
+        const textInput = document.getElementById('textInput');
+        const signOutput = document.getElementById('signOutput');
 
-            if (input.length === 0) {
-                output.innerHTML = '<p style="color: #888;">Silakan ketik sesuatu di kolom atas...</p>';
-                return;
-            }
+        // KAMUS DESKRIPSI (Untuk Screen Reader / Alt Text)
+        // Ini membantu Tunanetra membayangkan bentuk jarinya (Tactile Learning)
+        const signDescriptions = {
+            'a': 'Tangan mengepal, jempol tegak di samping telunjuk',
+            'b': 'Empat jari tegak merapat, jempol menekuk ke telapak',
+            'c': 'Jari melengkung membentuk huruf C',
+            'd': 'Telunjuk tegak lurus, jari lain menyentuh jempol membentuk lingkaran',
+            'e': 'Semua jari menekuk ke dalam, menempel pada jempol di bawah',
+            'f': 'Telunjuk dan jempol menyatu membentuk lingkaran, tiga jari lain tegak mekar',
+            'g': 'Telunjuk dan jempol sejajar menunjuk ke samping kiri',
+            'h': 'Telunjuk dan jari tengah sejajar menunjuk ke samping kiri',
+            'i': 'Kelingking tegak lurus, jari lain mengepal',
+            'j': 'Kelingking tegak lalu membuat gerakan melengkung huruf J di udara',
+            'k': 'Telunjuk tegak, jari tengah miring ke depan, jempol diselipkan di antaranya (Huruf V dengan jempol di tengah)',
+            'l': 'Telunjuk dan jempol membentuk huruf L, jari lain mengepal',
+            'm': 'Tiga jari (telunjuk, tengah, manis) dilipat di atas jempol',
+            'n': 'Dua jari (telunjuk, tengah) dilipat di atas jempol',
+            'o': 'Semua ujung jari menyatu dengan jempol membentuk lingkaran',
+            'p': 'Sama seperti K tapi diarahkan ke bawah (telunjuk ke bawah)',
+            'q': 'Sama seperti G tapi diarahkan ke bawah',
+            'r': 'Telunjuk dan jari tengah saling menyilang (seperti tanda fingers crossed)',
+            's': 'Tangan mengepal, jempol melintang di depan jari-jari lain (tinju)',
+            't': 'Tangan mengepal, jempol diselipkan di antara telunjuk dan jari tengah',
+            'u': 'Telunjuk dan jari tengah tegak merapat, jari lain mengepal',
+            'v': 'Telunjuk dan jari tengah tegak membuka (tanda peace/damai)',
+            'w': 'Tiga jari (telunjuk, tengah, manis) tegak mekar (tanda angka 3)',
+            'x': 'Telunjuk ditekuk sedikit seperti kait, jari lain mengepal',
+            'y': 'Jempol dan kelingking mekar (seperti telepon/shaka), jari lain mengepal',
+            'z': 'Telunjuk menggambar huruf Z di udara',
+            '0': 'Jari membentuk lingkaran (seperti huruf O)',
+            '1': 'Telunjuk tegak (seperti huruf D/L kecil)',
+            '2': 'Dua jari tegak (seperti huruf V)',
+            '3': 'Tiga jari tegak (Jempol, Telunjuk, Tengah)', // ASL 3 pakai jempol
+            '4': 'Empat jari tegak',
+            '5': 'Lima jari terbuka lebar',
+            '6': 'Kelingking dan jempol menyatu (Sisa 3 jari tegak)',
+            '7': 'Jari manis dan jempol menyatu',
+            '8': 'Jari tengah dan jempol menyatu',
+            '9': 'Telunjuk dan jempol menyatu (Seperti huruf F)'
+        };
+
+        function updateDisplay() {
+            // Ambil teks, ubah ke huruf kecil, hapus karakter aneh
+            const text = textInput.value.toLowerCase().replace(/[^a-z0-9 ]/g, '');
+            signOutput.innerHTML = ''; // Bersihkan tampilan sebelumnya
 
             // Loop setiap karakter
-            for (let char of input) {
-                // Cek apakah karakter adalah huruf a-z atau angka 0-9
-                if (char.match(/[a-z0-9]/)) {
-                    // Buat elemen pembungkus (Card)
-                    let card = document.createElement('div');
-                    card.className = 'sign-card';
+            for (let char of text) {
+                const card = document.createElement('div');
+                card.className = 'sign-card';
 
-                    // Buat elemen Gambar
-                    let img = document.createElement('img');
-                    // Pastikan Anda punya folder images/sign/ dengan file a.png, b.png, dst.
-                    img.src = `images/sign/${char}.png`; 
-                    img.alt = `Isyarat tangan huruf ${char.toUpperCase()}`;
+                if (char === ' ') {
+                    // Jika spasi, buat kotak kosong transparan
+                    card.style.width = '40px'; 
+                } else {
+                    // Cek apakah ada deskripsinya di kamus?
+                    const description = signDescriptions[char] || `Huruf ${char.toUpperCase()}`;
+
+                    const img = document.createElement('img');
+                    img.src = `images/sign/${char}.png`; // Pastikan nama file a.png, b.png, dst.
+                    img.alt = `Isyarat ${char.toUpperCase()}: ${description}`; // Alt Text Edukatif
+                    img.title = description; // Tooltip saat mouse hover
+                    
+                    // Error handling: Jika gambar tidak ditemukan (belum diupload)
                     img.onerror = function() {
-                        this.style.display = 'none'; // Sembunyikan jika gambar tidak ditemukan
+                        this.style.display = 'none';
+                        const fallback = document.createElement('div');
+                        fallback.textContent = char.toUpperCase();
+                        fallback.style.fontSize = '2rem';
+                        fallback.style.fontWeight = 'bold';
+                        fallback.style.border = '1px dashed #ccc';
+                        fallback.style.padding = '10px';
+                        card.appendChild(fallback);
                     };
 
-                    // Buat elemen Teks Label di bawah gambar
-                    let label = document.createElement('span');
+                    const label = document.createElement('span');
                     label.textContent = char.toUpperCase();
+                    label.setAttribute('aria-hidden', 'true'); // Screen reader cukup baca alt image saja agar tidak dobel
 
-                    // Gabungkan
                     card.appendChild(img);
                     card.appendChild(label);
-                    output.appendChild(card);
-                } 
-                else if (char === ' ') {
-                    // Jika spasi, buat kotak kosong transparan sebagai pemisah
-                    let spacer = document.createElement('div');
-                    spacer.style.width = '30px';
-                    output.appendChild(spacer);
                 }
+
+                signOutput.appendChild(card);
             }
         }
-    </script>
 
+        // Jalankan fungsi saat mengetik
+        textInput.addEventListener('input', updateDisplay);
+    </script>
 </body>
 </html>
