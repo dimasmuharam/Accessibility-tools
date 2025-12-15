@@ -3,7 +3,8 @@
    ========================================= */
 :root {
     /* --- LIGHT MODE (DEFAULT) --- */
-    --primary-color: #003366;    /* Navy Blue */
+    --header-bg: #003366;        /* BARU: Khusus Latar Header/Footer */
+    --primary-color: #003366;    /* Warna Teks Utama/Judul (Navy) */
     --accent-color: #008CBA;     /* Biru Muda */
     --bg-color: #ffffff;         /* Background Putih */
     --text-color: #333333;       /* Teks Hitam */
@@ -17,30 +18,31 @@
 }
 
 [data-theme="dark"] {
-    /* --- DARK MODE (REVISI: SAFE DARK GREY) --- */
-    /* Mengurangi efek 'Bleeding/Halation' bagi penderita Astigmatisme */
+    /* --- DARK MODE (FINAL: SAFE & VISIBLE) --- */
     
-    /* 1. Header tetap hitam atau sangat gelap untuk batas tegas */
-    --primary-color: #0a0a0a;    
+    /* 1. Header & Footer: Tetap Hitam/Sangat Gelap untuk batas tegas */
+    --header-bg: #0a0a0a;        
     
-    /* 2. Aksen Biru Terang (Cyan) */
+    /* 2. Primary Color (Judul/Email): JADI PUTIH (Agar terbaca) */
+    /* PENTING: Ini yang bikin teks tidak hilang */
+    --primary-color: #ffffff;    
+    
+    /* 3. Aksen Biru Terang (Cyan) */
     --accent-color: #4cc9f0;     
     
-    /* 3. BACKGROUND BODY: Dark Grey (Bukan Hitam Pekat) */
-    /* Standar Material Design: #121212 */
+    /* 4. BACKGROUND BODY: Dark Grey (Bukan Hitam Pekat - Anti Bleeding) */
     --bg-color: #121212;         
     
-    /* 4. TEKS: Off-White (Putih Gading Terang) */
-    /* Hindari #ffffff murni untuk teks paragraf agar tidak silau */
+    /* 5. TEKS: Off-White (Putih Gading Terang - Anti Silau) */
     --text-color: #e6e6e6;       
     
-    /* 5. Latar Kotak/Card: Sedikit lebih terang dari body */
+    /* 6. Latar Kotak/Card: Sedikit lebih terang dari body */
     --card-bg: #1e1e1e;          
     
-    /* 6. Border */
+    /* 7. Border */
     --border-color: #444;        
     
-    /* 7. Header Text */
+    /* 8. Header Text */
     --header-text: #f4f4f4;
     
     --input-bg: #2c2c2c;
@@ -66,7 +68,8 @@ body {
    3. HEADER & NAVIGASI
    ========================================= */
 header {
-    background: var(--primary-color);
+    /* PENTING: Menggunakan variabel baru --header-bg */
+    background: var(--header-bg); 
     color: var(--header-text);
     padding: 1rem 0;
     border-bottom: 5px solid var(--accent-color);
@@ -86,7 +89,7 @@ header {
     flex-wrap: wrap;
 }
 
-/* Brand Style (Dipertahankan) */
+/* Brand Style */
 .brand {
     display: flex;
     align-items: center;
@@ -98,7 +101,7 @@ header {
 .brand img {
     height: 50px;
     width: auto;
-    background: white; /* PENTING: Logo tetap butuh background putih */
+    background: white; /* Logo tetap butuh background putih */
     padding: 4px;
     border-radius: 4px;
 }
@@ -236,7 +239,8 @@ input, textarea, select {
    6. FOOTER & ACCESSIBILITY
    ========================================= */
 footer {
-    background: var(--primary-color);
+    /* PENTING: Menggunakan variabel baru --header-bg */
+    background: var(--header-bg);
     color: var(--header-text);
     text-align: center;
     padding: 2rem 0;
@@ -248,7 +252,7 @@ footer a {
     text-decoration: none;
 }
 
-/* KHUSUS: Link Footer di Dark Mode jadi Kuning (High Contrast) */
+/* Link Footer di Dark Mode jadi Kuning (High Contrast) */
 [data-theme="dark"] footer a {
     color: #ffd700; 
     text-decoration: underline;
@@ -289,4 +293,29 @@ footer a {
 #theme-toggle:hover {
     background: rgba(255,255,255,0.1);
     color: #ffd700;
+}
+/* =========================================
+   8. PERBAIKAN LINK DALAM ARTIKEL (GLOBAL)
+   ========================================= */
+
+/* Link standar di dalam paragraf agar ikut warna aksen */
+a {
+    color: var(--accent-color);
+    text-decoration: none; /* Opsional: hilangkan garis bawah default */
+}
+
+a:hover {
+    text-decoration: underline; /* Muncul garis saat di-hover */
+}
+
+/* Pastikan Heading (H1-H6) di dalam artikel selalu kontras */
+h1, h2, h3, h4, h5, h6 {
+    color: var(--primary-color); 
+    /* Di Dark Mode ini akan jadi Putih, di Light Mode jadi Navy */
+}
+
+/* Khusus Dark Mode: Link di dalam artikel biar makin 'pop' */
+[data-theme="dark"] a {
+    color: #ffd700; /* Kuning Emas (Opsional: Jika ingin beda dengan Cyan) */
+    /* Atau hapus baris ini jika ingin tetap pakai Cyan (--accent-color) */
 }
