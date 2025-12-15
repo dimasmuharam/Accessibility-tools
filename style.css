@@ -320,36 +320,64 @@ h1, h2, h3, h4, h5, h6 {
     /* Atau hapus baris ini jika ingin tetap pakai Cyan (--accent-color) */
 }
 /* =========================================
-   9. EMERGENCY FIX: PAKSA TEKS TERBACA
+   9. EMERGENCY FIX (VERSI AMAN)
    ========================================= */
 
-/* Kode ini memaksa elemen yang punya warna 'hardcode' 
-   untuk tunduk pada warna tema saat Dark Mode aktif */
-
-[data-theme="dark"] p, 
-[data-theme="dark"] li, 
-[data-theme="dark"] span, 
-[data-theme="dark"] div {
-    /* Paksa jadi putih gading, abaikan style bawaan */
-    color: var(--text-color) !important; 
+/* 1. Paksa Teks Konten jadi Terbaca */
+/* Kita target elemen spesifik saja, jangan 'div' sembarangan */
+[data-theme="dark"] p,
+[data-theme="dark"] li,
+[data-theme="dark"] span,
+[data-theme="dark"] label,
+[data-theme="dark"] td,
+[data-theme="dark"] th {
+    color: var(--text-color) !important;
 }
 
-[data-theme="dark"] h1, 
-[data-theme="dark"] h2, 
-[data-theme="dark"] h3, 
-[data-theme="dark"] h4, 
-[data-theme="dark"] h5, 
+/* 2. Paksa Judul jadi Putih Terang */
+[data-theme="dark"] h1,
+[data-theme="dark"] h2,
+[data-theme="dark"] h3,
+[data-theme="dark"] h4,
+[data-theme="dark"] h5,
 [data-theme="dark"] h6 {
-    /* Paksa judul jadi putih terang */
     color: var(--primary-color) !important;
 }
 
-[data-theme="dark"] small {
-    /* Paksa teks kecil (seperti copyright) jadi terang */
-    color: #ccc !important;
+/* =========================================
+   PENGEUALIAN PENTING (SUPAYA TIDAK RUSAK)
+   ========================================= */
+
+/* A. JANGAN GANGGU TOMBOL */
+/* Biarkan tombol mengikuti warna aslinya agar tetap kontras */
+[data-theme="dark"] .button,
+[data-theme="dark"] button {
+    color: var(--button-text) !important;
 }
 
-/* KECUALI TOMBOL: Biarkan tombol tetap punya warnanya sendiri */
+/* B. JANGAN GANGGU LINK */
+/* Biarkan link tetap Kuning/Cyan sesuai settingan sebelumnya */
+[data-theme="dark"] a {
+    color: #ffd700 !important; /* Paksa kuning emas untuk link */
+}
 [data-theme="dark"] .button {
-    color: var(--button-text) !important;
+    color: var(--button-text) !important; /* Kecuali tombol, kembalikan ke warna tombol */
+    text-decoration: none !important;      /* Tombol jangan digarisbawah */
+}
+
+/* C. JANGAN GANGGU TOOL CONTRAST CHECKER */
+/* PENTING: ID 'previewBox' tidak boleh kena override, */
+/* karena warnanya diatur oleh JavaScript */
+[data-theme="dark"] #previewBox,
+[data-theme="dark"] #previewBox * {
+    color: unset !important; /* Lepaskan paksaan warna */
+}
+
+/* D. JANGAN GANGGU HASIL BRAILLE/DYSLEXIA */
+/* Biarkan kotak hasil mengikuti variabel input-bg */
+[data-theme="dark"] #outputText,
+[data-theme="dark"] #brailleOutput,
+[data-theme="dark"] #displayArea {
+    color: var(--text-color) !important;
+    background-color: var(--input-bg) !important;
 }
