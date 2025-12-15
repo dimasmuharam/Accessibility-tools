@@ -17,18 +17,36 @@
 }
 
 [data-theme="dark"] {
-    /* --- DARK MODE (HIGH CONTRAST REVISION) --- */
-    --primary-color: #000000;    /* Hitam Pekat (Header/Footer) */
-    --accent-color: #4cc9f0;     /* Biru Neon */
-    --bg-color: #121212;         /* Hitam Abu (Body) agar tidak pedih di mata */
-    --text-color: #ffffff;       /* Putih Murni (High Contrast) */
-    --card-bg: #1e1e1e;          /* Abu Gelap untuk Card */
-    --border-color: #555;        /* Border lebih terang agar kotak terlihat jelas */
-    --header-text: #ffffff;      /* Teks Header Putih Murni */
+    /* --- DARK MODE (REVISI: SAFE DARK GREY) --- */
+    /* Mengurangi efek 'Bleeding/Halation' bagi penderita Astigmatisme */
+    
+    /* 1. Header tetap hitam atau sangat gelap untuk batas tegas */
+    --primary-color: #0a0a0a;    
+    
+    /* 2. Aksen Biru Terang (Cyan) */
+    --accent-color: #4cc9f0;     
+    
+    /* 3. BACKGROUND BODY: Dark Grey (Bukan Hitam Pekat) */
+    /* Standar Material Design: #121212 */
+    --bg-color: #121212;         
+    
+    /* 4. TEKS: Off-White (Putih Gading Terang) */
+    /* Hindari #ffffff murni untuk teks paragraf agar tidak silau */
+    --text-color: #e6e6e6;       
+    
+    /* 5. Latar Kotak/Card: Sedikit lebih terang dari body */
+    --card-bg: #1e1e1e;          
+    
+    /* 6. Border */
+    --border-color: #444;        
+    
+    /* 7. Header Text */
+    --header-text: #f4f4f4;
+    
     --input-bg: #2c2c2c;
-    --button-text: #000000;      /* Teks tombol jadi hitam di atas biru neon */
-    --shadow: 0 4px 6px rgba(255,255,255,0.1); /* Bayangan putih tipis */
-    --hero-bg: #000000;          /* Hero Hitam Pekat */
+    --button-text: #121212;      
+    --shadow: 0 4px 6px rgba(0,0,0,0.3);
+    --hero-bg: #121212;          
 }
 
 /* =========================================
