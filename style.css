@@ -462,3 +462,36 @@ body { top: 0px !important; }
 .goog-te-gadget-simple:hover {
     background-color: rgba(128, 128, 128, 0.1) !important;
 }
+/* =========================================
+   11. CUSTOM LANGUAGE BUTTON
+   ========================================= */
+
+#lang-toggle {
+    background: transparent;
+    border: 2px solid var(--header-text);
+    color: var(--header-text);
+    padding: 5px 10px;
+    border-radius: 20px; /* Samakan dengan tombol Dark Mode */
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    min-width: 40px; /* Supaya ukuran stabil */
+}
+
+#lang-toggle:hover {
+    background: rgba(255,255,255,0.1);
+    color: #ffd700; /* Warna emas saat hover */
+    border-color: #ffd700;
+}
+
+#lang-toggle:focus {
+    outline: 2px solid #ffd700; /* Fokus keyboard jelas */
+}
+
+/* Sembunyikan banner Google Translate yang suka muncul di atas */
+.goog-te-banner-frame { display: none !important; }
+body { top: 0px !important; }
