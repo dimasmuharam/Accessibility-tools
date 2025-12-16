@@ -3,115 +3,239 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simulator Text-to-Speech - Accessible Web Indonesia</title>
-    <meta name="description" content="Tes bagaimana screen reader membacakan teks website Anda. Alat simulasi suara (TTS) untuk mengecek kenyamanan pendengaran.">
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5878514175202601"
-     crossorigin="anonymous"></script>
-
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-FGJKD3430G"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-FGJKD3430G');
-</script>
+    <title>Ubah Teks Jadi Suara (TTS) & Ketik Suara Online - Accessible Web</title>
+    <meta name="description" content="Alat gratis Text-to-Speech (baca teks otomatis) dan Speech-to-Text (ketik dengan suara) bahasa Indonesia. Tanpa instal aplikasi. Solusi produktivitas dan aksesibilitas.">
+    
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5878514175202601" crossorigin="anonymous"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-FGJKD3430G"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-FGJKD3430G');
+    </script>
         
     <link rel="icon" type="image/x-icon" href="dimaster.ico">
-
     <link rel="stylesheet" href="style.css">
 
-    </head>
+    <style>
+        .audio-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .control-panel {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        .slider-group {
+            margin-bottom: 15px;
+        }
+        .slider-group label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+        input[type=range] { width: 100%; cursor: pointer; }
+        
+        /* Area Input Teks yang Lebih Luas */
+        textarea {
+            width: 100%;
+            min-height: 200px;
+            padding: 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            background: var(--input-bg);
+            color: var(--text-color);
+            margin-bottom: 15px;
+            font-family: inherit;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        /* Tombol Rekam Berdenyut */
+        .btn-mic {
+            background-color: #dc3545; 
+            color: white;
+            border: none;
+        }
+        .btn-mic.recording {
+            animation: pulse 1.5s infinite;
+            background-color: #bd2130;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(220, 53, 69, 0.7); }
+            70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(220, 53, 69, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(220, 53, 69, 0); }
+        }
+
+        /* Tab Switcher (Navigasi Mode) */
+        .mode-switch {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            justify-content: center;
+        }
+        .mode-btn {
+            padding: 10px 20px;
+            border: 1px solid var(--border-color);
+            background: var(--card-bg);
+            color: var(--text-color);
+            cursor: pointer;
+            border-radius: 20px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        .mode-btn.active {
+            background: var(--accent-color);
+            color: #fff; /* Teks putih saat aktif */
+            border-color: var(--accent-color);
+        }
+    </style>
+</head>
 <body>
 
     <a href="#main-content" class="skip-link">Lewati ke Konten Utama</a>
 
     <header>
         <div class="container navbar">
-            
             <div class="brand" style="display: flex; align-items: center; gap: 15px;">
                 <a href="index.html" title="Kembali ke Beranda">
                     <img src="logo.png" alt="Logo Dimaster Institute" width="100" height="100">
                 </a>
-                
                 <div>
                     <a href="index.html" style="text-decoration: none; color: var(--header-text);">
                         <h1 style="margin: 0; font-size: 1.2rem;">Accessible Web Indonesia</h1>
                     </a>
-                    
                     <small style="color: #ccc;">by <a href="https://www.dimaster.co.id" target="_blank" style="color: #e6e6e6; text-decoration: underline;">Dimaster Institute</a></small>
                 </div>
             </div>
 
             <div style="display: flex; align-items: center; gap: 15px;">
-                
                 <nav aria-label="Menu Utama">
                     <ul>
-                        <li><a href="index.html">Home</a></li> <li><a href="about.html">About</a></li>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
                         <li><a href="contact.html">Contact</a></li>
                     </ul>
                 </nav>
-                
                 <button id="theme-toggle" aria-label="Ganti Mode Gelap atau Terang" title="Ganti Tema">🌙</button>
             </div>
-
         </div>
     </header>
+
     <main id="main-content" class="container">
-        <h1>Simulator Text-to-Speech</h1>
-        <p>Tes bagaimana tulisan Anda terdengar saat dibacakan oleh mesin komputer (Simulasi Screen Reader sederhana).</p>
-
-        <div class="tool-box">
-            <label for="textInput"><strong>Masukkan Teks untuk Dibaca:</strong></label>
-            <textarea id="textInput" rows="5" placeholder="Halo, nama saya Dimas. Saya sedang mencoba fitur aksesibilitas suara.">Selamat datang di Accessible Web Indonesia.</textarea>
-            
-            <div style="display: flex; gap: 15px; margin-top: 15px; flex-wrap: wrap;">
-                <div style="flex: 1; min-width: 200px;">
-                    <label for="voiceSelect">Pilih Suara (Voice):</label>
-                    <select id="voiceSelect"></select>
-                </div>
-                <div style="flex: 1; min-width: 200px;">
-                    <label for="rateRange">Kecepatan Bicara:</label>
-                    <input type="range" id="rateRange" min="0.5" max="2" value="1" step="0.1">
-                </div>
-            </div>
-
-            <div style="margin-top: 20px;">
-                <button id="speakBtn" class="button">🔊 Putar Suara</button>
-                <button id="stopBtn" class="button" style="background: #d9534f;">⏹ Berhenti</button>
-            </div>
-            
-            <p style="margin-top: 10px; font-size: 0.9rem; color: #666;">*Catatan: Kualitas dan pilihan bahasa tergantung pada browser dan sistem operasi perangkat Anda.</p>
+        
+        <div style="text-align: center; margin-bottom: 30px;">
+            <h1>Smart Audio Tools (TTS & STT)</h1>
+            <p>Satu halaman untuk dua kebutuhan: Dengarkan teks (Text-to-Speech) atau tulis artikel dengan suara (Speech-to-Text).</p>
         </div>
 
         <div class="ads-slot">
             <p>Iklan Google AdSense</p>
         </div>
 
-        <article class="content-article" style="margin-top: 3rem; border-top: 1px solid #eee; padding-top: 2rem;">
-            <h2>Mengapa Anda Perlu Peduli pada "Suara" Website?</h2>
-            <p>Di era digital yang inklusif, teks tidak hanya dibaca dengan mata, tetapi juga "didengar" dengan telinga. Jutaan penyandang tunanetra dan orang dengan gangguan penglihatan (low vision) mengandalkan teknologi <strong>Screen Reader</strong> (Pembaca Layar) seperti NVDA, JAWS, atau VoiceOver untuk berselancar di internet.</p>
+        <div class="mode-switch">
+            <button class="mode-btn active" onclick="switchMode('tts')">🔊 Mode Baca (TTS)</button>
+            <button class="mode-btn" onclick="switchMode('stt')">🎤 Mode Dikte (Voice Typing)</button>
+        </div>
 
-            <h3>Apa itu Text-to-Speech (TTS)?</h3>
-            <p>Text-to-Speech adalah teknologi bantu yang mengubah teks digital menjadi suara sintesis. Bagi developer dan content writer, memahami cara kerja TTS sangat penting untuk memastikan informasi tersampaikan dengan benar tanpa bias visual.</p>
+        <div class="audio-container tool-box" style="border: none; padding: 0; background: transparent; box-shadow: none;">
 
-            <h3>3 Tips Menulis untuk Telinga (Writing for the Ear)</h3>
-            <p>Gunakan simulator di atas untuk mengecek naskah website Anda. Apakah enak didengar? Berikut tipsnya:</p>
+            <div id="ttsPanel">
+                <div class="control-panel">
+                    <h3>Pengaturan Suara</h3>
+                    
+                    <div class="slider-group">
+                        <label for="voiceSelect">Pilih Suara / Narator:</label>
+                        <select id="voiceSelect" style="width: 100%; padding: 8px; border-radius: 4px; border: 1px solid #ccc;"></select>
+                    </div>
+
+                    <div style="display: flex; gap: 20px;">
+                        <div class="slider-group" style="flex: 1;">
+                            <label>Kecepatan: <span id="rateValue">1.0</span>x</label>
+                            <input type="range" id="rate" min="0.5" max="2" value="1" step="0.1">
+                        </div>
+                        <div class="slider-group" style="flex: 1;">
+                            <label>Nada: <span id="pitchValue">1.0</span></label>
+                            <input type="range" id="pitch" min="0" max="2" value="1" step="0.1">
+                        </div>
+                    </div>
+                </div>
+
+                <label for="textToRead" style="font-weight:bold; display:block; margin-bottom:10px;">Masukkan Teks untuk Dibaca:</label>
+                <textarea id="textToRead" placeholder="Ketik atau tempel artikel di sini untuk didengarkan...">Selamat datang di Accessible Web Indonesia. Alat ini membantu Anda mendengarkan teks website.</textarea>
+                
+                <div class="btn-group">
+                    <button id="speakBtn" class="button">▶️ Putar Suara</button>
+                    <button id="pauseBtn" class="button" style="background:#555;">⏸️ Jeda</button>
+                    <button id="stopBtn" class="button" style="background:#d9534f;">⏹ Stop</button>
+                </div>
+                <p style="margin-top: 10px; font-size: 0.9rem; color: #666;">*Kualitas suara tergantung pada browser Anda.</p>
+            </div>
+
+            <div id="sttPanel" style="display: none;">
+                <div class="control-panel" style="border-left: 5px solid #dc3545;">
+                    <h3>Petunjuk Dikte</h3>
+                    <p>Klik tombol "Mulai Rekam", lalu bicaralah dengan jelas. Browser akan mengetikkan ucapan Anda secara otomatis.</p>
+                    <p style="font-size: 0.8rem; color: #666;">*Pastikan izinkan akses mikrofon. Disarankan menggunakan Google Chrome.</p>
+                </div>
+
+                <label for="textResult" style="font-weight:bold; display:block; margin-bottom:10px;">Hasil Tulisan Suara:</label>
+                <textarea id="textResult" placeholder="Hasil suara Anda akan muncul di sini..."></textarea>
+
+                <div class="btn-group">
+                    <button id="micBtn" class="button btn-mic">🎙️ Mulai Rekam (Dikte)</button>
+                    <button onclick="copyText()" class="button" style="background: #28a745;">📋 Salin Teks</button>
+                    <button onclick="clearText()" class="button" style="background: #6c757d;">🗑️ Hapus</button>
+                </div>
+                <p id="micStatus" style="margin-top: 10px; font-style: italic; font-weight: bold;">Status: Siap merekam...</p>
+            </div>
+
+        </div>
+
+        <div class="ads-slot" style="margin-top: 30px;">
+            <p>Iklan Google AdSense</p>
+        </div>
+
+        <article class="content-article" style="margin-top: 50px; border-top: 1px solid var(--border-color); padding-top: 20px;">
+            <h2>Solusi Audio Digital untuk Produktivitas & Aksesibilitas</h2>
+            <p>Halaman ini menyediakan dua alat revolusioner yang memanfaatkan teknologi <strong>Web Speech API</strong>. Baik Anda seorang konten kreator, mahasiswa, atau pengguna dengan disabilitas, alat ini dirancang untuk mempermudah hidup Anda.</p>
+            
+            <h3>1. Text-to-Speech (TTS Reader)</h3>
+            <p>Fitur <em>ubah teks jadi suara</em> ini sangat berguna untuk:</p>
             <ul>
-                <li><strong>Hindari Singkatan Ambigu:</strong> Mesin mungkin membaca "Jl." sebagai "J-L" bukan "Jalan", atau "Dr." sebagai "Doktor" padahal maksudnya "dari". Tuliskan kata secara lengkap.</li>
-                <li><strong>Gunakan Tanda Baca yang Tepat:</strong> Koma (,) dan Titik (.) memberikan jeda napas bagi mesin. Teks tanpa tanda baca akan dibaca ngebut seperti kereta ekspres, membuat pendengar pusing.</li>
-                <li><strong>Deskripsi Gambar (Alt Text):</strong> Pastikan setiap gambar memiliki teks alternatif. Jika tidak, screen reader hanya akan membacakan nama file yang aneh seperti "IMG_2025.jpg".</li>
+                <li><strong>Cek Kualitas Konten:</strong> Penulis bisa mendengar naskah mereka untuk menemukan kalimat yang kaku.</li>
+                <li><strong>Multitasking:</strong> Dengarkan artikel berita atau materi kuliah sambil melakukan pekerjaan lain.</li>
+                <li><strong>Bantuan Disabilitas:</strong> Bagi penyandang tunanetra atau disleksia, mendengarkan adalah cara terbaik menyerap informasi.</li>
             </ul>
 
-            <div style="background: #f0f8ff; border-left: 5px solid var(--accent-color); padding: 20px; margin-top: 25px;">
-                <h3 style="margin-top: 0; color: var(--primary-color);">Butuh Audit Suara Profesional?</h3>
-                <p>Simulator ini hanya alat dasar. Pengalaman pengguna asli (User Experience) hanya bisa diuji oleh manusia.</p>
-                <p><strong>Kartunet Konsultan</strong> menyediakan layanan pengujian aksesibilitas mendalam bersama tester tunanetra bersertifikat untuk memastikan konten Anda ramah telinga.</p>
+            <h3>2. Speech-to-Text (Voice Typing)</h3>
+            <p>Fitur <em>ketik suara online</em> ini adalah favorit para penulis produktif:</p>
+            <ul>
+                <li><strong>Menulis Tanpa Lelah:</strong> Ucapkan ide Anda, biarkan komputer yang mengetik. Lebih cepat 3x lipat dibanding mengetik manual.</li>
+                <li><strong>Notulen Rapat Otomatis:</strong> Letakkan laptop di tengah meja rapat untuk menangkap percakapan.</li>
+                <li><strong>Solusi Tunadaksa:</strong> Membantu pengguna yang kesulitan menggunakan keyboard fisik karena hambatan motorik.</li>
+            </ul>
+
+            <div style="background: var(--card-bg); border-left: 5px solid var(--accent-color); padding: 25px; margin-top: 30px; border-radius: 8px; border: 1px solid var(--border-color);">
+                <h3 style="margin-top: 0; color: var(--primary-color);">Layanan Profesional untuk Perusahaan</h3>
+                <p>Apakah website atau aplikasi perusahaan Anda sudah ramah bagi pengguna yang mengandalkan suara?</p>
+                <p><strong>Kartunet Konsultan</strong> siap membantu Anda melakukan audit aksesibilitas dan implementasi teknologi asistif.</p>
                 <br>
                 <a href="https://kartunet.com/kontak" class="button">Hubungi Tim Kartunet &rarr;</a>
             </div>
         </article>
+
     </main>
 
     <footer>
@@ -124,13 +248,36 @@
         </div>
     </footer>
 
+    <script src="script.js"></script>
+
     <script>
+        // --- 1. TAB SWITCHER LOGIC ---
+        function switchMode(mode) {
+            const ttsPanel = document.getElementById('ttsPanel');
+            const sttPanel = document.getElementById('sttPanel');
+            const btns = document.querySelectorAll('.mode-btn');
+
+            if (mode === 'tts') {
+                ttsPanel.style.display = 'block';
+                sttPanel.style.display = 'none';
+                btns[0].classList.add('active');
+                btns[1].classList.remove('active');
+            } else {
+                ttsPanel.style.display = 'none';
+                sttPanel.style.display = 'block';
+                btns[0].classList.remove('active');
+                btns[1].classList.add('active');
+            }
+        }
+
+        // --- 2. TEXT TO SPEECH (BACA) ---
         const synth = window.speechSynthesis;
-        const textInput = document.getElementById('textInput');
+        const textToRead = document.getElementById('textToRead');
         const voiceSelect = document.getElementById('voiceSelect');
-        const rateRange = document.getElementById('rateRange');
-        const speakBtn = document.getElementById('speakBtn');
-        const stopBtn = document.getElementById('stopBtn');
+        const rate = document.getElementById('rate');
+        const pitch = document.getElementById('pitch');
+        const rateValue = document.getElementById('rateValue');
+        const pitchValue = document.getElementById('pitchValue');
         
         let voices = [];
 
@@ -138,12 +285,12 @@
             voices = synth.getVoices();
             voiceSelect.innerHTML = '';
             
-            // Prioritaskan Bahasa Indonesia
+            // Urutkan: Bahasa Indonesia Dulu
             voices.sort((a, b) => {
-                const langA = a.lang.toUpperCase();
-                const langB = b.lang.toUpperCase();
-                if (langA.includes('ID') || langA.includes('IND')) return -1;
-                if (langB.includes('ID') || langB.includes('IND')) return 1;
+                const aname = a.lang.toUpperCase();
+                const bname = b.lang.toUpperCase();
+                if (aname.includes('ID') || aname.includes('IND')) return -1;
+                if (bname.includes('ID') || bname.includes('IND')) return 1;
                 return 0;
             });
 
@@ -161,30 +308,114 @@
             speechSynthesis.onvoiceschanged = populateVoices;
         }
 
-        speakBtn.addEventListener('click', () => {
+        // Update tampilan angka slider
+        rate.addEventListener('input', () => rateValue.textContent = rate.value);
+        pitch.addEventListener('input', () => pitchValue.textContent = pitch.value);
+
+        document.getElementById('speakBtn').addEventListener('click', () => {
             if (synth.speaking) {
-                console.error('speechSynthesis.speaking');
+                console.error('Sedang bicara...');
                 return;
             }
-            if (textInput.value !== '') {
-                const utterThis = new SpeechSynthesisUtterance(textInput.value);
+            if (textToRead.value !== '') {
+                const speakText = new SpeechSynthesisUtterance(textToRead.value);
                 const selectedOption = voiceSelect.selectedOptions[0].getAttribute('data-name');
-                for (let i = 0; i < voices.length; i++) {
-                    if (voices[i].name === selectedOption) {
-                        utterThis.voice = voices[i];
+                
+                voices.forEach((voice) => {
+                    if (voice.name === selectedOption) {
+                        speakText.voice = voice;
                     }
-                }
-                utterThis.rate = rateRange.value;
-                synth.speak(utterThis);
+                });
+
+                speakText.rate = rate.value;
+                speakText.pitch = pitch.value;
+                synth.speak(speakText);
             }
         });
 
-        stopBtn.addEventListener('click', () => {
-            if (synth.speaking) {
-                synth.cancel();
-            }
+        document.getElementById('pauseBtn').addEventListener('click', () => {
+            if (synth.speaking && !synth.paused) synth.pause();
+            else if (synth.paused) synth.resume();
         });
+
+        document.getElementById('stopBtn').addEventListener('click', () => {
+            if (synth.speaking) synth.cancel();
+        });
+
+        // --- 3. SPEECH TO TEXT (TULIS) ---
+        const textResult = document.getElementById('textResult');
+        const micBtn = document.getElementById('micBtn');
+        const micStatus = document.getElementById('micStatus');
+        
+        // Cek dukungan browser untuk SpeechRecognition
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        
+        if (SpeechRecognition) {
+            const recognition = new SpeechRecognition();
+            recognition.lang = 'id-ID'; // Default Bahasa Indonesia
+            recognition.continuous = true;
+            recognition.interimResults = true;
+
+            let isRecording = false;
+
+            micBtn.addEventListener('click', () => {
+                if (!isRecording) {
+                    recognition.start();
+                    isRecording = true;
+                    micBtn.textContent = '⏹ Stop Rekam';
+                    micBtn.classList.add('recording');
+                    micStatus.textContent = 'Mendengarkan... Silakan bicara.';
+                    micStatus.style.color = '#28a745';
+                } else {
+                    recognition.stop();
+                    isRecording = false;
+                    micBtn.textContent = '🎙️ Mulai Rekam (Dikte)';
+                    micBtn.classList.remove('recording');
+                    micStatus.textContent = 'Rekaman berhenti.';
+                    micStatus.style.color = 'inherit';
+                }
+            });
+
+            recognition.onresult = (event) => {
+                let finalTranscript = '';
+                for (let i = event.resultIndex; i < event.results.length; ++i) {
+                    if (event.results[i].isFinal) {
+                        finalTranscript += event.results[i][0].transcript;
+                    }
+                }
+                if (finalTranscript !== '') {
+                    // Tambahkan teks baru (append) + spasi
+                    textResult.value += finalTranscript + ' ';
+                }
+            };
+
+            recognition.onerror = (event) => {
+                micStatus.textContent = 'Error: ' + event.error;
+                micStatus.style.color = 'red';
+                micBtn.classList.remove('recording');
+                isRecording = false;
+            };
+
+        } else {
+            micBtn.disabled = true;
+            micStatus.textContent = 'Maaf, browser Anda tidak mendukung fitur Dikte. Gunakan Google Chrome.';
+            micStatus.style.color = 'red';
+        }
+
+        // Helper Functions
+        function copyText() {
+            const copyText = document.getElementById("textResult");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999); 
+            document.execCommand("copy");
+            alert("Teks berhasil disalin!");
+        }
+
+        function clearText() {
+            if(confirm("Hapus semua teks hasil dikte?")) {
+                document.getElementById("textResult").value = "";
+            }
+        }
     </script>
-<script src="script.js"></script>
 </body>
 </html>
