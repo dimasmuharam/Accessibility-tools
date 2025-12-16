@@ -460,3 +460,145 @@ body { top: 0px !important; }
 
 /* Hilangkan tooltip hover Google yang mengganggu */
 #goog-gt-tt { display: none !important; }
+/* =========================================
+   12. HEADER CLEANUP (PENGGANTI INLINE STYLE)
+   ========================================= */
+
+/* Wrapper Utama Logo & Teks */
+.brand-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+/* Judul Website */
+.brand-title {
+    text-decoration: none; 
+    color: var(--header-text);
+}
+
+.brand-title h1 {
+    margin: 0; 
+    font-size: 1.2rem;
+}
+
+/* Subtitle "by Dimaster" - PENTING UNTUK KONTRAS */
+/* Karena Header Anda background-nya Biru Gelap (Navy) & Hitam, 
+   maka teks subtitle harus selalu TERANG (Putih/Abu Terang). */
+.brand-subtitle {
+    display: block;
+    font-size: 0.85rem;
+    color: #e0e0e0; /* Abu sangat terang (Hampir putih) */
+    margin-top: 2px;
+}
+
+.brand-subtitle a {
+    color: #fff; /* Putih bersih untuk link */
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+/* Wrapper Menu & Tombol Kanan */
+.nav-controls {
+    display: flex; 
+    align-items: center; 
+    gap: 15px;
+}
+
+/* Utilitas Sembunyikan Elemen (untuk Google Translate div) */
+.visually-hidden {
+    display: none;
+}
+
+
+/* =========================================
+   13. ACCESSIBLE DROPDOWN MENU (FITUR TOOLS)
+   ========================================= */
+
+/* Wadah Dropdown */
+.dropdown-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+/* Tombol Pemicu Tools */
+#tools-btn {
+    background: none;
+    border: none;
+    color: var(--header-text);
+    font-size: 1rem;
+    font-family: inherit;
+    cursor: pointer;
+    padding: 0;
+    font-weight: bold; /* Samakan dengan link menu lain */
+}
+
+#tools-btn:hover, #tools-btn:focus {
+    text-decoration: underline;
+    color: #ffd700; /* Emas saat di-hover */
+}
+
+/* Kotak Isi Dropdown (Default: Sembunyi) */
+.dropdown-content {
+    display: none; /* Sembunyi */
+    position: absolute;
+    background-color: var(--card-bg); /* Ikut tema (Putih/Hitam) */
+    min-width: 220px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1000; /* Pastikan di atas elemen lain */
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    top: 100%; /* Muncul persis di bawah tombol */
+    left: 0;
+    padding: 10px 0;
+    list-style: none;
+    margin-top: 10px;
+    text-align: left;
+}
+
+/* Tampilan Link di dalam Dropdown */
+.dropdown-content li {
+    display: block;
+    margin: 0;
+}
+
+.dropdown-content li a {
+    color: var(--text-color); /* Warna teks standar (Hitam/Putih) */
+    padding: 10px 20px;
+    text-decoration: none;
+    display: block;
+    font-size: 0.95rem;
+    font-weight: normal; /* Jangan terlalu tebal */
+}
+
+.dropdown-content li a:hover, 
+.dropdown-content li a:focus {
+    background-color: var(--accent-color); /* Biru saat disorot */
+    color: #fff !important; /* Teks jadi putih saat disorot */
+    outline: none;
+}
+
+/* KELAS AKTIF (Dimunculkan oleh JavaScript) */
+.dropdown-content.show {
+    display: block;
+}
+
+/* Highlight Tombol Tools jika anak-anaknya sedang dibuka */
+#tools-btn.active-parent {
+    color: #ffd700; /* Emas */
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+}
+
+
+/* =========================================
+   14. INDIKATOR HALAMAN AKTIF (NAVIGASI)
+   ========================================= */
+/* Memberi tanda pada menu yang sedang dibuka */
+nav ul li a.active,
+nav ul li a[aria-current="page"] {
+    color: #ffd700; /* Kuning Emas */
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 4px;
+}
