@@ -419,3 +419,46 @@ h1, h2, h3, h4, h5, h6 {
     font-size: 1.2rem;
     color: var(--text-color);
 }
+/* =========================================
+   11. STYLE GOOGLE TRANSLATE WIDGET
+   ========================================= */
+
+/* Sembunyikan Top Bar Google yang mengganggu */
+.goog-te-banner-frame.skiptranslate { display: none !important; } 
+body { top: 0px !important; }
+
+/* Wadah Widget */
+#google_translate_element {
+    display: inline-block;
+    vertical-align: middle;
+    line-height: normal;
+}
+
+/* Tombol Dropdown */
+.goog-te-gadget-simple {
+    background-color: transparent !important;
+    border: 1px solid var(--header-text) !important; /* Ikut warna tema */
+    padding: 4px 10px !important;
+    border-radius: 20px !important; /* Senada dengan tombol dark mode */
+    font-size: 0.9rem !important;
+    cursor: pointer;
+    display: flex !important;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+/* Teks di dalam tombol (Indonesian/English) */
+.goog-te-gadget-simple span {
+    color: var(--header-text) !important; /* Ikut warna tema */
+    font-weight: 600 !important;
+}
+
+/* Hilangkan ikon Google */
+.goog-te-gadget-icon {
+    display: none !important;
+}
+
+/* Efek Hover */
+.goog-te-gadget-simple:hover {
+    background-color: rgba(128, 128, 128, 0.1) !important;
+}
