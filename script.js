@@ -38,71 +38,91 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     // =========================================
-    // 2. LOGIKA BAHASA (DENGAN "INGATAN" KUAT)
+    // 2. LOGIKA BAHASA (FIXED AUTO-DETECT LOOP)
     // =========================================
     const langBtn = document.getElementById('lang-toggle');
     const langText = langBtn.querySelector('.lang-text') || langBtn;
 
-    // Helper: Ambil Cookie
+    // --- HELPER COOKIES (PENTING) ---
     function getCookie(name) {
         const v = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
         return v ? v[2] : null;
     }
 
-    // Helper: Set Cookie (Berlaku untuk Google & Ingatan Kita)
     function setCookie(name, value, days) {
         let d = new Date();
         d.setTime(d.getTime() + (days * 24 * 60 * 60 * 1000));
         let expires = "expires=" + d.toUTCString();
-        document.cookie = name + "=" + value + "; " + expires + "; path=/; domain=" + document.domain;
+        // Set untuk domain saat ini DAN root domain agar menempel kuat
         document.cookie = name + "=" + value + "; " + expires + "; path=/;";
+        document.cookie = name + "=" + value + "; " + expires + "; path=/; domain=" + document.domain;
+        document.cookie = name + "=" + value + "; " + expires + "; path=/; domain=." + document.domain;
     }
 
-    // A. Cek Status Bahasa Saat Load
-    // Kita cek cookie Google (googtrans) ATAU ingatan kita (manual_lang_pref)
-    const currentGoogleCookie = getCookie('googtrans');
-    const userPref = getCookie('manual_lang_pref');
+    function deleteCookie(name) {
+        // Hapus paksa dengan segala kemungkinan domain
+        document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/;';
+        document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/; domain=' + document.domain;
+        document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/; domain=.' + document.domain;
+    }
 
-    // Logika Label Tombol:
-    // Jika Google bilang EN, atau User Pref bilang EN -> Tampilkan status EN
-    if ((currentGoogleCookie && currentGoogleCookie.includes('/en')) || userPref === 'en') {
-        langText.textContent = 'EN'; 
+    // --- LOGIKA UTAMA ---
+    
+    // 1. Cek Ingatan Manual Kita Dulu (Prioritas Tertinggi)
+    const userPref = getCookie('manual_lang_pref');
+    const googleCookie = getCookie('googtrans');
+
+    // Tentukan status saat ini berdasarkan ingatan atau cookie Google
+    let currentMode = 'id'; // Default
+    if (userPref === 'en') {
+        currentMode = 'en';
+    } else if (userPref === 'id') {
+        currentMode = 'id';
+    } else if (googleCookie && googleCookie.includes('/en')) {
+        currentMode = 'en';
+    }
+
+    // Update Tampilan Tombol sesuai Status
+    if (currentMode === 'en') {
+        langText.textContent = 'EN';
         langBtn.setAttribute('aria-label', 'Current Language: English. Click to switch to Indonesian');
     } else {
         langText.textContent = 'ID';
         langBtn.setAttribute('aria-label', 'Bahasa saat ini Indonesia. Klik untuk ganti ke Inggris');
     }
 
-    // B. Event Klik Tombol Bahasa (Manual Switch)
+    // 2. Event Klik Tombol (Manual Switch)
     langBtn.addEventListener('click', () => {
-        if (langText.textContent.includes('ID')) {
+        if (currentMode === 'id') {
             // User mau ke INGGRIS
-            setCookie('googtrans', '/id/en', 1);      // Suruh Google Translate
-            setCookie('manual_lang_pref', 'en', 30);  // Simpan Ingatan: "User MAU Inggris"
+            // Set Cookie Google & Ingatan Kita
+            setCookie('googtrans', '/id/en', 1); 
+            setCookie('manual_lang_pref', 'en', 30); 
             location.reload();
         } else {
             // User mau ke INDONESIA
-            setCookie('googtrans', '/id/id', 1);      // Suruh Google Reset
-            setCookie('manual_lang_pref', 'id', 30);  // Simpan Ingatan: "User MAU Indonesia"
+            // HAPUS TOTAL cookie Google agar tidak nyangkut, tapi SET Ingatan Kita 'id'
+            deleteCookie('googtrans'); 
+            setCookie('manual_lang_pref', 'id', 30); 
             location.reload();
         }
     });
 
-    // C. AUTO DETECT LANGUAGE (Lebih Cerdas)
+    // 3. AUTO DETECT (Hanya jalan jika user BELUM PERNAH klik tombol)
     (function checkAutoLanguage() {
-        var userLang = navigator.language || navigator.userLanguage; 
-        
-        // Cek apakah user SUDAH PERNAH memilih manual?
-        // Jika sudah ada cookie 'manual_lang_pref', JANGAN jalankan auto-detect. Hormati pilihan user.
+        // Jika sudah ada ingatan manual (baik 'id' atau 'en'), STOP. Jangan auto-detect.
         if (getCookie('manual_lang_pref')) {
-            return; // Keluar, jangan paksa apa-apa.
+            return; 
         }
 
-        // Jika belum pernah memilih, baru kita cek browser
+        // Cek browser
+        var userLang = navigator.language || navigator.userLanguage; 
+        
+        // Jika browser BUKAN Indo, dan belum ada cookie Google
         if (userLang.indexOf('id') === -1 && userLang.indexOf('ind') === -1 && !getCookie('googtrans')) {
-            console.log('Non-Indonesian browser detected. Switching to English.');
+            console.log('Detected English Browser. Switching to English...');
             setCookie('googtrans', '/id/en', 1);
-            setCookie('manual_lang_pref', 'en', 30); // Set ingatan awal
+            setCookie('manual_lang_pref', 'en', 30); // Ingat ini sebagai preferensi 'en'
             location.reload();
         }
     })();
