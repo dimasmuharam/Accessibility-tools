@@ -155,13 +155,13 @@
         <div class="container navbar">
             <div class="brand-wrapper">
                 <a href="index.html" title="Kembali ke Beranda">
-                    <img src="logo.png" alt="Logo Dimaster Institute" width="100" height="100">
+                    <img src="logo.png" alt="Logo PT Dimaster Education Berprestasi" width="100" height="100">
                 </a>
                 <div>
                     <a href="index.html" class="brand-title">
                         <h1>Accessible Web Indonesia</h1>
                     </a>
-                    <small class="brand-subtitle">by <a href="https://www.dimaster.co.id" target="_blank">Dimaster Institute</a></small>
+                    <small class="brand-subtitle">Part of <a href="https://www.dimaster.co.id" target="_blank">PT Dimaster Education Berprestasi</a></small>
                 </div>
             </div>
 
@@ -169,6 +169,7 @@
                 <nav aria-label="Menu Utama">
                     <ul id="nav-menu">
                         <li><a href="index.html">Home</a></li>
+                        
                         <li class="dropdown-wrapper">
                             <button id="tools-btn" aria-expanded="false" aria-haspopup="true" aria-controls="tools-list">
                                 Tools ▾
@@ -176,7 +177,7 @@
                             <ul id="tools-list" class="dropdown-content">
                                 <li><a href="checker.html">✅ Access Score</a></li>
                                 <li><a href="contrast.html">🎨 Contrast Checker</a></li>
-                                <li><a href="blind.html">👁️ Tes Buta Warna</a></li>
+                                <li><a href="blind.html" aria-current="page" class="active">👁️ Tes Buta Warna</a></li>
                                 <li><a href="tts.html">🗣️ TTS & Voice</a></li>
                                 <li><a href="braille.html">⠃⠗⠇ Braille Latin</a></li>
                                 <li><a href="quran.html">🕌 Quran Braille</a></li>
@@ -184,10 +185,12 @@
                                 <li><a href="dyslexia.html">😵 Dyslexia Sim</a></li>
                             </ul>
                         </li>
+
                         <li><a href="about.html">About</a></li>
                         <li><a href="contact.html">Contact</a></li>
                     </ul>
                 </nav>
+                
                 <button id="theme-toggle" aria-label="Ganti Mode Gelap atau Terang" title="Ganti Tema">🌙</button>
                 <button id="lang-toggle" aria-label="Ganti Bahasa ke Inggris" title="Ganti Bahasa">ID</button>
                 <div id="google_translate_element" class="visually-hidden"></div>
@@ -205,7 +208,7 @@
         <div class="quiz-wrapper" aria-label="Area Tes Interaktif">
             
             <div id="start-screen">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/e/e0/Ishihara_9.png" alt="Contoh Gambar Ishihara Plate 9" class="plate-image">
+                <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Ishihara_9.png" alt="Contoh Gambar Ishihara Plate 9" class="plate-image">
                 <h3>Apakah Anda Melihat Angka?</h3>
                 <p>Tes ini menggunakan metode Ishihara standar untuk mendeteksi buta warna merah-hijau. Pastikan kecerahan layar Anda maksimal dan matikan filter "Eye Comfort".</p>
                 <p><em>Catatan: Tes ini bersifat visual. Pengguna Screen Reader dapat melewati bagian ini menuju artikel edukasi di bawah.</em></p>
@@ -318,10 +321,17 @@
 
     <footer>
         <div class="container">
-            <p>&copy; 2025 Dimaster Institute. All Rights Reserved.</p>
-            <p>Partner Resmi: <a href="https://kartunet.com" style="color:#008CBA;">Kartunet.com</a></p>
+            <p>&copy; 2025 PT Dimaster Education Berprestasi. All Rights Reserved.</p>
+            
+            <p>Our Ecosystem: 
+                <a href="https://kartunet.com" target="_blank" style="color:#4cc9f0; font-weight:bold;">Kartunet</a> | 
+                <a href="https://disabilitas.com" target="_blank" style="color:#4cc9f0; font-weight:bold;">Disabilitas.com</a> | 
+                <a href="https://www.dimaster.co.id" target="_blank" style="color:#4cc9f0; font-weight:bold;">Dimaster Group</a>
+            </p>
+            
             <p style="font-size: 0.8rem; margin-top: 10px;">
-                <a href="privacy.html" style="color: #333; text-decoration: underline;">Privacy Policy</a>
+                <a href="mailto:feedback@accessible.web.id" style="color: #e0e0e0; margin-right: 10px; text-decoration: none;">📩 Lapor Bug</a> | 
+                <a href="privacy.html" style="color: #e0e0e0; text-decoration: underline; margin-left: 10px;">Privacy Policy</a>
             </p>
         </div>
     </footer>
@@ -329,18 +339,37 @@
     <script src="script.js"></script>
 
     <script>
-        // DATA GAMBAR (Sumber: Wikimedia Commons Public Domain)
+        // DATA GAMBAR (Menggunakan Magic Link "Special:FilePath" agar PASTI JALAN)
         const questions = [
-            { img: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Ishihara_9.png/300px-Ishihara_9.png", correct: 74, wrong: 21 },
-            { img: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Ishihara_1.png/300px-Ishihara_1.png", correct: 12, wrong: 12 }, // Control plate
-            { img: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Ishihara_2.png/300px-Ishihara_2.png", correct: 8, wrong: 3 },
-            { img: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Ishihara_4.png/300px-Ishihara_4.png", correct: 29, wrong: 70 },
-            { img: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Ishihara_5.png/300px-Ishihara_5.png", correct: 57, wrong: 35 },
-            { img: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Ishihara_6.png/300px-Ishihara_6.png", correct: 5, wrong: 2 },
-            { img: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Ishihara_7.png/300px-Ishihara_7.png", correct: 3, wrong: 5 },
-            { img: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Ishihara_8.png/300px-Ishihara_8.png", correct: 15, wrong: 17 },
-            { img: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/Ishihara_11.png/300px-Ishihara_11.png", correct: 6, wrong: 'pass' },
-            { img: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Ishihara_23.png/300px-Ishihara_23.png", correct: 42, wrong: 2 }
+            // 1. Angka 12 (Control)
+            { img: "https://commons.wikimedia.org/wiki/Special:FilePath/Ishihara_1.png", correct: 12, wrong: 12 },
+            
+            // 2. Angka 8
+            { img: "https://commons.wikimedia.org/wiki/Special:FilePath/Ishihara_2.png", correct: 8, wrong: 3 },
+            
+            // 3. Angka 29
+            { img: "https://commons.wikimedia.org/wiki/Special:FilePath/Ishihara_4.png", correct: 29, wrong: 70 },
+            
+            // 4. Angka 5
+            { img: "https://commons.wikimedia.org/wiki/Special:FilePath/Ishihara_6.png", correct: 5, wrong: 2 },
+            
+            // 5. Angka 3
+            { img: "https://commons.wikimedia.org/wiki/Special:FilePath/Ishihara_7.png", correct: 3, wrong: 5 },
+            
+            // 6. Angka 15
+            { img: "https://commons.wikimedia.org/wiki/Special:FilePath/Ishihara_8.png", correct: 15, wrong: 17 },
+            
+            // 7. Angka 74
+            { img: "https://commons.wikimedia.org/wiki/Special:FilePath/Ishihara_9.png", correct: 74, wrong: 21 },
+            
+            // 8. Angka 6 (Pass)
+            { img: "https://commons.wikimedia.org/wiki/Special:FilePath/Ishihara_11.png", correct: 6, wrong: 'pass' },
+            
+            // 9. Angka 57
+            { img: "https://commons.wikimedia.org/wiki/Special:FilePath/Ishihara_5.png", correct: 57, wrong: 35 },
+
+            // 10. Angka 42
+            { img: "https://commons.wikimedia.org/wiki/Special:FilePath/Ishihara_23.png", correct: 42, wrong: 2 }
         ];
 
         let currentQ = 0;
@@ -357,25 +386,17 @@
         function loadQuestion() {
             const q = questions[currentQ];
             document.getElementById('ishihara-img').src = q.img;
-            // Update teks untuk screen reader & visual
             document.getElementById('question-number').innerText = `Gambar ${currentQ + 1} dari ${questions.length}`;
-            
-            // Update progress bar
             const percent = ((currentQ) / questions.length) * 100;
             document.getElementById('progress').style.width = percent + '%';
         }
 
         function checkAnswer(val) {
-            // Jika user klik "Pass"
             if (val === 'pass') {
                 finalizeAnswer('pass');
                 return;
             }
-
-            // Buffer input (untuk menangkap angka puluhan misal 74)
             inputBuffer += val;
-            
-            // Tunggu 800ms sebelum mengunci jawaban, siapa tahu user mengetik digit kedua
             clearTimeout(inputTimeout);
             inputTimeout = setTimeout(() => {
                 finalizeAnswer(parseInt(inputBuffer));
@@ -385,17 +406,10 @@
 
         function finalizeAnswer(answer) {
             const q = questions[currentQ];
-            
-            if (answer == q.correct) {
-                score++;
-            }
-            
+            if (answer == q.correct) score++;
             currentQ++;
-            if (currentQ < questions.length) {
-                loadQuestion();
-            } else {
-                showResult();
-            }
+            if (currentQ < questions.length) loadQuestion();
+            else showResult();
         }
 
         function showResult() {
@@ -407,25 +421,23 @@
 
             let title, desc, shareText;
 
-            // Logika Diagnosa Sederhana
             if (percentage >= 90) {
                 title = "Mata Normal";
-                desc = "Selamat! Penglihatan warna Anda sangat baik. Anda dapat melihat hampir semua pola angka dengan benar.";
-                shareText = `Mata gue 100% Normal setelah ikut Tes Buta Warna! 🦅 Coba tes mata kalian di sini:`;
+                desc = "Selamat! Penglihatan warna Anda sangat baik.";
+                shareText = `Mata gue 100% Normal di Tes Buta Warna! 🦅 Cek di:`;
             } else if (percentage >= 50) {
-                title = "Indikasi Buta Warna Parsial";
-                desc = "Ada kemungkinan Anda memiliki defisiensi penglihatan warna Merah-Hijau (Parsial). Sebaiknya konsultasikan ke dokter mata untuk surat keterangan resmi.";
-                shareText = `Waduh, skor gue ${percentage}% di Tes Buta Warna. Ada indikasi Parsial nih. 😱 Cek mata kalian:`;
+                title = "Indikasi Parsial";
+                desc = "Ada kemungkinan defisiensi Merah-Hijau (Parsial). Konsultasikan ke dokter.";
+                shareText = `Waduh, skor gue ${percentage}% di Tes Buta Warna. 😱 Cek di:`;
             } else {
-                title = "Indikasi Buta Warna Signifikan";
-                desc = "Anda kesulitan melihat sebagian besar angka pada tes. Ini indikasi kuat buta warna.";
-                shareText = `Ternyata skor tes mata gue cuma ${percentage}%. Baru tau kalau gue mungkin buta warna. 🤔 Cek di sini:`;
+                title = "Indikasi Signifikan";
+                desc = "Anda kesulitan melihat sebagian besar pola. Ini indikasi kuat buta warna.";
+                shareText = `Skor tes mata gue cuma ${percentage}%. Mungkin buta warna. 🤔 Cek di:`;
             }
 
             document.getElementById('result-title').innerText = title;
             document.getElementById('result-desc').innerText = desc;
 
-            // Generate Link Share
             const url = encodeURIComponent(window.location.href);
             const text = encodeURIComponent(shareText);
 
