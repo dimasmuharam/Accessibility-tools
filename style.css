@@ -358,3 +358,51 @@ body { top: 0 !important; }
     margin-top: 5px;
     color: var(--text-color);
 }
+
+/* --- SHARE BUTTONS (Campaign #CekAkses) --- */
+.share-box {
+    background: #fdfdfd;
+    border-top: 1px dashed var(--border-color);
+    border-bottom: 1px dashed var(--border-color);
+    padding: 20px;
+    margin-top: 0;
+    text-align: center;
+}
+
+.share-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 15px;
+}
+
+.btn-share {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 50px;
+    transition: transform 0.2s, opacity 0.2s;
+    min-width: 120px;
+}
+
+.btn-share:hover {
+    transform: translateY(-2px);
+    opacity: 0.9;
+    text-decoration: none;
+    color: white;
+}
+
+.btn-share:focus-visible {
+    outline: 3px solid var(--text-color);
+    outline-offset: 2px;
+}
+
+/* Warna Brand Medsos */
+.btn-share.wa { background-color: #25D366; }
+.btn-share.twitter { background-color: #000000; }
+.btn-share.linkedin { background-color: #0077b5; }
