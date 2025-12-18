@@ -80,9 +80,22 @@
             <label for="inputText">Masukkan Teks:</label>
             <textarea id="inputText" rows="4" placeholder="Ketik sesuatu di sini..."></textarea>
             
-            <label for="outputText">Hasil Braille:</label>
-            <div id="outputText" aria-live="polite" style="font-size: 2rem; background: var(--input-bg); color: var(--text-color); padding: 20px; border: 1px solid var(--border-color); min-height: 50px; overflow-wrap: break-word; border-radius: 4px;"></div>
-        </div>
+            <label for="outputText" style="margin-top:20px; display:block;">Hasil Braille:</label>
+            <div id="outputText" aria-live="polite" style="font-size: 2.5rem; background: var(--input-bg); color: var(--text-color); padding: 20px; border: 1px solid var(--border-color); min-height: 80px; overflow-wrap: break-word; border-radius: 4px; letter-spacing: 2px;"></div>
+
+            <div id="shareArea" class="share-box" style="display: none; margin-top: 30px;" aria-live="polite">
+                <h3 style="margin-top: 0; color: var(--primary-color);">🤫 Ssstt.. Kirim Pesan Rahasia Ini!</h3>
+                <p>Bagikan kode Braille ini ke temanmu dan lihat apakah mereka bisa membacanya.</p>
+                
+                <div class="share-buttons">
+                    <a id="shareWa" href="#" target="_blank" class="btn-share wa">WhatsApp</a>
+                    <a id="shareTwitter" href="#" target="_blank" class="btn-share twitter">X (Twitter)</a>
+                    <button onclick="copyBraille()" class="btn-share" style="background: #555; border:none; cursor:pointer; color: white;">
+                        📋 Salin Braille
+                    </button>
+                </div>
+            </div>
+            </div>
 
         <div class="ads-slot">
             <p>Iklan Google AdSense</p>
@@ -136,21 +149,77 @@
     <script src="script.js"></script>
 
     <script>
+        const inputText = document.getElementById('inputText');
+        const outputText = document.getElementById('outputText');
+        const shareArea = document.getElementById('shareArea');
+
         const map = {
             'a': '⠁', 'b': '⠃', 'c': '⠉', 'd': '⠙', 'e': '⠑', 'f': '⠋', 'g': '⠛', 'h': '⠓', 'i': '⠊', 'j': '⠚',
             'k': '⠅', 'l': '⠇', 'm': '⠍', 'n': '⠝', 'o': '⠕', 'p': '⠏', 'q': '⠟', 'r': '⠗', 's': '⠎', 't': '⠞',
             'u': '⠥', 'v': '⠧', 'w': '⠺', 'x': '⠭', 'y': '⠽', 'z': '⠵',
-            ' ': ' ', '1': '⠼⠁', '2': '⠼⠃', '3': '⠼⠉', '4': '⠼⠙', '5': '⠼⠑', '6': '⠼⠋', '7': '⠼⠛', '8': '⠼⠓', '9': '⠼⠊', '0': '⠼⠚'
+            ' ': '  ', '1': '⠼⠁', '2': '⠼⠃', '3': '⠼⠉', '4': '⠼⠙', '5': '⠼⠑', '6': '⠼⠋', '7': '⠼⠛', '8': '⠼⠓', '9': '⠼⠊', '0': '⠼⠚',
+            ',': '⠂', ';': '⠆', ':': '⠒', '.': '⠲', '!': '⠖', '?': '⠦'
         };
 
-        document.getElementById('inputText').addEventListener('input', function(e) {
-            const input = e.target.value.toLowerCase();
+        function convertToBraille() {
+            const input = inputText.value.toLowerCase();
             let output = '';
+            
+            if(!input) {
+                outputText.innerText = '';
+                shareArea.style.display = 'none';
+                return;
+            }
+
             for (let char of input) {
                 output += map[char] || char; 
             }
-            document.getElementById('outputText').innerText = output;
+            
+            outputText.innerText = output;
+            shareArea.style.display = 'block';
+            
+            updateShareLinks(input, output);
+        }
+
+        // --- FITUR VIRAL: UPDATE SHARE LINKS ---
+        function updateShareLinks(originalText, brailleText) {
+            const encodedText = encodeURIComponent(originalText);
+            
+            // Link Generate
+            const shareUrl = `${window.location.origin}${window.location.pathname}?text=${encodedText}`;
+            const encodedShareUrl = encodeURIComponent(shareUrl);
+
+            // Caption Misterius
+            const snippet = brailleText.substring(0, 15) + (brailleText.length > 15 ? '...' : '');
+            const caption = `Bisa baca pesan rahasiaku ini gak? 👀\n\n${snippet}\n\nTerjemahkan di sini: 👇\n`;
+
+            document.getElementById('shareWa').href = `https://api.whatsapp.com/send?text=${encodeURIComponent(caption)} ${encodedShareUrl}`;
+            document.getElementById('shareTwitter').href = `https://twitter.com/intent/tweet?text=${encodeURIComponent(caption)}&url=${encodedShareUrl}&hashtags=CekAkses,PesanRahasia`;
+        }
+
+        function copyBraille() {
+            const text = outputText.innerText;
+            navigator.clipboard.writeText(text).then(() => {
+                alert("Teks Braille berhasil disalin!");
+            });
+        }
+
+        // --- AUTO-FILL DARI URL ---
+        window.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const textFromUrl = urlParams.get('text');
+
+            if (textFromUrl) {
+                inputText.value = textFromUrl;
+                convertToBraille();
+                
+                setTimeout(() => {
+                    outputText.scrollIntoView({behavior: "smooth"});
+                }, 500);
+            }
         });
+
+        inputText.addEventListener('input', convertToBraille);
     </script>
 </body>
 </html>
