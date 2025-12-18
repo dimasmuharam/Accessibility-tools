@@ -7,7 +7,6 @@
     <meta name="description" content="Platform edukasi dan tools aksesibilitas website Indonesia. Free Web Accessibility Checker, Contrast Test, & Disability Simulation. Solusi website ramah disabilitas.">
     
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5878514175202601" crossorigin="anonymous"></script>
-    
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-FGJKD3430G"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -25,24 +24,22 @@
 
     <header>
         <div class="container navbar">
-            
             <div class="brand-wrapper">
                 <a href="index.html" title="Kembali ke Beranda">
-                    <img src="logo.png" alt="Logo PT Dimaster Education Berprestasi" width="100" height="100">
+                    <img src="logo.png" alt="Logo Accessible Web Indonesia" width="100" height="100">
                 </a>
                 <div>
                     <a href="index.html" class="brand-title">
                         <h1>Accessible Web Indonesia</h1>
                     </a>
-                    <small class="brand-subtitle">Part of <a href="https://www.dimaster.co.id" target="_blank">PT Dimaster Education Berprestasi</a></small>
+                    <small class="brand-subtitle">Tools Aksesibilitas & Edukasi Digital</small>
                 </div>
             </div>
 
             <div class="nav-controls">
-                
                 <nav aria-label="Menu Utama">
                     <ul id="nav-menu">
-                        <li><a href="index.html">Home</a></li>
+                        <li><a href="index.html" class="active" aria-current="page">Home</a></li>
                         
                         <li class="dropdown-wrapper">
                             <button id="tools-btn" aria-expanded="false" aria-haspopup="true" aria-controls="tools-list">
@@ -66,11 +63,8 @@
                 </nav>
                 
                 <button id="theme-toggle" aria-label="Ganti Mode Gelap atau Terang" title="Ganti Tema">🌙</button>
-                
                 <button id="lang-toggle" aria-label="Ganti Bahasa ke Inggris" title="Ganti Bahasa">ID</button>
-                
                 <div id="google_translate_element" class="visually-hidden"></div>
-
             </div>
         </div>
     </header>
@@ -97,6 +91,12 @@
                 <h3>🎨 Color Contrast Checker</h3>
                 <p>Pastikan kombinasi warna teks dan latar belakang terbaca oleh penyandang low vision.</p>
                 <a href="contrast.html" class="button">Cek Kontras</a>
+            </article>
+
+            <article class="card">
+                <h3>👁️ Tes Buta Warna</h3>
+                <p>Tes mata online metode Ishihara untuk mendeteksi buta warna (Color Blindness).</p>
+                <a href="blind.html" class="button">Mulai Tes Mata</a>
             </article>
 
             <article class="card">
@@ -214,6 +214,7 @@
             </p>
         </div>
     </footer>
+    
     <script src="script.js"></script>
 </body>
 </html>
