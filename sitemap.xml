@@ -1,14 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+   
    <url>
       <loc>https://www.accessible.web.id/</loc>
       <lastmod>2025-06-29</lastmod>
       <priority>1.00</priority>
-   </url>
-   <url>
-      <loc>https://www.accessible.web.id/index.html</loc>
-      <lastmod>2025-06-29</lastmod>
-      <priority>0.80</priority>
    </url>
 
    <url>
@@ -22,12 +18,32 @@
       <priority>0.80</priority>
    </url>
    <url>
-      <loc>https://www.accessible.web.id/braille.html</loc>
+      <loc>https://www.accessible.web.id/blind.html</loc>
       <lastmod>2025-06-29</lastmod>
       <priority>0.80</priority>
    </url>
    <url>
       <loc>https://www.accessible.web.id/tts.html</loc>
+      <lastmod>2025-06-29</lastmod>
+      <priority>0.80</priority>
+   </url>
+   <url>
+      <loc>https://www.accessible.web.id/braille.html</loc>
+      <lastmod>2025-06-29</lastmod>
+      <priority>0.80</priority>
+   </url>
+   <url>
+      <loc>https://www.accessible.web.id/quran.html</loc>
+      <lastmod>2025-06-29</lastmod>
+      <priority>0.80</priority>
+   </url>
+   <url>
+      <loc>https://www.accessible.web.id/sign.html</loc>
+      <lastmod>2025-06-29</lastmod>
+      <priority>0.80</priority>
+   </url>
+   <url>
+      <loc>https://www.accessible.web.id/dyslexia.html</loc>
       <lastmod>2025-06-29</lastmod>
       <priority>0.80</priority>
    </url>
@@ -42,19 +58,11 @@
       <lastmod>2025-06-29</lastmod>
       <priority>0.60</priority>
    </url>
+
    <url>
-      <loc>https://www.accessible.web.id/dyslexia.html</loc>
+      <loc>https://www.accessible.web.id/privacy.html</loc>
       <lastmod>2025-06-29</lastmod>
-      <priority>0.80</priority>
+      <priority>0.50</priority>
    </url>
-<url>
-      <loc>https://www.accessible.web.id/quran.html</loc>
-      <lastmod>2025-06-29</lastmod>
-      <priority>0.80</priority>
-   </url>
-   <url>
-    <loc>https://accessible.web.id/sign.html</loc>
-    <lastmod>2025-06-29</lastmod>
-    <priority>0.80</priority>
-  </url>
+
 </urlset>
