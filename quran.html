@@ -17,6 +17,52 @@
         
     <link rel="icon" type="image/x-icon" href="dimaster.ico">
     <link rel="stylesheet" href="style.css">
+
+    <style>
+        .arabic-text {
+            font-family: 'Traditional Arabic', 'Amiri', serif;
+            font-size: 1.8rem;
+            direction: rtl;
+            line-height: 1.8;
+        }
+        .preset-container {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+        .preset-btn {
+            background: #eef2ff;
+            border: 1px solid var(--accent-color);
+            color: var(--primary-color);
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+        .preset-btn:hover {
+            background: var(--accent-color);
+            color: white;
+            transform: translateY(-2px);
+        }
+        /* Efek Blur/Sensor */
+        .blur-text {
+            filter: blur(10px);
+            user-select: none;
+            pointer-events: none;
+            opacity: 0.4;
+            transition: all 0.5s ease;
+        }
+        #revealSection {
+            text-align: center;
+            margin-top: -50px;
+            position: relative;
+            z-index: 10;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -77,19 +123,48 @@
         </div>
 
         <div class="tool-box">
-            <label for="arabicInput"><strong>Masukkan Teks Arab (Hijaiyah):</strong></label>
-            <textarea id="arabicInput" rows="4" style="direction: rtl; font-family: 'Traditional Arabic', sans-serif; font-size: 1.5rem;" placeholder="بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم</textarea>
             
-            <div style="margin-top: 20px;">
-                <button id="convertBtn" class="button">⠃ Convert ke Braille</button>
+            <div class="preset-container">
+                <button class="preset-btn" onclick="setPreset('بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيْمِ')">Basmalah</button>
+                <button class="preset-btn" onclick="setPreset('الْحَمْدُ لِلَّهِ')">Alhamdulillah</button>
+                <button class="preset-btn" onclick="setPreset('اَللّهُ اَكْبَرُ')">Allahu Akbar</button>
+                <button class="preset-btn" onclick="setPreset('مَا شَاءَ ٱللَّٰهُ')">Masya Allah</button>
+                <button class="preset-btn" onclick="setPreset('آَمِينَ')">Aamiin</button>
+            </div>
+
+            <label for="brailleOutput"><strong>Hasil Braille (Dibaca Kiri ke Kanan):</strong></label>
+            <div id="brailleOutput" aria-live="polite" style="background: var(--input-bg); color: var(--text-color); padding: 20px; border: 2px solid var(--primary-color); border-radius: 8px; font-size: 2.2rem; letter-spacing: 3px; overflow-wrap: break-word; min-height: 80px; margin-bottom: 20px; direction: ltr; text-align: right;"></div>
+
+            <label for="arabicInput"><strong>Teks Arab Asli (Hijaiyah):</strong></label>
+            <div style="position: relative;">
+                <textarea id="arabicInput" class="arabic-text" rows="3" placeholder="Ketik atau tempel huruf Arab di sini..."></textarea>
+                
+                <div id="revealSection" style="display: none;">
+                    <button onclick="revealAnswer()" class="button" style="background: var(--accent-color); color: white; border: none; cursor: pointer; box-shadow: 0 4px 6px rgba(0,0,0,0.2);">
+                        👁️ Lihat Ayat Asli
+                    </button>
+                    <p style="font-size: 0.9rem; margin-top: 10px; background: rgba(255,255,255,0.9); padding: 5px; border-radius: 4px;">☝️ Coba baca pola Braille di atas dulu!</p>
+                </div>
+            </div>
+            
+            <div style="margin-top: 10px; display: flex; gap: 10px;">
+                <button id="convertBtn" class="button">⠃ Convert / Refresh</button>
                 <button id="clearBtn" class="button" style="background: #d9534f; color: white !important;">Hapus</button>
             </div>
 
-            <div id="resultArea" style="margin-top: 25px; display: none;">
-                <label><strong>Hasil Braille (Dibaca Kiri ke Kanan):</strong></label>
-                <div id="brailleOutput" style="background: var(--input-bg); color: var(--text-color); padding: 20px; border: 2px solid var(--primary-color); border-radius: 8px; font-size: 2rem; letter-spacing: 3px; overflow-wrap: break-word;"></div>
-                <p style="font-size: 0.8rem; margin-top: 10px; color: var(--text-muted);">*Tampilan visual titik Braille ini menggunakan font Unicode standar.</p>
+            <div id="shareArea" class="share-box" style="display: none; margin-top: 30px;" aria-live="polite">
+                <h3 style="margin-top: 0; color: var(--primary-color);">🕌 Bagikan Kebaikan Ini</h3>
+                <p>Bagikan lafaz indah ini dalam bentuk Braille. Temanmu harus menebak bacaannya!</p>
+                
+                <div class="share-buttons">
+                    <a id="shareWa" href="#" target="_blank" class="btn-share wa">WhatsApp</a>
+                    <a id="shareTwitter" href="#" target="_blank" class="btn-share twitter">X (Twitter)</a>
+                    <button onclick="copyBraille()" class="btn-share" style="background: #555; border:none; cursor:pointer; color: white;">
+                        📋 Salin Braille
+                    </button>
+                </div>
             </div>
+
         </div>
 
         <div class="ads-slot">
@@ -103,17 +178,6 @@
             <h3>Mengapa Bisa Begitu?</h3>
             <p>Sistem Braille diciptakan oleh Louis Braille berbasis huruf Latin yang linear (kiri-kanan). Ketika sistem ini diadopsi ke dalam bahasa Arab (Hijaiyah), para ahli memutuskan untuk mempertahankan logika urutan titik Braille agar universal.</p>
             <p>Jika Braille Arab dibalik menjadi kanan-ke-kiri, maka penomoran titik (1-2-3, 4-5-6) akan terbalik dan membingungkan tunanetra yang juga mempelajari huruf Latin/Inggris. Oleh karena itu, Al-Quran Braille secara fisik dibaca dengan gerakan jari dari kiri ke kanan, meskipun itu adalah bahasa Arab.</p>
-
-            <h3>Sistem Harakat (Tanda Baca)</h3>
-            <p>Dalam tulisan Arab biasa, harakat (Fathah, Kasrah, Dammah) letaknya menumpuk di atas atau di bawah huruf. Namun dalam Braille, <strong>tidak ada konsep menumpuk</strong>.</p>
-            <p>Harakat dalam Braille dianggap sebagai karakter tersendiri yang ditulis <strong>setelah</strong> hurufnya. Jadi secara logika:</p>
-            <ul>
-                <li><strong>Visual:</strong> Ba + Fathah (b) = ( بَ ) -> Satu posisi vertikal.</li>
-                <li><strong>Braille:</strong> Huruf Ba (⠃) diikuti Tanda Fathah (⠂) -> Menjadi dua sel berdampingan (⠃⠂).</li>
-            </ul>
-
-            <h3>Standar di Indonesia</h3>
-            <p>Indonesia mengacu pada standar <em>Unified Arabic Braille</em> yang juga digunakan secara internasional. Mushaf Al-Quran Braille di Indonesia (seperti terbitan Yaketunis atau Balai Literasi Braille Kemensos) menggunakan standar ini agar tunanetra Indonesia bisa membaca mushaf dari negara lain juga.</p>
 
             <div style="background: var(--card-bg); border-left: 5px solid var(--accent-color); padding: 25px; margin-top: 25px; border-radius: 8px; border: 1px solid var(--border-color);">
                 <h3 style="margin-top: 0; color: var(--primary-color);">Dukung Aksesibilitas Ibadah (CSR Program)</h3>
@@ -146,8 +210,15 @@
     <script src="script.js"></script>
 
     <script>
+        const arabicInput = document.getElementById('arabicInput');
+        const brailleOutput = document.getElementById('brailleOutput');
+        const shareArea = document.getElementById('shareArea');
+        const revealSection = document.getElementById('revealSection');
+
+        let secretAnswer = ""; // Simpan jawaban asli
+
         const arabicMap = {
-            'ا': '⠁', 'أ': '⠁', 'إ': '⠮', 'آ': '⠜', 
+            'ا': '⠁', 'أ': '⠁', 'إ': '⠮', 'آ': '⠜', 'ٱ': '⠁',
             'ب': '⠃', 'ت': '⠞', 'ث': '⠹',
             'ج': '⠚', 'ح': '⠱', 'خ': '⠭',
             'د': '⠙', 'ذ': '⠳', 
@@ -162,7 +233,7 @@
             'ي': '⠽', 'ى': '⠕',
             'ء': '⠄', 'ة': '⠡',
             
-            // Harakat (Vowels)
+            // Harakat (Vowels) - Braille Arab
             'َ': '⠂', // Fathah 
             'ِ': '⠔', // Kasrah
             'ُ': '⠥', // Dammah
@@ -171,42 +242,134 @@
             'ٌ': '⠖', // Dammatain
             'ْ': '⠒', // Sukun
             'ّ': '⠠', // Shadda
-            ' ': ' ',  // Spasi
+            ' ': '  ', // Spasi
             '،': '⠐', // Koma Arab
             '؟': '⠦'  // Tanda tanya Arab
         };
 
+        function setPreset(text) {
+            // Jika sedang mode tantangan, reset dulu
+            if (revealSection.style.display === 'block') {
+                revealAnswer();
+            }
+            arabicInput.value = text;
+            convertArabic();
+        }
+
         function convertArabic() {
-            const input = document.getElementById('arabicInput').value;
+            // Jika sedang terkunci, jangan update
+            if (revealSection.style.display === 'block') return;
+
+            const input = arabicInput.value;
             let output = '';
+            
+            if(!input.trim()) {
+                brailleOutput.innerText = '';
+                shareArea.style.display = 'none';
+                return;
+            }
             
             for (let i = 0; i < input.length; i++) {
                 const char = input[i];
-                if (arabicMap[char]) {
-                    output += arabicMap[char];
-                } else {
-                    output += ''; 
-                }
+                output += arabicMap[char] || ''; 
             }
             
-            const resultArea = document.getElementById('resultArea');
-            const brailleOutput = document.getElementById('brailleOutput');
-            
-            if(output.trim() === '') {
-                alert("Silakan masukkan huruf Arab Hijaiyah.");
-                return;
+            brailleOutput.innerText = output;
+            shareArea.style.display = 'block';
+            updateShareLinks(input, output);
+        }
+
+        // --- HELPER: Deteksi Bahasa ---
+        function getCurrentLang() {
+            const cookie = document.cookie.match('(^|;) ?googtrans=([^;]*)(;|$)');
+            return cookie && cookie[2].includes('/en') ? 'en' : 'id';
+        }
+
+        // --- FUNGSI SHARE (VIRAL + MULTI-BAHASA) ---
+        function updateShareLinks(originalText, brailleText) {
+            const secretCode = btoa(encodeURIComponent(originalText));
+            const shareUrl = `${window.location.origin}${window.location.pathname}?code=${secretCode}`;
+            const encodedShareUrl = encodeURIComponent(shareUrl);
+            const snippet = brailleText.substring(0, 15) + (brailleText.length > 15 ? '...' : '');
+
+            const lang = getCurrentLang();
+            let caption = "";
+
+            if (lang === 'en') {
+                caption = `Mashallah, look how beautiful this verse looks in Braille. ✨\n\n${snippet}\n\nCan you guess what it says? Reveal it here: 👇\n`;
+            } else {
+                caption = `Masya Allah, indah sekali lafaz ini dalam bentuk Braille. ✨\n\n${snippet}\n\nCoba tebak ini bacaan apa? Buka jawabannya di sini: 👇\n`;
             }
 
-            brailleOutput.innerText = output;
-            resultArea.style.display = 'block';
-            resultArea.scrollIntoView({behavior: "smooth"});
+            document.getElementById('shareWa').href = `https://api.whatsapp.com/send?text=${encodeURIComponent(caption)} ${encodedShareUrl}`;
+            document.getElementById('shareTwitter').href = `https://twitter.com/intent/tweet?text=${encodeURIComponent(caption)}&url=${encodedShareUrl}&hashtags=CekAkses,QuranBraille`;
         }
+
+        function copyBraille() {
+            const lang = getCurrentLang();
+            navigator.clipboard.writeText(brailleOutput.innerText).then(() => {
+                alert(lang === 'en' ? "Braille Copied!" : "Braille Berhasil Disalin!");
+            });
+        }
+
+        // --- LOGIKA BUKA KUNCI (ACCESSIBLE) ---
+        function revealAnswer() {
+            arabicInput.value = secretAnswer;
+            arabicInput.removeAttribute('readonly');
+            arabicInput.classList.remove('blur-text');
+            revealSection.style.display = 'none';
+        }
+
+        // --- INISIALISASI DARI URL (MODE TANTANGAN) ---
+        window.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const secretCode = urlParams.get('code');
+
+            if (secretCode) {
+                try {
+                    secretAnswer = decodeURIComponent(atob(secretCode));
+                    
+                    // Render Braille Manual (karena input akan di-placeholder)
+                    let output = '';
+                    for (let char of secretAnswer) {
+                        output += arabicMap[char] || ''; 
+                    }
+                    brailleOutput.innerText = output;
+                    
+                    // Set Placeholder sesuai bahasa
+                    const lang = getCurrentLang();
+                    const placeholderText = lang === 'en' ? "[ HIDDEN VERSE ]" : "[ AYAT TERSEMBUNYI ]";
+
+                    arabicInput.value = placeholderText; 
+                    arabicInput.setAttribute('readonly', 'true');
+                    arabicInput.classList.add('blur-text');
+                    revealSection.style.display = 'block';
+
+                    setTimeout(() => {
+                        brailleOutput.scrollIntoView({behavior: "smooth"});
+                    }, 500);
+
+                } catch (e) {
+                    console.error("Kode URL rusak");
+                }
+            } else {
+                // Jika tidak ada kode, convert default text (Basmalah)
+                convertArabic();
+            }
+        });
 
         document.getElementById('convertBtn').addEventListener('click', convertArabic);
         document.getElementById('clearBtn').addEventListener('click', () => {
-            document.getElementById('arabicInput').value = '';
-            document.getElementById('resultArea').style.display = 'none';
+            if (revealSection.style.display === 'block') {
+                revealAnswer(); // Reset lock jika ada
+            }
+            arabicInput.value = '';
+            brailleOutput.innerText = '';
+            shareArea.style.display = 'none';
         });
+        
+        // Convert realtime saat mengetik
+        arabicInput.addEventListener('input', convertArabic);
     </script>
 </body>
 </html>
