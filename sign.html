@@ -101,7 +101,7 @@
                         </button>
                     </div>
                 </div>
-                </div>
+            </div>
 
             <div class="ads-slot">
                 <p>Iklan Google AdSense</p>
@@ -162,12 +162,10 @@
     <script>
         const textInput = document.getElementById('textInput');
         const signOutput = document.getElementById('signOutput');
-        const shareArea = document.getElementById('shareNameArea'); // [BARU]
+        const shareArea = document.getElementById('shareNameArea');
 
-        // URL BASE IMAGE (Lokal)
-        const imgBasePath = "images/sign/"; // Pastikan folder ini ada
+        const imgBasePath = "images/sign/"; 
 
-        // Deskripsi Alt Text
         const signDescriptions = {
             'a': 'Tangan mengepal, jempol tegak di samping',
             'b': 'Empat jari tegak merapat, jempol menekuk',
@@ -198,7 +196,6 @@
         };
 
         function updateDisplay() {
-            // Bersihkan karakter non-alphanumeric
             const rawText = textInput.value;
             const cleanText = rawText.toLowerCase().replace(/[^a-z0-9 ]/g, '');
             
@@ -206,11 +203,10 @@
 
             if(!cleanText) {
                 signOutput.innerHTML = '<p style="color: var(--text-muted);">Silakan ketik sesuatu di kolom atas...</p>';
-                shareArea.style.display = 'none'; // Sembunyikan share jika kosong
+                shareArea.style.display = 'none';
                 return;
             }
 
-            // [BARU] Tampilkan tombol share jika ada teks
             shareArea.style.display = 'block';
             updateShareLinks(rawText);
 
@@ -221,7 +217,6 @@
                 if (char === ' ') {
                     card.style.width = '40px'; 
                 } else if (/[a-z]/.test(char)) {
-                    // Panggil Gambar Lokal
                     const img = document.createElement('img');
                     img.src = `${imgBasePath}${char}.png`; 
                     img.alt = `Isyarat ${char.toUpperCase()}: ${signDescriptions[char] || ''}`;
@@ -259,42 +254,50 @@
             }
         }
 
-        // --- [BARU] FITUR VIRAL: UPDATE SHARE LINKS ---
+        // --- HELPER: Deteksi Bahasa ---
+        function getCurrentLang() {
+            const cookie = document.cookie.match('(^|;) ?googtrans=([^;]*)(;|$)');
+            return cookie && cookie[2].includes('/en') ? 'en' : 'id';
+        }
+
+        // --- FITUR VIRAL DENGAN MULTI-BAHASA ---
         function updateShareLinks(name) {
-            // Encode nama agar aman di URL
             const encodedName = encodeURIComponent(name);
-            
-            // Link Generate: accessible.web.id/sign.html?text=Dimas
             const shareUrl = `${window.location.origin}${window.location.pathname}?text=${encodedName}`;
             const encodedShareUrl = encodeURIComponent(shareUrl);
+            const nameUpper = name.toUpperCase();
 
-            const caption = `Halo, ini namaku "${name.toUpperCase()}" dalam Bahasa Isyarat (Abjad Jari)! 👋\n\nCek bentuk isyarat namamu di sini: 👇\n`;
+            // Logika Bahasa
+            const lang = getCurrentLang();
+            let caption = "";
 
-            // Update Href Tombol
+            if (lang === 'en') {
+                caption = `Hello, here is my name "${nameUpper}" in Sign Language (Finger Spelling)! 👋\n\nCheck your name sign here: 👇\n`;
+            } else {
+                caption = `Halo, ini namaku "${nameUpper}" dalam Bahasa Isyarat (Abjad Jari)! 👋\n\nCek bentuk isyarat namamu di sini: 👇\n`;
+            }
+
             document.getElementById('shareWaName').href = `https://api.whatsapp.com/send?text=${encodeURIComponent(caption)} ${encodedShareUrl}`;
             document.getElementById('shareTwitterName').href = `https://twitter.com/intent/tweet?text=${encodeURIComponent(caption)}&url=${encodedShareUrl}&hashtags=CekAkses,BahasaIsyarat`;
             
-            // Simpan URL untuk tombol copy
             shareArea.dataset.link = shareUrl;
         }
 
         function copyLinkName() {
             const url = shareArea.dataset.link;
+            const lang = getCurrentLang();
             navigator.clipboard.writeText(url).then(() => {
-                alert("Link berhasil disalin! Kirim ke temanmu.");
+                alert(lang === 'en' ? "Link copied!" : "Link berhasil disalin!");
             });
         }
 
-        // --- [BARU] FITUR AUTO-TYPE DARI URL ---
         window.addEventListener('DOMContentLoaded', () => {
             const urlParams = new URLSearchParams(window.location.search);
             const textFromUrl = urlParams.get('text');
 
             if (textFromUrl) {
-                textInput.value = textFromUrl; // Isi kolom input
-                updateDisplay(); // Jalankan konversi
-                
-                // Scroll ke hasil agar user langsung lihat
+                textInput.value = textFromUrl;
+                updateDisplay(); 
                 setTimeout(() => {
                     signOutput.scrollIntoView({behavior: "smooth"});
                 }, 500);
