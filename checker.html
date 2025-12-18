@@ -183,19 +183,32 @@
     </footer>
 
     <script>
-        // --- LOGIKA SHARE MEDSOS (Campaign #CekAkses) ---
+        // --- HELPER: Deteksi Bahasa ---
+        function getCurrentLang() {
+            const cookie = document.cookie.match('(^|;) ?googtrans=([^;]*)(;|$)');
+            return cookie && cookie[2].includes('/en') ? 'en' : 'id';
+        }
+
+        // --- LOGIKA SHARE MEDSOS MULTI-BAHASA ---
         function updateShareLinks(score, targetUrl) {
             const shareSection = document.getElementById('shareSection');
             const btnWA = document.getElementById('shareWA');
             const btnTwitter = document.getElementById('shareTwitter');
             const btnLinkedIn = document.getElementById('shareLinkedIn');
 
-            // 1. Copywriting Campaign
+            const encodedUrl = encodeURIComponent('https://accessible.web.id/checker.html');
+            const lang = getCurrentLang();
+            let campaignText = "";
             let emotion = score >= 90 ? '🤩' : (score >= 50 ? '😐' : '😱');
-            const campaignText = `Baru saja cek aksesibilitas website ${targetUrl}. Skornya: ${score}/100 ${emotion}.\n\nApakah web favoritmu sudah inklusif? Cek sekarang di accessible.web.id! 👇\n\n#CekAkses #20TahunKartunet #DigitalInklusif`;
+
+            // Logika Bahasa
+            if (lang === 'en') {
+                campaignText = `Just checked accessibility score for ${targetUrl}.\nScore: ${score}/100 ${emotion}.\n\nIs your favorite site inclusive? Check here! 👇\n\n#CekAkses #20TahunKartunet #DigitalInclusion`;
+            } else {
+                campaignText = `Baru saja cek aksesibilitas website ${targetUrl}.\nSkornya: ${score}/100 ${emotion}.\n\nApakah web favoritmu sudah inklusif? Cek sekarang di accessible.web.id! 👇\n\n#CekAkses #20TahunKartunet #DigitalInklusif`;
+            }
 
             const encodedText = encodeURIComponent(campaignText);
-            const encodedUrl = encodeURIComponent('https://accessible.web.id/checker.html'); 
 
             // 2. Set Link
             btnWA.href = `https://api.whatsapp.com/send?text=${encodedText}`;
@@ -208,7 +221,7 @@
         }
 
         function runAudit() {
-            // API Key
+            // API Key (Gunakan milik Anda jika kuota habis)
             const apiKey = 'AIzaSyBIya_RRn2SoSU8j0yOPHjgCQ6yO7f-Mdg'; 
 
             let urlInput = document.getElementById('urlInput').value.trim();
@@ -216,8 +229,10 @@
             const resultDiv = document.getElementById('result');
             const shareSection = document.getElementById('shareSection');
             
+            const lang = getCurrentLang();
+            
             if(!urlInput) { 
-                alert("Mohon masukkan URL website!"); 
+                alert(lang === 'en' ? "Please enter a URL!" : "Mohon masukkan URL website!"); 
                 return; 
             }
 
@@ -225,10 +240,10 @@
                 urlInput = 'https://' + urlInput;
             }
             
-            btn.innerText = "Sedang Memindai... (Tunggu 10-20 Detik)";
+            btn.innerText = lang === 'en' ? "Scanning... (Wait 10-20s)" : "Sedang Memindai... (Tunggu 10-20 Detik)";
             btn.disabled = true;
             resultDiv.style.display = 'none';
-            shareSection.style.display = 'none'; // Reset share button
+            shareSection.style.display = 'none'; 
 
             fetch(`https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=${encodeURIComponent(urlInput)}&key=${apiKey}&category=ACCESSIBILITY&strategy=mobile`)
             .then(response => {
@@ -255,7 +270,7 @@
                 else scoreElem.style.color = "red";
 
                 resultDiv.style.display = 'block';
-                btn.innerText = "Cek URL Lain";
+                btn.innerText = lang === 'en' ? "Check Another URL" : "Cek URL Lain";
                 btn.disabled = false;
 
                 // --- INTEGRASI SHARE BUTTON ---
@@ -263,8 +278,8 @@
             })
             .catch(err => {
                 console.error(err);
-                alert("Gagal memindai: " + err.message);
-                btn.innerText = "Coba Lagi";
+                alert((lang === 'en' ? "Scan failed: " : "Gagal memindai: ") + err.message);
+                btn.innerText = lang === 'en' ? "Try Again" : "Coba Lagi";
                 btn.disabled = false;
             });
         }
