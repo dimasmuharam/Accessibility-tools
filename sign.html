@@ -152,11 +152,7 @@
         const textInput = document.getElementById('textInput');
         const signOutput = document.getElementById('signOutput');
 
-        // URL BASE IMAGE (Menggunakan CDN Publik Hand Sign agar langsung muncul gambar)
-        // Kita gunakan link stabil dari repository "Sign-Language-Alphabet" di GitHub Pages
-        const imgBaseUrl = "https://raw.githubusercontent.com/natash-m/Sign-Language-Alphabet/master/examples/";
-
-        // Deskripsi Alt Text untuk Screen Reader (Aksesibilitas)
+        // Deskripsi Alt Text (Aksesibilitas)
         const signDescriptions = {
             'a': 'Tangan mengepal, jempol tegak di samping',
             'b': 'Empat jari tegak merapat, jempol menekuk',
@@ -203,14 +199,14 @@
                 if (char === ' ') {
                     card.style.width = '40px'; // Spasi kosong
                 } else if (/[a-z]/.test(char)) {
-                    // Jika huruf a-z, ambil gambar dari CDN
+                    // KOREKSI: MENGGUNAKAN FILE LOKAL
+                    // Pastikan Anda punya file a.png, b.png di folder images/sign/
                     const img = document.createElement('img');
-                    // Menggunakan link raw github yang stabil
-                    img.src = `${imgBaseUrl}${char.toUpperCase()}.png`; 
+                    img.src = `images/sign/${char}.png`; 
                     img.alt = `Isyarat ${char.toUpperCase()}: ${signDescriptions[char] || ''}`;
                     img.title = signDescriptions[char];
                     
-                    // Fallback jika gambar gagal load (misal offline)
+                    // Fallback jika gambar lokal tidak ketemu
                     img.onerror = function() {
                         this.style.display = 'none';
                         const fallback = document.createElement('div');
@@ -229,7 +225,7 @@
                     card.appendChild(img);
                     card.appendChild(label);
                 } else {
-                    // Jika angka, tampilkan teks saja (karena library gambar terbatas huruf)
+                    // Angka
                     const numBox = document.createElement('div');
                     numBox.textContent = char;
                     numBox.style.fontSize = '2rem';
