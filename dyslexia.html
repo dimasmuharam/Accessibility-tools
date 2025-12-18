@@ -17,6 +17,43 @@
         
     <link rel="icon" type="image/x-icon" href="dimaster.ico">
     <link rel="stylesheet" href="style.css">
+
+    <style>
+        .share-box {
+            background: #fdfdfd;
+            border: 1px dashed var(--border-color);
+            padding: 20px;
+            margin-top: 30px;
+            text-align: center;
+            border-radius: 8px;
+        }
+        .share-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 15px;
+        }
+        .btn-share {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 20px;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 50px;
+            transition: transform 0.2s, opacity 0.2s;
+            min-width: 120px;
+        }
+        .btn-share:hover {
+            transform: translateY(-2px);
+            opacity: 0.9;
+            color: white;
+        }
+        .btn-share.wa { background-color: #25D366; }
+        .btn-share.twitter { background-color: #000000; }
+    </style>
 </head>
 <body>
 
@@ -84,7 +121,21 @@
                 <button id="resetBtn" class="button" style="background: #d9534f; color: white !important;">⏹ Stop / Reset</button>
             </div>
 
-            <div id="displayArea" style="margin-top: 25px; padding: 20px; background: var(--input-bg); color: var(--text-color); border: 1px solid var(--border-color); border-radius: 8px; font-size: 1.2rem; line-height: 1.6; min-height: 150px; display:none;">
+            <div id="displayArea" aria-hidden="true" style="margin-top: 25px; padding: 20px; background: var(--input-bg); color: var(--text-color); border: 1px solid var(--border-color); border-radius: 8px; font-size: 1.2rem; line-height: 1.6; min-height: 150px; display:none;">
+            </div>
+            <p id="sr-note" style="display:none; font-size:0.8rem; color:#666; margin-top:5px;">*Simulasi visual disembunyikan dari pembaca layar.</p>
+
+            <div id="shareArea" class="share-box" style="display: none;">
+                <h3 style="margin-top: 0; color: var(--primary-color);">😵 Bikin Pusing? Bagikan Pengalaman Ini!</h3>
+                <p>Tantang temanmu untuk membaca tulisan di atas tanpa pusing.</p>
+                
+                <div class="share-buttons">
+                    <a id="shareWa" href="#" target="_blank" class="btn-share wa">WhatsApp</a>
+                    <a id="shareTwitter" href="#" target="_blank" class="btn-share twitter">X (Twitter)</a>
+                    <button onclick="copyLink()" class="btn-share" style="background: #555; border:none; cursor:pointer; color: white;">
+                        🔗 Salin Link
+                    </button>
+                </div>
             </div>
         </div>
 
@@ -147,9 +198,13 @@
         const startBtn = document.getElementById('startBtn');
         const resetBtn = document.getElementById('resetBtn');
         const displayArea = document.getElementById('displayArea');
+        const shareArea = document.getElementById('shareArea');
+        const srNote = document.getElementById('sr-note');
+        
         let intervalId = null;
 
         function scrambleWord(word) {
+            // Logika asli Anda: Mengacak huruf tengah
             if (word.length < 4) return word;
             const first = word[0];
             const last = word[word.length - 1];
@@ -166,6 +221,7 @@
         function scrambleText(text) {
             return text.split(' ').map(word => {
                 if (/^[a-zA-Z]+$/.test(word)) {
+                    // 30% kemungkinan kata teracak
                     return Math.random() > 0.3 ? scrambleWord(word) : word; 
                 }
                 return word;
@@ -177,22 +233,23 @@
             if(!originalText) return;
 
             displayArea.style.display = 'block';
+            srNote.style.display = 'block'; // Tampilkan info untuk SR user
             displayArea.innerText = originalText;
             displayArea.scrollIntoView({behavior: "smooth"});
 
+            // Tampilkan tombol share
+            shareArea.style.display = 'block';
+            updateShareLinks(originalText);
+
             if (intervalId) clearInterval(intervalId);
 
+            // Jalankan scramble setiap 500ms
             intervalId = setInterval(() => {
                 displayArea.innerText = scrambleText(originalText);
             }, 500);
         }
 
-        startBtn.addEventListener('click', startSimulation);
-
-        resetBtn.addEventListener('click', () => {
-            if (intervalId) clearInterval(intervalId);
-            displayArea.style.display = 'none';
-        });
-    </script>
-</body>
-</html>
+        // --- HELPER: Deteksi Bahasa ---
+        function getCurrentLang() {
+            const cookie = document.cookie.match('(^|;) ?googtrans=([^;]*)(;|$)');
+            return cookie && cookie[2].includes('/en
