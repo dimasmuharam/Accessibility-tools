@@ -3,46 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Arabic to Braille Converter - Konverter Huruf Arab ke Braille (Quran)</title>
-<meta name="description" content="Simulasi & konverter teks Arab ke Braille (Arabic Braille Translator). Lihat bagaimana tunanetra membaca Al-Quran. Educational tool to convert Arabic script to Braille dots.">    
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5878514175202601"
-     crossorigin="anonymous"></script>
-
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-FGJKD3430G"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-FGJKD3430G');
-</script>
+    <title>Arabic to Braille Converter - Konverter Huruf Arab ke Braille (Quran)</title>
+    <meta name="description" content="Simulasi & konverter teks Arab ke Braille (Arabic Braille Translator). Lihat bagaimana tunanetra membaca Al-Quran. Educational tool to convert Arabic script to Braille dots.">    
+    
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5878514175202601" crossorigin="anonymous"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-FGJKD3430G"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-FGJKD3430G');
+    </script>
         
     <link rel="icon" type="image/x-icon" href="dimaster.ico">
-
     <link rel="stylesheet" href="style.css">
-
-    </head>
+</head>
 <body>
 
     <a href="#main-content" class="skip-link">Lewati ke Konten Utama</a>
-<header>
+
+    <header>
         <div class="container navbar">
-            
             <div class="brand-wrapper">
                 <a href="index.html" title="Kembali ke Beranda">
-                    <img src="logo.png" alt="Logo Dimaster Institute" width="100" height="100">
+                    <img src="logo.png" alt="Logo Accessible Web Indonesia" width="100" height="100">
                 </a>
                 <div>
                     <a href="index.html" class="brand-title">
                         <h1>Accessible Web Indonesia</h1>
                     </a>
-                    <small class="brand-subtitle">by <a href="https://www.dimaster.co.id" target="_blank">Dimaster Institute</a></small>
+                    <small class="brand-subtitle">Tools Aksesibilitas & Edukasi Digital</small>
                 </div>
             </div>
 
             <div class="nav-controls">
-                
                 <nav aria-label="Menu Utama">
                     <ul id="nav-menu">
                         <li><a href="index.html">Home</a></li>
@@ -57,7 +51,7 @@
                                 <li><a href="blind.html">👁️ Tes Buta Warna</a></li>
                                 <li><a href="tts.html">🗣️ TTS & Voice</a></li>
                                 <li><a href="braille.html">⠃⠗⠇ Braille Latin</a></li>
-                                <li><a href="quran.html">🕌 Quran Braille</a></li>
+                                <li><a href="quran.html" aria-current="page" class="active">🕌 Quran Braille</a></li>
                                 <li><a href="sign.html">🤟 Sign Language</a></li>
                                 <li><a href="dyslexia.html">😵 Dyslexia Sim</a></li>
                             </ul>
@@ -69,17 +63,18 @@
                 </nav>
                 
                 <button id="theme-toggle" aria-label="Ganti Mode Gelap atau Terang" title="Ganti Tema">🌙</button>
-                
                 <button id="lang-toggle" aria-label="Ganti Bahasa ke Inggris" title="Ganti Bahasa">ID</button>
-                
                 <div id="google_translate_element" class="visually-hidden"></div>
-
             </div>
         </div>
-</header>
+    </header>
+
     <main id="main-content" class="container">
-        <h1>Simulasi Quran Braille (Hijaiyah)</h1>
-        <p>Menjawab rasa penasaran: "Bagaimana bentuk huruf Arab jika diraba?" Alat ini mengonversi teks Arab standar menjadi pola Braille.</p>
+        
+        <div style="text-align: center; margin-bottom: 20px;">
+            <h1>Simulasi Quran Braille (Hijaiyah)</h1>
+            <p>Menjawab rasa penasaran: "Bagaimana bentuk huruf Arab jika diraba?" Alat ini mengonversi teks Arab standar menjadi pola Braille.</p>
+        </div>
 
         <div class="tool-box">
             <label for="arabicInput"><strong>Masukkan Teks Arab (Hijaiyah):</strong></label>
@@ -87,13 +82,13 @@
             
             <div style="margin-top: 20px;">
                 <button id="convertBtn" class="button">⠃ Convert ke Braille</button>
-                <button id="clearBtn" class="button" style="background: #d9534f;">Hapus</button>
+                <button id="clearBtn" class="button" style="background: #d9534f; color: white !important;">Hapus</button>
             </div>
 
             <div id="resultArea" style="margin-top: 25px; display: none;">
                 <label><strong>Hasil Braille (Dibaca Kiri ke Kanan):</strong></label>
-                <div id="brailleOutput" style="background: #fff; padding: 20px; border: 2px solid var(--primary-color); border-radius: 8px; font-size: 2rem; letter-spacing: 3px; overflow-wrap: break-word;"></div>
-                <p style="font-size: 0.8rem; color: #666; margin-top: 10px;">*Tampilan visual titik Braille ini menggunakan font Unicode standar.</p>
+                <div id="brailleOutput" style="background: var(--input-bg); color: var(--text-color); padding: 20px; border: 2px solid var(--primary-color); border-radius: 8px; font-size: 2rem; letter-spacing: 3px; overflow-wrap: break-word;"></div>
+                <p style="font-size: 0.8rem; margin-top: 10px; color: var(--text-muted);">*Tampilan visual titik Braille ini menggunakan font Unicode standar.</p>
             </div>
         </div>
 
@@ -120,55 +115,62 @@
             <h3>Standar di Indonesia</h3>
             <p>Indonesia mengacu pada standar <em>Unified Arabic Braille</em> yang juga digunakan secara internasional. Mushaf Al-Quran Braille di Indonesia (seperti terbitan Yaketunis atau Balai Literasi Braille Kemensos) menggunakan standar ini agar tunanetra Indonesia bisa membaca mushaf dari negara lain juga.</p>
 
-            <div style="background: #f0f8ff; border-left: 5px solid var(--accent-color); padding: 20px; margin-top: 25px;">
-                <h3 style="margin-top: 0; color: var(--primary-color);">Belajar Islam & Al-Quran Bagi Tunanetra</h3>
-                <p>Membaca Al-Quran Braille membutuhkan ketelatenan ekstra karena ukurannya yang besar dan kodenya yang kompleks. Namun, semangat teman-teman tunanetra untuk mengaji tidak pernah surut.</p>
-                <p><strong>Kartunet</strong> sering mengadakan program literasi dan kajian inklusif. Jika Anda ingin mendukung program pemberdayaan tunanetra atau membutuhkan konsultasi aksesibilitas sarana ibadah, kami siap berkolaborasi.</p>
+            <div style="background: var(--card-bg); border-left: 5px solid var(--accent-color); padding: 25px; margin-top: 25px; border-radius: 8px; border: 1px solid var(--border-color);">
+                <h3 style="margin-top: 0; color: var(--primary-color);">Dukung Aksesibilitas Ibadah (CSR Program)</h3>
+                <p>Ingin menjadikan masjid perusahaan atau fasilitas umum Anda ramah tunanetra dengan menyediakan Al-Quran Braille dan jalur pemandu?</p>
+                <p><strong>Layanan Konsultasi Disabilitas.com</strong> siap membantu perusahaan Anda dalam program CSR atau pengadaan fasilitas inklusif yang tepat sasaran.</p>
                 <br>
-                <a href="https://kartunet.com/kontak" class="button">Hubungi Kartunet &rarr;</a>
+                <a href="https://disabilitas.com" class="button" target="_blank">Hubungi Konsultan CSR & Fasilitas &rarr;</a>
             </div>
+
         </article>
     </main>
 
     <footer>
         <div class="container">
-            <p>&copy; 2025 Dimaster Institute. All Rights Reserved.</p>
-            <p>Partner Resmi: <a href="https://kartunet.com" style="color:#008CBA;">Kartunet.com</a></p>
+            <p>&copy; 2025 PT Dimaster Education Berprestasi. All Rights Reserved.</p>
+            
+            <p>Our Ecosystem: 
+                <a href="https://kartunet.com" target="_blank" style="color:#4cc9f0; font-weight:bold;">Kartunet</a> | 
+                <a href="https://disabilitas.com" target="_blank" style="color:#4cc9f0; font-weight:bold;">Disabilitas.com</a> | 
+                <a href="https://www.dimaster.co.id" target="_blank" style="color:#4cc9f0; font-weight:bold;">Dimaster Group</a>
+            </p>
+            
             <p style="font-size: 0.8rem; margin-top: 10px;">
-                <a href="privacy.html" style="color: #333; text-decoration: underline;">Privacy Policy</a>
+                <a href="mailto:feedback@accessible.web.id" style="color: #e0e0e0; margin-right: 10px; text-decoration: none;">📩 Lapor Bug</a> | 
+                <a href="privacy.html" style="color: #e0e0e0; text-decoration: underline; margin-left: 10px;">Privacy Policy</a>
             </p>
         </div>
     </footer>
 
+    <script src="script.js"></script>
+
     <script>
-        // MAPPING HIJAIYAH KE BRAILLE (UNICODE)
-        // Standar Unified Arabic Braille
         const arabicMap = {
-            'ا': '⠁', 'أ': '⠁', 'إ': '⠮', 'آ': '⠜', // Alif variants
+            'ا': '⠁', 'أ': '⠁', 'إ': '⠮', 'آ': '⠜', 
             'ب': '⠃', 'ت': '⠞', 'ث': '⠹',
             'ج': '⠚', 'ح': '⠱', 'خ': '⠭',
-            'd': '⠙', 'ذ': '⠳', // Dal handled manually below due to mapping complexity
+            'د': '⠙', 'ذ': '⠳', 
             'ر': '⠗', 'ز': '⠵',
             'س': '⠎', 'ش': '⠩',
             'ص': '⠯', 'ض': '⠫',
             'ط': '⠾', 'ظ': '⠼',
             'ع': '⠷', 'غ': '⠣',
-            'ف': '⠋', 'q': '⠟', // Qaf handled below
-            'ك': '⠅', 'ل': '⠇', 'm': '⠍', // Mim handled below
-            'ن': '⠝', 'ه': '⠓', 'w': '⠺', // Waw handled below
+            'ف': '⠋', 'ق': '⠟', 
+            'ك': '⠅', 'ل': '⠇', 'م': '⠍', 
+            'ن': '⠝', 'ه': '⠓', 'و': '⠺', 
             'ي': '⠽', 'ى': '⠕',
             'ء': '⠄', 'ة': '⠡',
-            'د': '⠙', 'ق': '⠟', 'م': '⠍', 'و': '⠺', // Fix constants
             
             // Harakat (Vowels)
-            'َ': '⠂', // Fathah (Dot 2)
-            'ِ': '⠔', // Kasrah (Dot 3-5) - *Check standard variation, sometimes 1-5*
-            'ُ': '⠥', // Dammah (Dot 1-3-6)
+            'َ': '⠂', // Fathah 
+            'ِ': '⠔', // Kasrah
+            'ُ': '⠥', // Dammah
             'ً': '⠆', // Fathatain
             'ٍ': '⠢', // Kasratain
             'ٌ': '⠖', // Dammatain
             'ْ': '⠒', // Sukun
-            'ّ': '⠠', // Shadda (Dot 6)
+            'ّ': '⠠', // Shadda
             ' ': ' ',  // Spasi
             '،': '⠐', // Koma Arab
             '؟': '⠦'  // Tanda tanya Arab
@@ -178,14 +180,11 @@
             const input = document.getElementById('arabicInput').value;
             let output = '';
             
-            // Loop setiap karakter
             for (let i = 0; i < input.length; i++) {
                 const char = input[i];
                 if (arabicMap[char]) {
                     output += arabicMap[char];
                 } else {
-                    // Jika tidak ketemu (misal angka atau simbol lain), biarkan atau kasih tanda tanya
-                    // Untuk demo ini kita biarkan kosong atau spasi agar rapi
                     output += ''; 
                 }
             }
@@ -200,8 +199,6 @@
 
             brailleOutput.innerText = output;
             resultArea.style.display = 'block';
-            
-            // Auto scroll ke hasil
             resultArea.scrollIntoView({behavior: "smooth"});
         }
 
@@ -211,6 +208,5 @@
             document.getElementById('resultArea').style.display = 'none';
         });
     </script>
-<script src="script.js"></script>
 </body>
 </html>
