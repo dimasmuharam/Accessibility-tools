@@ -1,7 +1,7 @@
-/* =========================================
+/* ==========================================================================
    ACCESSIBLE WEB INDONESIA - MAIN SCRIPT
-   Features: Dark Mode, Lang Toggle, Nav Logic, Dropdown
-   ========================================= */
+   Features: Dark Mode, Manual Lang Toggle, Accessible Dropdown & Nav
+   ========================================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
     
@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (currentTheme === 'dark') {
         updateThemeButton('dark');
     } else {
-        updateThemeButton('light');
+        updateThemeButton('light'); // Default Light
     }
     
     // Event Klik Tombol Tema
@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     // =========================================
-    // 2. LOGIKA GANTI BAHASA (GOOGLE TRANSLATE)
+    // 2. LOGIKA GANTI BAHASA (MANUAL ONLY)
     // =========================================
     const langToggle = document.getElementById('lang-toggle');
     
@@ -61,6 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function setGoogleCookie(value) {
+        // Set cookie untuk domain utama dan path root agar berlaku global
         document.cookie = "googtrans=" + value + "; path=/; domain=" + document.domain;
         document.cookie = "googtrans=" + value + "; path=/;";
     }
@@ -68,7 +69,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const currentLang = getCookie('googtrans');
     
     if (langToggle) {
-        // Cek status bahasa saat ini
+        // Cek status bahasa saat ini berdasarkan Cookie (Bukan Teks Tombol)
+        // Default: ID (Indonesia)
         if (currentLang && currentLang.includes('/en')) {
             langToggle.textContent = 'EN';
             langToggle.setAttribute('aria-label', 'Bahasa saat ini Inggris. Klik untuk ganti ke Indonesia');
@@ -77,34 +79,37 @@ document.addEventListener('DOMContentLoaded', () => {
             langToggle.setAttribute('aria-label', 'Bahasa saat ini Indonesia. Klik untuk ganti ke Inggris');
         }
 
+        // Event Klik Tombol Bahasa
         langToggle.addEventListener('click', () => {
-            if (langToggle.textContent === 'ID') {
-                setGoogleCookie('/id/en'); // Ganti ke Inggris
-                location.reload();
+            // Logika: Jika sekarang ID, ubah ke EN. Jika EN, ubah ke ID.
+            // Kita cek cookie saat ini untuk akurasi.
+            const current = getCookie('googtrans');
+            
+            if (current && current.includes('/en')) {
+                // Sedang Inggris -> Ganti ke Indonesia
+                setGoogleCookie('/id/id'); 
             } else {
-                setGoogleCookie('/id/id'); // Ganti ke Indonesia
-                location.reload();
+                // Sedang Indonesia (atau null) -> Ganti ke Inggris
+                setGoogleCookie('/id/en'); 
             }
+            
+            // Reload halaman agar Google Translate memproses perubahan
+            location.reload();
         });
     }
 
-    // Auto Detect jika browser bule (Opsional)
-    (function checkAutoLanguage() {
-        var userLang = navigator.language || navigator.userLanguage; 
-        if (userLang.indexOf('id') === -1 && userLang.indexOf('ind') === -1 && !getCookie('googtrans')) {
-            // Jika browser bukan Indo & belum ada cookie, set ke Inggris
-            setGoogleCookie('/id/en');
-            location.reload();
-        }
-    })();
+    // CATATAN: Fitur Auto-Detect Browser Language DIHAPUS sesuai instruksi.
+    // User memegang kendali penuh mau pakai bahasa apa.
 
 
     // =========================================
-    // 3. LOGIKA NAVIGASI & DROPDOWN TOOLS (FIXED KEYBOARD)
+    // 3. LOGIKA NAVIGASI & DROPDOWN TOOLS
     // =========================================
     (function manageNavigation() {
         // Ambil nama file saat ini (misal: "blind.html")
-        const currentPath = window.location.pathname.split('/').pop() || 'index.html';
+        // Jika di root (/), anggap index.html
+        let currentPath = window.location.pathname.split('/').pop();
+        if (currentPath === '') currentPath = 'index.html';
         
         const navLinks = document.querySelectorAll('#nav-menu a');
         const toolsBtn = document.getElementById('tools-btn');
@@ -113,10 +118,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // A. Highlight Menu Aktif
         navLinks.forEach(link => {
-            const linkPath = link.getAttribute('href');
+            const linkHref = link.getAttribute('href');
             
-            // Cek apakah href link sama dengan halaman yang dibuka
-            if (linkPath === currentPath) {
+            // Bandingkan filename. Pastikan persis.
+            if (linkHref === currentPath) {
                 link.setAttribute('aria-current', 'page');
                 link.classList.add('active');
                 
@@ -125,6 +130,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     isToolActive = true;
                 }
             } else {
+                // Bersihkan state aktif dari menu lain
                 link.removeAttribute('aria-current');
                 link.classList.remove('active');
             }
@@ -135,7 +141,7 @@ document.addEventListener('DOMContentLoaded', () => {
             toolsBtn.classList.add('active-parent');
         }
 
-        // B. Logika Buka/Tutup Dropdown (Interaksi)
+        // B. Logika Buka/Tutup Dropdown (Interaksi Mouse & Keyboard)
         if (toolsBtn && toolsList) {
             
             function toggleMenu(event) {
@@ -160,7 +166,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // 1. Event KLIK MOUSE
             toolsBtn.addEventListener('click', toggleMenu);
 
-            // 2. Event KEYBOARD (ENTER & SPASI) - PERBAIKAN UTAMA
+            // 2. Event KEYBOARD (ENTER & SPASI) - PERBAIKAN AKSESIBILITAS
             toolsBtn.addEventListener('keydown', (e) => {
                 // Cek jika tombol yang ditekan adalah Enter atau Spasi
                 if (e.key === 'Enter' || e.key === ' ') {
@@ -176,7 +182,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
 
-            // Tutup jika tekan tombol ESC (Standar Aksesibilitas)
+            // Tutup jika tekan tombol ESC (Standar Aksesibilitas WCAG)
             document.addEventListener('keydown', (e) => {
                 if (e.key === 'Escape') {
                     closeMenu();
@@ -195,7 +201,7 @@ document.addEventListener('DOMContentLoaded', () => {
 window.googleTranslateElementInit = function() {
     new google.translate.TranslateElement({
         pageLanguage: 'id',
-        includedLanguages: 'en,id',
+        includedLanguages: 'en,id', // Hanya support ID dan EN
         layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
         autoDisplay: false
     }, 'google_translate_element');
