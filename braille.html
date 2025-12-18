@@ -85,7 +85,7 @@
 
             <div id="shareArea" class="share-box" style="display: none; margin-top: 30px;" aria-live="polite">
                 <h3 style="margin-top: 0; color: var(--primary-color);">🤫 Ssstt.. Kirim Pesan Rahasia Ini!</h3>
-                <p>Bagikan kode Braille ini ke temanmu dan lihat apakah mereka bisa membacanya.</p>
+                <p>Link yang dibagikan akan dienkripsi menjadi kode acak, jadi temanmu harus membukanya di sini untuk membaca isinya.</p>
                 
                 <div class="share-buttons">
                     <a id="shareWa" href="#" target="_blank" class="btn-share wa">WhatsApp</a>
@@ -95,7 +95,7 @@
                     </button>
                 </div>
             </div>
-            </div>
+        </div>
 
         <div class="ads-slot">
             <p>Iklan Google AdSense</p>
@@ -158,7 +158,7 @@
             'k': '⠅', 'l': '⠇', 'm': '⠍', 'n': '⠝', 'o': '⠕', 'p': '⠏', 'q': '⠟', 'r': '⠗', 's': '⠎', 't': '⠞',
             'u': '⠥', 'v': '⠧', 'w': '⠺', 'x': '⠭', 'y': '⠽', 'z': '⠵',
             ' ': '  ', '1': '⠼⠁', '2': '⠼⠃', '3': '⠼⠉', '4': '⠼⠙', '5': '⠼⠑', '6': '⠼⠋', '7': '⠼⠛', '8': '⠼⠓', '9': '⠼⠊', '0': '⠼⠚',
-            ',': '⠂', ';': '⠆', ':': '⠒', '.': '⠲', '!': '⠖', '?': '⠦'
+            ',': '⠂', ';': '⠆', ':': '⠒', '.': '⠲', '!': '⠖', '?': '⠦', '"': '⠶', "'": '⠄'
         };
 
         function convertToBraille() {
@@ -181,17 +181,20 @@
             updateShareLinks(input, output);
         }
 
-        // --- FITUR VIRAL: UPDATE SHARE LINKS ---
+        // --- UPDATE LOGIKA SHARE (ENCODED/RAHASIA) ---
         function updateShareLinks(originalText, brailleText) {
-            const encodedText = encodeURIComponent(originalText);
+            // Kita Enkripsi (Encode Base64) teks asli agar tidak terbaca di URL
+            // btoa() membuat string jadi acak: "halo" -> "aGFsbw=="
+            // encodeURIComponent() untuk handle spasi/karakter khusus sebelum di-base64
+            const secretCode = btoa(encodeURIComponent(originalText));
             
-            // Link Generate
-            const shareUrl = `${window.location.origin}${window.location.pathname}?text=${encodedText}`;
+            // Link Generate dengan parameter 'code' (bukan 'text' lagi)
+            const shareUrl = `${window.location.origin}${window.location.pathname}?code=${secretCode}`;
             const encodedShareUrl = encodeURIComponent(shareUrl);
 
             // Caption Misterius
             const snippet = brailleText.substring(0, 15) + (brailleText.length > 15 ? '...' : '');
-            const caption = `Bisa baca pesan rahasiaku ini gak? 👀\n\n${snippet}\n\nTerjemahkan di sini: 👇\n`;
+            const caption = `Ada pesan rahasia buat kamu nih! 👀\n\n${snippet}\n\nTerjemahkan kodenya di sini: 👇\n`;
 
             document.getElementById('shareWa').href = `https://api.whatsapp.com/send?text=${encodeURIComponent(caption)} ${encodedShareUrl}`;
             document.getElementById('shareTwitter').href = `https://twitter.com/intent/tweet?text=${encodeURIComponent(caption)}&url=${encodedShareUrl}&hashtags=CekAkses,PesanRahasia`;
@@ -204,18 +207,26 @@
             });
         }
 
-        // --- AUTO-FILL DARI URL ---
+        // --- AUTO-FILL & DECRYPT DARI URL ---
         window.addEventListener('DOMContentLoaded', () => {
             const urlParams = new URLSearchParams(window.location.search);
-            const textFromUrl = urlParams.get('text');
+            const secretCode = urlParams.get('code'); // Ambil parameter 'code'
 
-            if (textFromUrl) {
-                inputText.value = textFromUrl;
-                convertToBraille();
-                
-                setTimeout(() => {
-                    outputText.scrollIntoView({behavior: "smooth"});
-                }, 500);
+            if (secretCode) {
+                try {
+                    // Dekripsi (Decode Base64) kembali ke teks asli
+                    // atob() membalikkan kode acak jadi teks biasa
+                    const decodedText = decodeURIComponent(atob(secretCode));
+                    
+                    inputText.value = decodedText;
+                    convertToBraille(); // Jalankan konversi otomatis
+                    
+                    setTimeout(() => {
+                        outputText.scrollIntoView({behavior: "smooth"});
+                    }, 500);
+                } catch (e) {
+                    console.error("Kode URL tidak valid/rusak");
+                }
             }
         });
 
