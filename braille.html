@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="style.css">
 
     <style>
-        /* CSS KHUSUS UNTUK FITUR TEBAK BRAILLE */
+        /* CSS KHUSUS FITUR BRAILLE CHALLENGE */
         .blur-text {
             filter: blur(8px);
             user-select: none;
@@ -55,7 +55,7 @@
         
         #revealSection {
             text-align: center;
-            margin-top: -40px; /* Supaya tombol naik ke atas area blur */
+            margin-top: -40px;
             position: relative;
             z-index: 10;
         }
@@ -143,7 +143,7 @@
 
             <div id="shareArea" class="share-box" style="display: none; margin-top: 30px;" aria-live="polite">
                 <h3 style="margin-top: 0; color: var(--primary-color);">🤫 Ssstt.. Kirim Pesan Rahasia Ini!</h3>
-                <p>Link yang dibagikan akan dienkripsi menjadi kode acak. Temanmu harus memecahkannya di sini.</p>
+                <p>Link yang dibagikan akan dienkripsi. Temanmu harus mencoba membacanya sebelum melihat jawaban asli.</p>
                 
                 <div class="share-buttons">
                     <a id="shareWa" href="#" target="_blank" class="btn-share wa">WhatsApp</a>
@@ -180,16 +180,10 @@
     <footer>
         <div class="container">
             <p>&copy; 2025 PT Dimaster Education Berprestasi. All Rights Reserved.</p>
-            
             <p>Our Ecosystem: 
                 <a href="https://kartunet.com" target="_blank" style="color:#4cc9f0; font-weight:bold;">Kartunet</a> | 
-                <a href="https://disabilitas.com" target="_blank" style="color:#4cc9f0; font-weight:bold;">Disabilitas.com</a> | 
+                <a href="https://disabilitas.com" target="_blank" style="color:#4cc9f0; font-weight:bold;">Disabilitas.com</a> |
                 <a href="https://www.dimaster.co.id" target="_blank" style="color:#4cc9f0; font-weight:bold;">Dimaster Group</a>
-            </p>
-            
-            <p style="font-size: 0.8rem; margin-top: 10px;">
-                <a href="mailto:feedback@accessible.web.id" style="color: #e0e0e0; margin-right: 10px; text-decoration: none;">📩 Lapor Bug</a> | 
-                <a href="privacy.html" style="color: #e0e0e0; text-decoration: underline; margin-left: 10px;">Privacy Policy</a>
             </p>
         </div>
     </footer>
@@ -203,7 +197,7 @@
         const revealSection = document.getElementById('revealSection');
         const cheatSheet = document.getElementById('cheatSheet');
 
-        // Variabel aman untuk menyimpan jawaban (Tidak terbaca screen reader)
+        // Variabel aman untuk menyimpan jawaban (Agar tidak dibaca Screen Reader sebelum waktunya)
         let secretAnswer = ""; 
 
         const map = {
@@ -219,14 +213,14 @@
         for (let char of alphabet) {
             const div = document.createElement('div');
             div.className = 'cheat-item';
-            div.setAttribute('aria-label', `Huruf ${char.toUpperCase()}`); // Aksesibilitas SR
+            div.setAttribute('aria-label', `Huruf ${char.toUpperCase()}`); // Aksesibilitas Screen Reader
             div.innerHTML = `<span class="cheat-braille" aria-hidden="true">${map[char]}</span><span class="cheat-latin">${char.toUpperCase()}</span>`;
             cheatSheet.appendChild(div);
         }
 
         // 2. FUNGSI KONVERSI
         function convertToBraille() {
-            // Jika mode terkunci, jangan update output berdasarkan input placeholder
+            // Jika sedang dalam Mode Tantangan (Terkunci), hentikan update otomatis
             if (revealSection.style.display === 'block') return;
 
             const input = inputText.value.toLowerCase();
@@ -247,36 +241,47 @@
             updateShareLinks(input, output);
         }
 
-        // 3. FUNGSI SHARE (COPYWRITING BARU)
+        // --- HELPER: Deteksi Bahasa (Untuk Copywriting Share) ---
+        function getCurrentLang() {
+            const cookie = document.cookie.match('(^|;) ?googtrans=([^;]*)(;|$)');
+            return cookie && cookie[2].includes('/en') ? 'en' : 'id';
+        }
+
+        // 3. FUNGSI SHARE (DINAMIS BAHASA)
         function updateShareLinks(originalText, brailleText) {
-            // Encode teks asli ke Base64 (Rahasia)
             const secretCode = btoa(encodeURIComponent(originalText));
-            
             const shareUrl = `${window.location.origin}${window.location.pathname}?code=${secretCode}`;
             const encodedShareUrl = encodeURIComponent(shareUrl);
-
             const snippet = brailleText.substring(0, 15) + (brailleText.length > 15 ? '...' : '');
-            
-            // COPYWRITING SESUAI REQUEST
-            const caption = `Ada pesan rahasia untuk kamu dalam huruf Braille! 🤫\n\n${snippet}\n\nCoba terjemahkan (pecahkan kodenya) di sini: 👇\n`;
+
+            // Logika Copywriting sesuai Bahasa
+            const lang = getCurrentLang();
+            let caption = "";
+
+            if (lang === 'en') {
+                caption = `There is a secret Braille message for you! 🤫\n\n${snippet}\n\nDecode the secret message here: 👇\n`;
+            } else {
+                caption = `Ada pesan rahasia untuk kamu dalam huruf Braille! 🤫\n\n${snippet}\n\nCoba terjemahkan (pecahkan kodenya) di sini: 👇\n`;
+            }
 
             document.getElementById('shareWa').href = `https://api.whatsapp.com/send?text=${encodeURIComponent(caption)} ${encodedShareUrl}`;
-            document.getElementById('shareTwitter').href = `https://twitter.com/intent/tweet?text=${encodeURIComponent(caption)}&url=${encodedShareUrl}&hashtags=CekAkses,PesanRahasia`;
+            document.getElementById('shareTwitter').href = `https://twitter.com/intent/tweet?text=${encodeURIComponent(caption)}&url=${encodedShareUrl}&hashtags=CekAkses,BrailleChallenge`;
         }
 
         function copyBraille() {
-            navigator.clipboard.writeText(outputText.innerText).then(() => alert("Teks Braille tersalin!"));
+            navigator.clipboard.writeText(outputText.innerText).then(() => {
+                const lang = getCurrentLang();
+                alert(lang === 'en' ? "Braille text copied!" : "Teks Braille tersalin!");
+            });
         }
 
-        // 4. LOGIKA BUKA KUNCI (ACCESSIBLE)
+        // 4. LOGIKA BUKA KUNCI (ACCESSIBLE REVEAL)
         function revealAnswer() {
-            inputText.value = secretAnswer; // Kembalikan teks asli
-            
+            inputText.value = secretAnswer; // Kembalikan jawaban asli
             inputText.removeAttribute('readonly');
             inputText.classList.remove('blur-text');
             revealSection.style.display = 'none';
-            
-            inputText.focus(); // Arahkan fokus agar SR membaca jawaban
+            inputText.focus(); // Fokus ke input agar SR langsung membaca jawaban
         }
 
         // 5. INISIALISASI DARI URL
@@ -286,30 +291,30 @@
 
             if (secretCode) {
                 try {
-                    // Decode pesan
                     secretAnswer = decodeURIComponent(atob(secretCode));
                     
-                    // --- RENDER MANUAL OUTPUT BRAILLE DARI SECRET ---
-                    // Kita lakukan manual di sini karena input text-nya akan diisi placeholder
+                    // Render Braille secara manual
                     let output = '';
                     for (let char of secretAnswer.toLowerCase()) {
                         output += map[char] || char; 
                     }
                     outputText.innerText = output;
                     
-                    // --- SETTING MODE TANTANGAN ---
-                    inputText.value = "[ PESAN RAHASIA TERSEMBUNYI ]"; // Placeholder aman
+                    // Setup Mode Tantangan (Placeholder + Blur)
+                    const lang = getCurrentLang();
+                    const placeholderText = lang === 'en' ? "[ HIDDEN SECRET MESSAGE ]" : "[ PESAN RAHASIA TERSEMBUNYI ]";
+
+                    inputText.value = placeholderText; // Jangan taruh jawaban asli di sini agar SR tidak spoiler
                     inputText.setAttribute('readonly', 'true');
                     inputText.classList.add('blur-text');
                     revealSection.style.display = 'block';
 
-                    // Scroll
                     setTimeout(() => {
                         outputText.scrollIntoView({behavior: "smooth"});
                     }, 500);
 
                 } catch (e) {
-                    console.error("Kode rusak");
+                    console.error("Kode URL rusak/tidak valid");
                 }
             }
         });
