@@ -3,15 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Text-to-Speech (TTS) & Voice Typing Indonesia - Free Audio Reader</title>
-<meta name="description" content="Ubah teks jadi suara (Text to Speech Reader) dan ubah suara jadi teks (Speech to Text/Voice Typing) online. Free TTS converter Bahasa Indonesia & English.">
-            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5878514175202601" crossorigin="anonymous"></script>
+    <title>Text-to-Speech (TTS) & Voice Typing Indonesia - Accessible Web Indonesia</title>
+    <meta name="description" content="Ubah teks jadi suara (Text to Speech Reader) dan ubah suara jadi teks (Speech to Text/Voice Typing) online. Free TTS converter Bahasa Indonesia & English.">
+    
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5878514175202601" crossorigin="anonymous"></script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-FGJKD3430G"></script>
     <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-FGJKD3430G');
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-FGJKD3430G');
     </script>
         
     <link rel="icon" type="image/x-icon" href="dimaster.ico">
@@ -40,7 +41,6 @@
         }
         input[type=range] { width: 100%; cursor: pointer; }
         
-        /* Area Input Teks yang Lebih Luas */
         textarea {
             width: 100%;
             min-height: 200px;
@@ -61,7 +61,6 @@
             flex-wrap: wrap;
         }
 
-        /* Tombol Rekam Berdenyut */
         .btn-mic {
             background-color: #dc3545; 
             color: white;
@@ -77,7 +76,6 @@
             100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(220, 53, 69, 0); }
         }
 
-        /* Tab Switcher (Navigasi Mode) */
         .mode-switch {
             display: flex;
             gap: 10px;
@@ -96,7 +94,7 @@
         }
         .mode-btn.active {
             background: var(--accent-color);
-            color: #fff; /* Teks putih saat aktif */
+            color: #fff;
             border-color: var(--accent-color);
         }
     </style>
@@ -104,23 +102,22 @@
 <body>
 
     <a href="#main-content" class="skip-link">Lewati ke Konten Utama</a>
-<header>
+
+    <header>
         <div class="container navbar">
-            
             <div class="brand-wrapper">
                 <a href="index.html" title="Kembali ke Beranda">
-                    <img src="logo.png" alt="Logo Dimaster Institute" width="100" height="100">
+                    <img src="logo.png" alt="Logo Accessible Web Indonesia" width="100" height="100">
                 </a>
                 <div>
                     <a href="index.html" class="brand-title">
                         <h1>Accessible Web Indonesia</h1>
                     </a>
-                    <small class="brand-subtitle">by <a href="https://www.dimaster.co.id" target="_blank">Dimaster Institute</a></small>
+                    <small class="brand-subtitle">Tools Aksesibilitas & Edukasi Digital</small>
                 </div>
             </div>
 
             <div class="nav-controls">
-                
                 <nav aria-label="Menu Utama">
                     <ul id="nav-menu">
                         <li><a href="index.html">Home</a></li>
@@ -133,7 +130,7 @@
                                 <li><a href="checker.html">✅ Access Score</a></li>
                                 <li><a href="contrast.html">🎨 Contrast Checker</a></li>
                                 <li><a href="blind.html">👁️ Tes Buta Warna</a></li>
-                                <li><a href="tts.html">🗣️ TTS & Voice</a></li>
+                                <li><a href="tts.html" aria-current="page" class="active">🗣️ TTS & Voice</a></li>
                                 <li><a href="braille.html">⠃⠗⠇ Braille Latin</a></li>
                                 <li><a href="quran.html">🕌 Quran Braille</a></li>
                                 <li><a href="sign.html">🤟 Sign Language</a></li>
@@ -147,15 +144,13 @@
                 </nav>
                 
                 <button id="theme-toggle" aria-label="Ganti Mode Gelap atau Terang" title="Ganti Tema">🌙</button>
-                
                 <button id="lang-toggle" aria-label="Ganti Bahasa ke Inggris" title="Ganti Bahasa">ID</button>
-                
                 <div id="google_translate_element" class="visually-hidden"></div>
-
             </div>
         </div>
-</header>
-        <main id="main-content" class="container">
+    </header>
+
+    <main id="main-content" class="container">
         
         <div style="text-align: center; margin-bottom: 30px;">
             <h1>Smart Audio Tools (TTS & STT)</h1>
@@ -251,10 +246,10 @@
 
             <div style="background: var(--card-bg); border-left: 5px solid var(--accent-color); padding: 25px; margin-top: 30px; border-radius: 8px; border: 1px solid var(--border-color);">
                 <h3 style="margin-top: 0; color: var(--primary-color);">Layanan Profesional untuk Perusahaan</h3>
-                <p>Apakah website atau aplikasi perusahaan Anda sudah ramah bagi pengguna yang mengandalkan suara?</p>
-                <p><strong>Kartunet Konsultan</strong> siap membantu Anda melakukan audit aksesibilitas dan implementasi teknologi asistif.</p>
+                <p>Apakah website atau aplikasi perusahaan Anda sudah ramah bagi pengguna yang mengandalkan suara (Voice Navigation)?</p>
+                <p><strong>Layanan Audit Profesional</strong> kami siap membantu Anda melakukan audit aksesibilitas dan implementasi teknologi asistif agar sesuai standar WCAG.</p>
                 <br>
-                <a href="https://kartunet.com/kontak" class="button">Hubungi Tim Kartunet &rarr;</a>
+                <a href="https://disabilitas.com" class="button" target="_blank">Hubungi Konsultan Disabilitas.com &rarr;</a>
             </div>
         </article>
 
@@ -262,10 +257,17 @@
 
     <footer>
         <div class="container">
-            <p>&copy; 2025 Dimaster Institute. All Rights Reserved.</p>
-            <p>Partner Resmi: <a href="https://kartunet.com" style="color:#008CBA;">Kartunet.com</a></p>
+            <p>&copy; 2025 PT Dimaster Education Berprestasi. All Rights Reserved.</p>
+            
+            <p>Our Ecosystem: 
+                <a href="https://kartunet.com" target="_blank" style="color:#4cc9f0; font-weight:bold;">Kartunet</a> | 
+                <a href="https://disabilitas.com" target="_blank" style="color:#4cc9f0; font-weight:bold;">Disabilitas.com</a> | 
+                <a href="https://www.dimaster.co.id" target="_blank" style="color:#4cc9f0; font-weight:bold;">Dimaster Group</a>
+            </p>
+            
             <p style="font-size: 0.8rem; margin-top: 10px;">
-                <a href="privacy.html" style="color: #333; text-decoration: underline;">Privacy Policy</a>
+                <a href="mailto:feedback@accessible.web.id" style="color: #e0e0e0; margin-right: 10px; text-decoration: none;">📩 Lapor Bug</a> | 
+                <a href="privacy.html" style="color: #e0e0e0; text-decoration: underline; margin-left: 10px;">Privacy Policy</a>
             </p>
         </div>
     </footer>
@@ -273,7 +275,6 @@
     <script src="script.js"></script>
 
     <script>
-        // --- 1. TAB SWITCHER LOGIC ---
         function switchMode(mode) {
             const ttsPanel = document.getElementById('ttsPanel');
             const sttPanel = document.getElementById('sttPanel');
@@ -307,7 +308,6 @@
             voices = synth.getVoices();
             voiceSelect.innerHTML = '';
             
-            // Urutkan: Bahasa Indonesia Dulu
             voices.sort((a, b) => {
                 const aname = a.lang.toUpperCase();
                 const bname = b.lang.toUpperCase();
@@ -330,7 +330,6 @@
             speechSynthesis.onvoiceschanged = populateVoices;
         }
 
-        // Update tampilan angka slider
         rate.addEventListener('input', () => rateValue.textContent = rate.value);
         pitch.addEventListener('input', () => pitchValue.textContent = pitch.value);
 
@@ -369,12 +368,11 @@
         const micBtn = document.getElementById('micBtn');
         const micStatus = document.getElementById('micStatus');
         
-        // Cek dukungan browser untuk SpeechRecognition
         const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
         
         if (SpeechRecognition) {
             const recognition = new SpeechRecognition();
-            recognition.lang = 'id-ID'; // Default Bahasa Indonesia
+            recognition.lang = 'id-ID';
             recognition.continuous = true;
             recognition.interimResults = true;
 
@@ -406,7 +404,6 @@
                     }
                 }
                 if (finalTranscript !== '') {
-                    // Tambahkan teks baru (append) + spasi
                     textResult.value += finalTranscript + ' ';
                 }
             };
@@ -424,7 +421,6 @@
             micStatus.style.color = 'red';
         }
 
-        // Helper Functions
         function copyText() {
             const copyText = document.getElementById("textResult");
             copyText.select();
