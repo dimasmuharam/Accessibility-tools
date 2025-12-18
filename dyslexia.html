@@ -3,46 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dyslexia Simulator & Reading Helper - Simulasi Baca Disleksia</title>
-<meta name="description" content="Rasakan bagaimana orang dengan dyslexia membaca teks (Dyslexia Simulation). Test font ramah disleksia dan pahami kesulitan membaca (Reading difficulty awareness).">    
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5878514175202601"
-     crossorigin="anonymous"></script>
-
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-FGJKD3430G"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-FGJKD3430G');
-</script>
+    <title>Dyslexia Simulator & Reading Helper - Accessible Web Indonesia</title>
+    <meta name="description" content="Rasakan bagaimana orang dengan dyslexia membaca teks (Dyslexia Simulation). Test font ramah disleksia dan pahami kesulitan membaca (Reading difficulty awareness).">    
+    
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5878514175202601" crossorigin="anonymous"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-FGJKD3430G"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-FGJKD3430G');
+    </script>
         
     <link rel="icon" type="image/x-icon" href="dimaster.ico">
-
     <link rel="stylesheet" href="style.css">
-
-    </head>
+</head>
 <body>
 
     <a href="#main-content" class="skip-link">Lewati ke Konten Utama</a>
-<header>
+
+    <header>
         <div class="container navbar">
-            
             <div class="brand-wrapper">
                 <a href="index.html" title="Kembali ke Beranda">
-                    <img src="logo.png" alt="Logo Dimaster Institute" width="100" height="100">
+                    <img src="logo.png" alt="Logo Accessible Web Indonesia" width="100" height="100">
                 </a>
                 <div>
                     <a href="index.html" class="brand-title">
                         <h1>Accessible Web Indonesia</h1>
                     </a>
-                    <small class="brand-subtitle">by <a href="https://www.dimaster.co.id" target="_blank">Dimaster Institute</a></small>
+                    <small class="brand-subtitle">Tools Aksesibilitas & Edukasi Digital</small>
                 </div>
             </div>
 
             <div class="nav-controls">
-                
                 <nav aria-label="Menu Utama">
                     <ul id="nav-menu">
                         <li><a href="index.html">Home</a></li>
@@ -59,7 +53,7 @@
                                 <li><a href="braille.html">⠃⠗⠇ Braille Latin</a></li>
                                 <li><a href="quran.html">🕌 Quran Braille</a></li>
                                 <li><a href="sign.html">🤟 Sign Language</a></li>
-                                <li><a href="dyslexia.html">😵 Dyslexia Sim</a></li>
+                                <li><a href="dyslexia.html" aria-current="page" class="active">😵 Dyslexia Sim</a></li>
                             </ul>
                         </li>
 
@@ -69,17 +63,17 @@
                 </nav>
                 
                 <button id="theme-toggle" aria-label="Ganti Mode Gelap atau Terang" title="Ganti Tema">🌙</button>
-                
                 <button id="lang-toggle" aria-label="Ganti Bahasa ke Inggris" title="Ganti Bahasa">ID</button>
-                
                 <div id="google_translate_element" class="visually-hidden"></div>
-
             </div>
         </div>
-</header>
+    </header>
+
     <main id="main-content" class="container">
-        <h1>Simulator Membaca Disleksia</h1>
-        <p>Apakah huruf-huruf di layar terasa menari? Alat ini menyimulasikan pengalaman visual yang sering dialami oleh penyandang disleksia saat mencoba membaca.</p>
+        <div style="text-align: center; margin-bottom: 20px;">
+            <h1>Simulator Membaca Disleksia</h1>
+            <p>Apakah huruf-huruf di layar terasa menari? Alat ini menyimulasikan pengalaman visual yang sering dialami oleh penyandang disleksia saat mencoba membaca.</p>
+        </div>
 
         <div class="tool-box">
             <label for="dyslexiaInput"><strong>Masukkan Teks (Atau gunakan teks contoh):</strong></label>
@@ -87,11 +81,11 @@
             
             <div style="margin-top: 20px;">
                 <button id="startBtn" class="button">😵 Mulai Simulasi</button>
-                <button id="resetBtn" class="button" style="background: #d9534f;">⏹ Stop / Reset</button>
+                <button id="resetBtn" class="button" style="background: #d9534f; color: white !important;">⏹ Stop / Reset</button>
             </div>
 
-            <div id="displayArea" style="margin-top: 25px; padding: 20px; background: #fff; border: 1px solid #ccc; border-radius: 8px; font-size: 1.2rem; line-height: 1.6; min-height: 150px; display:none;">
-                </div>
+            <div id="displayArea" style="margin-top: 25px; padding: 20px; background: var(--input-bg); color: var(--text-color); border: 1px solid var(--border-color); border-radius: 8px; font-size: 1.2rem; line-height: 1.6; min-height: 150px; display:none;">
+            </div>
         </div>
 
         <div class="ads-slot">
@@ -113,30 +107,40 @@
             <h3>Disleksia & Aksesibilitas Web (WCAG)</h3>
             <p>Sebagai pengembang web atau penulis konten, Anda bisa membantu mereka dengan menerapkan prinsip <strong>Cognitive Accessibility</strong>:</p>
             <ol>
-                <li><strong>Gunakan Font Sans-Serif:</strong> Font seperti Arial, Verdana, atau Comic Sans lebih mudah dibaca daripada Times New Roman karena bentuk hurufnya lebih tegas dan tidak memiliki "kait" yang membingungkan.</li>
-                <li><strong>Hindari Rata Kanan-Kiri (Justify):</strong> Teks rata kanan-kiri menciptakan spasi yang tidak merata, memicu "efek sungai" yang membingungkan mata. Gunakan rata kiri (Align Left).</li>
+                <li><strong>Gunakan Font Sans-Serif:</strong> Font seperti Arial, Verdana, atau Comic Sans lebih mudah dibaca daripada Times New Roman.</li>
+                <li><strong>Hindari Rata Kanan-Kiri (Justify):</strong> Teks rata kanan-kiri menciptakan spasi yang tidak merata, memicu "efek sungai". Gunakan rata kiri (Align Left).</li>
                 <li><strong>Paragraf Pendek:</strong> Pecah teks panjang menjadi paragraf-paragraf kecil. Dinding teks (Wall of Text) adalah musuh utama disleksia.</li>
             </ol>
 
-            <div style="background: #f0f8ff; border-left: 5px solid var(--accent-color); padding: 20px; margin-top: 25px;">
+            <div style="background: var(--card-bg); border-left: 5px solid var(--accent-color); padding: 25px; margin-top: 30px; border-radius: 8px; border: 1px solid var(--border-color);">
                 <h3 style="margin-top: 0; color: var(--primary-color);">Ingin Website Anda Ramah Kognitif?</h3>
                 <p>Aksesibilitas bukan hanya untuk tunanetra. Memastikan website mudah dipahami (Understandable) adalah salah satu dari 4 prinsip utama WCAG.</p>
-                <p><strong>Kartunet Konsultan</strong> dapat membantu Anda melakukan audit konten (Content Audit) dan User Testing untuk memastikan informasi di website Anda tersampaikan dengan efektif kepada semua orang, termasuk mereka dengan kesulitan belajar.</p>
+                <p><strong>Layanan Audit Profesional</strong> kami dapat membantu Anda melakukan audit konten (Content Audit) dan User Testing untuk memastikan informasi di website Anda tersampaikan dengan efektif kepada semua orang.</p>
                 <br>
-                <a href="https://kartunet.com/kontak" class="button">Hubungi Kami untuk Konsultasi &rarr;</a>
+                <a href="https://disabilitas.com" class="button" target="_blank">Hubungi Konsultan Disabilitas.com &rarr;</a>
             </div>
+
         </article>
     </main>
 
     <footer>
         <div class="container">
-            <p>&copy; 2025 Dimaster Institute. All Rights Reserved.</p>
-            <p>Partner Resmi: <a href="https://kartunet.com" style="color:#008CBA;">Kartunet.com</a></p>
+            <p>&copy; 2025 PT Dimaster Education Berprestasi. All Rights Reserved.</p>
+            
+            <p>Our Ecosystem: 
+                <a href="https://kartunet.com" target="_blank" style="color:#4cc9f0; font-weight:bold;">Kartunet</a> | 
+                <a href="https://disabilitas.com" target="_blank" style="color:#4cc9f0; font-weight:bold;">Disabilitas.com</a> | 
+                <a href="https://www.dimaster.co.id" target="_blank" style="color:#4cc9f0; font-weight:bold;">Dimaster Group</a>
+            </p>
+            
             <p style="font-size: 0.8rem; margin-top: 10px;">
-                <a href="privacy.html" style="color: #333; text-decoration: underline;">Privacy Policy</a>
+                <a href="mailto:feedback@accessible.web.id" style="color: #e0e0e0; margin-right: 10px; text-decoration: none;">📩 Lapor Bug</a> | 
+                <a href="privacy.html" style="color: #e0e0e0; text-decoration: underline; margin-left: 10px;">Privacy Policy</a>
             </p>
         </div>
     </footer>
+
+    <script src="script.js"></script>
 
     <script>
         const textInput = document.getElementById('dyslexiaInput');
@@ -145,14 +149,12 @@
         const displayArea = document.getElementById('displayArea');
         let intervalId = null;
 
-        // Fungsi mengacak huruf dalam kata (kecuali huruf pertama & terakhir)
         function scrambleWord(word) {
             if (word.length < 4) return word;
             const first = word[0];
             const last = word[word.length - 1];
             const middle = word.slice(1, word.length - 1).split('');
             
-            // Algoritma pengacakan sederhana (Fisher-Yates)
             for (let i = middle.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
                 [middle[i], middle[j]] = [middle[j], middle[i]];
@@ -163,9 +165,7 @@
 
         function scrambleText(text) {
             return text.split(' ').map(word => {
-                // Hanya acak jika bukan tanda baca
                 if (/^[a-zA-Z]+$/.test(word)) {
-                    // Probabilitas 50% kata akan teracak setiap detiknya agar efek "gerak"
                     return Math.random() > 0.3 ? scrambleWord(word) : word; 
                 }
                 return word;
@@ -178,13 +178,10 @@
 
             displayArea.style.display = 'block';
             displayArea.innerText = originalText;
-            
-            // Scroll ke area hasil
             displayArea.scrollIntoView({behavior: "smooth"});
 
             if (intervalId) clearInterval(intervalId);
 
-            // Update teks setiap 500ms (setengah detik) untuk efek "menari"
             intervalId = setInterval(() => {
                 displayArea.innerText = scrambleText(originalText);
             }, 500);
@@ -197,6 +194,5 @@
             displayArea.style.display = 'none';
         });
     </script>
-<script src="script.js"></script>
 </body>
 </html>
