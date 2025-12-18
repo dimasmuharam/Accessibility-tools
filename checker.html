@@ -96,6 +96,22 @@
                     <p style="font-size: 0.8rem; color: #999; margin-top: 10px; margin-bottom: 0;">*Skor berdasarkan Google Lighthouse Mobile Strategy</p>
                 </div>
 
+                <div id="shareSection" class="share-box" style="display: none;" aria-live="polite">
+                    <h3 style="margin-top:0; color: var(--primary-color);">📢 Bagikan Hasil Audit Ini!</h3>
+                    <p>Ajak teman-temanmu sadar aksesibilitas. Dukung gerakan <strong>#CekAkses</strong>.</p>
+                    
+                    <div class="share-buttons">
+                        <a id="shareWA" href="#" target="_blank" class="btn-share wa" aria-label="Bagikan hasil ke WhatsApp">
+                            WhatsApp
+                        </a>
+                        <a id="shareTwitter" href="#" target="_blank" class="btn-share twitter" aria-label="Bagikan hasil ke X Twitter">
+                            X (Twitter)
+                        </a>
+                        <a id="shareLinkedIn" href="#" target="_blank" class="btn-share linkedin" aria-label="Bagikan link ke LinkedIn">
+                            LinkedIn
+                        </a>
+                    </div>
+                </div>
                 <div style="background: #f8f9fa; padding: 25px;">
                     <h3 style="color: var(--primary-color); margin-top: 0; font-size: 1.2rem;">Mengapa Skor Tinggi Belum Tentu Aksesibel?</h3>
                     <p style="font-size: 0.95rem; color: #333;">Mesin (seperti alat ini) hanya mampu mendeteksi sekitar 30% kesalahan teknis. Sisa 70%-nya adalah soal "Kenyamanan Pengguna" yang hanya bisa dirasakan oleh manusia.</p>
@@ -167,21 +183,44 @@
     </footer>
 
     <script>
+        // --- LOGIKA SHARE MEDSOS (Campaign #CekAkses) ---
+        function updateShareLinks(score, targetUrl) {
+            const shareSection = document.getElementById('shareSection');
+            const btnWA = document.getElementById('shareWA');
+            const btnTwitter = document.getElementById('shareTwitter');
+            const btnLinkedIn = document.getElementById('shareLinkedIn');
+
+            // 1. Copywriting Campaign
+            let emotion = score >= 90 ? '🤩' : (score >= 50 ? '😐' : '😱');
+            const campaignText = `Baru saja cek aksesibilitas website ${targetUrl}. Skornya: ${score}/100 ${emotion}.\n\nApakah web favoritmu sudah inklusif? Cek sekarang di accessible.web.id! 👇\n\n#CekAkses #20TahunKartunet #DigitalInklusif`;
+
+            const encodedText = encodeURIComponent(campaignText);
+            const encodedUrl = encodeURIComponent('https://accessible.web.id/checker.html'); 
+
+            // 2. Set Link
+            btnWA.href = `https://api.whatsapp.com/send?text=${encodedText}`;
+            btnTwitter.href = `https://twitter.com/intent/tweet?text=${encodedText}`;
+            btnLinkedIn.href = `https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}`;
+
+            // 3. Tampilkan
+            shareSection.style.display = 'block';
+            shareSection.scrollIntoView({ behavior: 'smooth' });
+        }
+
         function runAudit() {
-            // 1. MASUKKAN API KEY ANDA
+            // API Key
             const apiKey = 'AIzaSyBIya_RRn2SoSU8j0yOPHjgCQ6yO7f-Mdg'; 
 
             let urlInput = document.getElementById('urlInput').value.trim();
             const btn = document.getElementById('btnCheck');
             const resultDiv = document.getElementById('result');
+            const shareSection = document.getElementById('shareSection');
             
-            // Validasi Input Kosong
             if(!urlInput) { 
                 alert("Mohon masukkan URL website!"); 
                 return; 
             }
 
-            // Auto-Fix URL
             if (!urlInput.startsWith('http://') && !urlInput.startsWith('https://')) {
                 urlInput = 'https://' + urlInput;
             }
@@ -189,23 +228,20 @@
             btn.innerText = "Sedang Memindai... (Tunggu 10-20 Detik)";
             btn.disabled = true;
             resultDiv.style.display = 'none';
+            shareSection.style.display = 'none'; // Reset share button
 
-            // Panggil Google API
             fetch(`https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=${encodeURIComponent(urlInput)}&key=${apiKey}&category=ACCESSIBILITY&strategy=mobile`)
             .then(response => {
                 if (!response.ok) {
                     return response.json().then(errData => {
-                        if(errData.error && errData.error.message) {
-                            throw new Error(errData.error.message);
-                        }
-                        throw new Error("Google menolak akses. Cek API Key Anda.");
+                        throw new Error(errData.error?.message || "Google menolak akses.");
                     });
                 }
                 return response.json();
             })
             .then(data => {
                 if (!data.lighthouseResult || !data.lighthouseResult.categories.accessibility) {
-                    throw new Error("Data tidak lengkap. Coba URL lain.");
+                    throw new Error("Data tidak lengkap.");
                 }
 
                 const score = data.lighthouseResult.categories.accessibility.score * 100;
@@ -221,6 +257,9 @@
                 resultDiv.style.display = 'block';
                 btn.innerText = "Cek URL Lain";
                 btn.disabled = false;
+
+                // --- INTEGRASI SHARE BUTTON ---
+                updateShareLinks(Math.round(score), urlInput);
             })
             .catch(err => {
                 console.error(err);
@@ -230,6 +269,6 @@
             });
         }
     </script>
-    <script src="script.js"></script>    
+    <script src="script.js"></script>     
 </body>
 </html>
