@@ -3,46 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Color Contrast Checker (WCAG Compliance) - Cek Kontras Warna Online</title>
-<meta name="description" content="Alat tes kombinasi warna latar & teks (Background vs Foreground). Check contrast ratio online to meet WCAG AA/AAA standards. Pastikan desain nyaman di mata.">    
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5878514175202601"
-     crossorigin="anonymous"></script>
-
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-FGJKD3430G"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-FGJKD3430G');
-</script>
+    <title>Color Contrast Checker (WCAG Compliance) - Accessible Web Indonesia</title>
+    <meta name="description" content="Alat tes kombinasi warna latar & teks (Background vs Foreground). Check contrast ratio online to meet WCAG AA/AAA standards. Pastikan desain nyaman di mata.">    
+    
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5878514175202601" crossorigin="anonymous"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-FGJKD3430G"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-FGJKD3430G');
+    </script>
     
     <link rel="icon" type="image/x-icon" href="dimaster.ico">
-
     <link rel="stylesheet" href="style.css">
-
-    </head>
+</head>
 <body>
 
     <a href="#main-content" class="skip-link">Lewati ke Konten Utama</a>
-<header>
+
+    <header>
         <div class="container navbar">
-            
             <div class="brand-wrapper">
                 <a href="index.html" title="Kembali ke Beranda">
-                    <img src="logo.png" alt="Logo Dimaster Institute" width="100" height="100">
+                    <img src="logo.png" alt="Logo Accessible Web Indonesia" width="100" height="100">
                 </a>
                 <div>
                     <a href="index.html" class="brand-title">
                         <h1>Accessible Web Indonesia</h1>
                     </a>
-                    <small class="brand-subtitle">by <a href="https://www.dimaster.co.id" target="_blank">Dimaster Institute</a></small>
+                    <small class="brand-subtitle">Tools Aksesibilitas & Edukasi Digital</small>
                 </div>
             </div>
 
             <div class="nav-controls">
-                
                 <nav aria-label="Menu Utama">
                     <ul id="nav-menu">
                         <li><a href="index.html">Home</a></li>
@@ -53,7 +47,7 @@
                             </button>
                             <ul id="tools-list" class="dropdown-content">
                                 <li><a href="checker.html">✅ Access Score</a></li>
-                                <li><a href="contrast.html">🎨 Contrast Checker</a></li>
+                                <li><a href="contrast.html" aria-current="page" class="active">🎨 Contrast Checker</a></li>
                                 <li><a href="blind.html">👁️ Tes Buta Warna</a></li>
                                 <li><a href="tts.html">🗣️ TTS & Voice</a></li>
                                 <li><a href="braille.html">⠃⠗⠇ Braille Latin</a></li>
@@ -69,17 +63,17 @@
                 </nav>
                 
                 <button id="theme-toggle" aria-label="Ganti Mode Gelap atau Terang" title="Ganti Tema">🌙</button>
-                
                 <button id="lang-toggle" aria-label="Ganti Bahasa ke Inggris" title="Ganti Bahasa">ID</button>
-                
                 <div id="google_translate_element" class="visually-hidden"></div>
-
             </div>
         </div>
-</header>
+    </header>
+
     <main id="main-content" class="container">
-        <h1>Color Contrast Checker</h1>
-        <p>Cek apakah kombinasi warna teks dan latar belakang Anda sudah memenuhi standar WCAG AA atau AAA.</p>
+        <div style="text-align: center; margin-bottom: 20px;">
+            <h1>Color Contrast Checker</h1>
+            <p>Cek apakah kombinasi warna teks dan latar belakang Anda sudah memenuhi standar WCAG AA atau AAA.</p>
+        </div>
 
         <div class="tool-box">
             <div style="display: flex; gap: 20px; flex-wrap: wrap;">
@@ -93,12 +87,12 @@
                 </div>
             </div>
 
-            <div id="previewBox" style="margin-top: 20px; padding: 20px; border: 1px solid #ccc; text-align: center;">
-                <h2 id="previewText">Contoh Teks Terbaca</h2>
-                <p>Ini adalah simulasi tampilan teks pada latar belakang yang dipilih.</p>
+            <div id="previewBox" style="margin-top: 20px; padding: 20px; border: 1px solid #ccc; text-align: center; border-radius: 8px;">
+                <h2 id="previewText" style="margin: 0 0 10px 0;">Contoh Teks Terbaca</h2>
+                <p style="margin: 0;">Ini adalah simulasi tampilan teks pada latar belakang yang dipilih.</p>
             </div>
 
-            <div style="margin-top: 20px;">
+            <div style="margin-top: 20px; text-align: center;">
                 <h3>Rasio Kontras: <span id="ratioResult" style="font-size: 2rem;">-</span></h3>
                 <p>Status: <span id="statusResult" style="font-weight: bold;">-</span></p>
             </div>
@@ -115,38 +109,45 @@
             <h3>1. Membedakan Target: Totally Blind vs Low Vision</h3>
             <p>Penting bagi desainer untuk memahami siapa yang mereka bantu:</p>
             <ul>
-                <li><strong>Totally Blind (Buta Total):</strong> Tidak memiliki persepsi cahaya. Mereka menggunakan <em>Screen Reader</em> (suara). Bagi mereka, warna visual tidak berpengaruh, yang penting adalah kode program yang rapi.</li>
-                <li><strong>Low Vision (Penglihatan Terbatas):</strong> Memiliki sisa penglihatan namun ketajamannya menurun drastis. Kelompok ini masih membaca dengan mata. Di sinilah <strong>Kontras Warna</strong> menjadi "nyawa" agar tulisan terbaca.</li>
+                <li><strong>Totally Blind (Buta Total):</strong> Tidak memiliki persepsi cahaya. Mereka menggunakan <em>Screen Reader</em> (suara).</li>
+                <li><strong>Low Vision (Penglihatan Terbatas):</strong> Memiliki sisa penglihatan namun ketajamannya menurun drastis. Di sinilah <strong>Kontras Warna</strong> menjadi "nyawa" agar tulisan terbaca.</li>
             </ul>
 
             <h3>2. Standar Kelulusan WCAG 2.1 (Target Angka)</h3>
             <p>Agar desain Anda ramah bagi penyandang <em>Low Vision</em>, Konsorsium World Wide Web (W3C) menetapkan rumus matematika rasio kecerahan:</p>
             <ul>
-                <li><strong>Level AA (Standar Wajib):</strong> Rasio minimal <strong>4.5:1</strong> untuk teks normal. Ini standar yang digunakan oleh pemerintah dan layanan publik global.</li>
-                <li><strong>Level AAA (Standar Emas):</strong> Rasio minimal <strong>7:1</strong>. Sangat disarankan untuk teks paragraf panjang agar mata tidak cepat lelah.</li>
-                <li><strong>Pengecualian:</strong> Teks berukuran besar (18pt ke atas) atau teks tebal (bold 14pt) boleh memiliki rasio lebih rendah, yaitu minimal 3:1.</li>
+                <li><strong>Level AA (Standar Wajib):</strong> Rasio minimal <strong>4.5:1</strong> untuk teks normal.</li>
+                <li><strong>Level AAA (Standar Emas):</strong> Rasio minimal <strong>7:1</strong>. Disarankan untuk teks paragraf panjang.</li>
+                <li><strong>Pengecualian:</strong> Teks besar (18pt+) boleh minimal 3:1.</li>
             </ul>
 
             <h3>3. Tantangan Low Vision & Mitos Estetika</h3>
-            <p>Bagi penyandang <em>Low Vision</em> (seperti penglihatan terowongan atau sensitif silau), teks abu-abu muda di atas putih bukan sekadar "kurang jelas", tapi <strong>tidak terlihat sama sekali</strong>. Mereka seringkali harus mendekatkan mata ke layar hingga jarak 5 cm.</p>
-            <p>Apakah kontras tinggi membuat desain jadi jelek? <strong>Tentu tidak.</strong> Prinsip <em>"Inclusive but Beautiful"</em> menantang Anda untuk tetap menggunakan palet warna modern yang cantik, namun dengan rasio kontras yang aman. Inklusif tidak harus hitam-putih.</p>
+            <p>Apakah kontras tinggi membuat desain jadi jelek? <strong>Tentu tidak.</strong> Prinsip <em>"Inclusive but Beautiful"</em> menantang Anda untuk tetap menggunakan palet warna modern, namun dengan rasio kontras yang aman.</p>
 
-            <div style="background: #f0f8ff; border-left: 5px solid var(--accent-color); padding: 20px; margin-top: 25px;">
+            <div style="background: var(--card-bg); border-left: 5px solid var(--accent-color); padding: 25px; margin-top: 30px; border-radius: 8px; border: 1px solid var(--border-color);">
                 <h3 style="margin-top: 0; color: var(--primary-color);">Butuh Desain Cantik yang Tetap Inklusif?</h3>
                 <p>Memadukan estetika <em>branding</em> dengan kepatuhan standar WCAG memerlukan keahlian khusus. Jangan sampai niat inklusif malah membuat tampilan website Anda terlihat kaku.</p>
-                <p><strong>Kartunet Konsultan</strong> siap membantu audit desain UI/UX. Kami melibatkan penguji dari berbagai spektrum tunanetra (baik pengguna Screen Reader maupun Low Vision) untuk memastikan website Anda fungsional sekaligus indah.</p>
+                <p><strong>Layanan Audit Profesional</strong> kami siap membantu mengevaluasi desain UI/UX Anda. Kami melibatkan penguji dari berbagai spektrum tunanetra untuk memastikan website Anda fungsional sekaligus indah.</p>
                 <br>
-                <a href="https://kartunet.com/kontak" class="button">Hubungi Tim Ahli Kartunet &rarr;</a>
+                <a href="https://disabilitas.com" class="button" target="_blank">Hubungi Konsultan Disabilitas.com &rarr;</a>
             </div>
+
         </article>
     </main>
 
     <footer>
         <div class="container">
-            <p>&copy; 2025 Dimaster Institute. All Rights Reserved.</p>
-            <p>Partner Resmi: <a href="https://kartunet.com" style="color:#008CBA;">Kartunet.com</a></p>
+            <p>&copy; 2025 PT Dimaster Education Berprestasi. All Rights Reserved.</p>
+            
+            <p>Our Ecosystem: 
+                <a href="https://kartunet.com" target="_blank" style="color:#4cc9f0; font-weight:bold;">Kartunet</a> | 
+                <a href="https://disabilitas.com" target="_blank" style="color:#4cc9f0; font-weight:bold;">Disabilitas.com</a> | 
+                <a href="https://www.dimaster.co.id" target="_blank" style="color:#4cc9f0; font-weight:bold;">Dimaster Group</a>
+            </p>
+            
             <p style="font-size: 0.8rem; margin-top: 10px;">
-                <a href="privacy.html" style="color: #333; text-decoration: underline;">Privacy Policy</a>
+                <a href="mailto:feedback@accessible.web.id" style="color: #e0e0e0; margin-right: 10px; text-decoration: none;">📩 Lapor Bug</a> | 
+                <a href="privacy.html" style="color: #e0e0e0; text-decoration: underline; margin-left: 10px;">Privacy Policy</a>
             </p>
         </div>
     </footer>
@@ -202,6 +203,6 @@
         textInput.addEventListener('input', checkContrast);
         checkContrast(); // Run on load
     </script>
-<script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
