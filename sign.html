@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sign Language Simulator (BISINDO) - Belajar Bahasa Isyarat / Finger Spelling</title>
-<meta name="description" content="Simulator kamus bahasa isyarat Indonesia (BISINDO). Type to see hand signs. Visual dictionary for deaf communication learning & accessibility.">    
-       <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5878514175202601" crossorigin="anonymous"></script>
+    <title>Sign Language Simulator (BISINDO/ASL) - Accessible Web Indonesia</title>
+    <meta name="description" content="Simulator kamus bahasa isyarat Indonesia (BISINDO) & ASL. Ketik teks untuk melihat gerakan tangan (Finger Spelling). Alat edukasi komunikasi Tuli.">    
+    
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5878514175202601" crossorigin="anonymous"></script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-FGJKD3430G"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -16,27 +17,26 @@
     
     <link rel="icon" type="image/x-icon" href="dimaster.ico">
     <link rel="stylesheet" href="style.css">
-    </head>
+</head>
 <body>
 
     <a href="#main-content" class="skip-link">Lewati ke Konten Utama</a>
-<header>
+
+    <header>
         <div class="container navbar">
-            
             <div class="brand-wrapper">
                 <a href="index.html" title="Kembali ke Beranda">
-                    <img src="logo.png" alt="Logo Dimaster Institute" width="100" height="100">
+                    <img src="logo.png" alt="Logo Accessible Web Indonesia" width="100" height="100">
                 </a>
                 <div>
                     <a href="index.html" class="brand-title">
                         <h1>Accessible Web Indonesia</h1>
                     </a>
-                    <small class="brand-subtitle">by <a href="https://www.dimaster.co.id" target="_blank">Dimaster Institute</a></small>
+                    <small class="brand-subtitle">Tools Aksesibilitas & Edukasi Digital</small>
                 </div>
             </div>
 
             <div class="nav-controls">
-                
                 <nav aria-label="Menu Utama">
                     <ul id="nav-menu">
                         <li><a href="index.html">Home</a></li>
@@ -52,7 +52,7 @@
                                 <li><a href="tts.html">🗣️ TTS & Voice</a></li>
                                 <li><a href="braille.html">⠃⠗⠇ Braille Latin</a></li>
                                 <li><a href="quran.html">🕌 Quran Braille</a></li>
-                                <li><a href="sign.html">🤟 Sign Language</a></li>
+                                <li><a href="sign.html" aria-current="page" class="active">🤟 Sign Language</a></li>
                                 <li><a href="dyslexia.html">😵 Dyslexia Sim</a></li>
                             </ul>
                         </li>
@@ -63,244 +63,188 @@
                 </nav>
                 
                 <button id="theme-toggle" aria-label="Ganti Mode Gelap atau Terang" title="Ganti Tema">🌙</button>
-                
                 <button id="lang-toggle" aria-label="Ganti Bahasa ke Inggris" title="Ganti Bahasa">ID</button>
-                
                 <div id="google_translate_element" class="visually-hidden"></div>
-
             </div>
         </div>
-</header>
-        <main id="main-content" class="container">
+    </header>
+
+    <main id="main-content" class="container">
         
         <section class="hero">
             <h1>Simulasi Bahasa Isyarat (Abjad Jari)</h1>
             <p>Ketik kata atau nama Anda di bawah ini, dan lihat bagaimana menerjemahkannya ke dalam gerakan tangan (Fingerspelling).</p>
         </section>
-<section class="tool-container" style="margin-bottom: 30px;">
-            <label for="textInput" style="display: block; margin-bottom: 10px; font-weight: bold;">Masukkan Teks (Huruf A-Z dan Angka):</label>
-            
-            <textarea id="textInput" placeholder="Contoh: Halo Dimas 123" rows="3" style="width: 100%; padding: 10px; border: 1px solid var(--border-color); border-radius: 5px; background: var(--input-bg); color: var(--text-color); font-size: 1rem;"></textarea>
-            
-            <div class="ads-slot" style="margin: 20px 0;">
-                <small>Iklan Google AdSense</small>
-            </div>
 
-            <div aria-live="polite">
-                <h3>Hasil Terjemahan Isyarat:</h3>
-                <div id="signOutput" class="sign-output">
-                    <p style="color: #888;">Silakan ketik sesuatu di kolom atas...</p>
+        <section class="tool-container" style="margin-bottom: 30px;">
+            <div class="tool-box">
+                <label for="textInput" style="display: block; margin-bottom: 10px; font-weight: bold;">Masukkan Teks (Huruf A-Z dan Angka):</label>
+                
+                <textarea id="textInput" placeholder="Contoh: Halo Dimas 123" rows="3"></textarea>
+                
+                <div aria-live="polite" style="margin-top: 20px;">
+                    <h3>Hasil Terjemahan Isyarat:</h3>
+                    <div id="signOutput" class="sign-output">
+                        <p style="color: var(--text-muted);">Silakan ketik sesuatu di kolom atas...</p>
+                    </div>
                 </div>
-            </div>
-</section>
-<section class="content-article" style="margin-top: 3rem; border-top: 1px solid var(--border-color); padding-top: 2rem;">
-            
-            <div style="margin-bottom: 30px;">
-                <h2>Belajar Bahasa Isyarat: Gerbang Menuju Dunia Inklusif</h2>
-                <p>
-                    Bagi Anda yang baru mulai <strong>belajar bahasa isyarat</strong>, mungkin Anda bingung dengan berbagai istilah seperti BISINDO atau SIBI. Anda mungkin juga bertanya, "Bagaimana cara berkomunikasi jika isyarat tiap daerah berbeda?"
-                </p>
-                <p>
-                    Simulator <strong>Abjad Jari (Fingerspelling)</strong> di atas adalah langkah pertama yang paling praktis. Sebelum masuk ke kosakata yang kompleks, kemampuan mengeja huruf demi huruf adalah "kunci darurat" untuk memperkenalkan nama atau mengeja kata yang belum ada isyaratnya.
-                </p>
-            </div>
-
-            <div style="margin-bottom: 40px; padding-bottom: 20px; border-bottom: 1px dashed var(--border-color);">
-                <h3>BISINDO vs SIBI: Memahami Peran Masing-Masing</h3>
-                <p>
-                    Sering terjadi perdebatan mengenai mana yang "benar" antara <strong>BISINDO</strong> dan <strong>SIBI</strong>. Mari kita dudukkan pada porsinya:
-                </p>
-                <ul>
-                    <li>
-                        <strong>BISINDO (Bahasa Isyarat Indonesia):</strong> Adalah <em>Bahasa Alami (Natural Language)</em>. Ini adalah bahasa ibu bagi komunitas Tuli untuk berpikir, berdiskusi, dan bergaul. Memiliki tata bahasa visual sendiri yang unik.
-                    </li>
-                    <li>
-                        <strong>SIBI (Sistem Isyarat Bahasa Indonesia):</strong> Adalah <em>Sistem Kode Buatan</em>. Fungsinya mirip alat peraga di kelas untuk memvisualisasikan tata bahasa lisan (imbuhan <em>me-, ber-, -kan</em>).
-                    </li>
-                </ul>
-                <div style="background: var(--card-bg); padding: 15px; border-left: 4px solid var(--primary-color); margin: 20px 0;">
-                    <strong>💡 Benang Merah:</strong> Konflik terjadi jika SIBI dipaksakan menjadi bahasa pergaulan. Biarkan SIBI menjadi alat bantu visual di kelas bahasa, dan biarkan BISINDO menjadi bahasa komunikasi yang hidup.
-                </div>
-            </div>
-
-            <div style="margin-bottom: 40px;">
-                <h3>Bhinneka Tunggal Ika: Bagaimana Jika Isyarat Tiap Daerah Berbeda?</h3>
-                <p>
-                    Banyak yang khawatir, <em>"Isyarat Jakarta beda dengan Yogyakarta, lalu bagaimana mereka ngobrol?"</em> Jawabannya adalah melalui <strong>Literasi Bahasa Indonesia</strong>.
-                </p>
-                <ol>
-                    <li>
-                        <strong>Logika Visual (Universal):</strong> Untuk hal-hal konkrit (makan, minum, besar, kecil), Tuli seluruh dunia memiliki logika visual yang mirip.
-                    </li>
-                    <li>
-                        <strong>Bahasa Indonesia Tulis (Lingua Franca):</strong> Untuk istilah abstrak yang berbeda isyaratnya, Tuli menggunakan Bahasa Indonesia tertulis (lewat HP atau Ejaan Jari) sebagai jembatan pemersatu.
-                    </li>
-                </ol>
-                <p>
-                    Itulah mengapa pendidikan Tuli idealnya <strong>Bilingual</strong>: Menguasai Bahasa Isyarat sebagai bahasa ibu, dan Bahasa Indonesia Tulis sebagai bahasa persatuan.
-                </p>
             </div>
 
             <div class="ads-slot">
-                <small>Iklan Google AdSense</small>
+                <p>Iklan Google AdSense</p>
+            </div>
+        </section>
+
+        <section class="content-article" style="margin-top: 3rem; border-top: 1px solid var(--border-color); padding-top: 2rem;">
+            
+            <h2>Belajar Bahasa Isyarat: Gerbang Menuju Dunia Inklusif</h2>
+            <p>Bagi Anda yang baru mulai belajar bahasa isyarat, mungkin Anda bingung dengan berbagai istilah seperti BISINDO atau SIBI. Simulator Abjad Jari (Fingerspelling) di atas adalah langkah pertama yang paling praktis untuk mengeja nama atau istilah teknis.</p>
+
+            <h3>BISINDO vs SIBI: Memahami Perbedaan</h3>
+            <p>Sering terjadi perdebatan mengenai mana yang "benar". Mari kita dudukkan pada porsinya:</p>
+            <ul>
+                <li><strong>BISINDO (Bahasa Isyarat Indonesia):</strong> Bahasa Alami (Natural Language) komunitas Tuli. Memiliki tata bahasa visual sendiri.</li>
+                <li><strong>SIBI (Sistem Isyarat Bahasa Indonesia):</strong> Sistem kode buatan untuk memvisualisasikan tata bahasa lisan Indonesia (imbuhan me-, ber-, dll) di sekolah.</li>
+            </ul>
+            
+            <div style="background: var(--card-bg); border-left: 5px solid var(--accent-color); padding: 20px; margin: 25px 0; border-radius: 8px;">
+                <h3 style="margin-top: 0; color: var(--primary-color);">Ingin Belajar Langsung dari Guru Tuli?</h3>
+                <p>Simulator ini hanya alat bantu visual. Untuk menguasai ekspresi wajah dan gramatika isyarat yang sesungguhnya, Anda perlu berinteraksi dengan penutur asli.</p>
+                <p><strong>Kartunet</strong> dan mitra komunitas kami sering membuka kelas bahasa isyarat untuk umum dan perusahaan (In-House Training).</p>
+                <br>
+                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                    <a href="https://kartunet.com/kontak" class="button" target="_blank">Gabung Komunitas (Umum)</a>
+                    <a href="https://disabilitas.com" class="button" target="_blank" style="background: var(--primary-color);">Training Perusahaan (B2B)</a>
+                </div>
             </div>
 
-            <div style="margin-top: 40px; padding-top: 20px; border-top: 1px dashed var(--border-color);">
-                <h3>Tahukah Anda? Tunanetra Juga Bisa Berbahasa Isyarat!</h3>
-                <p>
-                    Aksesibilitas itu saling terhubung. Seorang Tunanetra (seperti pendiri website ini) dapat berkomunikasi dengan Teman Tuli menggunakan metode <strong>Tactile Sign Language (Isyarat Taktil)</strong>.
-                </p>
-                <p>
-                    Metodenya disebut <em>Hand-over-Hand</em>. Tunanetra meletakkan tangannya di atas tangan Teman Tuli untuk meraba bentuk dan gerakan isyarat yang sedang dibuat. Mempelajari bentuk <strong>Abjad Jari (A-Z)</strong> adalah langkah awal untuk membuka komunikasi lintas-disabilitas ini.
-                </p>
-            </div>
+            <h3>Mengapa Simulator Ini Menggunakan Abjad Satu Tangan?</h3>
+            <p>Meskipun BISINDO memiliki variasi abjad dua tangan, kami memilih Abjad Jari Internasional (Satu Tangan/ASL) untuk simulator ini karena:</p>
+            <ul>
+                <li><strong>Solusi "Kekosongan Simbol":</strong> Metode standar untuk mengeja Nama Orang atau Merk yang belum ada isyarat khususnya.</li>
+                <li><strong>Universalitas Digital:</strong> Standar abjad paling umum di dunia digital internasional dan mudah dilihat di layar HP (Video Call).</li>
+            </ul>
 
-            <div style="margin-top: 40px; padding-top: 20px; border-top: 1px dashed var(--border-color);">
-                <h3>Inisiatif Dimaster Institute & Kartunet</h3>
-                <p>
-                    Tools simulasi ini bukan sekadar permainan, melainkan bagian dari misi besar <strong>Ekosistem Dimaster</strong> untuk menciptakan ruang digital yang inklusif.
-                </p>
-                <ul>
-                    <li>
-                        <strong><a href="https://www.dimaster.co.id" target="_blank">Dimaster Institute</a>:</strong> Mengembangkan solusi teknis (seperti website ini) untuk memudahkan masyarakat umum dan profesional memahami dunia disabilitas secara praktis.
-                    </li>
-                    <li>
-                        <strong><a href="https://kartunet.com" target="_blank">Kartunet (Karya Tunanetra)</a>:</strong> Sebagai media advokasi, Kartunet terus menyuarakan pentingnya pemenuhan hak bahasa bagi Teman Tuli dan aksesibilitas informasi bagi Tunanetra.
-                    </li>
-                </ul>
-                <p>
-                    Kami percaya bahwa teknologi harus menjembatani perbedaan, bukan memperlebar jarak. Simulator ini dipersembahkan oleh <strong>Dimas P. Muharam</strong> sebagai wujud kolaborasi lintas ragam disabilitas.
-                </p>
-            </div>
+        </section>
 
-            <div style="background: var(--input-bg); padding: 25px; border-radius: 8px; margin-top: 40px; border: 1px solid var(--border-color);">
-                <h3>Mengapa Simulator Ini Menggunakan Abjad Satu Tangan?</h3>
-                <p>
-                    Meskipun BISINDO memiliki abjadnya sendiri (dua tangan), kami memilih <strong>Abjad Jari Internasional (Satu Tangan/ASL)</strong> untuk simulator ini karena alasan strategis:
-                </p>
-                <ul style="margin-bottom: 0;">
-                    <li>
-                        <strong>Solusi "Kekosongan Simbol":</strong> Tidak semua kata memiliki gerakan isyaratnya (contoh: Nama Orang, Merk, Nama Jalan). Abjad satu tangan adalah metode paling standar dan cepat untuk mengeja kata-kata tersebut.
-                    </li>
-                    <li>
-                        <strong>Universalitas Digital:</strong> Ini adalah standar abjad paling umum di dunia digital internasional.
-                    </li>
-                    <li>
-                        <strong>Visibilitas Layar:</strong> Gambar satu tangan lebih mudah dilihat detailnya di layar HP (saat Video Call) dibandingkan gerakan dua tangan yang lebih kompleks.
-                    </li>
-                </ul>
-            </div>
-
-            <div class="ads-slot" style="margin-top: 30px;">
-                <small>Iklan Google AdSense</small>
-            </div>
-
-</section>
     </main>
 
     <footer>
         <div class="container">
-            <p>&copy; 2025 Dimaster Institute. All Rights Reserved.</p>
-            <p>Partner Resmi: <a href="https://kartunet.com" style="color: var(--accent-color);">Kartunet.com</a></p>
+            <p>&copy; 2025 PT Dimaster Education Berprestasi. All Rights Reserved.</p>
+            
+            <p>Our Ecosystem: 
+                <a href="https://kartunet.com" target="_blank" style="color:#4cc9f0; font-weight:bold;">Kartunet</a> | 
+                <a href="https://disabilitas.com" target="_blank" style="color:#4cc9f0; font-weight:bold;">Disabilitas.com</a> | 
+                <a href="https://www.dimaster.co.id" target="_blank" style="color:#4cc9f0; font-weight:bold;">Dimaster Group</a>
+            </p>
+            
             <p style="font-size: 0.8rem; margin-top: 10px;">
-                <a href="privacy.html" style="color: #333; text-decoration: underline;">Privacy Policy</a>
+                <a href="mailto:feedback@accessible.web.id" style="color: #e0e0e0; margin-right: 10px; text-decoration: none;">📩 Lapor Bug</a> | 
+                <a href="privacy.html" style="color: #e0e0e0; text-decoration: underline; margin-left: 10px;">Privacy Policy</a>
             </p>
         </div>
     </footer>
 
     <script src="script.js"></script>
+    
     <script>
         const textInput = document.getElementById('textInput');
         const signOutput = document.getElementById('signOutput');
 
-        // KAMUS DESKRIPSI (Untuk Screen Reader / Alt Text)
-        // Ini membantu Tunanetra membayangkan bentuk jarinya (Tactile Learning)
+        // URL BASE IMAGE (Menggunakan CDN Publik Hand Sign agar langsung muncul gambar)
+        // Kita gunakan link stabil dari repository "Sign-Language-Alphabet" di GitHub Pages
+        const imgBaseUrl = "https://raw.githubusercontent.com/natash-m/Sign-Language-Alphabet/master/examples/";
+
+        // Deskripsi Alt Text untuk Screen Reader (Aksesibilitas)
         const signDescriptions = {
-            'a': 'Tangan mengepal, jempol tegak di samping telunjuk',
-            'b': 'Empat jari tegak merapat, jempol menekuk ke telapak',
+            'a': 'Tangan mengepal, jempol tegak di samping',
+            'b': 'Empat jari tegak merapat, jempol menekuk',
             'c': 'Jari melengkung membentuk huruf C',
-            'd': 'Telunjuk tegak lurus, jari lain menyentuh jempol membentuk lingkaran',
-            'e': 'Semua jari menekuk ke dalam, menempel pada jempol di bawah',
-            'f': 'Telunjuk dan jempol menyatu membentuk lingkaran, tiga jari lain tegak mekar',
-            'g': 'Telunjuk dan jempol sejajar menunjuk ke samping kiri',
-            'h': 'Telunjuk dan jari tengah sejajar menunjuk ke samping kiri',
-            'i': 'Kelingking tegak lurus, jari lain mengepal',
-            'j': 'Kelingking tegak lalu membuat gerakan melengkung huruf J di udara',
-            'k': 'Telunjuk tegak, jari tengah miring ke depan, jempol diselipkan di antaranya (Huruf V dengan jempol di tengah)',
-            'l': 'Telunjuk dan jempol membentuk huruf L, jari lain mengepal',
-            'm': 'Tiga jari (telunjuk, tengah, manis) dilipat di atas jempol',
-            'n': 'Dua jari (telunjuk, tengah) dilipat di atas jempol',
-            'o': 'Semua ujung jari menyatu dengan jempol membentuk lingkaran',
-            'p': 'Sama seperti K tapi diarahkan ke bawah (telunjuk ke bawah)',
-            'q': 'Sama seperti G tapi diarahkan ke bawah',
-            'r': 'Telunjuk dan jari tengah saling menyilang (seperti tanda fingers crossed)',
-            's': 'Tangan mengepal, jempol melintang di depan jari-jari lain (tinju)',
-            't': 'Tangan mengepal, jempol diselipkan di antara telunjuk dan jari tengah',
-            'u': 'Telunjuk dan jari tengah tegak merapat, jari lain mengepal',
-            'v': 'Telunjuk dan jari tengah tegak membuka (tanda peace/damai)',
-            'w': 'Tiga jari (telunjuk, tengah, manis) tegak mekar (tanda angka 3)',
-            'x': 'Telunjuk ditekuk sedikit seperti kait, jari lain mengepal',
-            'y': 'Jempol dan kelingking mekar (seperti telepon/shaka), jari lain mengepal',
-            'z': 'Telunjuk menggambar huruf Z di udara',
-            '0': 'Jari membentuk lingkaran (seperti huruf O)',
-            '1': 'Telunjuk tegak (seperti huruf D/L kecil)',
-            '2': 'Dua jari tegak (seperti huruf V)',
-            '3': 'Tiga jari tegak (Jempol, Telunjuk, Tengah)', // ASL 3 pakai jempol
-            '4': 'Empat jari tegak',
-            '5': 'Lima jari terbuka lebar',
-            '6': 'Kelingking dan jempol menyatu (Sisa 3 jari tegak)',
-            '7': 'Jari manis dan jempol menyatu',
-            '8': 'Jari tengah dan jempol menyatu',
-            '9': 'Telunjuk dan jempol menyatu (Seperti huruf F)'
+            'd': 'Telunjuk tegak lurus, jari lain membentuk lingkaran',
+            'e': 'Semua jari menekuk ke dalam',
+            'f': 'Telunjuk dan jempol menyatu (OK sign)',
+            'g': 'Telunjuk menunjuk ke samping',
+            'h': 'Dua jari menunjuk ke samping',
+            'i': 'Kelingking tegak lurus',
+            'j': 'Kelingking menggambar huruf J',
+            'k': 'Telunjuk tegak, jari tengah miring (V)',
+            'l': 'Telunjuk dan jempol membentuk L',
+            'm': 'Tiga jari dilipat di atas jempol',
+            'n': 'Dua jari dilipat di atas jempol',
+            'o': 'Jari membentuk lingkaran',
+            'p': 'Huruf K diarahkan ke bawah',
+            'q': 'Huruf G diarahkan ke bawah',
+            'r': 'Jari telunjuk dan tengah bersilang',
+            's': 'Tangan mengepal (Tinju)',
+            't': 'Jempol diselipkan di antara telunjuk',
+            'u': 'Dua jari tegak merapat',
+            'v': 'Dua jari tegak mekar (Peace)',
+            'w': 'Tiga jari tegak mekar',
+            'x': 'Telunjuk ditekuk seperti kait',
+            'y': 'Jempol dan kelingking mekar',
+            'z': 'Telunjuk menggambar Z di udara'
         };
 
         function updateDisplay() {
-            // Ambil teks, ubah ke huruf kecil, hapus karakter aneh
+            // Bersihkan karakter non-alphanumeric
             const text = textInput.value.toLowerCase().replace(/[^a-z0-9 ]/g, '');
-            signOutput.innerHTML = ''; // Bersihkan tampilan sebelumnya
+            signOutput.innerHTML = ''; 
 
-            // Loop setiap karakter
+            if(!text) {
+                signOutput.innerHTML = '<p style="color: var(--text-muted);">Silakan ketik sesuatu di kolom atas...</p>';
+                return;
+            }
+
             for (let char of text) {
                 const card = document.createElement('div');
                 card.className = 'sign-card';
 
                 if (char === ' ') {
-                    // Jika spasi, buat kotak kosong transparan
-                    card.style.width = '40px'; 
-                } else {
-                    // Cek apakah ada deskripsinya di kamus?
-                    const description = signDescriptions[char] || `Huruf ${char.toUpperCase()}`;
-
+                    card.style.width = '40px'; // Spasi kosong
+                } else if (/[a-z]/.test(char)) {
+                    // Jika huruf a-z, ambil gambar dari CDN
                     const img = document.createElement('img');
-                    img.src = `images/sign/${char}.png`; // Pastikan nama file a.png, b.png, dst.
-                    img.alt = `Isyarat ${char.toUpperCase()}: ${description}`; // Alt Text Edukatif
-                    img.title = description; // Tooltip saat mouse hover
+                    // Menggunakan link raw github yang stabil
+                    img.src = `${imgBaseUrl}${char.toUpperCase()}.png`; 
+                    img.alt = `Isyarat ${char.toUpperCase()}: ${signDescriptions[char] || ''}`;
+                    img.title = signDescriptions[char];
                     
-                    // Error handling: Jika gambar tidak ditemukan (belum diupload)
+                    // Fallback jika gambar gagal load (misal offline)
                     img.onerror = function() {
                         this.style.display = 'none';
                         const fallback = document.createElement('div');
                         fallback.textContent = char.toUpperCase();
                         fallback.style.fontSize = '2rem';
                         fallback.style.fontWeight = 'bold';
-                        fallback.style.border = '1px dashed #ccc';
+                        fallback.style.border = '1px dashed var(--border-color)';
                         fallback.style.padding = '10px';
                         card.appendChild(fallback);
                     };
 
                     const label = document.createElement('span');
                     label.textContent = char.toUpperCase();
-                    label.setAttribute('aria-hidden', 'true'); // Screen reader cukup baca alt image saja agar tidak dobel
+                    label.setAttribute('aria-hidden', 'true');
 
                     card.appendChild(img);
                     card.appendChild(label);
+                } else {
+                    // Jika angka, tampilkan teks saja (karena library gambar terbatas huruf)
+                    const numBox = document.createElement('div');
+                    numBox.textContent = char;
+                    numBox.style.fontSize = '2rem';
+                    numBox.style.fontWeight = 'bold';
+                    numBox.style.padding = '10px';
+                    numBox.style.border = '1px solid var(--border-color)';
+                    numBox.style.borderRadius = '8px';
+                    numBox.style.background = 'var(--card-bg)';
+                    card.appendChild(numBox);
                 }
 
                 signOutput.appendChild(card);
             }
         }
 
-        // Jalankan fungsi saat mengetik
         textInput.addEventListener('input', updateDisplay);
     </script>
 </body>
