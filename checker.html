@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Web Accessibility Score Checker - Disabilitas.com</title>
-    <meta name="description" content="Free audit tool to check website accessibility score. Analisa performa web Anda sesuai standar Google Lighthouse & WCAG.">    
+    <title>Web Accessibility Score Checker - Cek Skor Aksesibilitas Website</title>
+    <meta name="description" content="Free audit tool to check website accessibility score. Analisa performa web Anda sesuai standar Google Lighthouse & WCAG. Cek seberapa inklusif website Anda.">    
     
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5878514175202601" crossorigin="anonymous"></script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-FGJKD3430G"></script>
@@ -22,16 +22,14 @@
     <link rel="stylesheet" href="style.css">
 
     <style>
-        /* Variabel Warna Default (Light Mode) */
+        /* Variabel Warna untuk Mode Dramatis */
         :root {
             --bg-card: #ffffff;
             --text-main: #333333;
-            --text-sub: #666666;
             --border-color: #ddd;
-            --primary: #0056b3;
             
-            /* Warna Dramatis */
-            --panic-bg: #721c24;
+            /* Warna Emosi */
+            --panic-bg: #721c24; 
             --panic-text: #ffffff;
             --caution-bg: #fff3cd;
             --caution-text: #856404;
@@ -39,19 +37,18 @@
             --success-text: #155724;
         }
 
-        /* Override untuk Dark Mode (Pastikan class .dark-mode ada di body saat tombol tema diklik) */
+        /* FIX DARK MODE: Override variabel saat body punya class dark-mode */
         body.dark-mode {
             --bg-card: #1e1e1e;
             --text-main: #f0f0f0;
-            --text-sub: #cccccc;
             --border-color: #444;
         }
 
-        /* Card Container Utama */
+        /* Styling Kartu Hasil (Menggantikan inline style lama) */
         .result-card {
-            display: none; /* Hidden by default */
+            display: none;
             margin-top: 30px;
-            background: var(--bg-card);
+            background: var(--bg-card); /* Ikut tema */
             border: 1px solid var(--border-color);
             border-radius: 12px;
             overflow: hidden;
@@ -60,126 +57,61 @@
             color: var(--text-main);
         }
 
-        /* HEADER HASIL (Tempat Skor & Warna Dramatis) */
+        /* Header Hasil (Tempat Warna Berubah) */
         .result-header {
             padding: 30px;
             text-align: center;
             border-bottom: 1px solid var(--border-color);
-            transition: background 0.5s ease, color 0.5s ease;
+            transition: background 0.5s ease;
         }
 
-        /* Kelas Dramatis (Override Dark/Light Mode untuk efek emosional) */
-        .mode-panic .result-header {
-            background-color: #fff5f5; /* Merah Sangat Muda */
-            border-bottom: 4px solid #dc3545;
-            color: #721c24; /* Merah Gelap */
-        }
-        /* Khusus Panic Mode di Dark Mode agar tidak silau tapi tetap merah */
-        body.dark-mode .mode-panic .result-header {
-            background-color: #2c0b0e; 
-            color: #ffcccc;
-        }
+        /* --- LOGIKA DRAMATIS (PANIC MODE) --- */
+        /* Merah (Kritis) */
+        .mode-panic .result-header { background-color: #ffe6e6; border-bottom: 4px solid #dc3545; color: #721c24; }
+        body.dark-mode .mode-panic .result-header { background-color: #2c0b0e; color: #ffcccc; }
 
-        .mode-caution .result-header {
-            background-color: #fff9db;
-            border-bottom: 4px solid #ffc107;
-            color: #856404;
-        }
-        body.dark-mode .mode-caution .result-header {
-            background-color: #332b00;
-            color: #ffeba8;
-        }
+        /* Kuning (Waspada) */
+        .mode-caution .result-header { background-color: #fff9db; border-bottom: 4px solid #ffc107; color: #856404; }
+        body.dark-mode .mode-caution .result-header { background-color: #332b00; color: #ffeba8; }
 
-        .mode-success .result-header {
-            background-color: #e8f5e9;
-            border-bottom: 4px solid #28a745;
-            color: #155724;
-        }
-        body.dark-mode .mode-success .result-header {
-            background-color: #0b2e13;
-            color: #d4edda;
-        }
+        /* Hijau (Aman) */
+        .mode-success .result-header { background-color: #e8f5e9; border-bottom: 4px solid #28a745; color: #155724; }
+        body.dark-mode .mode-success .result-header { background-color: #0b2e13; color: #d4edda; }
 
-        /* Elemen Skor */
-        .score-big {
-            font-size: 5rem;
-            font-weight: 900;
-            line-height: 1;
-            margin: 15px 0;
-            display: block;
-        }
-        .verdict-badge {
-            font-size: 1.5rem;
-            text-transform: uppercase;
-            font-weight: 800;
-            padding: 5px 15px;
-            border-radius: 50px;
-            display: inline-block;
-            margin-bottom: 10px;
-        }
+        /* Font Skor Besar */
+        .score-big { font-size: 5rem; font-weight: 900; line-height: 1; margin: 15px 0; display: block; }
+        .verdict-badge { font-size: 1.2rem; text-transform: uppercase; font-weight: 800; padding: 5px 15px; border-radius: 50px; display: inline-block; margin-bottom: 10px; border: 2px solid currentColor; }
 
-        /* Tombol Aksi */
+        /* Tombol Aksi Baru */
         .action-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            padding: 20px;
-            background: rgba(0,0,0,0.02);
+            display: grid; grid-template-columns: 1fr 1fr; gap: 15px; padding: 20px; background: rgba(0,0,0,0.02);
         }
         .btn-action {
-            padding: 12px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: bold;
-            font-size: 1rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            color: white;
-            transition: transform 0.2s;
+            padding: 12px; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 0.95rem; display: flex; align-items: center; justify-content: center; gap: 8px; color: white;
         }
-        .btn-action:hover { transform: translateY(-2px); }
         .btn-pdf { background-color: #343a40; }
-        .btn-share { background-color: #E1306C; } /* IG Color */
+        .btn-share { background-color: #E1306C; }
 
-        /* Call to Action Box (Professional Audit) */
-        .cta-box {
-            background: var(--bg-card);
-            border: 2px solid var(--primary);
-            border-radius: 8px;
-            padding: 25px;
-            margin: 20px;
-            text-align: center;
-        }
-        .cta-box h4 { margin-top: 0; color: var(--primary); }
-        .cta-box p { color: var(--text-sub); }
-
-        /* LOADING LOG (Efek Cerdas) */
+        /* Loading Log (Efek Matrix) */
         #loading-log {
-            font-family: monospace;
-            font-size: 0.9rem;
-            color: var(--text-sub);
-            margin-top: 10px;
-            height: 20px;
+            font-family: monospace; font-size: 0.9rem; color: #666; margin-top: 15px; height: 20px; display: none;
         }
+        body.dark-mode #loading-log { color: #aaa; }
 
         /* HIDDEN CARD (Untuk Gambar Sosmed) */
         #share-card {
             position: fixed; top: -9999px; left: -9999px;
             width: 800px; height: 800px; /* Square High Res */
-            display: flex; flex-direction: column;
-            justify-content: center; align-items: center;
-            text-align: center;
-            color: white; font-family: 'Segoe UI', sans-serif;
-            padding: 40px; box-sizing: border-box;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            text-align: center; color: white; font-family: sans-serif; padding: 40px; box-sizing: border-box;
         }
-        /* Background Gradasi Dramatis */
         #share-card.panic { background: linear-gradient(135deg, #b92b27 0%, #150000 100%); }
         #share-card.caution { background: linear-gradient(135deg, #f2994a 0%, #f2c94c 100%); }
         #share-card.success { background: linear-gradient(135deg, #56ab2f 0%, #a8e063 100%); }
 
+        @media (max-width: 600px) {
+            .action-grid { grid-template-columns: 1fr; }
+        }
     </style>
 </head>
 <body>
@@ -189,90 +121,146 @@
     <header>
         <div class="container navbar">
             <div class="brand-wrapper">
-                <a href="index.html">
+                <a href="index.html" title="Kembali ke Beranda">
                     <img src="logo.png" alt="Logo Accessible Web Indonesia" width="100" height="100">
                 </a>
                 <div>
-                    <a href="index.html" class="brand-title"><h1>Accessible Web Indonesia</h1></a>
-                    <small class="brand-subtitle">Guardian Aksesibilitas Digital</small>
+                    <a href="index.html" class="brand-title">
+                        <h1>Accessible Web Indonesia</h1>
+                    </a>
+                    <small class="brand-subtitle">Tools Aksesibilitas & Edukasi Digital</small>
                 </div>
             </div>
+
             <div class="nav-controls">
                 <nav aria-label="Menu Utama">
                     <ul id="nav-menu">
                         <li><a href="index.html">Home</a></li>
-                        <li><a href="checker.html" aria-current="page" class="active">✅ Access Score</a></li>
-                        <li><a href="https://disabilitas.com" target="_blank">Layanan Audit</a></li>
+                        
+                        <li class="dropdown-wrapper">
+                            <button id="tools-btn" aria-expanded="false" aria-haspopup="true" aria-controls="tools-list">
+                                Tools ▾
+                            </button>
+                            <ul id="tools-list" class="dropdown-content">
+                                <li><a href="checker.html" aria-current="page" class="active">✅ Access Score</a></li>
+                                <li><a href="contrast.html">🎨 Contrast Checker</a></li>
+                                <li><a href="blind.html">👁️ Tes Buta Warna</a></li>
+                                <li><a href="tts.html">🗣️ TTS & Voice</a></li>
+                                <li><a href="braille.html">⠃⠗⠇ Braille Latin</a></li>
+                                <li><a href="quran.html">🕌 Quran Braille</a></li>
+                                <li><a href="sign.html">🤟 Sign Language</a></li>
+                                <li><a href="dyslexia.html">😵 Dyslexia Sim</a></li>
+                            </ul>
+                        </li>
+
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="contact.html">Contact</a></li>
                     </ul>
                 </nav>
-                <button id="theme-toggle" aria-label="Ganti Mode Gelap">🌙</button>
-                <button id="lang-toggle" aria-label="Ganti Bahasa">ID</button>
+                
+                <button id="theme-toggle" aria-label="Ganti Mode Gelap atau Terang" title="Ganti Tema">🌙</button>
+                <button id="lang-toggle" aria-label="Ganti Bahasa ke Inggris" title="Ganti Bahasa">ID</button>
+                <div id="google_translate_element" class="visually-hidden"></div>
             </div>
         </div>
     </header>
 
     <main id="main-content" class="container">
         <h1>Website Accessibility Audit Scanner</h1>
-        <p>Cek apakah website Anda mematuhi hukum dan ramah disabilitas. Masukkan URL untuk audit otomatis standar WCAG.</p>
+        <p>Masukkan URL website untuk melihat skor performa aksesibilitas berdasarkan Google Lighthouse (Mobile Strategy).</p>
 
         <div class="tool-box">
             <label for="urlInput"><strong>URL Website (https://...)</strong></label>
-            <div style="display: flex; gap:10px;">
-                <input type="url" id="urlInput" placeholder="Contoh: https://perusahaan.co.id" required style="flex:1;">
-                <button onclick="runAudit()" id="btnCheck" class="button">CEK SEKARANG</button>
+            <div style="display: flex; gap:10px; flex-wrap:wrap;">
+                <input type="url" id="urlInput" placeholder="Contoh: https://kemkes.go.id" required style="flex:1;">
+                <button onclick="runAudit()" id="btnCheck" class="button">Mulai Audit</button>
             </div>
-            
+
             <div id="loading-log"></div>
 
             <div id="result" class="result-card">
                 
                 <div class="result-header">
-                    <p style="margin:0; opacity: 0.7;">Target: <span id="resUrl" style="font-weight:bold;">-</span></p>
+                    <p style="margin:0; opacity: 0.8;">Target URL: <span id="resUrl" style="font-weight:bold;">-</span></p>
                     
                     <div class="verdict-badge" id="verdictText">-</div>
                     <span class="score-big" id="resScore">0</span>
-                    <p id="descText" style="max-width: 600px; margin: 0 auto; line-height: 1.5;">-</p>
+                    <p id="descText" style="max-width: 600px; margin: 0 auto; line-height: 1.5; font-size: 0.95rem;">-</p>
                 </div>
 
                 <div class="action-grid">
                     <button class="btn-action btn-pdf" onclick="downloadPDF()">
-                        📄 Download Laporan PDF
+                        📄 Download Laporan (PDF)
                     </button>
                     <button class="btn-action btn-share" onclick="shareResult()">
-                        📱 Share Gambar ke Medsos
+                        📢 Share Gambar ke Medsos
                     </button>
                 </div>
 
-                <div class="cta-box">
-                    <h4>⚠️ Penting: Mesin Bukan Manusia</h4>
-                    <p>Skor otomatis ini hanya mendeteksi 30% error teknis. Risiko hukum sebenarnya seringkali tidak terdeteksi mesin.</p>
-                    <p style="margin-bottom: 20px;"><strong>Hindari Tuntutan Hukum. Dapatkan Sertifikasi Aksesibilitas Manual.</strong></p>
-                    <a href="mailto:audit@disabilitas.com" class="button" style="background-color: #d9534f;">Hubungi Audit Pro (audit@disabilitas.com)</a>
+                <div style="padding: 25px; text-align: center;">
+                    <h3 style="color: #d9534f; margin-top: 0; font-size: 1.1rem;">⚠️ Peringatan: Skor Tinggi Belum Tentu Aksesibel</h3>
+                    <p style="font-size: 0.9rem;">Mesin hanya mendeteksi 30% kesalahan. Hindari risiko hukum dengan audit manual.</p>
+                    
+                    <div style="background: #fff; border: 2px solid #0056b3; border-radius: 8px; padding: 20px; margin-top: 15px;">
+                        <h4 style="margin-top: 0; color: #333;">Butuh Sertifikasi Aksesibilitas Resmi?</h4>
+                        <p style="font-size: 0.9rem; color: #555; margin-bottom: 15px;">Serahkan pada tim penguji tunanetra asli di Disabilitas.com.</p>
+                        <a href="https://disabilitas.com" class="button" target="_blank" style="width: 100%; text-align: center; box-sizing: border-box; background: #0056b3;">Hubungi Konsultan Disabilitas.com &rarr;</a>
+                    </div>
                 </div>
-
             </div>
+            <div class="ads-slot">
+                <p>Iklan Google AdSense</p>
             </div>
 
-        <div class="ads-slot">
-            <p>Iklan Google AdSense</p>
+            <article class="content-article" style="margin-top: 3rem; border-top: 1px solid #eee; padding-top: 2rem;">
+                <h2>Panduan Lengkap Audit Aksesibilitas & Standar WCAG</h2>
+                <p>Memiliki website yang aksesibel bukan lagi sekadar pilihan, melainkan keharusan hukum dan moral. Di Indonesia, hak aksesibilitas digital telah dijamin dalam UU No. 8 Tahun 2016. Tool <em>Accessibility Checker</em> ini adalah langkah awal Anda untuk mematuhi standar tersebut.</p>
+
+                <h3>1. Apa yang Diperiksa oleh Alat Ini?</h3>
+                <p>Alat ini menggunakan mesin Google Lighthouse untuk memindai kode HTML website Anda. Beberapa poin krusial yang diperiksa meliputi:</p>
+                <ul>
+                    <li><strong>Alt Text pada Gambar:</strong> Apakah setiap gambar memiliki deskripsi teks bagi pengguna pembaca layar?</li>
+                    <li><strong>Struktur Heading:</strong> Apakah penggunaan H1, H2, H3 berurutan secara logis?</li>
+                    <li><strong>Label Formulir:</strong> Apakah setiap kotak input memiliki label yang jelas?</li>
+                    <li><strong>Warna dan Kontras:</strong> Apakah teks cukup kontras dengan latar belakangnya?</li>
+                </ul>
+
+                <h3>2. Mengenal Standar WCAG (Prinsip POUR)</h3>
+                <p>Standar internasional yang digunakan adalah <strong>WCAG (Web Content Accessibility Guidelines)</strong>. Agar website dianggap aksesibel, ia harus memenuhi 4 prinsip utama (POUR):</p>
+                <ol>
+                    <li><strong>Perceivable (Dapat Diterima):</strong> Informasi harus bisa ditangkap oleh indera.</li>
+                    <li><strong>Operable (Dapat Dioperasikan):</strong> Website harus bisa dijalankan sepenuhnya dengan Keyboard.</li>
+                    <li><strong>Understandable (Dapat Dipahami):</strong> Navigasi dan bahasa tidak membingungkan.</li>
+                    <li><strong>Robust (Kokoh):</strong> Kode program valid dan bisa dibaca oleh berbagai teknologi bantu.</li>
+                </ol>
+
+                <div style="background: #f0f8ff; border-left: 5px solid var(--accent-color); padding: 20px; margin-top: 25px;">
+                    <h3 style="margin-top: 0; color: var(--primary-color);">Mengapa Harus Audit Manual?</h3>
+                    <p>Berbeda dengan audit otomatis yang terbatas, layanan profesional kami menawarkan kedalaman analisa:</p>
+                    <ul>
+                        <li><strong>Native Screen Reader Users:</strong> Tim penguji adalah tunanetra yang "hidup" di internet.</li>
+                        <li><strong>Compliance:</strong> Memastikan website Anda aman dari risiko hukum diskriminasi.</li>
+                    </ul>
+                    <br>
+                    <a href="https://disabilitas.com" class="button" target="_blank">Hubungi Tim Ahli Disabilitas.com &rarr;</a>
+                </div>
+            </article>
         </div>
-
-        <article class="content-article" style="margin-top: 3rem; border-top: 1px solid #eee; padding-top: 2rem;">
-            <h2>Mengapa Anda Harus Peduli?</h2>
-            <p>Di era digital, aksesibilitas adalah Hak Asasi Manusia. Website yang tidak aksesibel berisiko:</p>
-            <ul>
-                <li>Kehilangan potensi pasar dari 22 juta penyandang disabilitas di Indonesia.</li>
-                <li>Menerima reputasi buruk sebagai brand yang diskriminatif.</li>
-                <li>Risiko kepatuhan hukum (UU No. 8 Tahun 2016).</li>
-            </ul>
-        </article>
     </main>
 
     <footer>
         <div class="container">
-            <p>&copy; 2025 PT Dimaster Education Berprestasi (Disabilitas.com). All Rights Reserved.</p>
-            <p style="font-size: 0.8rem;">
-                <a href="https://kartunet.com">Kartunet</a> | <a href="https://disabilitas.com">Disabilitas.com</a>
+            <p>&copy; 2025 PT Dimaster Education Berprestasi. All Rights Reserved.</p>
+            
+            <p>Our Ecosystem: 
+                <a href="https://kartunet.com" target="_blank" style="color:#4cc9f0; font-weight:bold;">Kartunet</a> | 
+                <a href="https://disabilitas.com" target="_blank" style="color:#4cc9f0; font-weight:bold;">Disabilitas.com</a> | 
+                <a href="https://www.dimaster.co.id" target="_blank" style="color:#4cc9f0; font-weight:bold;">Dimaster Group</a>
+            </p>
+            
+            <p style="font-size: 0.8rem; margin-top: 10px;">
+                <a href="mailto:feedback@accessible.web.id" style="color: #e0e0e0; margin-right: 10px; text-decoration: none;">📩 Lapor Bug</a> | 
+                <a href="privacy.html" style="color: #e0e0e0; text-decoration: underline; margin-left: 10px;">Privacy Policy</a>
             </p>
         </div>
     </footer>
@@ -291,14 +279,9 @@
     </div>
 
     <script>
-        // --- 1. KONFIGURASI API & BAHASA ---
-        const apiKey = 'AIzaSyBIya_RRn2SoSU8j0yOPHjgCQ6yO7f-Mdg'; // Ganti dengan key Anda jika perlu
+        // --- 1. KONFIGURASI ---
+        const apiKey = 'AIzaSyBIya_RRn2SoSU8j0yOPHjgCQ6yO7f-Mdg'; 
         
-        function getCurrentLang() {
-            // Deteksi sederhana atau default ke ID
-            return 'id'; 
-        }
-
         // --- 2. LOGIKA UTAMA AUDIT ---
         function runAudit() {
             let urlInput = document.getElementById('urlInput').value.trim();
@@ -306,7 +289,7 @@
             const resultCard = document.getElementById('result');
             const logArea = document.getElementById('loading-log');
             
-            if(!urlInput) { alert("Masukkan URL website dulu!"); return; }
+            if(!urlInput) { alert("Mohon masukkan URL website!"); return; }
             if (!urlInput.startsWith('http')) urlInput = 'https://' + urlInput;
 
             // UI Loading state
@@ -317,7 +300,7 @@
 
             // Efek Loading Cerdas (Matrix Logs)
             const logs = [
-                "Menghubungi Google Lighthouse...",
+                "Menghubungi Server Google Lighthouse...",
                 "Memindai struktur DOM HTML...",
                 "Mengecek kontras warna WCAG 2.1...",
                 "Validasi Label ARIA...",
@@ -338,7 +321,7 @@
             .then(data => {
                 clearInterval(logInterval);
                 logArea.innerText = "> Selesai!";
-                logArea.style.display = 'none';
+                setTimeout(() => { logArea.style.display = 'none'; }, 500);
 
                 if (!data.lighthouseResult) throw new Error("Gagal mengambil data.");
                 
@@ -346,13 +329,13 @@
                 displayResult(score, urlInput);
                 
                 btn.disabled = false;
-                btn.innerText = "CEK URL LAIN";
+                btn.innerText = "Cek URL Lain";
             })
             .catch(err => {
                 clearInterval(logInterval);
                 logArea.innerText = "Error: " + err.message;
                 btn.disabled = false;
-                btn.innerText = "COBA LAGI";
+                btn.innerText = "Coba Lagi";
             });
         }
 
@@ -364,7 +347,7 @@
             const desc = document.getElementById('descText');
             const resUrl = document.getElementById('resUrl');
             
-            // Hidden Card Elements
+            // Hidden Card Elements (Untuk Gambar)
             const cardScore = document.getElementById('cardScore');
             const cardVerdict = document.getElementById('cardVerdict');
             const cardUrl = document.getElementById('cardUrl');
@@ -386,37 +369,36 @@
                 card.classList.add('mode-panic');
                 shareCard.classList.add('panic');
                 verdict.innerText = "KRITIS / GAGAL";
-                cardVerdict.innerText = "BERISIKO HUKUM";
-                desc.innerText = "Website ini sangat sulit diakses oleh difabel. Anda berpotensi kehilangan trafik dan menghadapi risiko tuntutan hukum. Perbaikan total diperlukan.";
+                cardVerdict.innerText = "KRITIS";
+                desc.innerText = "Website ini sangat sulit diakses oleh difabel. Berisiko tinggi terhadap kepatuhan hukum.";
             } else if (score < 90) {
                 // CAUTION MODE 🟡
                 card.classList.add('mode-caution');
                 shareCard.classList.add('caution');
                 verdict.innerText = "PERLU PERBAIKAN";
                 cardVerdict.innerText = "WASPADA";
-                desc.innerText = "Aksesibilitas cukup, namun masih banyak jebakan bagi pengguna screen reader. Jangan berpuas diri, tingkatkan lagi.";
+                desc.innerText = "Aksesibilitas cukup, namun masih banyak jebakan bagi pengguna screen reader.";
             } else {
                 // SUCCESS MODE 🟢
                 card.classList.add('mode-success');
                 shareCard.classList.add('success');
                 verdict.innerText = "SANGAT BAIK";
                 cardVerdict.innerText = "LULUS";
-                desc.innerText = "Luar biasa! Website ini inklusif dan ramah disabilitas. Pertahankan kualitas ini.";
+                desc.innerText = "Luar biasa! Website ini inklusif dan ramah disabilitas.";
             }
 
             card.style.display = 'block';
-            // Scroll ke hasil
             card.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
 
-        // --- 4. GENERATE PDF (PROFESIONAL) ---
+        // --- 4. GENERATE PDF (Disabilitas.com Only) ---
         function downloadPDF() {
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF();
             const score = document.getElementById('resScore').innerText;
             const url = document.getElementById('resUrl').innerText;
 
-            // Header Bersih (Hanya Disabilitas.com)
+            // Header Bersih (Disabilitas.com Only - Sesuai Request)
             doc.setFontSize(22);
             doc.setTextColor(0, 50, 100);
             doc.text("DISABILITAS.COM", 20, 20);
@@ -439,40 +421,30 @@
             else doc.setTextColor(40, 167, 69); // Hijau
             doc.text(`${score}/100`, 20, 80);
 
-            // Disclaimer
-            doc.setFontSize(11);
-            doc.setTextColor(50);
-            doc.text("Catatan Penting:", 20, 110);
-            doc.setFontSize(10);
-            doc.text("Laporan ini dihasilkan oleh mesin otomatis. Mesin tidak bisa mendeteksi", 20, 116);
-            doc.text("nuansa pengalaman pengguna (UX) dan kepatuhan hukum penuh.", 20, 121);
-
-            // Call to Action (CTA) - Bagian Bawah
+            // CTA Footer (Ke Email)
             doc.setFontSize(14);
             doc.setTextColor(220, 53, 69); // Merah
             doc.text("RISIKO KEPATUHAN TERDETEKSI", 20, 150);
             
             doc.setFontSize(11);
             doc.setTextColor(0);
-            doc.text("Dapatkan audit manual mendalam & sertifikasi resmi.", 20, 158);
+            doc.text("Skor otomatis ini belum menjamin bebas dari tuntutan hukum.", 20, 158);
             
             doc.setFontSize(12);
             doc.setTextColor(0, 50, 100);
-            doc.text("Kontak Tim Ahli: audit@disabilitas.com", 20, 170);
+            doc.text("Jadwalkan Audit Manual: audit@disabilitas.com", 20, 170);
 
             doc.save(`Audit-Report-${score}.pdf`);
         }
 
-        // --- 5. SHARE IMAGE (DRAMATIS) ---
+        // --- 5. SHARE IMAGE (accessible.web.id + Disabilitas.com) ---
         function shareResult() {
             const cardElement = document.getElementById('share-card');
             
-            // Render elemen tersembunyi jadi gambar
             html2canvas(cardElement, { scale: 2 }).then(canvas => {
                 canvas.toBlob(blob => {
                     const file = new File([blob], "audit-result.png", { type: "image/png" });
 
-                    // Coba Share Native (HP)
                     if (navigator.share) {
                         navigator.share({
                             title: 'Cek Skor Aksesibilitas',
@@ -480,18 +452,15 @@
                             files: [file]
                         }).catch(console.error);
                     } else {
-                        // Fallback Desktop (Download)
                         const link = document.createElement('a');
                         link.download = 'audit-result.png';
                         link.href = canvas.toDataURL();
                         link.click();
-                        alert("Gambar disimpan! Silakan upload ke Medsos.");
+                        alert("Gambar disimpan! Silakan upload manual ke medsos.");
                     }
                 });
             });
         }
-        
-        // Script Eksternal Anda (Theme Toggle, dll)
     </script>
     <script src="script.js"></script>
 </body>
