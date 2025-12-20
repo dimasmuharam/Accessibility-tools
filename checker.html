@@ -28,10 +28,10 @@
             --text-main: #333333;
             --border-color: #ddd;
             
-            /* Warna Emosi (Panic/Caution/Success) */
-            --panic-bg: #fff5f5; --panic-text: #721c24; --panic-border: #dc3545;
-            --caution-bg: #fff9db; --caution-text: #856404; --caution-border: #ffc107;
-            --success-bg: #e8f5e9; --success-text: #155724; --success-border: #28a745;
+            /* Warna Emosi (Lebih Gelap/Serius untuk efek Skeptis) */
+            --panic-bg: #fff5f5; --panic-text: #8a1c24; --panic-border: #dc3545;
+            --caution-bg: #fffbf2; --caution-text: #946c00; --caution-border: #ffc107;
+            --success-bg: #f0fff4; --success-text: #155724; --success-border: #28a745;
         }
 
         /* Override Variabel saat Dark Mode Aktif */
@@ -41,8 +41,8 @@
             --border-color: #444;
             
             /* Warna Emosi di Dark Mode */
-            --panic-bg: #2c0b0e; --panic-text: #ffcccc;
-            --caution-bg: #332b00; --caution-text: #ffeba8;
+            --panic-bg: #380d11; --panic-text: #ffcccc;
+            --caution-bg: #332701; --caution-text: #ffeba8;
             --success-bg: #0b2e13; --success-text: #d4edda;
         }
 
@@ -56,10 +56,10 @@
             overflow: hidden;
             box-shadow: 0 4px 15px rgba(0,0,0,0.05);
             color: var(--text-main);
-            outline: none; /* Hapus outline saat fokus programatik */
+            outline: none;
         }
 
-        /* Header Hasil (Area yang berubah warna) */
+        /* Header Hasil */
         .result-header { 
             padding: 30px; 
             text-align: center; 
@@ -80,7 +80,7 @@
         .share-section { padding: 20px; background: rgba(0,0,0,0.03); text-align: center; }
         .share-title { font-size: 0.85rem; font-weight: bold; margin-bottom: 15px; display: block; opacity: 0.7; letter-spacing: 1px; }
 
-        /* Grid Tombol Utama (PDF & Gambar) */
+        /* Grid Tombol Utama */
         .main-actions { display: flex; gap: 10px; justify-content: center; margin-bottom: 20px; flex-wrap: wrap; }
         
         .btn-action { 
@@ -91,7 +91,7 @@
         .btn-action:hover { transform: translateY(-2px); opacity: 0.95; }
         
         .btn-pdf { background-color: #343a40; }
-        .btn-img { background-color: #E1306C; /* Instagram Color */ }
+        .btn-img { background-color: #E1306C; }
 
         /* Tombol Kecil Sosmed */
         .social-buttons { display: flex; gap: 10px; justify-content: center; margin-top: 10px; flex-wrap: wrap; }
@@ -105,27 +105,24 @@
         .fb { background-color: #1877F2; }
         .tw { background-color: #000000; border: 1px solid #333; } 
         .li { background-color: #0077b5; }
-        /* Dark mode adjustment untuk icon Twitter */
         body.dark-mode .tw { background-color: #fff; color: #000; }
 
-        /* Loading Log (Efek Matrix) */
+        /* Loading Log */
         #loading-log { font-family: monospace; font-size: 0.9rem; color: #666; margin-top: 15px; height: 20px; display: none; }
         body.dark-mode #loading-log { color: #aaa; }
 
-        /* HIDDEN TEMPLATE (Untuk Generate Gambar) */
+        /* HIDDEN TEMPLATE (Gambar) */
         #share-card {
             position: fixed; top: -9999px; left: -9999px; width: 800px; height: 800px;
             display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
             color: white; font-family: sans-serif; padding: 40px; box-sizing: border-box;
         }
+        /* Background Skeptis */
         #share-card.panic { background: linear-gradient(135deg, #b92b27 0%, #150000 100%); }
-        #share-card.caution { background: linear-gradient(135deg, #f2994a 0%, #f2c94c 100%); }
-        #share-card.success { background: linear-gradient(135deg, #56ab2f 0%, #a8e063 100%); }
+        #share-card.caution { background: linear-gradient(135deg, #ff8008 0%, #ffc837 100%); }
+        #share-card.success { background: linear-gradient(135deg, #1d976c 0%, #93f9b9 100%); }
 
-        @media (max-width: 600px) {
-            .main-actions { flex-direction: column; }
-            .btn-action { justify-content: center; width: 100%; }
-        }
+        @media (max-width: 600px) { .main-actions { flex-direction: column; } .btn-action { width: 100%; justify-content: center; } }
     </style>
 </head>
 <body>
@@ -201,7 +198,6 @@
 
                 <div class="share-section">
                     <span class="share-title">📂 DOWNLOAD & SHARE</span>
-                    
                     <div class="main-actions">
                         <button class="btn-action btn-pdf" onclick="downloadPDF()">📄 Download PDF</button>
                         <button class="btn-action btn-img" onclick="shareImage()">📸 Share Image (IG/WA)</button>
@@ -209,10 +205,10 @@
 
                     <span class="share-title" style="margin-top: 20px;">💬 SHARE LINK VIA:</span>
                     <div class="social-buttons">
-                        <a id="btnWA" href="#" target="_blank" class="btn-soc wa" title="WhatsApp" aria-label="Share ke WhatsApp">WA</a>
-                        <a id="btnX" href="#" target="_blank" class="btn-soc tw" title="X / Twitter" aria-label="Share ke X Twitter">X</a>
-                        <a id="btnFB" href="#" target="_blank" class="btn-soc fb" title="Facebook" aria-label="Share ke Facebook">FB</a>
-                        <a id="btnLI" href="#" target="_blank" class="btn-soc li" title="LinkedIn" aria-label="Share ke LinkedIn">in</a>
+                        <a id="btnWA" href="#" target="_blank" class="btn-soc wa" aria-label="WhatsApp">WA</a>
+                        <a id="btnX" href="#" target="_blank" class="btn-soc tw" aria-label="X Twitter">X</a>
+                        <a id="btnFB" href="#" target="_blank" class="btn-soc fb" aria-label="Facebook">FB</a>
+                        <a id="btnLI" href="#" target="_blank" class="btn-soc li" aria-label="LinkedIn">in</a>
                     </div>
                 </div>
 
@@ -244,9 +240,22 @@
                     <li><strong>Warna dan Kontras:</strong> Apakah teks cukup kontras dengan latar belakangnya?</li>
                 </ul>
 
+                <h3>2. Mengenal Standar WCAG (Prinsip POUR)</h3>
+                <p>Standar internasional yang digunakan adalah <strong>WCAG (Web Content Accessibility Guidelines)</strong>. Agar website dianggap aksesibel, ia harus memenuhi 4 prinsip utama (POUR):</p>
+                <ol>
+                    <li><strong>Perceivable (Dapat Diterima):</strong> Informasi harus bisa ditangkap oleh indera.</li>
+                    <li><strong>Operable (Dapat Dioperasikan):</strong> Website harus bisa dijalankan sepenuhnya dengan Keyboard.</li>
+                    <li><strong>Understandable (Dapat Dipahami):</strong> Navigasi dan bahasa tidak membingungkan.</li>
+                    <li><strong>Robust (Kokoh):</strong> Kode program valid dan bisa dibaca oleh berbagai teknologi bantu.</li>
+                </ol>
+
                 <div style="background: #f0f8ff; border-left: 5px solid var(--accent-color); padding: 20px; margin-top: 25px;">
                     <h3 style="margin-top: 0; color: var(--primary-color);">Mengapa Harus Audit Manual?</h3>
-                    <p>Berbeda dengan audit otomatis yang terbatas, layanan profesional kami menawarkan kedalaman analisa. Mesin hanya mendeteksi 30% error, sisanya adalah soal kenyamanan (UX) yang hanya bisa dirasakan manusia.</p>
+                    <p>Berbeda dengan audit otomatis yang terbatas, layanan profesional kami menawarkan kedalaman analisa:</p>
+                    <ul>
+                        <li><strong>Native Screen Reader Users:</strong> Tim penguji adalah tunanetra yang "hidup" di internet.</li>
+                        <li><strong>Compliance:</strong> Memastikan website Anda aman dari risiko hukum diskriminasi.</li>
+                    </ul>
                     <br>
                     <a href="https://disabilitas.com" class="button" target="_blank">Hubungi Tim Ahli Disabilitas.com &rarr;</a>
                 </div>
@@ -279,7 +288,7 @@
         <div id="cardVerdict" style="font-size: 4rem; font-weight: 800; text-transform: uppercase; margin: 30px 0; border: 6px solid white; padding: 10px 50px; transform: rotate(-5deg); display: inline-block;">KRITIS</div>
         
         <div style="margin-top: auto; font-size: 1.8rem; font-weight: bold; border-top: 2px solid rgba(255,255,255,0.5); width: 100%; padding-top: 30px;">
-            Cek Gratis di: accessible.web.id
+            Free Check: accessible.web.id
         </div>
     </div>
 
@@ -287,46 +296,49 @@
         const apiKey = 'AIzaSyBIya_RRn2SoSU8j0yOPHjgCQ6yO7f-Mdg'; 
         let globalShareText = ""; 
 
-        // --- 1. DETEKSI BAHASA (Logic Bawaan) ---
+        // --- KONFIGURASI THRESHOLD (SKEPTICAL MODE) ---
+        const THRESHOLD_PANIC = 60; // 0-60 Merah (Naik dari 50)
+        const THRESHOLD_CAUTION = 94; // 61-94 Oranye (Naik dari 90)
+
         function getCurrentLang() {
             const cookie = document.cookie.match('(^|;) ?googtrans=([^;]*)(;|$)');
             return cookie && cookie[2].includes('/en') ? 'en' : 'id';
         }
 
-        // --- 2. KAMUS BAHASA (Multi-Language) ---
         const texts = {
             id: {
                 loading: ["Menghubungi Server Google...", "Memindai DOM HTML...", "Cek Kontras Warna...", "Validasi Label ARIA...", "Kalkulasi Skor..."],
                 btnLoading: "MENGANALISA...",
                 btnAgain: "Cek URL Lain",
-                verdict: { low: "KRITIS / GAGAL", mid: "PERLU PERBAIKAN", high: "SANGAT BAIK" },
-                card: { low: "KRITIS", mid: "WASPADA", high: "LULUS" },
+                // Copywriting Skeptis (Level 3)
+                verdict: { low: "KRITIS / GAGAL", mid: "BERISIKO TINGGI", high: "TEKNIS LULUS*" },
+                card: { low: "GAGAL", mid: "WASPADA", high: "LULUS*" },
                 desc: {
-                    low: "Website ini sulit diakses difabel. Risiko kepatuhan hukum tinggi.",
-                    mid: "Aksesibilitas cukup, tapi masih ada jebakan bagi pengguna screen reader.",
-                    high: "Luar biasa! Website ini inklusif dan ramah disabilitas."
+                    low: "Sangat buruk. Website ini 'neraka' bagi tunanetra. Risiko tuntutan hukum sangat tinggi.",
+                    mid: "Jangan tertipu skor ini. Masih banyak celah aksesibilitas yang tidak terdeteksi mesin.",
+                    high: "Secara teknis baik. Namun ingat, mesin bukan manusia. Tetap lakukan audit manual."
                 },
                 share: {
-                    low: "Waduh 😢 Barusan cek skor aksesibilitas website {url}, hasilnya cuma {score}/100. Ternyata website saya berisiko hukum.",
-                    mid: "Lumayan 🤔 Skor aksesibilitas website {url} dapat {score}/100. Masih ada beberapa perbaikan biar inklusif.",
-                    high: "Keren! 🤩 Website {url} dapat skor aksesibilitas {score}/100! Bangga punya website yang inklusif."
+                    low: "Parah 😱 Cek skor aksesibilitas website {url}, cuma dapat {score}/100. Ini bahaya buat bisnis & hukum.",
+                    mid: "Hati-hati 🤔 Skor aksesibilitas {url} dapat {score}/100. Terlihat aman, tapi sebenarnya masih berisiko.",
+                    high: "Keren 🏆 Website {url} dapat skor aksesibilitas {score}/100! Tapi tetep butuh cek manual biar inklusif total."
                 }
             },
             en: {
                 loading: ["Contacting Google Server...", "Scanning DOM Elements...", "Checking Color Contrast...", "Validating ARIA Labels...", "Calculating Score..."],
                 btnLoading: "ANALYZING...",
                 btnAgain: "Check Another URL",
-                verdict: { low: "CRITICAL / FAILED", mid: "NEEDS IMPROVEMENT", high: "EXCELLENT" },
-                card: { low: "CRITICAL", mid: "WARNING", high: "PASSED" },
+                verdict: { low: "CRITICAL FAILURE", mid: "HIGH RISK", high: "TECHNICALLY PASSED*" },
+                card: { low: "FAILED", mid: "AT RISK", high: "PASSED*" },
                 desc: {
-                    low: "This site is hard to access for disabled users. High legal compliance risk.",
-                    mid: "Accessibility is okay, but still has traps for screen reader users.",
-                    high: "Amazing! This website is inclusive and disability-friendly."
+                    low: "Severe accessibility issues detected. High risk of legal action and discrimination lawsuits.",
+                    mid: "Don't be fooled by this score. Automated tests miss 70% of real-world barriers.",
+                    high: "Technically good. However, machines cannot judge user experience. Manual audit recommended."
                 },
                 share: {
-                    low: "Oh no 😢 Just checked accessibility score for {url}, got only {score}/100. Turns out my site is at legal risk.",
-                    mid: "Not bad 🤔 Accessibility score for {url} is {score}/100. Still needs work to be fully inclusive.",
-                    high: "Awesome! 🤩 Website {url} hit accessibility score {score}/100! Proud to have an inclusive site."
+                    low: "Shocking 😱 Accessibility score for {url} is only {score}/100. This is a major legal risk.",
+                    mid: "Be careful 🤔 Website {url} got {score}/100 accessibility score. Looks safe, but hidden risks remain.",
+                    high: "Great 🏆 Website {url} hit {score}/100 accessibility score! Still need manual check to be truly inclusive."
                 }
             }
         };
@@ -336,7 +348,7 @@
             const btn = document.getElementById('btnCheck');
             const resultCard = document.getElementById('result');
             const logArea = document.getElementById('loading-log');
-            const lang = getCurrentLang(); // Cek Bahasa
+            const lang = getCurrentLang(); 
             
             if(!urlInput) { alert(lang === 'en' ? "Please enter URL!" : "Mohon masukkan URL!"); return; }
             if (!urlInput.startsWith('http')) urlInput = 'https://' + urlInput;
@@ -345,7 +357,6 @@
             resultCard.style.display = 'none';
             logArea.style.display = 'block';
 
-            // Loading Log Multi-bahasa
             const logs = texts[lang].loading;
             let step = 0;
             const logInterval = setInterval(() => {
@@ -382,7 +393,6 @@
             const desc = document.getElementById('descText');
             const resUrl = document.getElementById('resUrl');
             
-            // Hidden Card
             const cardScore = document.getElementById('cardScore');
             const cardVerdict = document.getElementById('cardVerdict');
             const cardUrl = document.getElementById('cardUrl');
@@ -394,15 +404,15 @@
             resScore.innerText = score; resUrl.innerText = url;
             cardScore.innerText = score; cardUrl.innerText = url;
 
-            // LOGIKA BAHASA DI SINI
             const content = texts[lang];
 
-            if (score < 50) {
+            // LOGIKA WARNA SKEPTIS
+            if (score <= THRESHOLD_PANIC) {
                 card.classList.add('mode-panic'); shareCard.classList.add('panic');
                 verdict.innerText = content.verdict.low; 
                 cardVerdict.innerText = content.card.low;
                 desc.innerText = content.desc.low;
-            } else if (score < 90) {
+            } else if (score <= THRESHOLD_CAUTION) {
                 card.classList.add('mode-caution'); shareCard.classList.add('caution');
                 verdict.innerText = content.verdict.mid; 
                 cardVerdict.innerText = content.card.mid;
@@ -419,17 +429,16 @@
             card.focus();
         }
 
-        // --- SIAPKAN TEXT ADAPTIF MULTI-BAHASA ---
         function prepareShareText(score, url, lang) {
             let baseText = "";
             const content = texts[lang];
 
-            if(score < 50) baseText = content.share.low;
-            else if (score < 90) baseText = content.share.mid;
+            if(score <= THRESHOLD_PANIC) baseText = content.share.low;
+            else if (score <= THRESHOLD_CAUTION) baseText = content.share.mid;
             else baseText = content.share.high;
 
             let finalText = baseText.replace("{url}", url).replace("{score}", score);
-            const footer = "\n\n#CekAkses #InklusiDigital accessible.web.id";
+            const footer = "\n\n#CekAkses accessible.web.id";
             globalShareText = finalText + footer;
 
             const encodedText = encodeURIComponent(globalShareText);
@@ -445,7 +454,6 @@
             const cardElement = document.getElementById('share-card');
             const btn = document.querySelector('.btn-img');
             const originalText = btn.innerText;
-
             btn.innerText = "Processing...";
             
             html2canvas(cardElement, { scale: 2 }).then(canvas => {
@@ -455,7 +463,7 @@
 
                     if (navigator.share) {
                         navigator.share({
-                            title: 'Accessibility Score',
+                            title: 'Score',
                             text: globalShareText,
                             files: [file]
                         }).catch(console.error);
@@ -464,7 +472,7 @@
                         link.download = 'audit-result.png';
                         link.href = canvas.toDataURL();
                         link.click();
-                        alert("Image saved! Please upload to Social Media manually.\n\nCaption copied to logic.");
+                        alert("Image saved. Please upload manually.");
                     }
                 });
             });
@@ -475,53 +483,33 @@
             const doc = new jsPDF();
             const score = document.getElementById('resScore').innerText;
             const url = document.getElementById('resUrl').innerText;
-
-            // 1. Muat Logo Gambar (logo.png)
+            
+            // Muat Logo untuk PDF
             var img = new Image();
             img.src = 'logo.png'; 
             
             img.onload = function() {
-                // Gambar Logo (Posisi x:20, y:15, w:30, h:30)
                 doc.addImage(this, 'PNG', 20, 15, 30, 30);
-                
-                // Teks Kop
-                doc.setFontSize(22); doc.setTextColor(0, 50, 100); 
-                doc.text("DISABILITAS.COM", 55, 25);
-                
-                doc.setFontSize(10); doc.setTextColor(100); 
-                doc.text("Professional Accessibility Audit Report", 55, 32); 
-                
-                // Garis Bawah
-                doc.setDrawColor(200, 200, 200);
-                doc.line(20, 50, 190, 50);
-
-                // Isi Laporan
-                doc.setFontSize(12); doc.setTextColor(0); 
-                doc.text(`Target: ${url}`, 20, 65);
+                doc.setFontSize(22); doc.setTextColor(0, 50, 100); doc.text("DISABILITAS.COM", 55, 25);
+                doc.setFontSize(10); doc.setTextColor(100); doc.text("Professional Accessibility Audit Report", 55, 32); 
+                doc.setDrawColor(200, 200, 200); doc.line(20, 50, 190, 50);
+                doc.setFontSize(12); doc.setTextColor(0); doc.text(`Target: ${url}`, 20, 65);
                 doc.text(`Date: ${new Date().toLocaleDateString('id-ID')}`, 20, 72);
 
-                // Skor
                 doc.setFontSize(60); 
-                if(score < 50) doc.setTextColor(220, 53, 69);
-                else if(score < 90) doc.setTextColor(255, 165, 0);
+                // Warna PDF ikut Threshold Skeptis
+                if(score <= THRESHOLD_PANIC) doc.setTextColor(220, 53, 69);
+                else if(score <= THRESHOLD_CAUTION) doc.setTextColor(255, 165, 0);
                 else doc.setTextColor(40, 167, 69);
                 doc.text(`${score}/100`, 20, 100);
 
-                // CTA
-                doc.setFontSize(14); doc.setTextColor(220, 53, 69); 
-                doc.text("RISIKO TERDETEKSI", 20, 140);
-                doc.setFontSize(11); doc.setTextColor(0); 
-                doc.text("Hasil ini otomatis. Jadwalkan audit manual.", 20, 148);
-                doc.setFontSize(12); doc.setTextColor(0, 50, 100); 
-                doc.text("Email: audit@disabilitas.com", 20, 160);
+                doc.setFontSize(14); doc.setTextColor(220, 53, 69); doc.text("RISIKO TERDETEKSI", 20, 140);
+                doc.setFontSize(11); doc.setTextColor(0); doc.text("Hasil ini otomatis. Jadwalkan audit manual.", 20, 148);
+                doc.setFontSize(12); doc.setTextColor(0, 50, 100); doc.text("Email: audit@disabilitas.com", 20, 160);
 
                 doc.save(`Audit-${score}.pdf`);
             };
-
-            img.onerror = function() {
-                alert("Gagal memuat logo.pdf! Pastikan file logo.png ada.");
-                // Fallback tanpa logo bisa ditambahkan di sini jika mau
-            };
+            img.onerror = function() { alert("Logo not found!"); };
         }
     </script>
     <script src="script.js"></script>
