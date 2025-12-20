@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Web Accessibility Score Checker - Cek Skor Aksesibilitas Website</title>
-    <meta name="description" content="Free audit tool to check website accessibility score. Analisa performa web Anda sesuai standar Google Lighthouse & WCAG.">    
+    <meta name="description" content="Free audit tool to check website accessibility score. Analisa performa web Anda sesuai standar Google Lighthouse & WCAG. Cek seberapa inklusif website Anda.">    
     
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5878514175202601" crossorigin="anonymous"></script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-FGJKD3430G"></script>
@@ -22,63 +22,97 @@
     <link rel="stylesheet" href="style.css">
 
     <style>
+        /* Variabel Warna Responsif */
         :root {
-            --bg-card: #ffffff; --text-main: #333333; --border-color: #ddd;
-            /* Warna Emosi */
+            --bg-card: #ffffff;
+            --text-main: #333333;
+            --border-color: #ddd;
+            
+            /* Warna Emosi (Panic/Caution/Success) */
             --panic-bg: #fff5f5; --panic-text: #721c24; --panic-border: #dc3545;
             --caution-bg: #fff9db; --caution-text: #856404; --caution-border: #ffc107;
             --success-bg: #e8f5e9; --success-text: #155724; --success-border: #28a745;
         }
 
+        /* Override Variabel saat Dark Mode Aktif */
         body.dark-mode {
-            --bg-card: #1e1e1e; --text-main: #f0f0f0; --border-color: #444;
+            --bg-card: #1e1e1e; 
+            --text-main: #f0f0f0; 
+            --border-color: #444;
+            
+            /* Warna Emosi di Dark Mode */
             --panic-bg: #2c0b0e; --panic-text: #ffcccc;
             --caution-bg: #332b00; --caution-text: #ffeba8;
             --success-bg: #0b2e13; --success-text: #d4edda;
         }
 
+        /* Container Kartu Hasil */
         .result-card {
-            display: none; margin-top: 30px; background: var(--bg-card);
-            border: 1px solid var(--border-color); border-radius: 12px; overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05); color: var(--text-main); outline: none;
+            display: none; 
+            margin-top: 30px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px; 
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            color: var(--text-main);
+            outline: none; /* Hapus outline saat fokus programatik */
         }
 
-        .result-header { padding: 30px; text-align: center; border-bottom: 1px solid var(--border-color); transition: all 0.5s ease; }
-        
+        /* Header Hasil (Area yang berubah warna) */
+        .result-header { 
+            padding: 30px; 
+            text-align: center; 
+            border-bottom: 1px solid var(--border-color); 
+            transition: all 0.5s ease; 
+        }
+
+        /* Logika Warna Dramatis */
         .mode-panic .result-header { background-color: var(--panic-bg); border-bottom: 4px solid var(--panic-border); color: var(--panic-text); }
         .mode-caution .result-header { background-color: var(--caution-bg); border-bottom: 4px solid var(--caution-border); color: var(--caution-text); }
         .mode-success .result-header { background-color: var(--success-bg); border-bottom: 4px solid var(--success-border); color: var(--success-text); }
 
+        /* Tipografi Skor */
         .score-big { font-size: 5rem; font-weight: 900; line-height: 1; margin: 15px 0; display: block; }
         .verdict-badge { font-size: 1.2rem; text-transform: uppercase; font-weight: 800; padding: 5px 15px; border-radius: 50px; display: inline-block; margin-bottom: 10px; border: 2px solid currentColor; }
 
-        /* SHARE SECTION */
+        /* --- AREA SHARE & DOWNLOAD --- */
         .share-section { padding: 20px; background: rgba(0,0,0,0.03); text-align: center; }
         .share-title { font-size: 0.85rem; font-weight: bold; margin-bottom: 15px; display: block; opacity: 0.7; letter-spacing: 1px; }
 
+        /* Grid Tombol Utama (PDF & Gambar) */
         .main-actions { display: flex; gap: 10px; justify-content: center; margin-bottom: 20px; flex-wrap: wrap; }
+        
         .btn-action { 
             padding: 12px 20px; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; 
             font-size: 0.95rem; display: flex; align-items: center; gap: 8px; color: white; text-decoration: none;
             transition: transform 0.2s;
         }
         .btn-action:hover { transform: translateY(-2px); opacity: 0.95; }
+        
         .btn-pdf { background-color: #343a40; }
-        .btn-img { background-color: #E1306C; }
+        .btn-img { background-color: #E1306C; /* Instagram Color */ }
 
+        /* Tombol Kecil Sosmed */
         .social-buttons { display: flex; gap: 10px; justify-content: center; margin-top: 10px; flex-wrap: wrap; }
         .btn-soc {
             width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
             color: white; text-decoration: none; font-size: 1.1rem; transition: transform 0.2s; font-weight: bold;
         }
         .btn-soc:hover { transform: scale(1.1); }
-        .wa { background-color: #25D366; } .fb { background-color: #1877F2; } .tw { background-color: #000; border: 1px solid #333; } .li { background-color: #0077b5; }
+        
+        .wa { background-color: #25D366; }
+        .fb { background-color: #1877F2; }
+        .tw { background-color: #000000; border: 1px solid #333; } 
+        .li { background-color: #0077b5; }
+        /* Dark mode adjustment untuk icon Twitter */
         body.dark-mode .tw { background-color: #fff; color: #000; }
 
+        /* Loading Log (Efek Matrix) */
         #loading-log { font-family: monospace; font-size: 0.9rem; color: #666; margin-top: 15px; height: 20px; display: none; }
         body.dark-mode #loading-log { color: #aaa; }
 
-        /* HIDDEN TEMPLATE */
+        /* HIDDEN TEMPLATE (Untuk Generate Gambar) */
         #share-card {
             position: fixed; top: -9999px; left: -9999px; width: 800px; height: 800px;
             display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
@@ -88,7 +122,10 @@
         #share-card.caution { background: linear-gradient(135deg, #f2994a 0%, #f2c94c 100%); }
         #share-card.success { background: linear-gradient(135deg, #56ab2f 0%, #a8e063 100%); }
 
-        @media (max-width: 600px) { .main-actions { flex-direction: column; } .btn-action { width: 100%; justify-content: center; } }
+        @media (max-width: 600px) {
+            .main-actions { flex-direction: column; }
+            .btn-action { justify-content: center; width: 100%; }
+        }
     </style>
 </head>
 <body>
@@ -98,20 +135,25 @@
     <header>
         <div class="container navbar">
             <div class="brand-wrapper">
-                <a href="index.html">
+                <a href="index.html" title="Kembali ke Beranda">
                     <img src="logo.png" alt="Logo Accessible Web Indonesia" width="100" height="100">
                 </a>
                 <div>
-                    <a href="index.html" class="brand-title"><h1>Accessible Web Indonesia</h1></a>
+                    <a href="index.html" class="brand-title">
+                        <h1>Accessible Web Indonesia</h1>
+                    </a>
                     <small class="brand-subtitle">Tools Aksesibilitas & Edukasi Digital</small>
                 </div>
             </div>
+
             <div class="nav-controls">
                 <nav aria-label="Menu Utama">
                     <ul id="nav-menu">
                         <li><a href="index.html">Home</a></li>
                         <li class="dropdown-wrapper">
-                            <button id="tools-btn" aria-expanded="false" aria-haspopup="true" aria-controls="tools-list">Tools ▾</button>
+                            <button id="tools-btn" aria-expanded="false" aria-haspopup="true" aria-controls="tools-list">
+                                Tools ▾
+                            </button>
                             <ul id="tools-list" class="dropdown-content">
                                 <li><a href="checker.html" aria-current="page" class="active">✅ Access Score</a></li>
                                 <li><a href="contrast.html">🎨 Contrast Checker</a></li>
@@ -127,8 +169,8 @@
                         <li><a href="contact.html">Contact</a></li>
                     </ul>
                 </nav>
-                <button id="theme-toggle" aria-label="Switch Theme">🌙</button>
-                <button id="lang-toggle" aria-label="Switch Language">ID</button>
+                <button id="theme-toggle" aria-label="Ganti Mode Gelap atau Terang" title="Ganti Tema">🌙</button>
+                <button id="lang-toggle" aria-label="Ganti Bahasa" title="Ganti Bahasa">ID</button>
                 <div id="google_translate_element" class="visually-hidden"></div>
             </div>
         </div>
@@ -151,6 +193,7 @@
                 
                 <div class="result-header">
                     <p style="margin:0; opacity: 0.8;">Target URL: <span id="resUrl" style="font-weight:bold;">-</span></p>
+                    
                     <div class="verdict-badge" id="verdictText">-</div>
                     <span class="score-big" id="resScore">0</span>
                     <p id="descText" style="max-width: 600px; margin: 0 auto; line-height: 1.5; font-size: 0.95rem;">-</p>
@@ -158,6 +201,7 @@
 
                 <div class="share-section">
                     <span class="share-title">📂 DOWNLOAD & SHARE</span>
+                    
                     <div class="main-actions">
                         <button class="btn-action btn-pdf" onclick="downloadPDF()">📄 Download PDF</button>
                         <button class="btn-action btn-img" onclick="shareImage()">📸 Share Image (IG/WA)</button>
@@ -165,33 +209,46 @@
 
                     <span class="share-title" style="margin-top: 20px;">💬 SHARE LINK VIA:</span>
                     <div class="social-buttons">
-                        <a id="btnWA" href="#" target="_blank" class="btn-soc wa" aria-label="WhatsApp">WA</a>
-                        <a id="btnX" href="#" target="_blank" class="btn-soc tw" aria-label="X Twitter">X</a>
-                        <a id="btnFB" href="#" target="_blank" class="btn-soc fb" aria-label="Facebook">FB</a>
-                        <a id="btnLI" href="#" target="_blank" class="btn-soc li" aria-label="LinkedIn">in</a>
+                        <a id="btnWA" href="#" target="_blank" class="btn-soc wa" title="WhatsApp" aria-label="Share ke WhatsApp">WA</a>
+                        <a id="btnX" href="#" target="_blank" class="btn-soc tw" title="X / Twitter" aria-label="Share ke X Twitter">X</a>
+                        <a id="btnFB" href="#" target="_blank" class="btn-soc fb" title="Facebook" aria-label="Share ke Facebook">FB</a>
+                        <a id="btnLI" href="#" target="_blank" class="btn-soc li" title="LinkedIn" aria-label="Share ke LinkedIn">in</a>
                     </div>
                 </div>
 
                 <div style="padding: 25px; text-align: center; border-top: 1px solid var(--border-color);">
-                    <h3 style="color: #d9534f; margin-top: 0; font-size: 1.1rem;">⚠️ Warning: Machine ≠ Human</h3>
-                    <p style="font-size: 0.9rem;">Automated score does not guarantee full legal compliance. Manual audit is required.</p>
+                    <h3 style="color: #d9534f; margin-top: 0; font-size: 1.1rem;">⚠️ Peringatan: Mesin Bukan Manusia</h3>
+                    <p style="font-size: 0.9rem;">Skor otomatis ini belum menjamin Anda bebas dari tuntutan hukum. Audit manual diperlukan.</p>
                     <div style="background: #fff; border: 2px solid #0056b3; border-radius: 8px; padding: 20px; margin-top: 15px;">
-                        <h4 style="margin-top: 0; color: #333;">Need Accessibility Certificate?</h4>
-                        <p style="font-size: 0.9rem; color: #555; margin-bottom: 15px;">Get audited by native screen reader users at Disabilitas.com.</p>
-                        <a href="https://disabilitas.com" class="button" target="_blank" style="background: #0056b3; width:100%; box-sizing:border-box; text-align:center;">Contact Disabilitas.com &rarr;</a>
+                        <h4 style="margin-top: 0; color: #333;">Butuh Sertifikat Aksesibilitas?</h4>
+                        <p style="font-size: 0.9rem; color: #555; margin-bottom: 15px;">Dapatkan audit dari penguji tunanetra asli di Disabilitas.com.</p>
+                        <a href="https://disabilitas.com" class="button" target="_blank" style="background: #0056b3; width:100%; box-sizing:border-box; text-align:center;">Hubungi Konsultan Disabilitas.com &rarr;</a>
                     </div>
                 </div>
             </div>
             
-            <div class="ads-slot"><p>Iklan Google AdSense</p></div>
+            <div class="ads-slot">
+                <p>Iklan Google AdSense</p>
+            </div>
 
             <article class="content-article" style="margin-top: 3rem; border-top: 1px solid #eee; padding-top: 2rem;">
-                <h2>Panduan Lengkap Audit Aksesibilitas</h2>
-                <p>Memiliki website yang aksesibel adalah keharusan hukum (UU No. 8 Tahun 2016). Tool ini menggunakan standar Google Lighthouse.</p>
+                <h2>Panduan Lengkap Audit Aksesibilitas & Standar WCAG</h2>
+                <p>Memiliki website yang aksesibel bukan lagi sekadar pilihan, melainkan keharusan hukum dan moral. Di Indonesia, hak aksesibilitas digital telah dijamin dalam UU No. 8 Tahun 2016. Tool <em>Accessibility Checker</em> ini adalah langkah awal Anda untuk mematuhi standar tersebut.</p>
+
+                <h3>1. Apa yang Diperiksa oleh Alat Ini?</h3>
+                <p>Alat ini menggunakan mesin Google Lighthouse untuk memindai kode HTML website Anda. Beberapa poin krusial yang diperiksa meliputi:</p>
+                <ul>
+                    <li><strong>Alt Text pada Gambar:</strong> Apakah setiap gambar memiliki deskripsi teks bagi pengguna pembaca layar?</li>
+                    <li><strong>Struktur Heading:</strong> Apakah penggunaan H1, H2, H3 berurutan secara logis?</li>
+                    <li><strong>Label Formulir:</strong> Apakah setiap kotak input memiliki label yang jelas?</li>
+                    <li><strong>Warna dan Kontras:</strong> Apakah teks cukup kontras dengan latar belakangnya?</li>
+                </ul>
+
                 <div style="background: #f0f8ff; border-left: 5px solid var(--accent-color); padding: 20px; margin-top: 25px;">
-                    <h3 style="margin-top: 0; color: var(--primary-color);">Why Manual Audit?</h3>
-                    <p>Machines only detect 30% of errors. The rest (UX) can only be felt by humans.</p>
-                    <a href="https://disabilitas.com" class="button" target="_blank">Contact Expert Team &rarr;</a>
+                    <h3 style="margin-top: 0; color: var(--primary-color);">Mengapa Harus Audit Manual?</h3>
+                    <p>Berbeda dengan audit otomatis yang terbatas, layanan profesional kami menawarkan kedalaman analisa. Mesin hanya mendeteksi 30% error, sisanya adalah soal kenyamanan (UX) yang hanya bisa dirasakan manusia.</p>
+                    <br>
+                    <a href="https://disabilitas.com" class="button" target="_blank">Hubungi Tim Ahli Disabilitas.com &rarr;</a>
                 </div>
             </article>
         </div>
@@ -200,30 +257,43 @@
     <footer>
         <div class="container">
             <p>&copy; 2025 PT Dimaster Education Berprestasi. All Rights Reserved.</p>
-            <p>Our Ecosystem: <a href="https://kartunet.com" target="_blank">Kartunet</a> | <a href="https://disabilitas.com" target="_blank">Disabilitas.com</a></p>
+            <p>Our Ecosystem: 
+                <a href="https://kartunet.com" target="_blank" style="color:#4cc9f0; font-weight:bold;">Kartunet</a> | 
+                <a href="https://disabilitas.com" target="_blank" style="color:#4cc9f0; font-weight:bold;">Disabilitas.com</a> | 
+                <a href="https://www.dimaster.co.id" target="_blank" style="color:#4cc9f0; font-weight:bold;">Dimaster Group</a>
+            </p>
+            <p style="font-size: 0.8rem; margin-top: 10px;">
+                <a href="mailto:feedback@accessible.web.id" style="color: #e0e0e0; margin-right: 10px; text-decoration: none;">📩 Lapor Bug</a> | 
+                <a href="privacy.html" style="color: #e0e0e0; text-decoration: underline; margin-left: 10px;">Privacy Policy</a>
+            </p>
         </div>
     </footer>
 
     <div id="share-card">
-        <div style="font-size: 2rem; font-weight: bold; margin-bottom: 20px; opacity: 0.9;">DISABILITAS.COM</div>
+        <img src="logo.png" alt="Logo" style="width: 150px; height: auto; margin-bottom: 30px; filter: brightness(0) invert(1) drop-shadow(0 4px 6px rgba(0,0,0,0.3));">
+        
         <div id="cardUrl" style="font-size: 1.5rem; background: rgba(0,0,0,0.3); padding: 10px 30px; border-radius: 50px; margin-bottom: 40px;">-</div>
+        
         <div id="cardScore" style="font-size: 15rem; font-weight: 900; line-height: 1; text-shadow: 4px 4px 20px rgba(0,0,0,0.4);">0</div>
+        
         <div id="cardVerdict" style="font-size: 4rem; font-weight: 800; text-transform: uppercase; margin: 30px 0; border: 6px solid white; padding: 10px 50px; transform: rotate(-5deg); display: inline-block;">KRITIS</div>
-        <div style="margin-top: auto; font-size: 1.8rem; font-weight: bold; border-top: 2px solid rgba(255,255,255,0.5); width: 100%; padding-top: 30px;">Free Check: accessible.web.id</div>
+        
+        <div style="margin-top: auto; font-size: 1.8rem; font-weight: bold; border-top: 2px solid rgba(255,255,255,0.5); width: 100%; padding-top: 30px;">
+            Cek Gratis di: accessible.web.id
+        </div>
     </div>
 
     <script>
         const apiKey = 'AIzaSyBIya_RRn2SoSU8j0yOPHjgCQ6yO7f-Mdg'; 
         let globalShareText = ""; 
 
-        // --- 1. HELPER DETEKSI BAHASA ---
+        // --- 1. DETEKSI BAHASA (Logic Bawaan) ---
         function getCurrentLang() {
-            // Cek Cookie Google Translate (Logic bawaan template user)
             const cookie = document.cookie.match('(^|;) ?googtrans=([^;]*)(;|$)');
             return cookie && cookie[2].includes('/en') ? 'en' : 'id';
         }
 
-        // --- 2. KAMUS BAHASA (Dictionary) ---
+        // --- 2. KAMUS BAHASA (Multi-Language) ---
         const texts = {
             id: {
                 loading: ["Menghubungi Server Google...", "Memindai DOM HTML...", "Cek Kontras Warna...", "Validasi Label ARIA...", "Kalkulasi Skor..."],
@@ -358,9 +428,7 @@
             else if (score < 90) baseText = content.share.mid;
             else baseText = content.share.high;
 
-            // Replace placeholder {url} dan {score}
             let finalText = baseText.replace("{url}", url).replace("{score}", score);
-
             const footer = "\n\n#CekAkses #InklusiDigital accessible.web.id";
             globalShareText = finalText + footer;
 
@@ -407,16 +475,53 @@
             const doc = new jsPDF();
             const score = document.getElementById('resScore').innerText;
             const url = document.getElementById('resUrl').innerText;
-            doc.setFontSize(22); doc.setTextColor(0, 50, 100); doc.text("DISABILITAS.COM", 20, 20);
-            doc.setFontSize(10); doc.setTextColor(100); doc.text("Audit Report", 20, 26); doc.line(20, 30, 190, 30);
-            doc.setFontSize(12); doc.setTextColor(0); doc.text(`Target: ${url}`, 20, 45);
-            doc.setFontSize(60); 
-            if(score < 50) doc.setTextColor(220, 53, 69);
-            else if(score < 90) doc.setTextColor(255, 165, 0);
-            else doc.setTextColor(40, 167, 69);
-            doc.text(`${score}/100`, 20, 80);
-            doc.setFontSize(12); doc.setTextColor(0, 50, 100); doc.text("Email: audit@disabilitas.com", 20, 150);
-            doc.save(`Audit-${score}.pdf`);
+
+            // 1. Muat Logo Gambar (logo.png)
+            var img = new Image();
+            img.src = 'logo.png'; 
+            
+            img.onload = function() {
+                // Gambar Logo (Posisi x:20, y:15, w:30, h:30)
+                doc.addImage(this, 'PNG', 20, 15, 30, 30);
+                
+                // Teks Kop
+                doc.setFontSize(22); doc.setTextColor(0, 50, 100); 
+                doc.text("DISABILITAS.COM", 55, 25);
+                
+                doc.setFontSize(10); doc.setTextColor(100); 
+                doc.text("Professional Accessibility Audit Report", 55, 32); 
+                
+                // Garis Bawah
+                doc.setDrawColor(200, 200, 200);
+                doc.line(20, 50, 190, 50);
+
+                // Isi Laporan
+                doc.setFontSize(12); doc.setTextColor(0); 
+                doc.text(`Target: ${url}`, 20, 65);
+                doc.text(`Date: ${new Date().toLocaleDateString('id-ID')}`, 20, 72);
+
+                // Skor
+                doc.setFontSize(60); 
+                if(score < 50) doc.setTextColor(220, 53, 69);
+                else if(score < 90) doc.setTextColor(255, 165, 0);
+                else doc.setTextColor(40, 167, 69);
+                doc.text(`${score}/100`, 20, 100);
+
+                // CTA
+                doc.setFontSize(14); doc.setTextColor(220, 53, 69); 
+                doc.text("RISIKO TERDETEKSI", 20, 140);
+                doc.setFontSize(11); doc.setTextColor(0); 
+                doc.text("Hasil ini otomatis. Jadwalkan audit manual.", 20, 148);
+                doc.setFontSize(12); doc.setTextColor(0, 50, 100); 
+                doc.text("Email: audit@disabilitas.com", 20, 160);
+
+                doc.save(`Audit-${score}.pdf`);
+            };
+
+            img.onerror = function() {
+                alert("Gagal memuat logo.pdf! Pastikan file logo.png ada.");
+                // Fallback tanpa logo bisa ditambahkan di sini jika mau
+            };
         }
     </script>
     <script src="script.js"></script>
