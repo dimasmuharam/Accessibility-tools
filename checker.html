@@ -379,7 +379,7 @@
             });
         }
         
-        // --- PDF GENERATOR (REVISI DATA PT & HALAMAN 2) ---
+        // --- PDF GENERATOR (UPDATE NAMA FILE DINAMIS) ---
         function downloadPDF() {
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF();
@@ -393,15 +393,13 @@
                 // HALAMAN 1: SURAT RESMI
                 doc.addImage(this, 'PNG', 20, 10, 25, 25);
                 
-                // Kop Surat (Brand + PT + Alamat)
+                // Kop Surat
                 doc.setFont("times", "bold"); doc.setFontSize(22); doc.setTextColor(0); 
                 doc.text("DISABILITAS.COM", 50, 20);
                 doc.setFontSize(10); doc.setFont("helvetica", "normal");
-                // Menambahkan Nama PT sebagai operator
                 doc.text("Managed by: PT DIMASTER EDUCATION BERPRESTASI", 50, 26);
                 doc.text("SK AHU-045800.AH.01.30.2024 | NIB: 1508240114679", 50, 31);
                 doc.text("Jalan Mulya Makarya No. A/1, Larangan Selatan, Kota Tangerang 15154", 50, 36);
-                
                 doc.setLineWidth(1); doc.line(20, 42, 190, 42); 
 
                 // Tanggal & Tujuan
@@ -439,34 +437,29 @@
                 doc.text("Demikian laporan awal ini kami sampaikan. Kami siap membantu Anda melakukan", 20, 200);
                 doc.text("audit manual dan pendampingan sertifikasi aksesibilitas.", 20, 206);
 
-                // Penutup & TTD Teks
+                // Penutup & TTD Teks (Keamanan Data)
                 doc.text("Hormat kami,", 140, 225, { align: 'center' });
                 doc.setFontSize(10); doc.setFont("helvetica", "italic");
                 doc.text("(Tanda Tangan Digital)", 140, 240, { align: 'center' });
-                
                 doc.setFontSize(12); doc.setFont("times", "bold");
                 doc.text("Dimas P. Muharam", 140, 250, { align: 'center' });
                 doc.setFont("times", "normal"); doc.setFontSize(10);
                 doc.text("CEO & Founder Disabilitas.com", 140, 255, { align: 'center' });
 
-                // HALAMAN 2: EDUKASI & STRATEGI BISNIS
+                // HALAMAN 2: EDUKASI & STRATEGI
                 doc.addPage();
-                
                 doc.setFontSize(14); doc.setFont("helvetica", "bold"); doc.setTextColor(0, 50, 100);
-                // Ganti judul jadi lebih corporate
                 doc.text("IMPLIKASI STRATEGIS & MITIGASI RISIKO BISNIS", 20, 20);
                 doc.setLineWidth(0.5); doc.line(20, 25, 190, 25);
 
                 doc.setFontSize(11); doc.setTextColor(0); doc.setFont("helvetica", "normal");
                 
-                // --- KEMBALIKAN BAGIAN METODOLOGI (Yang sempat hilang) ---
                 doc.setFont("helvetica", "bold"); doc.text("1. Metodologi Standar Global (WCAG)", 20, 40);
                 doc.setFont("helvetica", "normal");
                 doc.text("Audit ini mengacu pada standar internasional WCAG (Web Content Accessibility", 20, 46);
                 doc.text("Guidelines) 2.1 Level AA dengan prinsip POUR: Perceivable (Dapat dilihat/didengar),", 20, 52);
                 doc.text("Operable (Dapat dioperasikan), Understandable (Dipahami), dan Robust (Kompatibel).", 20, 58);
 
-                // Bagian Bisnis
                 doc.setFont("helvetica", "bold"); doc.text("2. Tunanetra sebagai Standar Kualitas Universal", 20, 75);
                 doc.setFont("helvetica", "normal");
                 doc.text("Jika website Anda mudah digunakan oleh tunanetra (via keyboard & screen reader),", 20, 81);
@@ -485,7 +478,10 @@
                 doc.setFontSize(11); doc.setTextColor(0); doc.setFont("helvetica", "normal");
                 doc.text("Email: audit@disabilitas.com | Web: disabilitas.com", 105, 175, { align: 'center' });
 
-                doc.save(`Laporan-Audit-${score}.pdf`);
+                // NAMA FILE DINAMIS
+                let cleanUrl = url.replace(/^https?:\/\//, '').replace(/\/$/, '').replace(/[\/\\:*?"<>|]/g, '-');
+                let dateFile = new Date().toLocaleDateString('id-ID').replace(/\//g, '-');
+                doc.save(`Audit_${cleanUrl}_${dateFile}_Score-${score}.pdf`);
             };
             imgLogo.onerror = function() { alert("Gagal memuat logo.png"); };
         }
