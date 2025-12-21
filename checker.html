@@ -81,7 +81,7 @@
         #share-card {
             position: fixed; top: -9999px; left: -9999px; width: 800px; height: 800px;
             display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
-            color: white; font-family: sans-serif; padding: 40px; box-sizing: border-box;
+            color: white; font-family: sans-serif; padding: 40px 0 0 0; box-sizing: border-box; /* Padding diatur agar footer nempel bawah */
         }
         #share-card.panic { background: linear-gradient(135deg, #b92b27 0%, #150000 100%); }
         #share-card.caution { background: linear-gradient(135deg, #ff8008 0%, #ffc837 100%); }
@@ -220,19 +220,23 @@
     </footer>
 
     <div id="share-card">
-        <img src="logo.png" alt="Logo" style="width: 150px; height: auto; margin-bottom: 20px; filter: brightness(0) invert(1) drop-shadow(0 4px 6px rgba(0,0,0,0.3));">
-        
-        <div style="font-size: 1.5rem; text-transform: uppercase; letter-spacing: 2px; opacity: 0.8; margin-bottom: 10px;">WEB ACCESSIBILITY SCORE</div>
-        
-        <div id="cardUrl" style="font-size: 1.5rem; background: rgba(0,0,0,0.3); padding: 10px 30px; border-radius: 50px; margin-bottom: 30px;">-</div>
-        
-        <div id="cardScore" style="font-size: 15rem; font-weight: 900; line-height: 1; text-shadow: 4px 4px 20px rgba(0,0,0,0.4);">0</div>
-        
-        <div id="cardVerdict" style="font-size: 4rem; font-weight: 800; text-transform: uppercase; margin: 20px 0; border: 6px solid white; padding: 10px 50px; transform: rotate(-5deg); display: inline-block;">KRITIS</div>
-        
-        <div id="cardImpact" style="font-size: 1.8rem; font-weight: bold; margin-bottom: 30px; max-width: 90%;">⚠️ Berpotensi Diskriminatif</div>
-        
-        <div style="margin-top: auto; font-size: 1.5rem; border-top: 2px solid rgba(255,255,255,0.5); width: 100%; padding-top: 20px;">Cek Gratis: accessible.web.id</div>
+        <div style="flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; width: 100%; padding: 40px;">
+            <img src="logo.png" alt="Logo" style="width: 150px; height: auto; margin-bottom: 20px; filter: brightness(0) invert(1) drop-shadow(0 4px 6px rgba(0,0,0,0.3));">
+            
+            <div style="font-size: 1.5rem; text-transform: uppercase; letter-spacing: 2px; opacity: 0.8; margin-bottom: 10px;">WEB ACCESSIBILITY SCORE</div>
+            
+            <div id="cardUrl" style="font-size: 1.5rem; background: rgba(0,0,0,0.3); padding: 10px 30px; border-radius: 50px; margin-bottom: 30px;">-</div>
+            
+            <div id="cardScore" style="font-size: 15rem; font-weight: 900; line-height: 1; text-shadow: 4px 4px 20px rgba(0,0,0,0.4);">0</div>
+            
+            <div id="cardVerdict" style="font-size: 4rem; font-weight: 800; text-transform: uppercase; margin: 20px 0; border: 6px solid white; padding: 10px 50px; transform: rotate(-5deg); display: inline-block;">KRITIS</div>
+            
+            <div id="cardImpact" style="font-size: 1.8rem; font-weight: bold; margin-bottom: 10px; max-width: 90%;">⚠️ Berpotensi Diskriminatif</div>
+        </div>
+
+        <div id="cardFooter" style="background: rgba(0,0,0,0.4); width: 100%; padding: 25px 0; font-size: 2rem; font-weight: 900; letter-spacing: 1px; margin-top: auto;">
+            CEK WEBSITE KAMU: accessible.web.id
+        </div>
     </div>
 
     <script type="text/javascript">
@@ -273,6 +277,7 @@
                 verdict: { low: "KRITIS / GAGAL", mid: "BERISIKO TINGGI", high: "TEKNIS LULUS*" },
                 card: { low: "GAGAL", mid: "WASPADA", high: "LULUS*" },
                 impact: { low: "⚠️ Website ini sulit diakses & berpotensi diskriminatif.", mid: "⚠️ Belum inklusif. Masih ada hambatan akses.", high: "✅ Ramah Disabilitas & Inklusif." },
+                footer: "CEK WEBSITE KAMU DI: accessible.web.id",
                 desc: { low: "Sangat buruk. Website ini sulit diakses difabel.", mid: "Jangan tertipu skor ini. Masih banyak celah.", high: "Secara teknis baik. Tetap lakukan audit manual." },
                 share: { low: "Parah 😱 Cek skor aksesibilitas website {url}, cuma dapat {score}/100.", mid: "Hati-hati 🤔 Skor aksesibilitas {url} dapat {score}/100. Masih berisiko.", high: "Keren 🏆 Website {url} dapat skor {score}/100! Tetap butuh cek manual." },
                 pdf: {
@@ -294,6 +299,7 @@
                 verdict: { low: "CRITICAL FAILURE", mid: "HIGH RISK", high: "TECHNICALLY PASSED*" },
                 card: { low: "FAILED", mid: "AT RISK", high: "PASSED*" },
                 impact: { low: "⚠️ Hard to access & potentially discriminatory.", mid: "⚠️ Not fully inclusive. Barriers remain.", high: "✅ Disability Friendly & Inclusive." },
+                footer: "CHECK YOUR SITE AT: accessible.web.id",
                 desc: { low: "Severe accessibility issues detected.", mid: "Don't be fooled by this score. Risks remain.", high: "Technically good. Manual audit recommended." },
                 share: { low: "Shocking 😱 Accessibility score for {url} is only {score}/100.", mid: "Be careful 🤔 Website {url} got {score}/100. Risks remain.", high: "Great 🏆 Website {url} hit {score}/100! Manual check needed." },
                 pdf: {
@@ -353,6 +359,7 @@
             const cardUrl = document.getElementById('cardUrl');
             const shareCard = document.getElementById('share-card');
             const cardImpact = document.getElementById('cardImpact');
+            const cardFooter = document.getElementById('cardFooter'); // Element Footer Baru
 
             card.classList.remove('mode-panic', 'mode-caution', 'mode-success');
             shareCard.classList.remove('panic', 'caution', 'success');
@@ -361,23 +368,26 @@
             cardScore.innerText = score; cardUrl.innerText = url;
 
             const content = texts[lang];
+            // UPDATE TEXT FOOTER SESUAI BAHASA
+            cardFooter.innerText = content.footer;
+
             if (score <= THRESHOLD_PANIC) {
                 card.classList.add('mode-panic'); shareCard.classList.add('panic');
                 verdict.innerText = content.verdict.low; 
                 cardVerdict.innerText = content.card.low; 
-                cardImpact.innerText = content.impact.low; // Dampak Kritis
+                cardImpact.innerText = content.impact.low; 
                 desc.innerText = content.desc.low;
             } else if (score <= THRESHOLD_CAUTION) {
                 card.classList.add('mode-caution'); shareCard.classList.add('caution');
                 verdict.innerText = content.verdict.mid; 
                 cardVerdict.innerText = content.card.mid; 
-                cardImpact.innerText = content.impact.mid; // Dampak Waspada
+                cardImpact.innerText = content.impact.mid; 
                 desc.innerText = content.desc.mid;
             } else {
                 card.classList.add('mode-success'); shareCard.classList.add('success');
                 verdict.innerText = content.verdict.high; 
                 cardVerdict.innerText = content.card.high; 
-                cardImpact.innerText = content.impact.high; // Dampak Sukses
+                cardImpact.innerText = content.impact.high; 
                 desc.innerText = content.desc.high;
             }
             card.style.display = 'block'; card.scrollIntoView({ behavior: 'smooth', block: 'center' }); card.focus();
