@@ -17,6 +17,90 @@
     
     <link rel="icon" type="image/x-icon" href="dimaster.ico">
     <link rel="stylesheet" href="style.css">
+
+    <style>
+        :root {
+            /* Light Mode Variables */
+            --bg-card: #ffffff;
+            --text-main: #111111; /* Hitam pekat untuk kontras maksimal */
+            --border-color: #ccc;
+            
+            /* Info Box Colors (Light) */
+            --info-bg: #f0f8ff; 
+            --info-text: #111111;
+            --info-border: #0056b3;
+            
+            /* Button Colors */
+            --btn-bg: #004085;
+            --btn-text: #ffffff;
+        }
+
+        body.dark-mode {
+            /* Dark Mode Variables (Low Vision Friendly) */
+            --bg-card: #1e1e1e;
+            --text-main: #ffffff; /* Putih terang di latar gelap */
+            --border-color: #666;
+            
+            /* Info Box Colors (Dark) */
+            --info-bg: #2d2d2d; /* Abu gelap solid (tidak silau) */
+            --info-text: #ffffff;
+            --info-border: #4dabf7; /* Biru terang untuk border */
+        }
+
+        /* Layout Utilities */
+        .tool-box {
+            background: var(--bg-card);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border: 1px solid var(--border-color);
+            margin-bottom: 30px;
+        }
+
+        input[type="color"] {
+            width: 100%; height: 50px; cursor: pointer;
+            border: 2px solid var(--border-color); border-radius: 8px;
+            padding: 2px; background: var(--bg-card);
+        }
+
+        label { font-weight: bold; margin-bottom: 8px; display: block; color: var(--text-main); }
+
+        /* Class untuk Kotak Edukasi / Promo (Pengganti Inline Style) */
+        .info-box {
+            background-color: var(--info-bg);
+            color: var(--info-text);
+            border-left: 6px solid var(--info-border);
+            padding: 25px;
+            margin-top: 30px;
+            border-radius: 8px;
+            /* Pastikan border terlihat jelas di dark mode */
+            border: 1px solid var(--border-color); 
+            border-left-width: 6px; /* Reset border left tebal */
+            border-left-color: var(--info-border);
+        }
+
+        /* Tombol Konsisten dengan Checker.html */
+        .cta-button {
+            display: inline-block;
+            background-color: var(--btn-bg);
+            color: var(--btn-text) !important;
+            padding: 12px 25px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 15px;
+            border: 2px solid transparent;
+            transition: opacity 0.2s;
+        }
+        .cta-button:hover { opacity: 0.9; text-decoration: underline; }
+        
+        /* Preview Box Border Fix */
+        #previewBox {
+            background-color: #ffffff; /* Default fallback */
+            color: #000000;
+            border: 2px solid var(--border-color) !important; /* Border tebal agar terlihat batasnya */
+        }
+    </style>
 </head>
 <body>
 
@@ -87,14 +171,15 @@
                 </div>
             </div>
 
-            <div id="previewBox" style="margin-top: 20px; padding: 20px; border: 1px solid #ccc; text-align: center; border-radius: 8px;">
+            <div id="previewBox" style="margin-top: 20px; padding: 30px; text-align: center; border-radius: 8px;">
                 <h2 id="previewText" style="margin: 0 0 10px 0;">Contoh Teks Terbaca</h2>
-                <p style="margin: 0;">Ini adalah simulasi tampilan teks pada latar belakang yang dipilih.</p>
+                <p style="margin: 0; font-size: 1.1rem;">Ini adalah simulasi tampilan teks pada latar belakang yang dipilih.</p>
+                <p style="margin-top: 10px; font-size: 0.9rem;">(Teks kecil untuk pengujian detail)</p>
             </div>
 
-            <div style="margin-top: 20px; text-align: center;">
-                <h3>Rasio Kontras: <span id="ratioResult" style="font-size: 2rem;">-</span></h3>
-                <p>Status: <span id="statusResult" style="font-weight: bold;">-</span></p>
+            <div style="margin-top: 30px; text-align: center;">
+                <h3 style="margin-bottom: 5px; color: var(--text-main);">Rasio Kontras: <span id="ratioResult" style="font-size: 2.5rem; font-weight: 900;">-</span></h3>
+                <p style="font-size: 1.2rem; color: var(--text-main);">Status: <span id="statusResult" style="font-weight: bold;">-</span></p>
             </div>
         </div>
 
@@ -124,12 +209,12 @@
             <h3>3. Tantangan Low Vision & Mitos Estetika</h3>
             <p>Apakah kontras tinggi membuat desain jadi jelek? <strong>Tentu tidak.</strong> Prinsip <em>"Inclusive but Beautiful"</em> menantang Anda untuk tetap menggunakan palet warna modern, namun dengan rasio kontras yang aman.</p>
 
-            <div style="background: var(--card-bg); border-left: 5px solid var(--accent-color); padding: 25px; margin-top: 30px; border-radius: 8px; border: 1px solid var(--border-color);">
-                <h3 style="margin-top: 0; color: var(--primary-color);">Butuh Desain Cantik yang Tetap Inklusif?</h3>
+            <div class="info-box">
+                <h3 style="margin-top: 0; color: inherit;">Butuh Desain Cantik yang Tetap Inklusif?</h3>
                 <p>Memadukan estetika <em>branding</em> dengan kepatuhan standar WCAG memerlukan keahlian khusus. Jangan sampai niat inklusif malah membuat tampilan website Anda terlihat kaku.</p>
                 <p><strong>Layanan Audit Profesional</strong> kami siap membantu mengevaluasi desain UI/UX Anda. Kami melibatkan penguji dari berbagai spektrum tunanetra untuk memastikan website Anda fungsional sekaligus indah.</p>
                 <br>
-                <a href="https://disabilitas.com" class="button" target="_blank">Hubungi Konsultan Disabilitas.com &rarr;</a>
+                <a href="https://disabilitas.com" class="cta-button" target="_blank">Hubungi Konsultan Disabilitas.com &rarr;</a>
             </div>
 
         </article>
@@ -190,13 +275,27 @@
             document.getElementById('ratioResult').innerText = ratio.toFixed(2) + ":1";
             
             let status = "";
-            if(ratio >= 7) status = "LULUS Sempurna (AAA)";
-            else if(ratio >= 4.5) status = "LULUS Standar (AA)";
-            else status = "GAGAL (Kontras Buruk)";
-            
             const statusElem = document.getElementById('statusResult');
+            
+            // Perbaikan Output Status dengan Ikon
+            if(ratio >= 7) {
+                status = "✅ LULUS Sempurna (AAA)";
+                statusElem.style.color = "#198754"; // Hijau
+            }
+            else if(ratio >= 4.5) {
+                status = "✅ LULUS Standar (AA)";
+                statusElem.style.color = "#198754"; // Hijau
+            }
+            else if(ratio >= 3) {
+                status = "⚠️ Cukup untuk Teks Besar Saja";
+                statusElem.style.color = "#d68e00"; // Oranye
+            }
+            else {
+                status = "❌ GAGAL (Kontras Buruk)";
+                statusElem.style.color = "#dc3545"; // Merah
+            }
+            
             statusElem.innerText = status;
-            statusElem.style.color = ratio >= 4.5 ? "green" : "red";
         }
 
         bgInput.addEventListener('input', checkContrast);
