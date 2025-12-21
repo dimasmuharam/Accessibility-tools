@@ -359,27 +359,44 @@
             document.getElementById('btnLI').href = `https://www.linkedin.com/sharing/share-offsite/?url=${siteUrl}`;
         }
 
+        // --- UPDATE: SHARE IMAGE WITH AUTO-COPY FALLBACK FOR PC ---
         function shareImage() {
             const cardElement = document.getElementById('share-card');
             const btn = document.querySelector('.btn-img');
             const originalText = btn.innerText;
             btn.innerText = "Processing...";
+            
             html2canvas(cardElement, { scale: 2 }).then(canvas => {
                 canvas.toBlob(blob => {
                     const file = new File([blob], "audit-result.png", { type: "image/png" });
                     btn.innerText = originalText;
-                    if (navigator.share) {
-                        navigator.share({ title: 'Score', text: globalShareText, files: [file] }).catch(console.error);
+
+                    // 1. Cek Dukungan Native Share (Biasanya HP)
+                    if (navigator.share && navigator.canShare && navigator.canShare({ files: [file] })) {
+                        navigator.share({
+                            title: 'Score',
+                            text: globalShareText,
+                            files: [file]
+                        }).catch(console.error);
                     } else {
+                        // 2. Fallback untuk PC (Download + Copy Text)
                         const link = document.createElement('a');
-                        link.download = 'audit-result.png'; link.href = canvas.toDataURL(); link.click();
-                        alert("Image saved. Please upload manually.");
+                        link.download = 'audit-result.png';
+                        link.href = canvas.toDataURL();
+                        link.click(); // Auto Download
+
+                        // Auto Copy Text
+                        navigator.clipboard.writeText(globalShareText).then(() => {
+                            alert("✅ Gambar tersimpan di komputer!\n✅ Caption berhasil di-COPY!\n\nSilakan Upload gambar ke WA/Medsos, lalu PASTE (Ctrl+V) caption-nya.");
+                        }).catch(() => {
+                            alert("✅ Gambar tersimpan!\n\nSilakan copy caption ini manual:\n" + globalShareText);
+                        });
                     }
                 });
             });
         }
         
-        // --- PDF GENERATOR (UPDATE NAMA FILE DINAMIS) ---
+        // --- PDF GENERATOR (NAMA FILE DINAMIS) ---
         function downloadPDF() {
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF();
@@ -390,7 +407,6 @@
             imgLogo.src = 'logo.png'; 
             
             imgLogo.onload = function() {
-                // HALAMAN 1: SURAT RESMI
                 doc.addImage(this, 'PNG', 20, 10, 25, 25);
                 
                 // Kop Surat
@@ -417,7 +433,6 @@
                 doc.setFont("helvetica", "bold"); doc.text("accessible.web.id", 147, 97); doc.setFont("times", "normal");
                 doc.text(", kami menyampaikan laporan awal aksesibilitas website Anda.", 20, 103);
                 
-                // Kotak Hasil
                 doc.setFillColor(245, 245, 245); doc.rect(40, 115, 130, 40, 'F');
                 doc.setFontSize(14); doc.text("SKOR AKSESIBILITAS ANDA:", 105, 125, { align: 'center' });
                 doc.setFontSize(30); doc.setFont("helvetica", "bold");
@@ -437,7 +452,6 @@
                 doc.text("Demikian laporan awal ini kami sampaikan. Kami siap membantu Anda melakukan", 20, 200);
                 doc.text("audit manual dan pendampingan sertifikasi aksesibilitas.", 20, 206);
 
-                // Penutup & TTD Teks (Keamanan Data)
                 doc.text("Hormat kami,", 140, 225, { align: 'center' });
                 doc.setFontSize(10); doc.setFont("helvetica", "italic");
                 doc.text("(Tanda Tangan Digital)", 140, 240, { align: 'center' });
@@ -446,7 +460,7 @@
                 doc.setFont("times", "normal"); doc.setFontSize(10);
                 doc.text("CEO & Founder Disabilitas.com", 140, 255, { align: 'center' });
 
-                // HALAMAN 2: EDUKASI & STRATEGI
+                // HALAMAN 2
                 doc.addPage();
                 doc.setFontSize(14); doc.setFont("helvetica", "bold"); doc.setTextColor(0, 50, 100);
                 doc.text("IMPLIKASI STRATEGIS & MITIGASI RISIKO BISNIS", 20, 20);
@@ -479,8 +493,11 @@
                 doc.text("Email: audit@disabilitas.com | Web: disabilitas.com", 105, 175, { align: 'center' });
 
                 // NAMA FILE DINAMIS
-                let cleanUrl = url.replace(/^https?:\/\//, '').replace(/\/$/, '').replace(/[\/\\:*?"<>|]/g, '-');
+                // Bersihkan URL dari https/www dan karakter aneh
+                let cleanUrl = url.replace(/^https?:\/\//, '').replace(/^www\./, '').replace(/\/$/, '').replace(/[\/\\:*?"<>|]/g, '-');
+                // Format Tanggal: 21-12-2025
                 let dateFile = new Date().toLocaleDateString('id-ID').replace(/\//g, '-');
+                
                 doc.save(`Audit_${cleanUrl}_${dateFile}_Score-${score}.pdf`);
             };
             imgLogo.onerror = function() { alert("Gagal memuat logo.png"); };
