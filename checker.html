@@ -23,18 +23,37 @@
 
     <style>
         :root {
-            --bg-card: #ffffff; --text-main: #333333; --border-color: #ddd;
-            /* Warna Emosi (Skeptis Mode) */
+            /* Light Mode (Standar Awal - Tidak Berubah) */
+            --bg-card: #ffffff; 
+            --text-main: #333333; 
+            --border-color: #ddd;
+            
+            /* Warna Kotak Info (Light Mode) */
+            --info-bg: #f0f8ff; /* Biru muda lembut */
+            --info-text: #333333;
+            --info-border: #0056b3;
+
+            /* Warna Emosi */
             --panic-bg: #fff5f5; --panic-text: #8a1c24; --panic-border: #dc3545;
             --caution-bg: #fffbf2; --caution-text: #946c00; --caution-border: #ffc107;
             --success-bg: #f0fff4; --success-text: #155724; --success-border: #28a745;
         }
 
         body.dark-mode {
-            --bg-card: #1e1e1e; --text-main: #f0f0f0; --border-color: #444;
-            --panic-bg: #380d11; --panic-text: #ffcccc;
-            --caution-bg: #332701; --caution-text: #ffeba8;
-            --success-bg: #0b2e13; --success-text: #d4edda;
+            /* Dark Mode (High Contrast Fix) */
+            --bg-card: #1e1e1e; 
+            --text-main: #ffffff; /* Teks Putih Terang */
+            --border-color: #666;
+            
+            /* Warna Kotak Info (Dark Mode - FIX KONTRAST) */
+            --info-bg: #2d2d2d; /* Abu Gelap (Bukan Putih/Biru Terang) */
+            --info-text: #ffffff; /* Teks Putih */
+            --info-border: #4dabf7; /* Border Biru Terang */
+
+            /* Warna Emosi Dark Mode */
+            --panic-bg: #3e0a0e; --panic-text: #ffcccc;
+            --caution-bg: #332701; --caution-text: #fff3cd;
+            --success-bg: #0f2e1b; --success-text: #d1e7dd;
         }
 
         .result-card {
@@ -53,7 +72,7 @@
         .verdict-badge { font-size: 1.2rem; text-transform: uppercase; font-weight: 800; padding: 5px 15px; border-radius: 50px; display: inline-block; margin-bottom: 10px; border: 2px solid currentColor; }
 
         .share-section { padding: 20px; background: rgba(0,0,0,0.03); text-align: center; }
-        .share-title { font-size: 0.85rem; font-weight: bold; margin-bottom: 15px; display: block; opacity: 0.7; letter-spacing: 1px; }
+        .share-title { font-size: 0.85rem; font-weight: bold; margin-bottom: 15px; display: block; opacity: 0.8; letter-spacing: 1px; color: var(--text-main); }
 
         .main-actions { display: flex; gap: 10px; justify-content: center; margin-bottom: 20px; flex-wrap: wrap; }
         .btn-action { 
@@ -77,11 +96,25 @@
         #loading-log { font-family: monospace; font-size: 0.9rem; color: #666; margin-top: 15px; height: 20px; display: none; }
         body.dark-mode #loading-log { color: #aaa; }
 
+        /* CLASS BARU: INFO BOX (Dinami Light/Dark) */
+        .info-box {
+            background-color: var(--info-bg);
+            color: var(--info-text);
+            border-left: 5px solid var(--info-border);
+            padding: 20px; margin-top: 25px;
+            border-radius: 4px;
+        }
+        .cta-link {
+            display: inline-block; padding: 10px 20px; margin-top: 10px;
+            background: var(--info-border); color: #fff; text-decoration: none; border-radius: 5px; font-weight: bold;
+        }
+        .cta-link:hover { opacity: 0.9; }
+
         /* HIDDEN TEMPLATE GAMBAR */
         #share-card {
             position: fixed; top: -9999px; left: -9999px; width: 800px; height: 800px;
             display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
-            color: white; font-family: sans-serif; padding: 40px 0 0 0; box-sizing: border-box; /* Padding diatur agar footer nempel bawah */
+            color: white; font-family: sans-serif; padding: 40px 0 0 0; box-sizing: border-box;
         }
         #share-card.panic { background: linear-gradient(135deg, #b92b27 0%, #150000 100%); }
         #share-card.caution { background: linear-gradient(135deg, #ff8008 0%, #ffc837 100%); }
@@ -172,12 +205,13 @@
                 </div>
 
                 <div style="padding: 25px; text-align: center; border-top: 1px solid var(--border-color);">
-                    <h3 style="color: #d9534f; margin-top: 0; font-size: 1.1rem;">⚠️ Peringatan: Mesin Bukan Manusia</h3>
-                    <p style="font-size: 0.9rem;">Skor otomatis ini belum menjamin Anda bebas dari tuntutan hukum. Audit manual diperlukan.</p>
-                    <div style="background: #fff; border: 2px solid #0056b3; border-radius: 8px; padding: 20px; margin-top: 15px;">
-                        <h4 style="margin-top: 0; color: #333;">Butuh Sertifikat Aksesibilitas?</h4>
-                        <p style="font-size: 0.9rem; color: #555; margin-bottom: 15px;">Dapatkan audit dari penguji tunanetra asli di Disabilitas.com.</p>
-                        <a href="https://disabilitas.com" class="button" target="_blank" style="background: #0056b3; width:100%; box-sizing:border-box; text-align:center;">Hubungi Konsultan Disabilitas.com &rarr;</a>
+                    <h3 style="color: var(--panic-text); margin-top: 0; font-size: 1.1rem;">⚠️ Peringatan: Mesin Bukan Manusia</h3>
+                    <p style="font-size: 0.9rem; color: var(--text-main);">Skor otomatis ini belum menjamin Anda bebas dari tuntutan hukum. Audit manual diperlukan.</p>
+                    
+                    <div class="info-box">
+                        <h4 style="margin-top: 0; color: inherit;">Butuh Sertifikat Aksesibilitas?</h4>
+                        <p style="font-size: 0.9rem; margin-bottom: 15px;">Dapatkan audit dari penguji tunanetra asli di Disabilitas.com.</p>
+                        <a href="https://disabilitas.com" class="cta-link" target="_blank">Hubungi Konsultan Disabilitas.com &rarr;</a>
                     </div>
                 </div>
             </div>
@@ -203,10 +237,10 @@
                     <li><strong>Robust:</strong> Kompatibel dengan teknologi bantu.</li>
                 </ol>
 
-                <div style="background: #f0f8ff; border-left: 5px solid var(--accent-color); padding: 20px; margin-top: 25px;">
-                    <h3 style="margin-top: 0; color: var(--primary-color);">Mengapa Harus Audit Manual?</h3>
+                <div class="info-box">
+                    <h3 style="margin-top: 0; color: inherit;">Mengapa Harus Audit Manual?</h3>
                     <p>Mesin hanya mendeteksi 30% error. Sisanya (UX & Kenyamanan) hanya bisa dirasakan manusia.</p>
-                    <a href="https://disabilitas.com" class="button" target="_blank">Hubungi Tim Ahli Disabilitas.com &rarr;</a>
+                    <a href="https://disabilitas.com" class="cta-link" target="_blank">Hubungi Tim Ahli Disabilitas.com &rarr;</a>
                 </div>
             </article>
         </div>
@@ -359,7 +393,7 @@
             const cardUrl = document.getElementById('cardUrl');
             const shareCard = document.getElementById('share-card');
             const cardImpact = document.getElementById('cardImpact');
-            const cardFooter = document.getElementById('cardFooter'); // Element Footer Baru
+            const cardFooter = document.getElementById('cardFooter'); 
 
             card.classList.remove('mode-panic', 'mode-caution', 'mode-success');
             shareCard.classList.remove('panic', 'caution', 'success');
@@ -368,7 +402,6 @@
             cardScore.innerText = score; cardUrl.innerText = url;
 
             const content = texts[lang];
-            // UPDATE TEXT FOOTER SESUAI BAHASA
             cardFooter.innerText = content.footer;
 
             if (score <= THRESHOLD_PANIC) {
