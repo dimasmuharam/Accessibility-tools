@@ -359,7 +359,7 @@
             document.getElementById('btnLI').href = `https://www.linkedin.com/sharing/share-offsite/?url=${siteUrl}`;
         }
 
-        // --- SHARE IMAGE WITH AUTO-COPY & INSTRUCTIONS (REVERTED TO AUTO-COPY) ---
+        // --- SHARE IMAGE WITH AUTO-COPY & INSTRUCTIONS ---
         async function shareImage() {
             const cardElement = document.getElementById('share-card');
             const btn = document.querySelector('.btn-img');
@@ -372,7 +372,6 @@
                 textCopied = true;
             } catch (err) {
                 try {
-                    // Fallback Tradisional
                     const textArea = document.createElement("textarea");
                     textArea.value = globalShareText;
                     textArea.style.position = "fixed"; 
@@ -408,9 +407,9 @@
                         link.href = canvas.toDataURL();
                         link.click(); 
 
-                        // 3. INSTRUKSI PENTING DI SINI
+                        // 3. INSTRUKSI PENTING DI SINI (ALERT)
                         if(textCopied) {
-                            alert("✅ GAMBAR TERSIMPAN & CAPTION TER-COPY!\n\n⚠ AGAR TEKS JADI CAPTION DI WA:\n\n1. Upload Gambar.\n2. JANGAN TEKAN ENTER / KIRIM DULU!\n3. Fokuskan kursor ke kolom 'Tambah Keterangan' (Caption).\n4. PASTE (Ctrl+V) di situ.\n5. Baru klik Kirim.");
+                            alert("✅ GAMBAR TERSIMPAN & CAPTION TER-COPY!\n\n⚠ CARA PASTE DI WHATSAPP AGAR RAPI:\n\n1. Upload Gambar.\n2. JANGAN LANGSUNG KIRIM (ENTER)!\n3. Klik kolom 'Tambah Keterangan' (Caption) di bawah gambar.\n4. Paste (Ctrl+V) di situ.\n5. Baru klik Kirim.");
                         } else {
                             prompt("Gambar tersimpan! Browser memblokir auto-copy. Copy teks di bawah ini:", globalShareText);
                         }
@@ -419,7 +418,7 @@
             });
         }
         
-        // --- PDF GENERATOR (FITUR LENGKAP TETAP ADA) ---
+        // --- PDF GENERATOR (FINAL REFINED ALIGNMENT) ---
         function downloadPDF() {
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF();
@@ -437,12 +436,16 @@
                 doc.setFontSize(10); doc.setFont("helvetica", "normal");
                 doc.text("Managed by: PT DIMASTER EDUCATION BERPRESTASI", 50, 26);
                 doc.text("SK AHU-045800.AH.01.30.2024 | NIB: 1508240114679", 50, 31);
+                // Font lebih kecil (9pt) agar muat
+                doc.setFontSize(9);
                 doc.text("Jalan Mulya Makarya No. A/1, Larangan Selatan, Kota Tangerang 15154", 50, 36);
+                
                 doc.setLineWidth(1); doc.line(20, 42, 190, 42); 
 
                 doc.setFontSize(12); doc.setTextColor(0);
                 const dateStr = new Date().toLocaleDateString('id-ID', { year: 'numeric', month: 'long', day: 'numeric' });
-                doc.text(`Kota Tangerang, ${dateStr}`, 140, 55, { align: 'right' });
+                // Posisi Tanggal Diperbaiki (Rata Kanan murni di 190)
+                doc.text(`Kota Tangerang, ${dateStr}`, 190, 55, { align: 'right' });
                 
                 doc.text("Kepada Yth,", 20, 65);
                 doc.text(`Pengelola Situs: ${url}`, 20, 71);
@@ -472,6 +475,7 @@
                 doc.text("Demikian laporan awal ini kami sampaikan. Kami siap membantu Anda melakukan", 20, 200);
                 doc.text("audit manual dan pendampingan sertifikasi aksesibilitas.", 20, 206);
 
+                // Tanda Tangan
                 doc.text("Hormat kami,", 140, 225, { align: 'center' });
                 doc.setFontSize(10); doc.setFont("helvetica", "italic");
                 doc.text("(Tanda Tangan Digital)", 140, 240, { align: 'center' });
@@ -480,6 +484,7 @@
                 doc.setFont("times", "normal"); doc.setFontSize(10);
                 doc.text("CEO & Founder Disabilitas.com", 140, 255, { align: 'center' });
 
+                // HALAMAN 2
                 doc.addPage();
                 doc.setFontSize(14); doc.setFont("helvetica", "bold"); doc.setTextColor(0, 50, 100);
                 doc.text("IMPLIKASI STRATEGIS & MITIGASI RISIKO BISNIS", 20, 20);
