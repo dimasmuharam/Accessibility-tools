@@ -220,11 +220,19 @@
     </footer>
 
     <div id="share-card">
-        <img src="logo.png" alt="Logo" style="width: 150px; height: auto; margin-bottom: 30px; filter: brightness(0) invert(1) drop-shadow(0 4px 6px rgba(0,0,0,0.3));">
-        <div id="cardUrl" style="font-size: 1.5rem; background: rgba(0,0,0,0.3); padding: 10px 30px; border-radius: 50px; margin-bottom: 40px;">-</div>
+        <img src="logo.png" alt="Logo" style="width: 150px; height: auto; margin-bottom: 20px; filter: brightness(0) invert(1) drop-shadow(0 4px 6px rgba(0,0,0,0.3));">
+        
+        <div style="font-size: 1.5rem; text-transform: uppercase; letter-spacing: 2px; opacity: 0.8; margin-bottom: 10px;">WEB ACCESSIBILITY SCORE</div>
+        
+        <div id="cardUrl" style="font-size: 1.5rem; background: rgba(0,0,0,0.3); padding: 10px 30px; border-radius: 50px; margin-bottom: 30px;">-</div>
+        
         <div id="cardScore" style="font-size: 15rem; font-weight: 900; line-height: 1; text-shadow: 4px 4px 20px rgba(0,0,0,0.4);">0</div>
-        <div id="cardVerdict" style="font-size: 4rem; font-weight: 800; text-transform: uppercase; margin: 30px 0; border: 6px solid white; padding: 10px 50px; transform: rotate(-5deg); display: inline-block;">KRITIS</div>
-        <div style="margin-top: auto; font-size: 1.8rem; font-weight: bold; border-top: 2px solid rgba(255,255,255,0.5); width: 100%; padding-top: 30px;">Free Check: accessible.web.id</div>
+        
+        <div id="cardVerdict" style="font-size: 4rem; font-weight: 800; text-transform: uppercase; margin: 20px 0; border: 6px solid white; padding: 10px 50px; transform: rotate(-5deg); display: inline-block;">KRITIS</div>
+        
+        <div id="cardImpact" style="font-size: 1.8rem; font-weight: bold; margin-bottom: 30px; max-width: 90%;">⚠️ Berpotensi Diskriminatif</div>
+        
+        <div style="margin-top: auto; font-size: 1.5rem; border-top: 2px solid rgba(255,255,255,0.5); width: 100%; padding-top: 20px;">Cek Gratis: accessible.web.id</div>
     </div>
 
     <script type="text/javascript">
@@ -240,7 +248,6 @@
         const THRESHOLD_PANIC = 60; 
         const THRESHOLD_CAUTION = 94; 
 
-        // 1. Logic Bahasa
         function getCurrentLang() {
             const cookie = document.cookie.match('(^|;) ?googtrans=([^;]*)(;|$)');
             return cookie && cookie[2].includes('/en') ? 'en' : 'id';
@@ -259,38 +266,25 @@
             });
         });
 
-        // 2. KAMUS BAHASA (TERMASUK PDF CONTENT)
         const texts = {
             id: {
                 loading: ["Menghubungi Server Google...", "Memindai DOM HTML...", "Cek Kontras Warna...", "Validasi Label ARIA...", "Kalkulasi Skor..."],
                 btnLoading: "MENGANALISA...", btnAgain: "Cek URL Lain",
                 verdict: { low: "KRITIS / GAGAL", mid: "BERISIKO TINGGI", high: "TEKNIS LULUS*" },
                 card: { low: "GAGAL", mid: "WASPADA", high: "LULUS*" },
+                impact: { low: "⚠️ Website ini sulit diakses & berpotensi diskriminatif.", mid: "⚠️ Belum inklusif. Masih ada hambatan akses.", high: "✅ Ramah Disabilitas & Inklusif." },
                 desc: { low: "Sangat buruk. Website ini sulit diakses difabel.", mid: "Jangan tertipu skor ini. Masih banyak celah.", high: "Secara teknis baik. Tetap lakukan audit manual." },
                 share: { low: "Parah 😱 Cek skor aksesibilitas website {url}, cuma dapat {score}/100.", mid: "Hati-hati 🤔 Skor aksesibilitas {url} dapat {score}/100. Masih berisiko.", high: "Keren 🏆 Website {url} dapat skor {score}/100! Tetap butuh cek manual." },
-                // PDF SPECIFIC CONTENT (INDONESIA)
                 pdf: {
-                    to: "Kepada Yth,",
-                    manager: "Pengelola Situs:",
-                    place: "Di Tempat",
-                    greeting: "Dengan hormat,",
-                    opening: "Berdasarkan hasil pengecekan otomatis yang telah dilakukan pada website",
-                    opening2: ", kami menyampaikan laporan awal aksesibilitas website Anda.",
-                    scoreTitle: "SKOR AKSESIBILITAS ANDA:",
-                    noteTitle: "⚠️ CATATAN PENTING:",
-                    note1: "Hasil di atas hanyalah deteksi mesin. Mesin tidak bisa merasakan pengalaman pengguna.",
-                    note2: "Risiko hukum (UU No. 8/2016) mungkin masih ada meski skor terlihat tinggi.",
-                    closing: "Demikian laporan awal ini kami sampaikan. Kami siap membantu Anda melakukan",
-                    closing2: "audit manual dan pendampingan sertifikasi aksesibilitas.",
-                    regards: "Hormat kami,",
-                    sign: "(Tanda Tangan Digital)",
-                    page2Title: "IMPLIKASI STRATEGIS & MITIGASI RISIKO BISNIS",
-                    p1Title: "1. Metodologi Standar Global (WCAG)",
-                    p1Body: "Audit ini mengacu pada standar internasional WCAG 2.1 Level AA dengan prinsip POUR: Perceivable, Operable, Understandable, dan Robust.",
-                    p2Title: "2. Tunanetra sebagai Standar Kualitas Universal",
-                    p2Body: "Jika website Anda mudah digunakan oleh tunanetra (via keyboard & screen reader), maka secara otomatis website tersebut akan sangat ringan dan mudah digunakan oleh semua orang.",
-                    p3Title: "3. Mitigasi Risiko Hukum & Pasar",
-                    p3Body: "Ketidakpatuhan terhadap standar aksesibilitas berisiko melanggar UU No. 8/2016. Website inklusif juga membuka potensi pasar 22+ juta penyandang disabilitas.",
+                    to: "Kepada Yth,", manager: "Pengelola Situs:", place: "Di Tempat", greeting: "Dengan hormat,",
+                    opening: "Berdasarkan hasil pengecekan otomatis yang telah dilakukan pada website", opening2: ", kami menyampaikan laporan awal aksesibilitas website Anda.",
+                    scoreTitle: "SKOR AKSESIBILITAS ANDA:", noteTitle: "⚠️ CATATAN PENTING:",
+                    note1: "Hasil di atas hanyalah deteksi mesin. Mesin tidak bisa merasakan pengalaman pengguna.", note2: "Risiko hukum (UU No. 8/2016) mungkin masih ada meski skor terlihat tinggi.",
+                    closing: "Demikian laporan awal ini kami sampaikan. Kami siap membantu Anda melakukan", closing2: "audit manual dan pendampingan sertifikasi aksesibilitas.",
+                    regards: "Hormat kami,", sign: "(Tanda Tangan Digital)", page2Title: "IMPLIKASI STRATEGIS & MITIGASI RISIKO BISNIS",
+                    p1Title: "1. Metodologi Standar Global (WCAG)", p1Body: "Audit ini mengacu pada standar internasional WCAG 2.1 Level AA dengan prinsip POUR: Perceivable, Operable, Understandable, dan Robust.",
+                    p2Title: "2. Tunanetra sebagai Standar Kualitas Universal", p2Body: "Jika website Anda mudah digunakan oleh tunanetra (via keyboard & screen reader), maka secara otomatis website tersebut akan sangat ringan dan mudah digunakan oleh semua orang.",
+                    p3Title: "3. Mitigasi Risiko Hukum & Pasar", p3Body: "Ketidakpatuhan terhadap standar aksesibilitas berisiko melanggar UU No. 8/2016. Website inklusif juga membuka potensi pasar 22+ juta penyandang disabilitas.",
                     cta: "JADWALKAN KONSULTASI AUDIT MANUAL SEKARANG"
                 }
             },
@@ -299,31 +293,19 @@
                 btnLoading: "ANALYZING...", btnAgain: "Check Another URL",
                 verdict: { low: "CRITICAL FAILURE", mid: "HIGH RISK", high: "TECHNICALLY PASSED*" },
                 card: { low: "FAILED", mid: "AT RISK", high: "PASSED*" },
+                impact: { low: "⚠️ Hard to access & potentially discriminatory.", mid: "⚠️ Not fully inclusive. Barriers remain.", high: "✅ Disability Friendly & Inclusive." },
                 desc: { low: "Severe accessibility issues detected.", mid: "Don't be fooled by this score. Risks remain.", high: "Technically good. Manual audit recommended." },
                 share: { low: "Shocking 😱 Accessibility score for {url} is only {score}/100.", mid: "Be careful 🤔 Website {url} got {score}/100. Risks remain.", high: "Great 🏆 Website {url} hit {score}/100! Manual check needed." },
-                // PDF SPECIFIC CONTENT (ENGLISH)
                 pdf: {
-                    to: "To:",
-                    manager: "Site Manager of:",
-                    place: "In Place",
-                    greeting: "Dear Sir/Madam,",
-                    opening: "Based on the automated accessibility audit results conducted on",
-                    opening2: ", we hereby submit the preliminary accessibility report for your website.",
-                    scoreTitle: "YOUR ACCESSIBILITY SCORE:",
-                    noteTitle: "⚠️ IMPORTANT NOTE:",
-                    note1: "The result above is machine-detected. Machines cannot perceive user experience (UX).",
-                    note2: "Legal risks (Indonesian Law No. 8/2016) may still exist even with high scores.",
-                    closing: "Thus we convey this preliminary report. We are ready to assist you with",
-                    closing2: "manual audit and accessibility certification process.",
-                    regards: "Sincerely,",
-                    sign: "(Digital Signature)",
-                    page2Title: "STRATEGIC IMPLICATIONS & BUSINESS RISK MITIGATION",
-                    p1Title: "1. Global Standard Methodology (WCAG)",
-                    p1Body: "This audit is based on international standard WCAG 2.1 Level AA using POUR principles: Perceivable, Operable, Understandable, and Robust.",
-                    p2Title: "2. Blind Users as Universal Quality Standard",
-                    p2Body: "If your website is accessible to blind users (via keyboard & screen reader), it guarantees ease of use for everyone (Seniors, small screen users, etc).",
-                    p3Title: "3. Legal & Market Risk Mitigation",
-                    p3Body: "Non-compliance with accessibility standards risks violating Law No. 8/2016. An inclusive website unlocks a market potential of 22+ million people with disabilities.",
+                    to: "To:", manager: "Site Manager of:", place: "In Place", greeting: "Dear Sir/Madam,",
+                    opening: "Based on the automated accessibility audit results conducted on", opening2: ", we hereby submit the preliminary accessibility report for your website.",
+                    scoreTitle: "YOUR ACCESSIBILITY SCORE:", noteTitle: "⚠️ IMPORTANT NOTE:",
+                    note1: "The result above is machine-detected. Machines cannot perceive user experience (UX).", note2: "Legal risks (Indonesian Law No. 8/2016) may still exist even with high scores.",
+                    closing: "Thus we convey this preliminary report. We are ready to assist you with", closing2: "manual audit and accessibility certification process.",
+                    regards: "Sincerely,", sign: "(Digital Signature)", page2Title: "STRATEGIC IMPLICATIONS & BUSINESS RISK MITIGATION",
+                    p1Title: "1. Global Standard Methodology (WCAG)", p1Body: "This audit is based on international standard WCAG 2.1 Level AA using POUR principles: Perceivable, Operable, Understandable, and Robust.",
+                    p2Title: "2. Blind Users as Universal Quality Standard", p2Body: "If your website is accessible to blind users (via keyboard & screen reader), it guarantees ease of use for everyone (Seniors, small screen users, etc).",
+                    p3Title: "3. Legal & Market Risk Mitigation", p3Body: "Non-compliance with accessibility standards risks violating Law No. 8/2016. An inclusive website unlocks a market potential of 22+ million people with disabilities.",
                     cta: "SCHEDULE MANUAL AUDIT CONSULTATION NOW"
                 }
             }
@@ -370,6 +352,7 @@
             const cardVerdict = document.getElementById('cardVerdict');
             const cardUrl = document.getElementById('cardUrl');
             const shareCard = document.getElementById('share-card');
+            const cardImpact = document.getElementById('cardImpact');
 
             card.classList.remove('mode-panic', 'mode-caution', 'mode-success');
             shareCard.classList.remove('panic', 'caution', 'success');
@@ -380,13 +363,22 @@
             const content = texts[lang];
             if (score <= THRESHOLD_PANIC) {
                 card.classList.add('mode-panic'); shareCard.classList.add('panic');
-                verdict.innerText = content.verdict.low; cardVerdict.innerText = content.card.low; desc.innerText = content.desc.low;
+                verdict.innerText = content.verdict.low; 
+                cardVerdict.innerText = content.card.low; 
+                cardImpact.innerText = content.impact.low; // Dampak Kritis
+                desc.innerText = content.desc.low;
             } else if (score <= THRESHOLD_CAUTION) {
                 card.classList.add('mode-caution'); shareCard.classList.add('caution');
-                verdict.innerText = content.verdict.mid; cardVerdict.innerText = content.card.mid; desc.innerText = content.desc.mid;
+                verdict.innerText = content.verdict.mid; 
+                cardVerdict.innerText = content.card.mid; 
+                cardImpact.innerText = content.impact.mid; // Dampak Waspada
+                desc.innerText = content.desc.mid;
             } else {
                 card.classList.add('mode-success'); shareCard.classList.add('success');
-                verdict.innerText = content.verdict.high; cardVerdict.innerText = content.card.high; desc.innerText = content.desc.high;
+                verdict.innerText = content.verdict.high; 
+                cardVerdict.innerText = content.card.high; 
+                cardImpact.innerText = content.impact.high; // Dampak Sukses
+                desc.innerText = content.desc.high;
             }
             card.style.display = 'block'; card.scrollIntoView({ behavior: 'smooth', block: 'center' }); card.focus();
         }
@@ -409,71 +401,52 @@
             document.getElementById('btnLI').href = `https://www.linkedin.com/sharing/share-offsite/?url=${siteUrl}`;
         }
 
-        // --- SHARE IMAGE WITH AUTO-COPY & INSTRUCTIONS ---
         async function shareImage() {
             const cardElement = document.getElementById('share-card');
             const btn = document.querySelector('.btn-img');
             const originalText = btn.innerText;
 
-            // 1. COPY TEKS DULUAN
             let textCopied = false;
-            try {
-                await navigator.clipboard.writeText(globalShareText);
-                textCopied = true;
-            } catch (err) {
+            try { await navigator.clipboard.writeText(globalShareText); textCopied = true; } 
+            catch (err) {
                 try {
                     const textArea = document.createElement("textarea");
-                    textArea.value = globalShareText;
-                    textArea.style.position = "fixed"; 
-                    document.body.appendChild(textArea);
-                    textArea.focus();
-                    textArea.select();
-                    document.execCommand('copy');
-                    document.body.removeChild(textArea);
-                    textCopied = true;
-                } catch (e) {
-                    console.error("Gagal copy text", e);
-                }
+                    textArea.value = globalShareText; textArea.style.position = "fixed"; 
+                    document.body.appendChild(textArea); textArea.focus(); textArea.select();
+                    document.execCommand('copy'); document.body.removeChild(textArea); textCopied = true;
+                } catch (e) { console.error("Gagal copy text", e); }
             }
 
             btn.innerText = "Processing...";
             
-            // 2. BARU PROSES GAMBAR
             html2canvas(cardElement, { scale: 2 }).then(canvas => {
                 canvas.toBlob(blob => {
                     const file = new File([blob], "audit-result.png", { type: "image/png" });
                     btn.innerText = originalText;
 
                     if (navigator.share && navigator.canShare && navigator.canShare({ files: [file] })) {
-                        navigator.share({
-                            title: 'Score',
-                            text: globalShareText,
-                            files: [file]
-                        }).catch(console.error);
+                        navigator.share({ title: 'Score', text: globalShareText, files: [file] }).catch(console.error);
                     } else {
                         const link = document.createElement('a');
-                        link.download = 'audit-result.png';
-                        link.href = canvas.toDataURL();
-                        link.click(); 
+                        link.download = 'audit-result.png'; link.href = canvas.toDataURL(); link.click(); 
 
                         if(textCopied) {
-                            alert("✅ GAMBAR TERSIMPAN & CAPTION TER-COPY!\n\n⚠ CARA PASTE DI WHATSAPP AGAR RAPI:\n\n1. Upload Gambar.\n2. JANGAN LANGSUNG KIRIM (ENTER)!\n3. Klik kolom 'Tambah Keterangan' (Caption) di bawah gambar.\n4. Paste (Ctrl+V) di situ.\n5. Baru klik Kirim.");
+                            alert("✅ GAMBAR TERSIMPAN & CAPTION TER-COPY!\n\n⚠ CARA PASTE DI WHATSAPP AGAR RAPI:\n\n1. Upload Gambar.\n2. JANGAN LANGSUNG KIRIM (ENTER)!\n3. Klik kolom 'Tambah Keterangan' (Caption).\n4. Paste (Ctrl+V).\n5. Baru klik Kirim.");
                         } else {
-                            prompt("Gambar tersimpan! Browser memblokir auto-copy. Copy teks di bawah ini:", globalShareText);
+                            prompt("Gambar tersimpan! Copy teks manual:", globalShareText);
                         }
                     }
                 });
             });
         }
         
-        // --- PDF GENERATOR (MULTI-BAHASA SUPPORT) ---
         function downloadPDF() {
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF();
             const score = document.getElementById('resScore').innerText;
             const url = document.getElementById('resUrl').innerText;
             const lang = getCurrentLang();
-            const content = texts[lang].pdf; // Ambil teks PDF sesuai bahasa
+            const content = texts[lang].pdf;
             
             var imgLogo = new Image();
             imgLogo.src = 'logo.png'; 
@@ -486,13 +459,11 @@
                 doc.setFontSize(10); doc.setFont("helvetica", "normal");
                 doc.text("Managed by: PT DIMASTER EDUCATION BERPRESTASI", 50, 26);
                 doc.text("SK AHU-045800.AH.01.30.2024 | NIB: 1508240114679", 50, 31);
-                doc.setFontSize(9);
-                doc.text("Jalan Mulya Makarya No. A/1, Larangan Selatan, Kota Tangerang 15154", 50, 36);
+                doc.setFontSize(9); doc.text("Jalan Mulya Makarya No. A/1, Larangan Selatan, Kota Tangerang 15154", 50, 36);
                 
                 doc.setLineWidth(1); doc.line(20, 42, 190, 42); 
 
                 doc.setFontSize(12); doc.setTextColor(0);
-                // Tanggal Format Lokal (ID/EN)
                 const dateOptions = { year: 'numeric', month: 'long', day: 'numeric' };
                 const locale = lang === 'en' ? 'en-US' : 'id-ID';
                 const dateStr = new Date().toLocaleDateString(locale, dateOptions);
@@ -500,13 +471,11 @@
                 
                 doc.text(`${city}, ${dateStr}`, 190, 55, { align: 'right' });
                 
-                doc.text(content.to, 20, 65);
-                doc.text(`${content.manager} ${url}`, 20, 71);
-                doc.text(content.place, 20, 77);
+                doc.text(content.to, 20, 65); doc.text(`${content.manager} ${url}`, 20, 71); doc.text(content.place, 20, 77);
 
                 doc.text(content.greeting, 20, 90);
-                doc.text(content.opening, 20, 97);
-                doc.setFont("helvetica", "bold"); doc.text("accessible.web.id", lang === 'en' ? 140 : 147, 97); doc.setFont("times", "normal");
+                doc.text(content.opening, 20, 97); doc.setFont("helvetica", "bold"); 
+                doc.text("accessible.web.id", lang === 'en' ? 140 : 147, 97); doc.setFont("times", "normal");
                 doc.text(content.opening2, 20, 103);
                 
                 doc.setFillColor(245, 245, 245); doc.rect(40, 115, 130, 40, 'F');
@@ -520,48 +489,30 @@
                 doc.text(`${score}/100`, 105, 140, { align: 'center' });
                 
                 doc.setTextColor(0); doc.setFont("times", "normal"); doc.setFontSize(12);
-                doc.text(content.noteTitle, 20, 170);
-                doc.setFontSize(11);
-                doc.text(content.note1, 20, 177);
-                doc.text(content.note2, 20, 183);
+                doc.text(content.noteTitle, 20, 170); doc.setFontSize(11);
+                doc.text(content.note1, 20, 177); doc.text(content.note2, 20, 183);
 
-                doc.text(content.closing, 20, 200);
-                doc.text(content.closing2, 20, 206);
+                doc.text(content.closing, 20, 200); doc.text(content.closing2, 20, 206);
 
                 doc.text(content.regards, 140, 225, { align: 'center' });
-                doc.setFontSize(10); doc.setFont("helvetica", "italic");
-                doc.text(content.sign, 140, 240, { align: 'center' });
-                doc.setFontSize(12); doc.setFont("times", "bold");
-                doc.text("Dimas P. Muharam", 140, 250, { align: 'center' });
-                doc.setFont("times", "normal"); doc.setFontSize(10);
-                doc.text("CEO & Founder Disabilitas.com", 140, 255, { align: 'center' });
+                doc.setFontSize(10); doc.setFont("helvetica", "italic"); doc.text(content.sign, 140, 240, { align: 'center' });
+                doc.setFontSize(12); doc.setFont("times", "bold"); doc.text("Dimas P. Muharam", 140, 250, { align: 'center' });
+                doc.setFont("times", "normal"); doc.setFontSize(10); doc.text("CEO & Founder Disabilitas.com", 140, 255, { align: 'center' });
 
-                // HALAMAN 2
                 doc.addPage();
                 doc.setFontSize(14); doc.setFont("helvetica", "bold"); doc.setTextColor(0, 50, 100);
-                doc.text(content.page2Title, 20, 20);
-                doc.setLineWidth(0.5); doc.line(20, 25, 190, 25);
+                doc.text(content.page2Title, 20, 20); doc.setLineWidth(0.5); doc.line(20, 25, 190, 25);
 
                 doc.setFontSize(11); doc.setTextColor(0); doc.setFont("helvetica", "normal");
                 
-                // Point 1
                 doc.setFont("helvetica", "bold"); doc.text(content.p1Title, 20, 40);
-                doc.setFont("helvetica", "normal");
-                // Text Split untuk handling paragraf panjang
-                const p1Lines = doc.splitTextToSize(content.p1Body, 170);
-                doc.text(p1Lines, 20, 46);
+                doc.setFont("helvetica", "normal"); const p1Lines = doc.splitTextToSize(content.p1Body, 170); doc.text(p1Lines, 20, 46);
 
-                // Point 2
                 doc.setFont("helvetica", "bold"); doc.text(content.p2Title, 20, 75);
-                doc.setFont("helvetica", "normal");
-                const p2Lines = doc.splitTextToSize(content.p2Body, 170);
-                doc.text(p2Lines, 20, 81);
+                doc.setFont("helvetica", "normal"); const p2Lines = doc.splitTextToSize(content.p2Body, 170); doc.text(p2Lines, 20, 81);
 
-                // Point 3
                 doc.setFont("helvetica", "bold"); doc.text(content.p3Title, 20, 110);
-                doc.setFont("helvetica", "normal");
-                const p3Lines = doc.splitTextToSize(content.p3Body, 170);
-                doc.text(p3Lines, 20, 116);
+                doc.setFont("helvetica", "normal"); const p3Lines = doc.splitTextToSize(content.p3Body, 170); doc.text(p3Lines, 20, 116);
 
                 doc.setFillColor(230, 240, 255); doc.rect(20, 150, 170, 40, 'F');
                 doc.setFontSize(12); doc.setTextColor(0, 50, 100); doc.setFont("helvetica", "bold");
@@ -571,7 +522,6 @@
 
                 let cleanUrl = url.replace(/^https?:\/\//, '').replace(/^www\./, '').replace(/\/$/, '').replace(/[\/\\:*?"<>|]/g, '-');
                 let fileDate = new Date().toLocaleDateString('id-ID').replace(/\//g, '-');
-                
                 doc.save(`Audit_${cleanUrl}_${fileDate}_Score-${score}.pdf`);
             };
             imgLogo.onerror = function() { alert("Gagal memuat logo.png"); };
