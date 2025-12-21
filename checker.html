@@ -359,19 +359,44 @@
             document.getElementById('btnLI').href = `https://www.linkedin.com/sharing/share-offsite/?url=${siteUrl}`;
         }
 
-        // --- UPDATE: SHARE IMAGE WITH AUTO-COPY FALLBACK FOR PC ---
-        function shareImage() {
+        // --- UPDATE: SHARE IMAGE WITH ROBUST COPY FALLBACK ---
+        async function shareImage() {
             const cardElement = document.getElementById('share-card');
             const btn = document.querySelector('.btn-img');
             const originalText = btn.innerText;
+
+            // 1. COPY TEKS DULUAN (Supaya tidak diblokir browser)
+            let textCopied = false;
+            try {
+                // Cara Modern
+                await navigator.clipboard.writeText(globalShareText);
+                textCopied = true;
+            } catch (err) {
+                // Cara Tradisional (Fallback Paling Aman untuk PC)
+                try {
+                    const textArea = document.createElement("textarea");
+                    textArea.value = globalShareText;
+                    textArea.style.position = "fixed"; // Hindari scroll
+                    document.body.appendChild(textArea);
+                    textArea.focus();
+                    textArea.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(textArea);
+                    textCopied = true;
+                } catch (e) {
+                    console.error("Gagal copy text", e);
+                }
+            }
+
             btn.innerText = "Processing...";
             
+            // 2. BARU PROSES GAMBAR
             html2canvas(cardElement, { scale: 2 }).then(canvas => {
                 canvas.toBlob(blob => {
                     const file = new File([blob], "audit-result.png", { type: "image/png" });
                     btn.innerText = originalText;
 
-                    // 1. Cek Dukungan Native Share (Biasanya HP)
+                    // Cek Apakah ini HP (Mobile Native Share)
                     if (navigator.share && navigator.canShare && navigator.canShare({ files: [file] })) {
                         navigator.share({
                             title: 'Score',
@@ -379,24 +404,25 @@
                             files: [file]
                         }).catch(console.error);
                     } else {
-                        // 2. Fallback untuk PC (Download + Copy Text)
+                        // Jika PC: Download Gambar
                         const link = document.createElement('a');
                         link.download = 'audit-result.png';
                         link.href = canvas.toDataURL();
                         link.click(); // Auto Download
 
-                        // Auto Copy Text
-                        navigator.clipboard.writeText(globalShareText).then(() => {
-                            alert("✅ Gambar tersimpan di komputer!\n✅ Caption berhasil di-COPY!\n\nSilakan Upload gambar ke WA/Medsos, lalu PASTE (Ctrl+V) caption-nya.");
-                        }).catch(() => {
-                            alert("✅ Gambar tersimpan!\n\nSilakan copy caption ini manual:\n" + globalShareText);
-                        });
+                        // Tampilkan Notifikasi
+                        if(textCopied) {
+                            alert("✅ Gambar tersimpan!\n✅ Caption berhasil dicopy!\n\nSilakan Upload gambar ke WA/Medsos, lalu PASTE (Ctrl+V) caption-nya.");
+                        } else {
+                            // Jika Copy Gagal Total, tampilkan Prompt manual
+                            prompt("Gambar tersimpan! Browser memblokir auto-copy. Silakan copy teks di bawah ini manual:", globalShareText);
+                        }
                     }
                 });
             });
         }
         
-        // --- PDF GENERATOR (NAMA FILE DINAMIS) ---
+        // --- PDF GENERATOR ---
         function downloadPDF() {
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF();
@@ -409,7 +435,6 @@
             imgLogo.onload = function() {
                 doc.addImage(this, 'PNG', 20, 10, 25, 25);
                 
-                // Kop Surat
                 doc.setFont("times", "bold"); doc.setFontSize(22); doc.setTextColor(0); 
                 doc.text("DISABILITAS.COM", 50, 20);
                 doc.setFontSize(10); doc.setFont("helvetica", "normal");
@@ -418,7 +443,6 @@
                 doc.text("Jalan Mulya Makarya No. A/1, Larangan Selatan, Kota Tangerang 15154", 50, 36);
                 doc.setLineWidth(1); doc.line(20, 42, 190, 42); 
 
-                // Tanggal & Tujuan
                 doc.setFontSize(12); doc.setTextColor(0);
                 const dateStr = new Date().toLocaleDateString('id-ID', { year: 'numeric', month: 'long', day: 'numeric' });
                 doc.text(`Kota Tangerang, ${dateStr}`, 140, 55, { align: 'right' });
@@ -427,7 +451,6 @@
                 doc.text(`Pengelola Situs: ${url}`, 20, 71);
                 doc.text("Di Tempat", 20, 77);
 
-                // Isi Surat
                 doc.text("Dengan hormat,", 20, 90);
                 doc.text("Berdasarkan hasil pengecekan otomatis yang telah dilakukan pada website", 20, 97);
                 doc.setFont("helvetica", "bold"); doc.text("accessible.web.id", 147, 97); doc.setFont("times", "normal");
@@ -460,7 +483,6 @@
                 doc.setFont("times", "normal"); doc.setFontSize(10);
                 doc.text("CEO & Founder Disabilitas.com", 140, 255, { align: 'center' });
 
-                // HALAMAN 2
                 doc.addPage();
                 doc.setFontSize(14); doc.setFont("helvetica", "bold"); doc.setTextColor(0, 50, 100);
                 doc.text("IMPLIKASI STRATEGIS & MITIGASI RISIKO BISNIS", 20, 20);
@@ -492,10 +514,7 @@
                 doc.setFontSize(11); doc.setTextColor(0); doc.setFont("helvetica", "normal");
                 doc.text("Email: audit@disabilitas.com | Web: disabilitas.com", 105, 175, { align: 'center' });
 
-                // NAMA FILE DINAMIS
-                // Bersihkan URL dari https/www dan karakter aneh
                 let cleanUrl = url.replace(/^https?:\/\//, '').replace(/^www\./, '').replace(/\/$/, '').replace(/[\/\\:*?"<>|]/g, '-');
-                // Format Tanggal: 21-12-2025
                 let dateFile = new Date().toLocaleDateString('id-ID').replace(/\//g, '-');
                 
                 doc.save(`Audit_${cleanUrl}_${dateFile}_Score-${score}.pdf`);
