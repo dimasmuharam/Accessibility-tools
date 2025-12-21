@@ -359,24 +359,23 @@
             document.getElementById('btnLI').href = `https://www.linkedin.com/sharing/share-offsite/?url=${siteUrl}`;
         }
 
-        // --- UPDATE: SHARE IMAGE WITH ROBUST COPY FALLBACK ---
+        // --- SHARE IMAGE WITH AUTO-COPY & INSTRUCTIONS (REVERTED TO AUTO-COPY) ---
         async function shareImage() {
             const cardElement = document.getElementById('share-card');
             const btn = document.querySelector('.btn-img');
             const originalText = btn.innerText;
 
-            // 1. COPY TEKS DULUAN (Supaya tidak diblokir browser)
+            // 1. COPY TEKS DULUAN
             let textCopied = false;
             try {
-                // Cara Modern
                 await navigator.clipboard.writeText(globalShareText);
                 textCopied = true;
             } catch (err) {
-                // Cara Tradisional (Fallback Paling Aman untuk PC)
                 try {
+                    // Fallback Tradisional
                     const textArea = document.createElement("textarea");
                     textArea.value = globalShareText;
-                    textArea.style.position = "fixed"; // Hindari scroll
+                    textArea.style.position = "fixed"; 
                     document.body.appendChild(textArea);
                     textArea.focus();
                     textArea.select();
@@ -396,7 +395,6 @@
                     const file = new File([blob], "audit-result.png", { type: "image/png" });
                     btn.innerText = originalText;
 
-                    // Cek Apakah ini HP (Mobile Native Share)
                     if (navigator.share && navigator.canShare && navigator.canShare({ files: [file] })) {
                         navigator.share({
                             title: 'Score',
@@ -408,20 +406,20 @@
                         const link = document.createElement('a');
                         link.download = 'audit-result.png';
                         link.href = canvas.toDataURL();
-                        link.click(); // Auto Download
+                        link.click(); 
 
-                        // UPDATE ALERT MESSAGE: INSTRUKSI PASTE
+                        // 3. INSTRUKSI PENTING DI SINI
                         if(textCopied) {
-                            alert("✅ Gambar tersimpan!\n✅ Caption tersalin!\n\nCARA KIRIM 1 CHAT (Gambar + Teks):\n1. Upload gambar ke WA.\n2. JANGAN KIRIM DULU!\n3. Klik kolom 'Tambah Keterangan' (Caption).\n4. Paste (Ctrl+V) di situ.\n5. Baru Kirim.");
+                            alert("✅ GAMBAR TERSIMPAN & CAPTION TER-COPY!\n\n⚠ AGAR TEKS JADI CAPTION DI WA:\n\n1. Upload Gambar.\n2. JANGAN TEKAN ENTER / KIRIM DULU!\n3. Fokuskan kursor ke kolom 'Tambah Keterangan' (Caption).\n4. PASTE (Ctrl+V) di situ.\n5. Baru klik Kirim.");
                         } else {
-                            prompt("Gambar tersimpan! Browser memblokir auto-copy. Silakan copy teks di bawah ini manual:", globalShareText);
+                            prompt("Gambar tersimpan! Browser memblokir auto-copy. Copy teks di bawah ini:", globalShareText);
                         }
                     }
                 });
             });
         }
         
-        // --- PDF GENERATOR ---
+        // --- PDF GENERATOR (FITUR LENGKAP TETAP ADA) ---
         function downloadPDF() {
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF();
