@@ -410,11 +410,10 @@
                         link.href = canvas.toDataURL();
                         link.click(); // Auto Download
 
-                        // Tampilkan Notifikasi
+                        // UPDATE ALERT MESSAGE: INSTRUKSI PASTE
                         if(textCopied) {
-                            alert("✅ Gambar tersimpan!\n✅ Caption berhasil dicopy!\n\nSilakan Upload gambar ke WA/Medsos, lalu PASTE (Ctrl+V) caption-nya.");
+                            alert("✅ Gambar tersimpan!\n✅ Caption tersalin!\n\nCARA KIRIM 1 CHAT (Gambar + Teks):\n1. Upload gambar ke WA.\n2. JANGAN KIRIM DULU!\n3. Klik kolom 'Tambah Keterangan' (Caption).\n4. Paste (Ctrl+V) di situ.\n5. Baru Kirim.");
                         } else {
-                            // Jika Copy Gagal Total, tampilkan Prompt manual
                             prompt("Gambar tersimpan! Browser memblokir auto-copy. Silakan copy teks di bawah ini manual:", globalShareText);
                         }
                     }
