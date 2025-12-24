@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact - Accessible Web Indonesia</title>
-    <meta name="description" content="Hubungi tim Accessible Web Indonesia untuk laporan bug, saran fitur tools, atau konsultasi audit aksesibilitas (Disabilitas.com).">
+    <meta name="description" content="Hubungi tim Accessible Web Indonesia untuk laporan bug, saran fitur tools, atau konsultasi audit aksesibilitas via Disabilitas.com.">
     
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5878514175202601" crossorigin="anonymous"></script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-FGJKD3430G"></script>
@@ -14,7 +14,9 @@
       gtag('js', new Date());
       gtag('config', 'G-FGJKD3430G');
     </script>
-<link rel="canonical" href="https://www.accessible.web.id/contact.html" />
+
+    <link rel="canonical" href="https://www.accessible.web.id/contact.html" />
+    
     <link rel="icon" type="image/x-icon" href="dimaster.ico">
     <link rel="stylesheet" href="style.css">
 </head>
@@ -87,17 +89,19 @@
                 <div class="card" style="border-left: 5px solid var(--accent-color);">
                     <h3>🐛 Lapor Bug & Feedback</h3>
                     <p>Menemukan tools yang tidak berfungsi? Atau punya ide alat baru untuk komunitas?</p>
-                    <p style="margin-top: 20px;">
-                        <strong>Email Teknis:</strong><br>
+                    <div style="margin-top: 20px;">
+                        <p style="margin-bottom: 5px;"><strong>Email Teknis:</strong></p>
                         <a href="mailto:feedback@accessible.web.id" style="font-size: 1.1rem; font-weight: bold;">feedback@accessible.web.id</a>
-                    </p>
+                    </div>
                 </div>
 
                 <div class="card" style="border-left: 5px solid var(--primary-color);">
                     <h3>💼 Audit & Kerjasama B2B</h3>
-                    <p>Untuk kebutuhan perusahaan, audit kepatuhan WCAG, atau proyek pemerintah, hubungi unit bisnis kami.</p>
+                    <p>Untuk kebutuhan perusahaan, audit kepatuhan WCAG, proyek pemerintah, atau proposal kerjasama resmi.</p>
                     <div style="margin-top: 20px;">
-                        <a href="https://disabilitas.com" class="button" target="_blank">Kunjungi Disabilitas.com &rarr;</a>
+                        <p style="margin-bottom: 5px;"><strong>Email Bisnis:</strong></p>
+                        <a href="mailto:audit@disabilitas.com" style="font-size: 1.1rem; font-weight: bold; display: block; margin-bottom: 15px;">audit@disabilitas.com</a>
+                        <a href="https://disabilitas.com" class="button" target="_blank">Profil Layanan Disabilitas.com &rarr;</a>
                     </div>
                 </div>
 
@@ -139,5 +143,35 @@
     </footer>
 
     <script src="script.js"></script>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Accessible Web Indonesia",
+      "parentOrganization": {
+        "@type": "Organization",
+        "name": "PT Dimaster Education Berprestasi"
+      },
+      "url": "https://www.accessible.web.id",
+      "logo": "https://www.accessible.web.id/logo.png",
+      "contactPoint": [
+        {
+          "@type": "ContactPoint",
+          "email": "feedback@accessible.web.id",
+          "contactType": "technical support",
+          "areaServed": "ID",
+          "availableLanguage": "Indonesian"
+        },
+        {
+          "@type": "ContactPoint",
+          "email": "audit@disabilitas.com",
+          "contactType": "sales",
+          "areaServed": "ID",
+          "availableLanguage": "Indonesian"
+        }
+      ]
+    }
+    </script>
 </body>
 </html>
