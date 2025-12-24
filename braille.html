@@ -7,6 +7,7 @@
     <meta name="description" content="Alat penerjemah dan edukasi Braille. Kirim tantangan pesan Braille ke temanmu dan belajar membaca pola titik timbul secara interaktif.">    
     
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5878514175202601" crossorigin="anonymous"></script>
+    
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-FGJKD3430G"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -14,7 +15,9 @@
       gtag('js', new Date());
       gtag('config', 'G-FGJKD3430G');
     </script>
-<link rel="canonical" href="https://www.accessible.web.id/braille.html" />        
+
+    <link rel="canonical" href="https://www.accessible.web.id/braille.html" />        
+    
     <link rel="icon" type="image/x-icon" href="dimaster.ico">
     <link rel="stylesheet" href="style.css">
 
@@ -155,10 +158,6 @@
             </div>
         </div>
 
-        <div class="ads-slot">
-            <p>Iklan Google AdSense</p>
-        </div>
-
         <article class="content-article" style="margin-top: 3rem; border-top: 1px solid var(--border-color); padding-top: 2rem;">
             <h2>Mengapa Kita Perlu Belajar Pola Braille?</h2>
             <p>Braille bukan sekadar "pengganti huruf". Ini adalah sistem logis yang melatih kepekaan taktil dan spasial.</p>
@@ -180,10 +179,17 @@
     <footer>
         <div class="container">
             <p>&copy; 2025 PT Dimaster Education Berprestasi. All Rights Reserved.</p>
+            
             <p>Our Ecosystem: 
                 <a href="https://kartunet.com" target="_blank" style="color:#4cc9f0; font-weight:bold;">Kartunet</a> | 
-                <a href="https://disabilitas.com" target="_blank" style="color:#4cc9f0; font-weight:bold;">Disabilitas.com</a> |
+                <a href="https://disabilitas.com" target="_blank" style="color:#4cc9f0; font-weight:bold;">Disabilitas.com</a> | 
                 <a href="https://www.dimaster.co.id" target="_blank" style="color:#4cc9f0; font-weight:bold;">Dimaster Group</a>
+            </p>
+            
+            <p style="font-size: 0.8rem; margin-top: 15px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 10px;">
+                <a href="about.html" style="color: #e0e0e0; margin: 0 5px; text-decoration: none;">About Us</a> |
+                <a href="contact.html" style="color: #e0e0e0; margin: 0 5px; text-decoration: none;">Contact Support</a> |
+                <a href="privacy.html" style="color: #e0e0e0; margin: 0 5px; text-decoration: none;">Privacy Policy</a>
             </p>
         </div>
     </footer>
@@ -197,7 +203,7 @@
         const revealSection = document.getElementById('revealSection');
         const cheatSheet = document.getElementById('cheatSheet');
 
-        // Variabel aman untuk menyimpan jawaban (Agar tidak dibaca Screen Reader sebelum waktunya)
+        // Variabel aman untuk menyimpan jawaban
         let secretAnswer = ""; 
 
         const map = {
@@ -213,14 +219,13 @@
         for (let char of alphabet) {
             const div = document.createElement('div');
             div.className = 'cheat-item';
-            div.setAttribute('aria-label', `Huruf ${char.toUpperCase()}`); // Aksesibilitas Screen Reader
+            div.setAttribute('aria-label', `Huruf ${char.toUpperCase()}`); 
             div.innerHTML = `<span class="cheat-braille" aria-hidden="true">${map[char]}</span><span class="cheat-latin">${char.toUpperCase()}</span>`;
             cheatSheet.appendChild(div);
         }
 
         // 2. FUNGSI KONVERSI
         function convertToBraille() {
-            // Jika sedang dalam Mode Tantangan (Terkunci), hentikan update otomatis
             if (revealSection.style.display === 'block') return;
 
             const input = inputText.value.toLowerCase();
@@ -241,7 +246,7 @@
             updateShareLinks(input, output);
         }
 
-        // --- HELPER: Deteksi Bahasa (Untuk Copywriting Share) ---
+        // --- HELPER: Deteksi Bahasa ---
         function getCurrentLang() {
             const cookie = document.cookie.match('(^|;) ?googtrans=([^;]*)(;|$)');
             return cookie && cookie[2].includes('/en') ? 'en' : 'id';
@@ -254,7 +259,6 @@
             const encodedShareUrl = encodeURIComponent(shareUrl);
             const snippet = brailleText.substring(0, 15) + (brailleText.length > 15 ? '...' : '');
 
-            // Logika Copywriting sesuai Bahasa
             const lang = getCurrentLang();
             let caption = "";
 
@@ -275,13 +279,13 @@
             });
         }
 
-        // 4. LOGIKA BUKA KUNCI (ACCESSIBLE REVEAL)
+        // 4. LOGIKA BUKA KUNCI
         function revealAnswer() {
-            inputText.value = secretAnswer; // Kembalikan jawaban asli
+            inputText.value = secretAnswer; 
             inputText.removeAttribute('readonly');
             inputText.classList.remove('blur-text');
             revealSection.style.display = 'none';
-            inputText.focus(); // Fokus ke input agar SR langsung membaca jawaban
+            inputText.focus(); 
         }
 
         // 5. INISIALISASI DARI URL
@@ -293,18 +297,16 @@
                 try {
                     secretAnswer = decodeURIComponent(atob(secretCode));
                     
-                    // Render Braille secara manual
                     let output = '';
                     for (let char of secretAnswer.toLowerCase()) {
                         output += map[char] || char; 
                     }
                     outputText.innerText = output;
                     
-                    // Setup Mode Tantangan (Placeholder + Blur)
                     const lang = getCurrentLang();
                     const placeholderText = lang === 'en' ? "[ HIDDEN SECRET MESSAGE ]" : "[ PESAN RAHASIA TERSEMBUNYI ]";
 
-                    inputText.value = placeholderText; // Jangan taruh jawaban asli di sini agar SR tidak spoiler
+                    inputText.value = placeholderText; 
                     inputText.setAttribute('readonly', 'true');
                     inputText.classList.add('blur-text');
                     revealSection.style.display = 'block';
@@ -320,6 +322,22 @@
         });
 
         inputText.addEventListener('input', convertToBraille);
+    </script>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Braille Translator & Challenge",
+      "url": "https://www.accessible.web.id/braille.html",
+      "description": "Alat penerjemah teks ke Braille dan game tantangan membaca Braille interaktif.",
+      "applicationCategory": "EducationalApplication",
+      "operatingSystem": "All",
+      "author": {
+          "@type": "Organization",
+          "name": "Accessible Web Indonesia"
+      }
+    }
     </script>
 </body>
 </html>
