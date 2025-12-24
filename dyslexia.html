@@ -7,6 +7,7 @@
     <meta name="description" content="Rasakan bagaimana orang dengan dyslexia membaca teks (Dyslexia Simulation). Test font ramah disleksia dan pahami kesulitan membaca (Reading difficulty awareness).">    
     
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5878514175202601" crossorigin="anonymous"></script>
+    
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-FGJKD3430G"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -14,7 +15,9 @@
       gtag('js', new Date());
       gtag('config', 'G-FGJKD3430G');
     </script>
-<link rel="canonical" href="https://www.accessible.web.id/dyslexia.html" />        
+
+    <link rel="canonical" href="https://www.accessible.web.id/dyslexia.html" />        
+    
     <link rel="icon" type="image/x-icon" href="dimaster.ico">
     <link rel="stylesheet" href="style.css">
 
@@ -53,6 +56,19 @@
         }
         .btn-share.wa { background-color: #25D366; }
         .btn-share.twitter { background-color: #000000; }
+
+        /* Efek Jitter untuk Simulasi */
+        @keyframes jitter {
+            0% { transform: translate(0,0); }
+            25% { transform: translate(1px,1px); }
+            50% { transform: translate(-1px,-1px); }
+            75% { transform: translate(-1px,1px); }
+            100% { transform: translate(1px,-1px); }
+        }
+        .jitter-text {
+            animation: jitter 0.1s infinite;
+            display: inline-block;
+        }
     </style>
 </head>
 <body>
@@ -117,8 +133,8 @@
             <textarea id="dyslexiaInput" rows="6" placeholder="Ketik sesuatu di sini...">Disleksia bukanlah tanda kebodohan. Banyak orang jenius seperti Albert Einstein dan Steve Jobs adalah penyandang disleksia. Bagi kami, huruf-huruf ini seringkali terlihat melompat, berputar, atau bertukar tempat, membuat aktivitas membaca menjadi sangat melelahkan.</textarea>
             
             <div style="margin-top: 20px;">
-                <button id="startBtn" class="button">😵 Mulai Simulasi</button>
-                <button id="resetBtn" class="button" style="background: #d9534f; color: white !important;">⏹ Stop / Reset</button>
+                <button id="startBtn" onclick="startSimulation()" class="button">😵 Mulai Simulasi</button>
+                <button id="resetBtn" onclick="stopSimulation()" class="button" style="background: #d9534f; color: white !important;">⏹ Stop / Reset</button>
             </div>
 
             <div id="displayArea" aria-hidden="true" style="margin-top: 25px; padding: 20px; background: var(--input-bg); color: var(--text-color); border: 1px solid var(--border-color); border-radius: 8px; font-size: 1.2rem; line-height: 1.6; min-height: 150px; display:none;">
@@ -139,15 +155,11 @@
             </div>
         </div>
 
-        <div class="ads-slot">
-            <p>Iklan Google AdSense</p>
-        </div>
-
         <article class="content-article" style="margin-top: 3rem; border-top: 1px solid #eee; padding-top: 2rem;">
             <h2>Memahami Disleksia: Lebih dari Sekadar "Susah Baca"</h2>
             <p>Seringkali dicap "malas" atau "lambat" di sekolah, penyandang disleksia sebenarnya memiliki struktur otak yang unik. Disleksia adalah gangguan dalam memproses bahasa (neurobiologis) yang berdampak pada kesulitan mengenali kata, mengeja, dan menguraikan simbol (decoding).</p>
 
-            <h3>Bagaimana Rasanya Menjadi Disleksia?</h3>
+            <h3>1. Bagaimana Rasanya Menjadi Disleksia?</h3>
             <p>Simulator di atas hanyalah gambaran kasar. Pengalaman setiap penyandang berbeda-beda, namun gejala umum visual yang sering dilaporkan meliputi:</p>
             <ul>
                 <li><strong>Efek Sungai (River Effect):</strong> Spasi antar kata terlihat menyambung membentuk garis putih vertikal yang memecah konsentrasi.</li>
@@ -155,10 +167,13 @@
                 <li><strong>Pembalikan (Reversal):</strong> Huruf seperti 'b' dan 'd', atau 'p' dan 'q' sering tertukar.</li>
             </ul>
 
-            <h3>Disleksia & Aksesibilitas Web (WCAG)</h3>
-            <p>Sebagai pengembang web atau penulis konten, Anda bisa membantu mereka dengan menerapkan prinsip <strong>Cognitive Accessibility</strong>:</p>
+            <h3>2. Mitos Font Khusus (OpenDyslexic vs Arial)</h3>
+            <p>Banyak yang percaya bahwa font khusus seperti <em>OpenDyslexic</em> adalah solusi ajaib. Namun, riset menunjukkan bahwa font standar yang bersih seperti <strong>Arial, Verdana, atau Comic Sans</strong> seringkali sama efektifnya.</p>
+            <p>Kunci utamanya bukan pada bentuk huruf yang aneh, melainkan pada <strong>Spasi (Kerning)</strong> dan kejelasan bentuk huruf yang tidak saling menumpuk.</p>
+
+            <h3>3. Tips Aksesibilitas Kognitif (WCAG)</h3>
+            <p>Sebagai pengembang web atau penulis konten, Anda bisa membantu mereka dengan prinsip sederhana:</p>
             <ol>
-                <li><strong>Gunakan Font Sans-Serif:</strong> Font seperti Arial, Verdana, atau Comic Sans lebih mudah dibaca daripada Times New Roman.</li>
                 <li><strong>Hindari Rata Kanan-Kiri (Justify):</strong> Teks rata kanan-kiri menciptakan spasi yang tidak merata, memicu "efek sungai". Gunakan rata kiri (Align Left).</li>
                 <li><strong>Paragraf Pendek:</strong> Pecah teks panjang menjadi paragraf-paragraf kecil. Dinding teks (Wall of Text) adalah musuh utama disleksia.</li>
             </ol>
@@ -184,9 +199,10 @@
                 <a href="https://www.dimaster.co.id" target="_blank" style="color:#4cc9f0; font-weight:bold;">Dimaster Group</a>
             </p>
             
-            <p style="font-size: 0.8rem; margin-top: 10px;">
-                <a href="mailto:feedback@accessible.web.id" style="color: #e0e0e0; margin-right: 10px; text-decoration: none;">📩 Lapor Bug</a> | 
-                <a href="privacy.html" style="color: #e0e0e0; text-decoration: underline; margin-left: 10px;">Privacy Policy</a>
+            <p style="font-size: 0.8rem; margin-top: 15px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 10px;">
+                <a href="about.html" style="color: #e0e0e0; margin: 0 5px; text-decoration: none;">About Us</a> |
+                <a href="contact.html" style="color: #e0e0e0; margin: 0 5px; text-decoration: none;">Contact Support</a> |
+                <a href="privacy.html" style="color: #e0e0e0; margin: 0 5px; text-decoration: none;">Privacy Policy</a>
             </p>
         </div>
     </footer>
@@ -204,7 +220,6 @@
         let intervalId = null;
 
         function scrambleWord(word) {
-            // Logika asli Anda: Mengacak huruf tengah
             if (word.length < 4) return word;
             const first = word[0];
             const last = word[word.length - 1];
@@ -221,8 +236,10 @@
         function scrambleText(text) {
             return text.split(' ').map(word => {
                 if (/^[a-zA-Z]+$/.test(word)) {
-                    // 30% kemungkinan kata teracak
-                    return Math.random() > 0.3 ? scrambleWord(word) : word; 
+                    // Tambahkan class jitter secara acak untuk efek visual
+                    const isJitter = Math.random() > 0.8 ? 'class="jitter-text"' : '';
+                    const scrambled = Math.random() > 0.3 ? scrambleWord(word) : word;
+                    return `<span ${isJitter}>${scrambled}</span>`;
                 }
                 return word;
             }).join(' ');
@@ -233,23 +250,76 @@
             if(!originalText) return;
 
             displayArea.style.display = 'block';
-            srNote.style.display = 'block'; // Tampilkan info untuk SR user
-            displayArea.innerText = originalText;
+            srNote.style.display = 'block'; 
+            displayArea.innerHTML = originalText; // Gunakan innerHTML karena ada span jitter
             displayArea.scrollIntoView({behavior: "smooth"});
 
-            // Tampilkan tombol share
             shareArea.style.display = 'block';
             updateShareLinks(originalText);
 
             if (intervalId) clearInterval(intervalId);
 
-            // Jalankan scramble setiap 500ms
             intervalId = setInterval(() => {
-                displayArea.innerText = scrambleText(originalText);
+                displayArea.innerHTML = scrambleText(originalText);
             }, 500);
         }
 
-        // --- HELPER: Deteksi Bahasa ---
+        function stopSimulation() {
+            if (intervalId) clearInterval(intervalId);
+            displayArea.style.display = 'none';
+            shareArea.style.display = 'none';
+            srNote.style.display = 'none';
+        }
+
+        // --- HELPER: Deteksi Bahasa & Share ---
         function getCurrentLang() {
             const cookie = document.cookie.match('(^|;) ?googtrans=([^;]*)(;|$)');
-            return cookie && cookie[2].includes('/en
+            return cookie && cookie[2].includes('/en') ? 'en' : 'id';
+        }
+
+        function updateShareLinks(text) {
+            const lang = getCurrentLang();
+            const caption = lang === 'en' 
+                ? "😵 Can you read this? Try the Dyslexia Simulator here! 👇\n" 
+                : "😵 Yakin bisa baca ini tanpa pusing? Cobain Simulator Disleksia di sini! 👇\n";
+            
+            const url = "https://accessible.web.id/dyslexia.html";
+            const encodedCaption = encodeURIComponent(caption);
+            const encodedUrl = encodeURIComponent(url);
+
+            document.getElementById('shareWa').href = `https://api.whatsapp.com/send?text=${encodedCaption} ${encodedUrl}`;
+            document.getElementById('shareTwitter').href = `https://twitter.com/intent/tweet?text=${encodedCaption}&url=${encodedUrl}&hashtags=DyslexiaAwareness`;
+        }
+
+        function copyLink() {
+            navigator.clipboard.writeText("https://accessible.web.id/dyslexia.html").then(() => {
+                alert("Link copied!");
+            });
+        }
+    </script>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": ["MedicalWebPage", "WebApplication"],
+      "name": "Dyslexia Simulator",
+      "url": "https://www.accessible.web.id/dyslexia.html",
+      "description": "Alat simulasi visual disleksia untuk membangun kesadaran tentang kesulitan membaca (reading difficulty awareness).",
+      "applicationCategory": "EducationalApplication",
+      "about": {
+        "@type": "MedicalCondition",
+        "name": "Dyslexia",
+        "alternateName": "Reading Disorder"
+      },
+      "audience": {
+        "@type": "EducationalAudience",
+        "educationalRole": "teacher"
+      },
+      "author": {
+          "@type": "Organization",
+          "name": "Accessible Web Indonesia"
+      }
+    }
+    </script>
+</body>
+</html>
