@@ -7,6 +7,7 @@
     <meta name="description" content="Alat tes kombinasi warna latar & teks (Background vs Foreground). Check contrast ratio online to meet WCAG AA/AAA standards. Pastikan desain nyaman di mata.">    
     
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5878514175202601" crossorigin="anonymous"></script>
+    
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-FGJKD3430G"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -24,7 +25,7 @@
         :root {
             /* Light Mode Variables */
             --bg-card: #ffffff;
-            --text-main: #111111; /* Hitam pekat untuk kontras maksimal */
+            --text-main: #111111; 
             --border-color: #ccc;
             
             /* Info Box Colors (Light) */
@@ -40,13 +41,13 @@
         body.dark-mode {
             /* Dark Mode Variables (Low Vision Friendly) */
             --bg-card: #1e1e1e;
-            --text-main: #ffffff; /* Putih terang di latar gelap */
+            --text-main: #ffffff; 
             --border-color: #666;
             
             /* Info Box Colors (Dark) */
-            --info-bg: #2d2d2d; /* Abu gelap solid (tidak silau) */
+            --info-bg: #2d2d2d; 
             --info-text: #ffffff;
-            --info-border: #4dabf7; /* Biru terang untuk border */
+            --info-border: #4dabf7; 
         }
 
         /* Layout Utilities */
@@ -110,7 +111,7 @@
     <header>
         <div class="container navbar">
             <div class="brand-wrapper">
-                <a href="index.html" title="Kembali ke Beranda">
+                <a href="index.html">
                     <img src="logo.png" alt="Logo Accessible Web Indonesia" width="100" height="100">
                 </a>
                 <div>
@@ -184,10 +185,6 @@
             </div>
         </div>
 
-        <div class="ads-slot">
-            <p>Iklan Google AdSense</p>
-        </div>
-
         <article class="content-article" style="margin-top: 3rem; border-top: 1px solid #eee; padding-top: 2rem;">
             <h2>Kontras Warna: Antara Estetika, Standar Baku, dan Kebutuhan Mata</h2>
             <p>Seringkali orang menganggap "Tunanetra" itu seragam: gelap total. Padahal, disabilitas netra adalah sebuah spektrum yang luas. Alat Cek Kontras ini dirancang untuk memfasilitasi kebutuhan visual tersebut berdasarkan standar internasional.</p>
@@ -198,6 +195,8 @@
                 <li><strong>Totally Blind (Buta Total):</strong> Tidak memiliki persepsi cahaya. Mereka menggunakan <em>Screen Reader</em> (suara).</li>
                 <li><strong>Low Vision (Penglihatan Terbatas):</strong> Memiliki sisa penglihatan namun ketajamannya menurun drastis. Di sinilah <strong>Kontras Warna</strong> menjadi "nyawa" agar tulisan terbaca.</li>
             </ul>
+            
+            
 
             <h3>2. Standar Kelulusan WCAG 2.1 (Target Angka)</h3>
             <p>Agar desain Anda ramah bagi penyandang <em>Low Vision</em>, Konsorsium World Wide Web (W3C) menetapkan rumus matematika rasio kecerahan:</p>
@@ -231,12 +230,10 @@
                 <a href="https://www.dimaster.co.id" target="_blank" style="color:#4cc9f0; font-weight:bold;">Dimaster Group</a>
             </p>
             
-            <p style="font-size: 0.8rem; margin-top: 10px;">
-                <a href="contact.html" style="color: #e0e0e0; margin-right: 10px; text-decoration: none;">Contact Us</a> | 
-                <a href="privacy.html" style="color: #e0e0e0; text-decoration: underline; margin-left: 10px;">Privacy Policy</a>
-            </p>
-            <p style="font-size: 0.8rem; margin-top: 5px; opacity: 0.7;">
-                <a href="mailto:feedback@accessible.web.id" style="color: inherit; text-decoration: none;">📩 Report Bug</a>
+            <p style="font-size: 0.8rem; margin-top: 15px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 10px;">
+                <a href="about.html" style="color: #e0e0e0; margin: 0 5px; text-decoration: none;">About Us</a> |
+                <a href="contact.html" style="color: #e0e0e0; margin: 0 5px; text-decoration: none;">Contact Support</a> |
+                <a href="privacy.html" style="color: #e0e0e0; margin: 0 5px; text-decoration: none;">Privacy Policy</a>
             </p>
         </div>
     </footer>
@@ -281,22 +278,21 @@
             let status = "";
             const statusElem = document.getElementById('statusResult');
             
-            // Perbaikan Output Status dengan Ikon
             if(ratio >= 7) {
                 status = "✅ LULUS Sempurna (AAA)";
-                statusElem.style.color = "#198754"; // Hijau
+                statusElem.style.color = "#198754"; 
             }
             else if(ratio >= 4.5) {
                 status = "✅ LULUS Standar (AA)";
-                statusElem.style.color = "#198754"; // Hijau
+                statusElem.style.color = "#198754"; 
             }
             else if(ratio >= 3) {
                 status = "⚠️ Cukup untuk Teks Besar Saja";
-                statusElem.style.color = "#d68e00"; // Oranye
+                statusElem.style.color = "#d68e00"; 
             }
             else {
                 status = "❌ GAGAL (Kontras Buruk)";
-                statusElem.style.color = "#dc3545"; // Merah
+                statusElem.style.color = "#dc3545"; 
             }
             
             statusElem.innerText = status;
@@ -304,8 +300,24 @@
 
         bgInput.addEventListener('input', checkContrast);
         textInput.addEventListener('input', checkContrast);
-        checkContrast(); // Run on load
+        checkContrast(); 
     </script>
     <script src="script.js"></script>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Color Contrast Checker",
+      "url": "https://www.accessible.web.id/contrast.html",
+      "description": "Alat cek kontras warna WCAG untuk memastikan aksesibilitas visual desain website bagi penyandang low vision.",
+      "applicationCategory": "DesignTool",
+      "operatingSystem": "All",
+      "author": {
+          "@type": "Organization",
+          "name": "Accessible Web Indonesia"
+      }
+    }
+    </script>
 </body>
 </html>
