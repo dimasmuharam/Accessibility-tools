@@ -9,16 +9,57 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+    <a href="#main-content" class="skip-link">Lewati ke Konten Utama</a>
+
     <header>
         <div class="container navbar">
             <div class="brand-wrapper">
-                <a href="index.html"><img src="logo.png" alt="Logo" width="50"></a>
-                <a href="index.html" class="brand-title"><h1>Accessible Web Indonesia</h1></a>
+                <a href="index.html" title="Kembali ke Beranda">
+                    <img src="logo.png" alt="Logo Accessible Web Indonesia" width="100" height="100">
+                </a>
+                <div>
+                    <a href="index.html" class="brand-title">
+                        <h1>Accessible Web Indonesia</h1>
+                    </a>
+                    <small class="brand-subtitle">Tools Aksesibilitas & Edukasi Digital</small>
+                </div>
+            </div>
+
+            <div class="nav-controls">
+                <nav aria-label="Menu Utama">
+                    <ul id="nav-menu">
+                        <li><a href="index.html">Home</a></li>
+                        
+                        <li class="dropdown-wrapper">
+                            <button id="tools-btn" aria-expanded="false" aria-haspopup="true" aria-controls="tools-list">
+                                Tools ▾
+                            </button>
+                            <ul id="tools-list" class="dropdown-content">
+                                <li><a href="checker.html">✅ Access Score</a></li>
+                                <li><a href="contrast.html">🎨 Contrast Checker</a></li>
+                                <li><a href="blind.html">👁️ Tes Buta Warna</a></li>
+                                <li><a href="tts.html">🗣️ TTS & Voice</a></li>
+                                <li><a href="braille.html">⠃⠗⠇ Braille Latin</a></li>
+                                <li><a href="quran.html">🕌 Quran Braille</a></li>
+                                <li><a href="sign.html">🤟 Sign Language</a></li>
+                                <li><a href="dyslexia.html">😵 Dyslexia Sim</a></li>
+                            </ul>
+                        </li>
+
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+                
+                <button id="theme-toggle" aria-label="Ganti Mode Gelap atau Terang" title="Ganti Tema">🌙</button>
+                <button id="lang-toggle" aria-label="Ganti Bahasa ke Inggris" title="Ganti Bahasa">ID</button>
+                <div id="google_translate_element" class="visually-hidden"></div>
             </div>
         </div>
     </header>
 
-    <main class="container" style="max-width: 800px; margin-top: 40px; margin-bottom: 40px;">
+    <main id="main-content" class="container" tabindex="-1" style="max-width: 800px; margin-top: 40px; margin-bottom: 40px;">
         <h1>Syarat dan Ketentuan (Terms of Service)</h1>
         <p>Dengan mengakses <strong>accessible.web.id</strong>, Anda menyetujui persyaratan berikut:</p>
 
@@ -35,13 +76,22 @@
     <footer>
         <div class="container">
             <p>&copy; 2025 PT Dimaster Education Berprestasi. All Rights Reserved.</p>
-            <p style="font-size: 0.8rem; margin-top: 15px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 10px;">
-                <a href="about.html" style="color: #e0e0e0; margin: 0 5px;">About Us</a> |
-                <a href="contact.html" style="color: #e0e0e0; margin: 0 5px;">Contact</a> |
-                <a href="privacy.html" style="color: #e0e0e0; margin: 0 5px;">Privacy Policy</a> | 
-                <a href="terms.html" style="color: #e0e0e0; margin: 0 5px;">Terms</a>
+            
+            <p class="ecosystem-links">Our Ecosystem: 
+                <a href="https://kartunet.com" target="_blank" rel="noopener noreferrer">Kartunet</a> | 
+                <a href="https://disabilitas.com" target="_blank" rel="noopener noreferrer">Disabilitas.com</a> | 
+                <a href="https://www.dimaster.co.id" target="_blank" rel="noopener noreferrer">Dimaster Group</a>
+            </p>
+            
+            <p class="footer-nav">
+                <a href="about.html">About Us</a> |
+                <a href="contact.html">Contact Support</a> |
+                <a href="privacy.html">Privacy Policy</a> | 
+                <a href="terms.html">Terms</a>
             </p>
         </div>
     </footer>
+    
+    <script src="script.js"></script>
 </body>
 </html>
