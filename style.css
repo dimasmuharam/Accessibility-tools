@@ -71,11 +71,14 @@ h1, h2, h3, h4, h5, h6 { color: var(--primary-color); }
     background: var(--accent-color);
     color: var(--button-text);
     padding: 8px;
-    z-index: 1000;
+    z-index: 9999;
     text-decoration: none;
     transition: top 0.3s;
 }
-.skip-link:focus { top: 0; }
+.skip-link:focus { 
+    top: 0; 
+    left: 0;
+}
 
 /* 3. HEADER & NAVIGATION */
 header {
@@ -406,3 +409,49 @@ body { top: 0 !important; }
 .btn-share.wa { background-color: #25D366; }
 .btn-share.twitter { background-color: #000000; }
 .btn-share.linkedin { background-color: #0077b5; }
+
+/* Footer Links (Consistent Styling) */
+footer .ecosystem-links a {
+    color: #4cc9f0;
+    font-weight: bold;
+}
+
+footer .footer-nav {
+    font-size: 0.8rem;
+    margin-top: 15px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding-top: 10px;
+}
+
+footer .footer-nav a {
+    color: #e0e0e0;
+    margin: 0 5px;
+    text-decoration: none;
+}
+
+/* Content Article Variants */
+.content-article-top {
+    margin-top: 3rem;
+    border-top: 1px solid var(--border-color);
+    padding-top: 2rem;
+}
+
+.info-box {
+    background: var(--card-bg);
+    border-left: 5px solid var(--accent-color);
+    padding: 25px;
+    margin-top: 30px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+}
+
+.info-box h3 {
+    margin-top: 0;
+    color: var(--primary-color);
+}
+
+.section-divider {
+    margin-bottom: 40px;
+    padding-bottom: 30px;
+    border-bottom: 1px dashed var(--border-color);
+}
